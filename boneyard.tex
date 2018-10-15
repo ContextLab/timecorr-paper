@@ -1,0 +1,52 @@
+
+%should we introduce the name levelup in the introduction? ie. "in the second step, levelup, we use..." -ecw
+%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Methods}
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+The mathematical theories behind the timecorr approach for calculating the moment-by-moment dynamic correlations in systems are described here. The function takes a number-of-timepoint by number-of-features matrix as well as a weight function to determine a moment-by-moment correlations matrix. To calculate the correlations, expectation values are found using equation 1: 
+
+\begin{equation}
+\mathrm{corr}_{x,y}(t) = \frac{1}{T} \sum_{t} \frac{\left(x(t)-\mathbb{E}[x]\right)\left(y(t)-\mathbb{E}[y]\right)}{\sigma_{x}(t)\sigma_{y}(t)}
+\end{equation}
+
+%should the variables in this equation/description change to match the description in the intro?
+Here, x is the timepoint component of the matrix and y is the feature component. Timepoint by timepoint, x by x, at each given moment (t) in the matrix is subtracted from the expectation value of the full timepoint matrix. The same process occurs for the features points (y) at each timepoint (t). The product of these are then divided by the standard deviation at that moment for both the timepoint and the feature. Only the upper triangle of the matrix is calculated as the interactions are assumed to be both symmetric and non-recurrent. 
+
+Two weight parameters have been used to calculate the connectivity of the data are a Gaussian weight parameter, equation 2, and a LaPlace weights parameter, equation 3. 
+
+%label as Gaussian? 
+\begin{equation}
+\mathcal{N}\left( x | \mu, \sigma \right) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{|| x - \mu ||^2}{2\sigma^2}\right)
+\end{equation}
+where sigma squared is the variance and mu is the expected value. 
+
+%label as LaPlace? 
+\begin{equation}
+\mathcal{L}\left( x | \mu, \lambda \right) = \frac{1}{2 \lambda}\left( x | \mu, \lambda \right) = \exp\left(-\frac{|x - \mu|}{\lambda}\right)
+\end{equation}
+where mu is the expectation values, lambda is a defined decay constant. 
+
+%figure showing the difference b/w two weights in same data set? Using the synthetic data?
+
+When using the Gaussian weights parameter timepoints are more closely correlated to timepoints further away in the matrix than when using then the LaPlace weight function.
+
+%Plot of kernels as Fig 1?
+
+% New section? Mathematical Methods of Levelup? 
+In order to understand how the data is interconnected we use the function levelup. Levelup uses the same input as the timecorr function, a timepoint-by-function matrix. 
+
+%Diagram of input-->timecorr-->PCaA= levelup?
+
+In the levelup method the the data first goes through the timecorr process and then is reduced using Principal Component Analysis (PCA). By utilizing PCA the output data maintains the same features as the input method. Not only does this allow for a sanity check, but also it allows for repeated use of the function. Using PCA or other reduction techniques is needed as without it the output data would get exponentially large. On the flip side using PCA, or any dimensionality reduction technique, makes the output data less accurate as information is lost. 
+
+
+%PCA equation?
+%figure/ chart of how many levels we "go up" before data gets too muddled- depends on the correlation?
+
+
+Timepoints that share high similarity across all subjects have a high probability of being stimulus driven.
+
+To compute the correlations of multiple subjects the across mode of both timecorr and levelup are used. The across function compares one voxel in a sample to the averages of that voxel in the rest of the dataframe. This occurs throughout every voxel in the dataset. The output of the across mode is a correlation matrix that is a number of timepoints by features matrix.
+
+%F^2-F/2 +F 
