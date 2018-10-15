@@ -1,103 +1,55 @@
 \documentclass[english]{article}
-%\usepackage[utf8]{inputenc}
-\usepackage{subfig}
 \usepackage{graphicx}
-\usepackage{subfig}
-\usepackage{babel,blindtext}
 \usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage{setspace}
 \usepackage{apacite}
-\usepackage{fancyhdr}
-\pagestyle{fancy}
 \usepackage{natbib}
 \usepackage{pxfonts}
 \usepackage[utf8]{inputenc}
-\usepackage{xfrac}
-\fancyhf{}
-\renewcommand{\headrulewidth}{0pt}
-\fancyhead[R]{\thepage}
-\usepackage{multirow,booktabs,setspace,caption}
-\usepackage{tikz}
-\captionsetup[figure]{labelsep=period,labelfont=it,justification=justified,
-  singlelinecheck=false,font=doublespacing}
-  \usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
-\lhead{}
-\fancyheadoffset[R]{0cm}
-\cfoot{}
+\usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
+\usepackage[left]{lineno}
+\linenumbers
 
-\fancypagestyle{first page}{
-  \lhead{Running head: High-order dynamic interactions}
-  \rhead{\thepage}
-}
+
+\title{An examination of the high-order dynamic interactions
+  underlying multi-dimensional timeseries data} \author{Lucy
+  L. W. Owen$^1$, Thomas Hao Chang$^{1,2}$, and\
+  Jeremy R. Manning\textsuperscript{$1, \dagger$}\\
+  [0.1in]$^1$Department of Psychological and Brain
+  Sciences,\\Dartmouth
+  College, Hanover, NH\\
+  $^3$Amazon.com, Seattle, WA\\
+  \textsuperscript{$\dagger$}Address correspondence to
+  jeremy.r.manning@dartmouth.edu}
+
 
 \begin{document}
-\title{An examination of the high-order dynamic interactions underlying multi-dimensional timeseries data}
-\author{Lucy L. W. Owen$^1$,
-Paxton C. Fitzpatrick$^1$,
-Kirsten Ziman$^1$,\\
-Andrew C. Heusser$^{1,2}$,
-Stephen F. Satterthwaite$^1$,
-Thomas Hao Chang$^{1,3}$,\\
-Qiang Liu$^{1,4}$,
-and\
-Jeremy R. Manning\textsuperscript{$1, \dagger$}\\
-[0.1in]$^1$Department of Psychological and Brain Sciences,\\Dartmouth
-College, Hanover, NH\\
-$^2$Akili Interactive, Inc, Boston, MA\\
-$^3$Amazon.com, Seattle, WA\\
-$^4$Department of Computer Science,\\University of Texas at Austin,
-Austin, TX\\
-\textsuperscript{$\dagger$}Address correspondence to jeremy.r.manning@dartmouth.edu}
-
-\begin{titlepage}
-\thispagestyle{fancy}   
-% \center
-% \vspace*{\fill}
-% \huge{}\\[0.5cm]
-
-% \Large{author 1,
-% author 2,
-% author 3, and
-% Jeremy R. Manning\textsuperscript{$\dagger$}}\\[0.5cm]
-
-% \large{Department of Psychological and Brain Sciences, Dartmouth College, Hanover, NH 03755}\\[0.5cm]
-
-% \textsuperscript{$\dagger$} Address correspondence to jeremy.r.manning@dartmouth.edu
-
-% \vspace*{\fill}
-\end{titlepage}
-
-
-
-% \addtocounter{page}{1}
-% \rhead{\thepage}
-
 \maketitle
 
-
 \begin{abstract}
-Most complex systems reflect dynamic interations between myriad
-evolving components (e.g., interacting molecules, interacting brain
-systems, interacting individuals within a social network or ecological
-system, coordinated components within a mechanical or digital device, etc.).  
-Despite that these interactions are central to the full system's
-behavior (e.g., removing a component from the full system can
-change the entire system's behavior), dynamic interactions cannot
-typically be directly measured.  Rather, the interactions must be
-inferred through their hypothesized role in guiding the dynamics of
-system components.  Here we use a model-based approach to inferring
-dynamic interactions from timeseries data.  In addition to examining
-first-order interactions (e.g., between pairs of components) we also
-examine higher-order interactions (e.g., that characterize mirrored
-structure in the patterns of interaction dynamics displayed by
-different subsets of components).  We apply our approach to two
-datasets.  First, we use a synthetic dataset, for which the underlying dynamic
-interactions are known, to show that our model recovers those
-ground-truth dynamic interactions.  We also apply our model to a
-neuroimaging dataset and show that the high-order dynamic interactions
-exhibited by brain data vary meaningfully as a function of the
-cognitive ``richness'' of the stimulus people are experiencing.
+  Most complex systems reflect dynamic interations between myriad
+  evolving components (e.g., interacting molecules, interacting brain
+  systems, interacting individuals within a social network or
+  ecological system, coordinated components within a mechanical or
+  digital device, etc.).  Despite that these interactions are central
+  to the full system's behavior (e.g., removing a component from the
+  full system can change the entire system's behavior), dynamic
+  interactions cannot typically be directly measured.  Rather, the
+  interactions must be inferred through their hypothesized role in
+  guiding the dynamics of system components.  Here we use a
+  model-based approach to inferring dynamic interactions from
+  timeseries data.  In addition to examining first-order interactions
+  (e.g., between pairs of components) we also examine higher-order
+  interactions (e.g., that characterize mirrored structure in the
+  patterns of interaction dynamics displayed by different subsets of
+  components).  We apply our approach to two datasets.  First, we use
+  a synthetic dataset, for which the underlying dynamic interactions
+  are known, to show that our model recovers those ground-truth
+  dynamic interactions.  We also apply our model to a neuroimaging
+  dataset and show that the high-order dynamic interactions exhibited
+  by brain data vary meaningfully as a function of the cognitive
+  ``richness'' of the stimulus people are experiencing.
 \end{abstract}
 
 \doublespacing
@@ -172,8 +124,31 @@ compressed number of dimensions.  By repeatedly applying these two
 steps in sequence, we can examine and explore higher order dynamic
 correlations in $\mathbf{X}$.
 
+\subsection*{Dynamic correlations}
+Given a matrix of observations, we can compute the (static)
+correlations between any pair of observations, $\mathbf{X}_i$ and
+$\mathbf{X}_j$ using:
+\begin{align}
+  \mathrm{corr}(\mathbf{X}_i, \mathbf{X}_j) &= \frac{\sum_{t=1}^T \left(\mathbf{X}_i(t)
+                                              -
+                                              \hat{\mathbf{X}_i}\right) \left(\mathbf{X}_j(t)
+                                              -
+                                              \hat{\mathbf{X}_j}\right)}{\sqrt{\sum_{t=1}^T\left(
+                                              \sigma^2_{\mathbf{X}_i}\right) \left(
+                                              \sigma^2_{\mathbf{X}_j}\right)}},~\mathrm{where}\\
+                                    \hat{\mathbf{X}_k} &= \sum_{t=1}^T
+                                                         \mathbf{X}_k(t),~\mathrm{and}\\
+  \sigma^2_{\mathbf{X}_k} &= \sum_{t=1}^T \left( \mathbf{X}_k -
+                            \hat{\mathbf{X}_k} \right)^2 
+\end{align}
 
+We can generalize this formula to compute time-varying correlations by
+incorporating a \textit{weight function} that takes a time $t$ as input,
+and returns how much the observed data every timepoint (including $t$)
+contribute to the correlations at time $t$.
+%include figure showing weights (https://github.com/ContextLab/timecorr-paper/issues/1)
 
+\textbf{JRM STOPPED HERE}
 \begin{align}
 \mathrm{corr}_t(x,y) &= \frac{\sum_{t=1}^T \left( x_t - \bar{x_t} \right) \left( y_t - \bar{y_t} \right)}{\sqrt{\sum_{t=1}^{T}\sigma ^{2}_{x_{t}}\sigma ^{2}_{y_{t}}}}\mathrm{, where}\\
 \bar{a_t} &= \sum_{t=1}^T w(t)_i a_i\\
@@ -217,13 +192,19 @@ w(t) &= \mathcal{N}\left(1...T ~|~ t, \sigma_\mathcal{N}\right) %update to inclu
 % small step for mankind, and so on.
 
 \section*{Acknowledgements}
-We acknowledge useful discussions with Luke Chang, Hany Farid,
-Matthijs van der Meer, and Emily Whitaker. Our work was supported in
+We acknowledge discussions with Luke Chang, Hany Farid, Paxton
+Fitzpatrick, Andrew Heusser, Eshin Jolly, Qiang Liu, Matthijs van der
+Meer, Judith Mildner, Gina Notaro, Stephen Satterthwaite, Emily
+Whitaker, Weizhen Xie, and Kirsten Ziman. Our work was supported in
 part by NSF EPSCoR Award Number 1632738 to J.R.M. and by a sub-award
 of DARPA RAM Cooperative Agreement N66001-14-2-4-032 to J.R.M.  The
 content is solely the responsibility of the authors and does not
 necessarily represent the official views of our supporting
 organizations.
+
+\section*{Author contributions}
+Concept: J.R.M.  Implementation: T.H.C., L.L.W.O., and
+J.R.M.  Analyses: L.L.W.O and J.R.M.
 
 \bibliographystyle{apacite}
 \bibliography{CDL-bibliography/memlab}
