@@ -169,8 +169,11 @@ contribute to the correlations at time $t$ (Fig.~\ref{fig:weights}).
     several different example scale parameters ($b$) are displayed.
     \textbf{e. Mexican hat (Ricker wavelet) weights.}  Each
     observation's weights fall off in time according to a Ricker
-    wavelet centered on $t$.  Weights derived using several different
-    example width parameters ($\sigma$) are displayed.}
+    wavelet centered on $t$.  This function highlights the
+    \textit{contrasts} between local versus surrounding activity
+    patterns in estimating dynamic correlations. Weights derived using
+    several different example width parameters ($\sigma$) are
+    displayed.  }
   \label{fig:weights}
 \end{figure}
 
@@ -195,6 +198,46 @@ and $w(t, i)$ is shorthand for $w(t)$ evaluated at timepoint $i$.
 Equation~\ref{eqn:timecorr} may be used to estimate the instantaneous
 correlations between every pair of observations, at each timepoint
 (i.e., $\mathbf{Y}$).
+
+\subsubsection*{Inter-subject dynamic correlations}
+Equation~\ref{eqn:timecorr} provides a means of taking a single
+observation matrix, $\mathbf{X}$ and estimating the dynamic
+correlations from moment to moment, $\mathbf{Y}$.  Suppose that one
+has access to a set of multiple observation matrices that reflect the
+same phenomenon.  For example, one might collect neuroimaging data
+from several experimental participants, as each participant performs
+the same task (or sequence of tasks).  Let $\{ mathbf{X}_1,
+mathbf{X}_2, ..., mathbf{X}_P\}$ reflect the $T$ by $F$ observation
+matrices for each of $P$ participants in an experiment.  We can use
+\textit{inter-subject functional connectivity}~\citep[ISFC;
+][]{SimoEtal16} to compute the degree of stimulus-driven correlations
+reflected in the multi-participant dataset at a given timepoint $t$
+using:
+\begin{align}
+\bar{\mathbf{C}}(t) = M\left(R\left(\frac{1}{2P} \sum_{i=1}^P
+  Z\left(Y_i(t)\right)^\mathrm{T} + Z\left(Y_i,(t)\right)\right)\right),
+\end{align}
+where $M$ extracts and vectorizes the diagonal and upper triangle of a symmetric
+matrix, $Z$ is the Fisher $z$-transformation~\citep{Zar10}:
+\begin{align}
+Z(r) = \frac{\log(1+r) - \log(1-r)}{2}
+\end{align}
+$R$ is the inverse of $Z$:
+\begin{align}
+R(z) = \frac{\exp(2z - 1)}{\exp(2z + 1)},
+\end{align}
+and $\mathbf{Y}_i(t)$ denotes the correlation matrix
+(Eqn.~\ref{eqn:corr}) between each column of $\mathbf{X}_i$ and each
+column of the average observations from all \textit{other}
+participants, $\bar{\mathbf{X}}_{ \backslash i}$:
+\begin{align}
+  \bar{\mathbf{X}}_{ \backslash i} = R\left(\frac{1}{P-1}\sum_{i \in \backslash i} Z(\mathbf{X}_i\right),
+\end{align}
+where $ \backslash i$ denotes the set of all participants other than
+participant $i$. In this way, the $T$ by $\left( \frac{F^2 - F}{2}
+  + F \right)$
+matrix $\bar{\mathbf{C}}$ is the time-varying extension of the ISFC
+approach developed by \cite{SimoEtal16}.
 
 \subsection*{Higher-order correlations}
 Given a timeseries of dynamic correlations (e.g., obtained using
@@ -311,6 +354,8 @@ characterizes the nature and timecourse of each feature's
 
 
 \subsection*{Timepoint decoding}
+
+
 Cite HTFA paper, summarize relevant methods.
 
 \subsection*{Prediction}
