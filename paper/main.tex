@@ -131,15 +131,15 @@ $\mathbf{X}_j$ using:
 \begin{align}
   \mathrm{corr}(\mathbf{X}_i, \mathbf{X}_j) &= \frac{\sum_{t=1}^T \left(\mathbf{X}_i(t)
                                               -
-                                              \hat{\mathbf{X}_i}\right) \left(\mathbf{X}_j(t)
+                                              \bar{\mathbf{X}_i}\right) \left(\mathbf{X}_j(t)
                                               -
-                                              \hat{\mathbf{X}_j}\right)}{\sqrt{\sum_{t=1}^T
+                                              \bar{\mathbf{X}_j}\right)}{\sqrt{\sum_{t=1}^T
                                               \sigma^2_{\mathbf{X}_i} 
                                               \sigma^2_{\mathbf{X}_j}}},~\mathrm{where}\\\label{eqn:corr}
-  \hat{\mathbf{X}_k} &= \sum_{t=1}^T
+  \bar{\mathbf{X}_k} &= \sum_{t=1}^T
                        \mathbf{X}_k(t),~\mathrm{and}\\
   \sigma^2_{\mathbf{X}_k} &= \sum_{t=1}^T \left( \mathbf{X}_k -
-                            \hat{\mathbf{X}_k} \right)^2 
+                            \bar{\mathbf{X}_k} \right)^2 
 \end{align}
 
 We can generalize this formula to compute time-varying correlations by
@@ -202,21 +202,89 @@ dynamic correlations between columns of $\mathbf{Y}$.  Given unlimited
 computing resources, one could use repeated applications of
 Equation~\ref{eqn:timecorr} to estimate these higher-order
 correlations (i.e., substituting in the previous output, $\mathbf{Y}$,
-for the input, $\mathbf{X}$ in the equation).  However, because each output
-$\mathbf{Y}$ has $O(F^2)$ columns relative to $F$ columns in the input
-$\mathbf{X}$, the output of Equation~\ref{eqn:timecorr} grows with the
-square of the number of repeated applications.  When $F$ is large,
+for the input, $\mathbf{X}$ in the equation).  However, because each
+output $\mathbf{Y}$ has $O(F^2)$ columns relative to $F$ columns in
+the input $\mathbf{X}$, the output of Equation~\ref{eqn:timecorr}
+grows with the square of the number of repeated applications (total
+cost of computing $n$\textsuperscript{th} order correlations is
+$O(F^{2(n - 1)})$ for $n \in \mathcal{J}, n > 0$).  When $F$ or $n$ is large,
 this approach quickly becomes intractable.
+
+To make progress in computing $\mathbf{Y_{n+1}}$, we can approximate
+$\mathbf{Y}_n$ by computing an $O(F)$-dimensional embedding of
+$\mathbf{Y}_n$, termed $\hat{\mathbf{Y}}_n$, and then we can apply
+Equation~\ref{eqn:timecorr} to $\hat{\mathbf{Y}}_n$ rather than
+directly to $\mathbf{Y}_n$.  This enables us to maintain $O(n)$
+scaling with respect to $n$, rather than exponential scaling via the
+direct approach.
+
+There are many possible methods for computing $\hat{\mathbf{Y}}_n$
+from $\mathbf{Y}_n$, including traditional dimensionality reduction
+approaches and graph theory based approaches as described next.  In the
+\textit{Discussion} section we elaborate on other potential approaches.
+
+\subsubsection*{Dimensionality reduction-based approaches to computing
+  $\hat{\mathbf{Y}}_n$}
+
+Commonly used dimensionality reduction algorithms include Principal
+Components Analysis~\citep[PCA; ][]{Pear01}, Probabilistic
+PCA~\citep[PPCA; ][]{TippBish99}, Exploratory Factor
+Analysis~\citep[EFA; ][]{Spea04}, Independent Components
+Analysis~\citep[ICA; ][]{JuttHera91, ComoEtal91}, $t$-Stochastic
+Neighbor Embedding~\citep[$t$-SNE; ][]{MaatHint08}, Uniform Manifold
+Approximation and Projection~\citep[UMAP; ][]{McInHeal18},
+non-negative matrix factorization~\citep[NMF; ][]{LeeSeun99},
+Topographic Factor Analysis (TFA)~\cite{MannEtal14b}, Hierarchical
+Topographic Factor analysis (HTFA)~\cite{MannEtal18}, Topographic
+Latent Source Analysis (TLSA)~\cite{GersEtal11}, Dictionary
+learning~\citep{MairEtal09a, MairEtal09b}, deep
+autoencoders~\citep{HintSala06}, among others.  While complete
+characterizations of each of these algorithms is beyond the scope of
+the present manuscript, the general intuition driving these
+approaches is to compute the $\hat{\mathbf{Y}}$ with $i$ columns that
+is closest to the original $\mathbf{Y}$ with $j$ columns, and where
+(typically) $i \ll j$.  The different approaches place different
+constraints on what properties $\hat{\mathbf{Y}}$ must satisfy and
+which aspects of the data are compared (and how) to characterize the
+match between $\hat{\mathbf{Y}}$ and  $\mathbf{Y}$.
+
+\subsubsection*{Graph theory-based approaches to computing
+  $\hat{\mathbf{Y}}_n$}
+
+\textbf{JRM TODO: Need references for each of the below, plus citation
+  of \href{https://github.com/aestrivex/bctpy/wiki}{bctpy toolbox} (source of measures listed below)}
+\begin{itemize}
+\item Betweenness centrality: Wei; Node Betweenness; edge betweenness
+  centrality; edge betweeness wei; 
+\item Shannon-entropy based diversity coefficient
+\item Eigenvector centrality, pagerank centrality
+\item flow coefficient (Honey et al. 2007, PNAS)
+\item k-coreness centrality (directed, undirected)
+\item within-module degree
+\item participation coefficient (signed, unsigned)
+\item subgraph centrality
+\end{itemize}
+
+Idea: for each timepoint, compute relevant measure for node.  Result:
+a $T$ by $F$ matrix characterizing how the given measure for each node
+over time.  We can use this as $\hat{\mathbf{Y}}_n$ and then apply
+Equation~\ref{eqn:timecorr} to compute $\hat{\mathbf{Y}}_{n+1}.$
 
 \textbf{JRM STOPPED HERE}
 
 \subsection*{Timepoint decoding}
+Cite HTFA paper, summarize relevant methods.
 
 \subsection*{Prediction}
-
+Use Eqn. 12 from SuperEEG paper, extend notation to treat
+$\hat{\mathbf{Y}}_{1...n}(1...(t-1))$ as ``observed'' and use this to
+predict $\mathbf{X}(t)$.  Key question: what is the predictive power
+added by each new level.
 
 \section*{Results}
-%currently Lucy, Kirsten, and Paxton have agreed to make figures
+\subsubsection*{Synthetic data}
+\subsubsection*{Neuroimaging dataset~\citep{SimoEtal16}}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Discussion}
