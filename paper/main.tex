@@ -9,6 +9,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
 \usepackage[left]{lineno}
+\usepackage{soul}
 \linenumbers
 
 
@@ -203,18 +204,18 @@ computing resources, one could use repeated applications of
 Equation~\ref{eqn:timecorr} to estimate these higher-order
 correlations (i.e., substituting in the previous output, $\mathbf{Y}$,
 for the input, $\mathbf{X}$ in the equation).  However, because each
-output $\mathbf{Y}$ has $O(F^2)$ columns relative to $F$ columns in
+output $\mathbf{Y}$ has $\mathcal{O}(F^2)$ columns relative to $F$ columns in
 the input $\mathbf{X}$, the output of Equation~\ref{eqn:timecorr}
 grows with the square of the number of repeated applications (total
 cost of computing $n$\textsuperscript{th} order correlations is
-$O(F^{2(n - 1)})$ for $n \in \mathcal{J}, n > 0$).  When $F$ or $n$ is large,
+$\mathcal{O}(F^{2(n - 1)})$ for $n \in \mathcal{J}, n > 0$).  When $F$ or $n$ is large,
 this approach quickly becomes intractable.
 
 To make progress in computing $\mathbf{Y_{n+1}}$, we can approximate
-$\mathbf{Y}_n$ by computing an $O(F)$-dimensional embedding of
+$\mathbf{Y}_n$ by computing an $\mathcal{O}(F)$-dimensional embedding of
 $\mathbf{Y}_n$, termed $\hat{\mathbf{Y}}_n$, and then we can apply
 Equation~\ref{eqn:timecorr} to $\hat{\mathbf{Y}}_n$ rather than
-directly to $\mathbf{Y}_n$.  This enables us to maintain $O(n)$
+directly to $\mathbf{Y}_n$.  This enables us to maintain $\mathcal{O}(n)$
 scaling with respect to $n$, rather than exponential scaling via the
 direct approach.
 
@@ -248,29 +249,66 @@ constraints on what properties $\hat{\mathbf{Y}}$ must satisfy and
 which aspects of the data are compared (and how) to characterize the
 match between $\hat{\mathbf{Y}}$ and  $\mathbf{Y}$.
 
+Applying dimensionality reduction algorithms to $\mathbf{Y}$ yields a
+$\hat{\mathbf{Y}}$ whose columns reflect weighted combinations (or
+nonlinear transformations) of the original columns of $\mathbf{Y}$.
+This has two main consequences.  First, with each repeated
+dimensionality reduction, the resulting $\hat{\mathbf{Y}}_n$ has lower
+and lower fidelity (with respect to what the ``true'' $\mathbf{Y}_n$
+might have looked like without using dimensionality reduction to
+maintain scalability).  In other words, computing $\hat{\mathbf{Y}}_n$
+is a lossy operation.  Second, whereas the columns of $\mathbf{Y}_n$
+may be mapped directly onto pairs of columns of $\mathbf{Y}_{n-1}$,
+that mapping either becomes less cleanly defined in
+$\hat{\mathbf{Y}}_n$ due to the reweightings and/or nonlinear
+transformations.
+
 \subsubsection*{Graph theory-based approaches to computing
   $\hat{\mathbf{Y}}_n$}
 
-\textbf{JRM TODO: Need references for each of the below, plus citation
-  of \href{https://github.com/aestrivex/bctpy/wiki}{bctpy toolbox} (source of measures listed below)}
-\begin{itemize}
-\item Betweenness centrality: Wei; Node Betweenness; edge betweenness
-  centrality; edge betweeness wei; 
-\item Shannon-entropy based diversity coefficient
-\item Eigenvector centrality, pagerank centrality
-\item flow coefficient (Honey et al. 2007, PNAS)
-\item k-coreness centrality (directed, undirected)
-\item within-module degree
-\item participation coefficient (signed, unsigned)
-\item subgraph centrality
-\end{itemize}
+Graph theoretic measures take as input a matrix of interactions (e.g.,
+using the above notation, an $F \times F$ correlation matrix or
+binarized correlation matrix reconstituded from a single timepoint's
+row of $\mathbf{Y}$) and return as output a set of $F$ measures
+describing how each node (feature) sits within that interactions
+matrix with respect to the rest of the population.  Common measures
+include betweeness centrality~\citep[the proportion of shortest paths
+between each pair of nodes in the population that involves the given
+node in question; e.g., ][]{Newm05, OpsaEtal10, Bart04, GeisEtal08,
+  Free77}; diversity and dissimilarity~\citep[characterizations of how
+differently connected a given node is from others in the population;
+e.g., ][]{Rao82, Lin09, RicoSzei06}; Eigenvector centrality and
+pagerank centrality~\citep[measures of how influential a given node is
+within the broader network; e.g., ][]{Newm08, Bona07, LohmEtal10,
+  HaluEtal13}; transfer entropy and flow coefficients~\citep[a measure
+of how much information is flowing from a given node to other nodes in
+the network; e.g., ][]{HoneEtal07, Schr00}; $k$-coreness
+centrality~\citep[a measure of the connectivity of a node within its
+local sub-graph; e.g., ][]{AlvaEtal05, ChriFowl10}; within-module
+degree~\citep[a measure of how many connections a node has to its
+close neighbors in the network; e.g., ][]{RubiSpor10}; participation
+coefficient~\citep[a measure of the diversity of a node's connections
+to different sub-graphs in the network; e.g., ][]{RubiSpor10}; and
+sub-graph centrality~\citep[a measure of a node's participation in all
+of the network's sub-graphs; e.g., ][]{EstrRodr05}.
 
-Idea: for each timepoint, compute relevant measure for node.  Result:
-a $T$ by $F$ matrix characterizing how the given measure for each node
-over time.  We can use this as $\hat{\mathbf{Y}}_n$ and then apply
-Equation~\ref{eqn:timecorr} to compute $\hat{\mathbf{Y}}_{n+1}.$
+As an alternative to the above dimensionality reduction approach to
+embedding $\mathbf{Y}_n$ in a lower-dimensional space, but still
+allowing for scalable explorations of higher-order structure in the
+data, we also explore using the above graph theoretic measures as a
+means of obtaining $\hat{\mathbf{Y}}_n$.  In particular: for a given
+graph theoretic measure, $\eta: \mathcal{R}^{F \times F} \rightarrow
+\mathcal{R}^F$, we can use $\eta$ to tranform each row of
+$\mathbf{Y}_n$ in a way that characterizes the corresponding
+graph-theoretic properties of each column.  Whereas the dimensionality
+reduction approach to computing $\hat{\mathbf{Y}}_n$ is lossy,
+the graph-theory approach is lossless.  However, whereas the
+dimensionality reduction approach maintains ties (direct or indirect)
+to the original activity patterns reflected in $\mathbf{Y}_{n-1}$, the
+graph-theory approach does not.  Instead, the graph-theory
+characterizes the nature and timecourse of each feature's
+\textit{participation} in the network.
 
-\textbf{JRM STOPPED HERE}
 
 \subsection*{Timepoint decoding}
 Cite HTFA paper, summarize relevant methods.
