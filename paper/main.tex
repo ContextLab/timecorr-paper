@@ -231,7 +231,8 @@ and $\mathbf{Y}_i(t)$ denotes the correlation matrix
 column of the average observations from all \textit{other}
 participants, $\bar{\mathbf{X}}_{ \backslash i}$:
 \begin{align}
-  \bar{\mathbf{X}}_{ \backslash i} = R\left(\frac{1}{P-1}\sum_{i \in \backslash i} Z(\mathbf{X}_i\right),
+  \bar{\mathbf{X}}_{ \backslash i} = R\left(\frac{1}{P-1}\sum_{i \in
+  \backslash i} Z\left( \mathbf{X}_i \right) \right),
 \end{align}
 where $ \backslash i$ denotes the set of all participants other than
 participant $i$. In this way, the $T$ by $\left( \frac{F^2 - F}{2}
@@ -352,46 +353,77 @@ graph-theory approach does not.  Instead, the graph-theory
 characterizes the nature and timecourse of each feature's
 \textit{participation} in the network.
 
+\subsection*{Evaluation metrics}
+We evaluate our approach to extracting dynamic correlations and
+higher-order correlations using several metrics detailed next.  First,
+we generated synthetic data using known time-varying correlations, and
+then we evaluated the fidelity with which Equation~\ref{eqn:timecorr}
+could recover those correlations (for synthetic datasets with
+different properties, and using different kernels to define the
+weights; Fig.~\ref{fig:weights}).  We then turned to a series of
+analyses on a (real) neuroimaging dataset where the ground truth
+correlations were \textit{not} known.  We evaluated whether the
+recovered correlations could be used to accurately label held-out
+neuroimaging data with the time at which it was collected, and also
+whether the history of correlations (and higher-order correlations)
+from time 0 to $t-1$ could be used to predict future activity patterns
+at time $t$.  We used these latter evaluations (using timepoint
+decoding and predictions of held-out future data) as a proxy for
+gauging how much explanatory power the recovered correlations held
+with respect to the observed data.
 
-\subsection*{Timepoint decoding}
+\subsubsection*{Generating synthetic data}
+Ramping dataset and block dataset.  Create an example figure for both.
 
+\subsubsection*{Recovery of ground truth parameters from synthetic
+  data}
+Apply timecorr with a given kernel, then correlate each recovered
+correlation matrix with the ground truth.  Explore how recovery varies
+with the kernel, kernel parameters, and specific structure of the data
+(e.g. slow changes as in the ramping dataset, versus rapid changes as
+in the block dataset).
 
+\subsubsection*{Timepoint decoding}
 Cite HTFA paper, summarize relevant methods.
 
-\subsection*{Prediction}
+\subsubsection*{Predicting held-out future data}
 Use Eqn. 12 from SuperEEG paper, extend notation to treat
 $\hat{\mathbf{Y}}_{1...n}(1...(t-1))$ as ``observed'' and use this to
 predict $\mathbf{X}(t)$.  Key question: what is the predictive power
-added by each new level.
+added by each new level?
 
 \section*{Results}
 \subsubsection*{Synthetic data}
+Figure: overall timecourse of recovery, also recovery near
+event boundaries.
+
 \subsubsection*{Neuroimaging dataset~\citep{SimoEtal16}}
+Figures: decoding by level, predictions by level
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Discussion}
-% multiple timescale representations (a la Hasson group) implies
-% first-order network interactions.  higher-order interactions imply
-% generalizations between interacting representations (e.g. mirrored
-% schema, a la Norman/Baldassano/Hasson).  possibly cite NTB 2013
-% science review, using as evidence that this is where the field is
-% going (voxels --> patterns (L0) --> interactions (L1) --> higher
-% order patterns (L2+).
-
-% related approaches: sliding window, phase-based correlations,
-% within-ROI spatial correlations at each timepoint, granger
-% causality, other explit models (e.g. virtual brain).
-
-%other applications: molecular interactions (protein folding?),
-%diagnosis (e.g. psychiatric disorders as network flow problems--
-%gratton work?), social network dynamics (e.g. financial markets,
-%social media interactions)
+\begin{itemize}
+\item multiple timescale representations (a la Hasson group) implies
+first-order network interactions.  higher-order interactions imply
+generalizations between interacting representations (e.g. mirrored
+schema, a la Norman/Baldassano/Hasson).  possibly cite NTB 2013
+science review, using as evidence that this is where the field is
+going (voxels $\rightarrow$ patterns (L0) $\rightarrow$ interactions (L1) $\rightarrow$ higher
+order patterns (L2$+$).
+\item related approaches: sliding window, phase-based correlations,
+within-ROI spatial correlations at each timepoint, granger
+causality, other explit models (e.g. virtual brain).
+\item other applications: molecular interactions (protein folding?),
+diagnosis (e.g. psychiatric disorders as network flow problems--
+gratton work?), social network dynamics (e.g. financial markets,
+social media interactions)
+\end{itemize}
 
 \subsection*{Concluding remarks}
-% the universe is complicated and we need scalable approaches to
-% studying how the pieces are interacting to make sense of it.  one
-% small step for mankind, and so on.
+the universe is complicated and we need scalable approaches to
+studying how the pieces are interacting to make sense of it.  one
+small step for mankind, and so on.
 
 \section*{Acknowledgements}
 We acknowledge discussions with Luke Chang, Hany Farid, Paxton
