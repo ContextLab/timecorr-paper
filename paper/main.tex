@@ -145,7 +145,28 @@ $\mathbf{X}_j$ using:
 We can generalize this formula to compute time-varying correlations by
 incorporating a \textit{weight function} that takes a time $t$ as input,
 and returns how much the observed data every timepoint (including $t$)
-contribute to the correlations at time $t$.
+contribute to the correlations at time $t$ (Fig.~\ref{fig:weights}).
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{figs/kernels}
+  \caption{\textbf{Examples of time-varying weights.  Each panel
+    displays per-timepoint weights computed for 100 timepoints
+    ($0, 1, ..., 99$) with $t = 50$.  a. Uniform weights.} The weights
+  are timepoint-invariant; all timepoints are weighted equally, and do
+  not change as a function of $t$.  This is a special case of weight
+  function that reduces dynamic correlations to static correlations.
+  \textbf{b. Dirac delta function.} Only the timepoint $t$ is given
+  weight (of 1), and all other timepoints' weights are set to 0.
+  \textbf{c. Gaussian weights.} Each timepoint's weights fall off
+  according to a Gaussian probability density function centered on
+  $\mu = t$.  Weights derived using several different example variance
+  parameters ($\sigma^2$ are displayed.  \textbf{d. Laplace weights.}
+  Each timepoint's weights fall off according to a Laplace probability
+  density function centered on $\mu = t$.  Weights derived using
+  several different example scale parameters ($b$) are displayed.}
+  \label{fig:weights}
+\end{figure}
+
 %include figure showing weights (https://github.com/ContextLab/timecorr-paper/issues/1)
 
 \textbf{JRM STOPPED HERE}
