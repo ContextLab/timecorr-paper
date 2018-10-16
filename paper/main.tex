@@ -133,11 +133,11 @@ $\mathbf{X}_j$ using:
                                               -
                                               \hat{\mathbf{X}_i}\right) \left(\mathbf{X}_j(t)
                                               -
-                                              \hat{\mathbf{X}_j}\right)}{\sqrt{\sum_{t=1}^T\left(
-                                              \sigma^2_{\mathbf{X}_i}\right) \left(
-                                              \sigma^2_{\mathbf{X}_j}\right)}},~\mathrm{where}\\
-                                    \hat{\mathbf{X}_k} &= \sum_{t=1}^T
-                                                         \mathbf{X}_k(t),~\mathrm{and}\\
+                                              \hat{\mathbf{X}_j}\right)}{\sqrt{\sum_{t=1}^T
+                                              \sigma^2_{\mathbf{X}_i} 
+                                              \sigma^2_{\mathbf{X}_j}}},~\mathrm{where}\\\label{eqn:corr}
+  \hat{\mathbf{X}_k} &= \sum_{t=1}^T
+                       \mathbf{X}_k(t),~\mathrm{and}\\
   \sigma^2_{\mathbf{X}_k} &= \sum_{t=1}^T \left( \mathbf{X}_k -
                             \hat{\mathbf{X}_k} \right)^2 
 \end{align}
@@ -150,39 +150,69 @@ contribute to the correlations at time $t$ (Fig.~\ref{fig:weights}).
   \centering
   \includegraphics[width=\textwidth]{figs/kernels}
   \caption{\textbf{Examples of time-varying weights.  Each panel
-    displays per-timepoint weights computed for 100 timepoints
-    ($0, 1, ..., 99$) with $t = 50$.  a. Uniform weights.} The weights
-  are timepoint-invariant; all timepoints are weighted equally, and do
-  not change as a function of $t$.  This is a special case of weight
-  function that reduces dynamic correlations to static correlations.
-  \textbf{b. Dirac delta function.} Only the timepoint $t$ is given
-  weight (of 1), and all other timepoints' weights are set to 0.
-  \textbf{c. Gaussian weights.} Each timepoint's weights fall off
-  according to a Gaussian probability density function centered on
-  $\mu = t$.  Weights derived using several different example variance
-  parameters ($\sigma^2$ are displayed.  \textbf{d. Laplace weights.}
-  Each timepoint's weights fall off according to a Laplace probability
-  density function centered on $\mu = t$.  Weights derived using
-  several different example scale parameters ($b$) are displayed.}
+      displays per-timepoint weights at $t = 50$, evaluated for 100
+      timepoints ($1, ..., 100$).  a. Uniform weights.} The weights
+    are timepoint-invariant; observations at all timepoints are
+    weighted equally, and do not change as a function of $t$.  This is
+    a special case of weight function that reduces dynamic
+    correlations to static correlations.  \textbf{b. Dirac delta
+      function.} Only the observation at timepoint $t$ is given weight
+    (of 1), and weights for observations at all other timepoints are
+    set to 0.  \textbf{c. Gaussian weights.} Each observation's
+    weights fall off in time according to a Gaussian probability
+    density function centered on $\mu = t$.  Weights derived using
+    several different example variance parameters ($\sigma^2$ are
+    displayed.  \textbf{d. Laplace weights.}  Each observation's
+    weights fall off in time according to a Laplace probability
+    density function centered on $\mu = t$.  Weights derived using
+    several different example scale parameters ($b$) are displayed.
+    \textbf{e. Mexican hat (Ricker wavelet) weights.}  Each
+    observation's weights fall off in time according to a Ricker
+    wavelet centered on $t$.  Weights derived using several different
+    example width parameters ($\sigma$) are displayed.}
   \label{fig:weights}
 \end{figure}
 
-%include figure showing weights (https://github.com/ContextLab/timecorr-paper/issues/1)
+Given a weight function $w(t)$ for timepoint $t$, evaluated at
+timepoints in the interval $\left[ 1, ..., T \right]$, we can extend the static correlation formula
+in Equation~\ref{eqn:corr} to reflect an \textit{instantaneous
+  correlation} at timepoint $t$:
+\begin{align}
+  \mathrm{timecorr}(\mathbf{X}_i, \mathbf{X}_j, t) &= \frac{\sum_{t=1}^T \left(\mathbf{X}_i(t)
+                                              -
+                                              \widetilde{\mathbf{X}}_i(t)\right) \left(\mathbf{X}_j(t)
+                                              -
+                                              \widetilde{\mathbf{X}}_j(t)\right)}{\sqrt{\sum_{t=1}^T
+                                              \widetilde{\sigma}^2_{\mathbf{X}_i}(t) 
+                                              \widetilde{\sigma}^2_{\mathbf{X}_j}}(t)},~\mathrm{where}\\\label{eqn:timecorr}
+  \widetilde{\mathbf{X}}_k(t) &= \sum_{i=1}^T
+                       w(t, i)\mathbf{X}_k(i),\\
+  \widetilde{\sigma}^2_{\mathbf{X}_k}(t) &= \sum_{i=1}^T \left( \mathbf{X}_k(i) -
+                            \widetilde{\mathbf{X}}_k(t) \right)^2,
+\end{align}
+and $w(t, i)$ is shorthand for $w(t)$ evaluated at timepoint $i$.
+Equation~\ref{eqn:timecorr} may be used to estimate the instantaneous
+correlations between every pair of observations, at each timepoint
+(i.e., $\mathbf{Y}$).
+
+\subsection*{Higher-order correlations}
+Given a timeseries of dynamic correlations (e.g., obtained using
+Eqn.~\ref{eqn:timecorr}), higher-order correlations reflect the
+dynamic correlations between columns of $\mathbf{Y}$.  Given unlimited
+computing resources, one could use repeated applications of
+Equation~\ref{eqn:timecorr} to estimate these higher-order
+correlations (i.e., substituting in the previous output, $\mathbf{Y}$,
+for the input, $\mathbf{X}$ in the equation).  However, because each output
+$\mathbf{Y}$ has $O(F^2)$ columns relative to $F$ columns in the input
+$\mathbf{X}$, the output of Equation~\ref{eqn:timecorr} grows with the
+square of the number of repeated applications.  When $F$ is large,
+this approach quickly becomes intractable.
 
 \textbf{JRM STOPPED HERE}
-\begin{align}
-\mathrm{corr}_t(x,y) &= \frac{\sum_{t=1}^T \left( x_t - \bar{x_t} \right) \left( y_t - \bar{y_t} \right)}{\sqrt{\sum_{t=1}^{T}\sigma ^{2}_{x_{t}}\sigma ^{2}_{y_{t}}}}\mathrm{, where}\\
-\bar{a_t} &= \sum_{t=1}^T w(t)_i a_i\\
-\sigma^{2}_{a_t} &= \sum_{t=1}^{T} \left(a_t - \bar{a_t} \right)^2\\
-w(t) &= \mathcal{N}\left(1...T ~|~ t, \sigma_\mathcal{N}\right) %update to include eye, laplace, and gaussian weights
-\end{align}
 
+\subsection*{Timepoint decoding}
 
-
-% \begin{equation}
-% c(t) = \sum_{i=1}^{T}w(t)_{i}
-% \end{equation}
-
+\subsection*{Prediction}
 
 
 \section*{Results}
