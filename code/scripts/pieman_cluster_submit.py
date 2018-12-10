@@ -3,6 +3,7 @@
 # create a bunch of job scripts
 from config import config
 from subprocess import call
+import numpy as np
 import os
 import socket
 import getpass
@@ -28,26 +29,36 @@ levels =  str('10')
 # options for reps: integer
 reps =  str('10')
 
-# options for reps: integer
-cfun =  str('isfc')
+# options for reps: cfuns
+cfuns =  [str('isfc'), str('wisfc')]
 
-# options for reps: integer
-rfun =  str('eigenvector_centrality')
+# options for reps: rfuns
+rfuns =  [str('eigenvector_centrality'), str('IncrementalPCA'), str('pagerank_centrality'), str('strength')]
+
+# options for widths: integer
+widths = [str(5), str(10), str(20)]
+
+# options for weight functions: laplace, gaussian, mexican hat, delta
+weights = ['laplace', 'gaussian', 'delta', 'mexican_hat']
+
 
 # options for debug: True or False
 debug = str('True')
 
+param_grid = [(c, r, wi, we) for c in cfuns for r in rfuns for wi in widths for we in weights]
 
-job_commands = list(map(lambda x: x[0]+" "+str(x[1])+" "+levels+" "+reps+" "+cfun+" "+rfun+" "+debug, zip([job_script]*len(cond_type), cond_type)))
+
+
+job_commands = list(np.array([list(map(lambda x: x[0]+" "+str(x[1])+" "+levels+" "+reps+
+                                                 " "+e[0]+" "+e[1]+" "+e[2]+" "+e[3]+" "+debug,
+                                       zip([job_script]*len(cond_type), cond_type)))
+                              for i, e in enumerate(param_grid)]).flat)
 
 # job_names should specify the file name of each script (as a list, of the same length as job_commands)
+job_names = list(np.array([list(map(lambda x: os.path.basename(os.path.splitext(x)[0])+'_'+levels+'_'+reps+'_'
+                                              +e[0]+'_'+e[1]+'_'+e[2]+'_'+e[3]+'_'+debug+'.sh', cond_type))
+                           for i, e in enumerate(param_grid)]).flat)
 
-job_names = list(map(lambda x: os.path.basename(os.path.splitext(x)[0])+'_'+levels+'_'+reps+'_'+cfun+'_'+rfun +'_'+debug+'.sh', cond_type))
-
-# job_commands = list(map(lambda x: x[0]+" " + reps, zip([job_script]*1, range(1))))
-# # job_names should specify the file name of each script (as a list, of the same length as job_commands)
-#
-# job_names = list(map(lambda x: 'cond_'+ reps + '.sh', range(len(job_commands))))
 
 # ====== MODIFY ONLY THE CODE BETWEEN THESE LINES ======
 
