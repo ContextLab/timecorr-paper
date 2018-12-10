@@ -8,17 +8,23 @@ import os
 from config import config
 import pandas as pd
 
-
 cond = sys.argv[1]
 level = sys.argv[2]
 reps = sys.argv[3]
 cfun = sys.argv[4]
 rfun = sys.argv[5]
 
+if len(sys.argv) < 7:
+    debug = False
+else:
+    debug = eval(sys.argv[6])
 
 
+if debug:
+    results_dir = os.path.join(config['resultsdir'], cfun + '_' + rfun + '_' + reps + '_debug')
 
-results_dir = os.path.join(config['resultsdir'], cfun + '_' + rfun + '_' + reps)
+else:
+    results_dir = os.path.join(config['resultsdir'], cfun + '_' + rfun + '_' + reps)
 
 try:
     if not os.path.exists(results_dir):
@@ -38,24 +44,27 @@ pieman_data = loadmat(os.path.join(config['datadir'], 'pieman_ica100.mat'))
 pieman_conds = ['intact', 'paragraph', 'word', 'rest']
 
 
-data = []
-conds = []
-for c in pieman_conds:
-    next_data = list(map(lambda i: pieman_data[c][:, i][0], np.arange(pieman_data[c].shape[1])))
-    data.extend(next_data)
-    conds.extend([c]*len(next_data))
-del pieman_data
-
-
 #### tiny data to debug #####
 
-# data = []
-# conds = []
-# for c in pieman_conds:
-#     next_data = list(map(lambda i: pieman_data[c][:, i][0][:30,:10], np.arange(2)))
-#     data.extend(next_data)
-#     conds.extend([c]*len(next_data))
-# del pieman_data
+if debug:
+    data = []
+    conds = []
+    for c in pieman_conds:
+        next_data = list(map(lambda i: pieman_data[c][:, i][0][:30,:10], np.arange(2)))
+        data.extend(next_data)
+        conds.extend([c]*len(next_data))
+    del pieman_data
+
+else:
+
+    data = []
+    conds = []
+    for c in pieman_conds:
+        next_data = list(map(lambda i: pieman_data[c][:, i][0], np.arange(pieman_data[c].shape[1])))
+        data.extend(next_data)
+        conds.extend([c]*len(next_data))
+    del pieman_data
+
 
 data = np.array(data)
 conds = np.array(conds)
@@ -72,11 +81,8 @@ for i in range(int(reps)):
     print(iter_results)
     iter_results['iteration'] = i
     append_iter = append_iter.append(iter_results)
-    #append_iter.index.rename('iteration', inplace=True)
 
 save_file = os.path.join(results_dir, cond)
-
-#results = append_iter.groupby('level').mean()
 
 results = append_iter
 
