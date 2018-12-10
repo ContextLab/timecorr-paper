@@ -34,12 +34,15 @@ cfun =  str('isfc')
 # options for reps: integer
 rfun =  str('eigenvector_centrality')
 
+# options for debug: True or False
+debug = str('True')
 
-job_commands = list(map(lambda x: x[0]+" "+str(x[1])+" "+levels+" "+reps+" "+cfun+" "+rfun, zip([job_script]*len(cond_type), cond_type)))
+
+job_commands = list(map(lambda x: x[0]+" "+str(x[1])+" "+levels+" "+reps+" "+cfun+" "+rfun+" "+debug, zip([job_script]*len(cond_type), cond_type)))
 
 # job_names should specify the file name of each script (as a list, of the same length as job_commands)
 
-job_names = list(map(lambda x: os.path.basename(os.path.splitext(x)[0])+'_'+levels+'_'+reps+'_'+cfun+'_'+rfun + '.sh', cond_type))
+job_names = list(map(lambda x: os.path.basename(os.path.splitext(x)[0])+'_'+levels+'_'+reps+'_'+cfun+'_'+rfun +'_'+debug+'.sh', cond_type))
 
 # job_commands = list(map(lambda x: x[0]+" " + reps, zip([job_script]*1, range(1))))
 # # job_names should specify the file name of each script (as a list, of the same length as job_commands)
