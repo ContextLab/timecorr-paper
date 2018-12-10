@@ -1,6 +1,6 @@
 
 import timecorr as tc
-from timecorr.helpers import isfc, mean_combine, corrmean_combine
+from timecorr.helpers import isfc, wisfc, mean_combine, corrmean_combine
 from scipy.io import loadmat
 import numpy as np
 import sys
@@ -13,18 +13,20 @@ level = sys.argv[2]
 reps = sys.argv[3]
 cfun = sys.argv[4]
 rfun = sys.argv[5]
+width = int(sys.argv[6])
+wp = sys.argv[7]
 
-if len(sys.argv) < 7:
+if len(sys.argv) < 9:
     debug = False
 else:
-    debug = eval(sys.argv[6])
+    debug = eval(sys.argv[8])
 
 
 if debug:
-    results_dir = os.path.join(config['resultsdir'], cfun + '_' + rfun + '_' + reps + '_debug')
+    results_dir = os.path.join(config['resultsdir'], cfun + '_' + rfun + '_' + reps + '_' + wp + '_' + str(width) + '_debug')
 
 else:
-    results_dir = os.path.join(config['resultsdir'], cfun + '_' + rfun + '_' + reps)
+    results_dir = os.path.join(config['resultsdir'], cfun + '_' + rfun + '_' + reps + '_' + wp + '_' + str(width))
 
 try:
     if not os.path.exists(results_dir):
@@ -33,16 +35,17 @@ except OSError as err:
    print(err)
 
 
-width = 10
+
 laplace = {'name': 'Laplace', 'weights': tc.laplace_weights, 'params': {'scale': width}}
-# delta = {'name': '$\delta$', 'weights': tc.eye_weights, 'params': tc.eye_params}
-# gaussian = {'name': 'Gaussian', 'weights': tc.gaussian_weights, 'params': {'var': width}}
-# mexican_hat = {'name': 'Mexican hat', 'weights': tc.mexican_hat_weights, 'params': {'sigma': width}}
-# kernels = [delta, gaussian, laplace, mexican_hat]
+delta = {'name': '$\delta$', 'weights': tc.eye_weights, 'params': tc.eye_params}
+gaussian = {'name': 'Gaussian', 'weights': tc.gaussian_weights, 'params': {'var': width}}
+mexican_hat = {'name': 'Mexican hat', 'weights': tc.mexican_hat_weights, 'params': {'sigma': width}}
 
 pieman_data = loadmat(os.path.join(config['datadir'], 'pieman_ica100.mat'))
 pieman_conds = ['intact', 'paragraph', 'word', 'rest']
 
+
+weights_paramter = eval(wp)
 
 #### tiny data to debug #####
 
@@ -77,7 +80,8 @@ for i in range(int(reps)):
                                         combine=corrmean_combine,
                                         cfun=eval(cfun),
                                         rfun=rfun,
-                                        weights_params=laplace['params'])
+                                        weights_fun=weights_paramter['weights'],
+                                        weights_params=weights_paramter['params'])
     print(iter_results)
     iter_results['iteration'] = i
     append_iter = append_iter.append(iter_results)
@@ -87,4 +91,6 @@ save_file = os.path.join(results_dir, cond)
 results = append_iter
 
 results.to_csv(save_file + '.csv')
+
+
 
