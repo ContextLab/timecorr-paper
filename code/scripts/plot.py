@@ -15,8 +15,18 @@ reps = sys.argv[1]
 cfun = sys.argv[2]
 rfun = sys.argv[3]
 
-# data_dir = os.path.join(config['resultsdir'], cfun + '_' + rfun + '_' + reps + '_test')
-data_dir = os.path.join(config['resultsdir'], cfun + '_' + rfun + '_' + reps)
+if len(sys.argv) < 5:
+    debug = False
+else:
+    debug = sys.argv[4]
+
+if debug:
+    data_dir = os.path.join(config['resultsdir'], cfun + '_' + rfun + '_' + reps + '_debug')
+
+else:
+    data_dir = os.path.join(config['resultsdir'], cfun + '_' + rfun + '_' + reps)
+
+
 
 conds =glob.glob(os.path.join(data_dir, '*.csv'))
 
@@ -55,48 +65,3 @@ grouped_barplot(full_data, 'cond','error', 'level', outfile)
 
 outfile = os.path.join(data_dir, 'rank.png')
 grouped_barplot(full_data, 'cond', 'rank', 'level', outfile)
-
-# fig, ax = plt.subplots()
-# g = sns.factorplot(x="cond", y="accuracy", hue="level", data=full_data,
-#                    size=6, kind="bar", estimator=np.mean, ci=95, n_boot=1000, palette="cubehelix", ax=ax, order=['intact', 'paragraph', 'word', 'rest'])
-#
-# sns.despine(ax=ax, left=True)
-# ax.set_ylabel("accuracy")
-# ax.set_xlabel("condition")
-# l = ax.legend()
-# l.set_title('level')
-# #plt.show()
-#
-# fig.savefig(os.path.join(data_dir, 'decoding_accuracy.png'))
-#
-# plt.clf()
-#
-# full_data['error'] = 1-full_data['error']
-# # Draw a nested barplot to show survival for class and sex
-# fig, ax = plt.subplots()
-# g = sns.factorplot(x="cond", y="error", hue="level", data=full_data,
-#                    size=6, kind="bar",  estimator=np.mean, ci=95, n_boot=1000, palette="muted", ax=ax, order=['intact', 'paragraph', 'word', 'rest'])
-#
-# sns.despine(ax=ax, left=True)
-# ax.set_ylabel("1 - error")
-# ax.set_xlabel("condition")
-# l = ax.legend()
-# l.set_title('level')
-# #plt.show()
-#
-# fig.savefig(os.path.join(data_dir, 'decoding_error.png'))
-#
-# plt.clf()
-# # Draw a nested barplot to show survival for class and sex
-# fig, ax = plt.subplots()
-# g = sns.factorplot(x="cond", y="rank", hue="level", data=full_data,
-#                    size=6, kind="bar",  estimator=np.mean, ci=95, n_boot=1000, palette="muted", ax=ax, order=['intact', 'paragraph', 'word', 'rest'])
-#
-# sns.despine(ax=ax, left=True)
-# ax.set_ylabel("rank")
-# ax.set_xlabel("condition")
-# l = ax.legend()
-# l.set_title('level')
-# #plt.show()
-#
-# fig.savefig(os.path.join(data_dir, 'decoding_rank.png'))
