@@ -23,10 +23,10 @@ job_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pieman_c
 cond_type = ['intact', 'paragraph', 'word', 'rest']
 
 # options for reps: integer
-levels =  str('5')
+levels =  str('10')
 
 # options for reps: integer
-reps =  str('5')
+reps =  str('10')
 
 # options for reps: integer
 cfun =  str('isfc')
