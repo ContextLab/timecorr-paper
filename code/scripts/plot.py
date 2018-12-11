@@ -9,39 +9,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 sns.set(style="whitegrid")
 
-
-
-reps = sys.argv[1]
-cfun = sys.argv[2]
-rfun = sys.argv[3]
-
-if len(sys.argv) < 5:
-    debug = False
-else:
-    debug = sys.argv[4]
-
-if debug:
-    data_dir = os.path.join(config['resultsdir'], cfun + '_' + rfun + '_' + reps + '_debug')
-
-else:
-    data_dir = os.path.join(config['resultsdir'], cfun + '_' + rfun + '_' + reps)
-
-
-
-conds =glob.glob(os.path.join(data_dir, '*.csv'))
-
-full_data = pd.DataFrame()
-for c in conds:
-    data = pd.read_csv(c)
-    data['cond'] = os.path.basename(os.path.splitext(c)[0])
-
-    if full_data.empty:
-        full_data = data
-    else:
-        full_data = full_data.append(data)
-
-full_data['error'] = 1-full_data['error']
-
 def grouped_barplot(df, x, y, hue, outfile=None):
     fig, ax = plt.subplots()
     g = sns.factorplot(x=x, y=y, hue=hue, data=df, size=6, kind="bar", estimator=np.mean, ci=95, n_boot=1000,
@@ -57,11 +24,49 @@ def grouped_barplot(df, x, y, hue, outfile=None):
     else:
         fig.savefig(outfile, bbox_inches='tight')
 
-outfile = os.path.join(data_dir, 'accuracy.png')
-grouped_barplot(full_data, 'cond', 'accuracy', 'level', outfile)
 
-outfile = os.path.join(data_dir, 'error.png')
-grouped_barplot(full_data, 'cond','error', 'level', outfile)
+if len(sys.argv) < 1:
+    debug = False
+else:
+    debug = True
 
-outfile = os.path.join(data_dir, 'rank.png')
-grouped_barplot(full_data, 'cond', 'rank', 'level', outfile)
+if debug:
+    data_dir = config['resultsdir']+ '_debug'
+
+else:
+    data_dir = config['resultsdir']
+
+fig_dir = os.path.join(config['workingdir'], 'figs')
+
+if not os.path.isdir(fig_dir):
+    os.mkdir(fig_dir)
+
+
+params =glob.glob(os.path.join(data_dir, '*'))
+
+for p in params:
+    param_name = os.path.basename(os.path.splitext(p)[0])
+
+    conds =glob.glob(os.path.join(p, '*.csv'))
+
+    full_data = pd.DataFrame()
+    for c in conds:
+        data = pd.read_csv(c)
+        data['cond'] = os.path.basename(os.path.splitext(c)[0])
+
+        if full_data.empty:
+            full_data = data
+        else:
+            full_data = full_data.append(data)
+
+    full_data['error'] = 1-full_data['error']
+
+
+    outfile = os.path.join(fig_dir, param_name + 'accuracy.png')
+    grouped_barplot(full_data, 'cond', 'accuracy', 'level', outfile)
+
+    outfile = os.path.join(fig_dir, param_name + 'error.png')
+    grouped_barplot(full_data, 'cond','error', 'level', outfile)
+
+    outfile = os.path.join(fig_dir, param_name + 'rank.png')
+    grouped_barplot(full_data, 'cond', 'rank', 'level', outfile)
