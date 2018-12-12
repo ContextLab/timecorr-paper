@@ -9,12 +9,13 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 sns.set(style="whitegrid")
 
-def grouped_barplot(df, x, y, hue, outfile=None):
+def grouped_barplot(df, x, y, hue, title=None, outfile=None):
     fig, ax = plt.subplots()
     g = sns.factorplot(x=x, y=y, hue=hue, data=df, size=6, kind="bar", estimator=np.mean, ci=95, n_boot=1000,
                        palette="cubehelix", ax=ax, order=['intact', 'paragraph', 'word', 'rest'])
 
     sns.despine(ax=ax, left=True)
+    ax.set_title(title)
     ax.set_ylabel(y)
     ax.set_xlabel(x)
     l = ax.legend(loc='center right', bbox_to_anchor=(1.25, 0.5), ncol=1)
@@ -61,12 +62,21 @@ for p in params:
 
     full_data['error'] = 1-full_data['error']
 
+    p_split = param_name.split('_')
+
+    if debug:
+        title = p_split[0] + ' ' + p_split[1] + ' ' + p_split[-3] + ' ' + p_split[-2]
+    else:
+        title = p_split[0] + ' ' + p_split[1] + ' ' + p_split[-2] + ' ' + p_split[-1]
+
 
     outfile = os.path.join(fig_dir, param_name + 'accuracy.png')
-    grouped_barplot(full_data, 'cond', 'accuracy', 'level', outfile)
+    grouped_barplot(full_data, 'cond', 'accuracy', 'level', title=title, outfile=outfile)
 
     outfile = os.path.join(fig_dir, param_name + 'error.png')
-    grouped_barplot(full_data, 'cond','error', 'level', outfile)
+    grouped_barplot(full_data, 'cond','error', 'level', title=title, outfile=outfile)
 
     outfile = os.path.join(fig_dir, param_name + 'rank.png')
-    grouped_barplot(full_data, 'cond', 'rank', 'level', outfile)
+    grouped_barplot(full_data, 'cond', 'rank', 'level', title=title, outfile=outfile)
+
+    plt.close('all')

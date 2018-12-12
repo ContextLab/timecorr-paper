@@ -43,7 +43,7 @@ weights = ['laplace', 'gaussian', 'delta', 'mexican_hat']
 
 
 # options for debug: True or False
-debug = str('True')
+debug = str('False')
 
 param_grid = [(c, r, wi, we) for c in cfuns for r in rfuns for wi in widths for we in weights]
 
