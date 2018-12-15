@@ -53,7 +53,7 @@ if debug:
     data = []
     conds = []
     for c in pieman_conds:
-        next_data = list(map(lambda i: pieman_data[c][:, i][0][:30,:10], np.arange(2)))
+        next_data = list(map(lambda i: pieman_data[c][:, i][0][:30,:10], np.arange(4)))
         data.extend(next_data)
         conds.extend([c]*len(next_data))
     del pieman_data
@@ -73,10 +73,11 @@ data = np.array(data)
 conds = np.array(conds)
 
 append_iter = pd.DataFrame()
+append_mu = pd.DataFrame()
 
 for i in range(int(reps)):
 
-    iter_results = tc.timepoint_decoder(data[conds == cond], level=np.arange(int(level) + 1),
+    iter_results = tc.optimize_weighted_timepoint_decoder(data[conds == cond], level=2,
                                         combine=corrmean_combine,
                                         cfun=eval(cfun),
                                         rfun=rfun,
@@ -88,9 +89,11 @@ for i in range(int(reps)):
 
 save_file = os.path.join(results_dir, cond)
 
-results = append_iter
+results_decode = append_iter
+results_mu = append_mu
 
-results.to_csv(save_file + '.csv')
+results_decode.to_csv(save_file + '.csv')
+results_mu.to_csv(save_file + '_mu.csv')
 
 
 
