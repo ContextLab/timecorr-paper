@@ -26,7 +26,7 @@ def grouped_barplot(df, x, y, hue, title=None, outfile=None):
         fig.savefig(outfile, bbox_inches='tight')
 
 
-if len(sys.argv) < 1:
+if len(sys.argv) < 2:
     debug = False
 else:
     debug = True
