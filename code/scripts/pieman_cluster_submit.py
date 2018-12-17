@@ -33,8 +33,8 @@ reps =  str('10')
 cfuns =  [str('isfc'), str('wisfc')]
 
 # options for reps: rfuns
-rfuns =  [str('eigenvector_centrality'), str('pagerank_centrality'), str('strength')]
-#rfuns =  [str('pagerank_centrality')]
+#rfuns =  [str('eigenvector_centrality'), str('pagerank_centrality'), str('strength')]
+rfuns =  [str('pagerank_centrality')]
 
 # options for widths: integer
 widths = [str(5), str(10), str(20)]
@@ -44,7 +44,7 @@ weights = ['laplace', 'gaussian', 'delta', 'mexican_hat']
 
 
 # options for debug: True or False
-debug = str('True')
+debug = str('False')
 
 param_grid = [(c, r, wi, we) for c in cfuns for r in rfuns for wi in widths for we in weights]
 
