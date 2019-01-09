@@ -18,7 +18,7 @@ except:
     os.makedirs(config['resultsdir'])
 
 # each job command should be formatted as a string
-job_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pieman_cluster.py')
+job_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pieman_cluster_param_search.py')
 
 
 cond_type = ['intact', 'paragraph', 'word', 'rest']
