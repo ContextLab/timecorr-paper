@@ -23,12 +23,14 @@ job_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pieman_c
 
 cond_type = ['intact', 'paragraph', 'word', 'rest']
 
-# options for reps: integer
+# options for levels: integer
 ## for 0; 0,1; 0,1,2
-levels = []
-for i in range(11):
-    levels.append(str(i))
+# levels = []
+# for i in range(11):
+#     levels.append(str(i))
 
+# options for levels: integer
+levels = str('10')
 # options for reps: integer
 reps =  str('10')
 
@@ -49,19 +51,20 @@ weights = ['mexican_hat']
 # options for debug: True or False
 debug = str('False')
 
-param_grid = [(c, r, wi, we, le) for c in cfuns for r in rfuns for wi in widths for we in weights for le in levels]
+param_grid = [(c, r, wi, we) for c in cfuns for r in rfuns for wi in widths for we in weights]
 
 
 
-job_commands = list(np.array([list(map(lambda x: x[0]+" "+str(x[1])+" "+e[4]+" "+reps+
+job_commands = list(np.array([list(map(lambda x: x[0]+" "+str(x[1])+" "+levels+" "+reps+
                                                  " "+e[0]+" "+e[1]+" "+e[2]+" "+e[3]+" "+debug,
                                        zip([job_script]*len(cond_type), cond_type)))
                               for i, e in enumerate(param_grid)]).flat)
 
 # job_names should specify the file name of each script (as a list, of the same length as job_commands)
-job_names = list(np.array([list(map(lambda x: os.path.basename(os.path.splitext(x)[0])+'_'+e[4]+'_'+reps+'_'
+job_names = list(np.array([list(map(lambda x: os.path.basename(os.path.splitext(x)[0])+'_'+levels+'_'+reps+'_'
                                               +e[0]+'_'+e[1]+'_'+e[2]+'_'+e[3]+'_'+debug+'.sh', cond_type))
                            for i, e in enumerate(param_grid)]).flat)
+
 
 
 # ====== MODIFY ONLY THE CODE BETWEEN THESE LINES ======
