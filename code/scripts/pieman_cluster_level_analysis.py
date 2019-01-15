@@ -76,7 +76,7 @@ append_iter = pd.DataFrame()
 
 for i in range(int(reps)):
 
-    iter_results = tc.optimize_weighted_timepoint_decoder(data[conds == cond], level=int(level),
+    iter_results = tc.optimize_weighted_timepoint_decoder(data[conds == cond], nfolds=1, level=int(level),
                                         combine=corrmean_combine,
                                         cfun=eval(cfun),
                                         rfun=rfun,
