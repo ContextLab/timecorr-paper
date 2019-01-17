@@ -20,19 +20,12 @@ except:
 # each job command should be formatted as a string
 job_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pieman_cluster_level_analysis.py')
 
-
 cond_type = ['intact', 'paragraph', 'word', 'rest']
-
-# options for levels: integer
-## for 0; 0,1; 0,1,2
-# levels = []
-# for i in range(11):
-#     levels.append(str(i))
 
 # options for levels: integer
 levels = str('10')
 # options for reps: integer
-reps =  str('10')
+reps =  str('5')
 
 # options for reps: cfuns
 cfuns =  [str('wisfc')]
@@ -47,23 +40,18 @@ widths = [str(5)]
 # options for weight functions: laplace, gaussian, mexican hat, delta
 weights = ['mexican_hat']
 
-
 # options for debug: True or False
 debug = str('False')
 
-param_grid = [(c, r, wi, we) for c in cfuns for r in rfuns for wi in widths for we in weights]
-
-
-
-job_commands = list(np.array([list(map(lambda x: x[0]+" "+str(x[1])+" "+levels+" "+reps+
-                                                 " "+e[0]+" "+e[1]+" "+e[2]+" "+e[3]+" "+debug,
+job_commands = list(np.array([list(map(lambda x: x[0]+" "+str(x[1])+" "+levels+" "+str(r)+
+                                                 " "+cfuns[0]+" "+rfuns[0]+" "+widths[0]+" "+weights[0]+" "+debug,
                                        zip([job_script]*len(cond_type), cond_type)))
-                              for i, e in enumerate(param_grid)]).flat)
+                              for r in range(int(reps))]).flat)
 
 # job_names should specify the file name of each script (as a list, of the same length as job_commands)
-job_names = list(np.array([list(map(lambda x: os.path.basename(os.path.splitext(x)[0])+'_'+levels+'_'+reps+'_'
-                                              +e[0]+'_'+e[1]+'_'+e[2]+'_'+e[3]+'_'+debug+'.sh', cond_type))
-                           for i, e in enumerate(param_grid)]).flat)
+job_names = list(np.array([list(map(lambda x: os.path.basename(os.path.splitext(x)[0])+'_'+levels+'_'+str(r)+'_'
+                                              +cfuns[0]+'_'+rfuns[0]+'_'+widths[0]+'_'+weights[0]+'_'+debug+'.sh', cond_type))
+                           for r in range(int(reps))]).flat)
 
 
 
@@ -164,7 +152,7 @@ for n, c in zip(job_names, job_commands):
         if lock(next_lockfile):
             next_job = create_job(n, c)
 
-            if (socket.gethostname() == 'discovery.hpcc.dartmouth.edu') or (socket.gethostname() == 'ndoli.hpcc.dartmouth.edu'):
+            if (socket.gethostname() == 'discovery7.hpcc.dartmouth.edu') or (socket.gethostname() == 'ndoli.hpcc.dartmouth.edu'):
                 submit_command = 'echo "[SUBMITTING JOB: ' + next_job + ']"; qsub'
             else:
                 submit_command = 'echo "[RUNNING JOB: ' + next_job + ']"; sh'

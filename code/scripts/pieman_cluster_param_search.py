@@ -23,10 +23,10 @@ else:
 
 
 if debug:
-    results_dir = os.path.join(config['resultsdir'], cfun + '_' + rfun + '_' + reps + '_' + wp + '_' + str(width) + '_debug')
+    results_dir = os.path.join(config['resultsdir'], cond, cfun + '_' + rfun + '_' + reps + '_' + wp + '_' + str(width) + '_debug')
 
 else:
-    results_dir = os.path.join(config['resultsdir'], cfun + '_' + rfun + '_' + reps + '_' + wp + '_' + str(width))
+    results_dir = os.path.join(config['resultsdir'], cond, cfun + '_' + rfun + '_' + reps + '_' + wp + '_' + str(width))
 
 try:
     if not os.path.exists(results_dir):
@@ -73,6 +73,14 @@ data = np.array(data)
 conds = np.array(conds)
 
 append_iter = pd.DataFrame()
+
+iter_results = tc.optimize_weighted_timepoint_decoder(data[conds == cond], level=int(level),
+                                                      combine=corrmean_combine,
+                                                      cfun=eval(cfun),
+                                                      rfun=rfun,
+                                                      weights_fun=weights_paramter['weights'],
+                                                      weights_params=weights_paramter['params'])
+
 
 for i in range(int(reps)):
 
