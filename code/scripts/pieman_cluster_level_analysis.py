@@ -23,10 +23,10 @@ else:
 
 
 if debug:
-    results_dir = os.path.join(config['resultsdir'], cfun + '_' + rfun + '_' + reps + '_' + wp + '_' + str(width) + '_debug', 'level_'+level)
+    results_dir = os.path.join(config['resultsdir'], cfun + '_' + rfun + '_' + wp + '_' + str(width) + '_debug', 'level_'+level)
 
 else:
-    results_dir = os.path.join(config['resultsdir'], cfun + '_' + rfun + '_' + reps + '_' + wp + '_' + str(width), 'level_'+level)
+    results_dir = os.path.join(config['resultsdir'], cfun + '_' + rfun + '_' + wp + '_' + str(width), 'level_'+level)
 
 try:
     if not os.path.exists(results_dir):
@@ -74,25 +74,26 @@ conds = np.array(conds)
 
 append_iter = pd.DataFrame()
 
-for i in range(int(reps)):
+iter_results = tc.optimize_weighted_timepoint_decoder(data[conds == cond], nfolds=1, level=int(level),
+                                    combine=corrmean_combine,
+                                    cfun=eval(cfun),
+                                    rfun=rfun,
+                                    weights_fun=weights_paramter['weights'],
+                                    weights_params=weights_paramter['params'])
 
-    iter_results = tc.optimize_weighted_timepoint_decoder(data[conds == cond], level=int(level),
-                                        combine=corrmean_combine,
-                                        cfun=eval(cfun),
-                                        rfun=rfun,
-                                        weights_fun=weights_paramter['weights'],
-                                        weights_params=weights_paramter['params'])
-    print(iter_results)
-    iter_results['iteration'] = i
-    append_iter = append_iter.append(iter_results)
+print(iter_results)
+iter_results['iteration'] = int(reps)
+
 
 save_file = os.path.join(results_dir, cond)
 
-results_decode = append_iter
 
-
-results_decode.to_csv(save_file + '.csv')
-
+if not os.path.isfile(save_file + '.csv'):
+      iter_results.to_csv(save_file + '.csv')
+else:
+    append_iter = pd.read_csv(save_file + '.csv', index_col=0)
+    append_iter = append_iter.append(iter_results)
+    append_iter.to_csv(save_file + '.csv')
 
 
 
