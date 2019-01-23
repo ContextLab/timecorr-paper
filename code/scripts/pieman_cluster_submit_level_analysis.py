@@ -23,9 +23,9 @@ job_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pieman_c
 cond_type = ['intact', 'paragraph', 'word', 'rest']
 
 # options for levels: integer
-levels = str('10')
+levels = str('5')
 # options for reps: integer
-reps =  str('5')
+reps =  str('3')
 
 # options for reps: cfuns
 cfuns =  [str('wisfc')]
