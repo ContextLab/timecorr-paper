@@ -15,18 +15,20 @@ cfun = sys.argv[4]
 rfun = sys.argv[5]
 width = int(sys.argv[6])
 wp = sys.argv[7]
+ndims = sys.argv[8]
 
-if len(sys.argv) < 9:
+if len(sys.argv) < 10:
     debug = False
 else:
-    debug = eval(sys.argv[8])
+    debug = eval(sys.argv[9])
 
+result_name = 'pca_decode'
 
 if debug:
-    results_dir = os.path.join(config['resultsdir'], cfun + '_' + rfun + '_' + wp + '_' + str(width) + '_debug', 'level_'+level)
+    results_dir = os.path.join(config['resultsdir'], result_name, rfun + '_debug', 'ndims_'+ ndims)
 
 else:
-    results_dir = os.path.join(config['resultsdir'], cfun + '_' + rfun + '_' + wp + '_' + str(width), 'level_'+level)
+    results_dir = os.path.join(config['resultsdir'], result_name, rfun , 'ndims_'+ ndims)
 
 try:
     if not os.path.exists(results_dir):
@@ -53,7 +55,7 @@ if debug:
     data = []
     conds = []
     for c in pieman_conds:
-        next_data = list(map(lambda i: pieman_data[c][:, i][0][:30,:10], np.arange(4)))
+        next_data = list(map(lambda i: pieman_data[c][:, i][0][:30,:20], np.arange(4)))
         data.extend(next_data)
         conds.extend([c]*len(next_data))
     del pieman_data
@@ -74,7 +76,7 @@ conds = np.array(conds)
 
 append_iter = pd.DataFrame()
 
-iter_results = tc.helpers.pca_decoder(data[conds == cond], nfolds=2, dims=10, level=int(level),
+iter_results = tc.helpers.pca_decoder(data[conds == cond], nfolds=2, dims=int(ndims), level=int(level),
                                     combine=mean_combine,
                                     cfun=eval(cfun),
                                     rfun=None,
