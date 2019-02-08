@@ -27,37 +27,37 @@ cond_type = ['intact', 'paragraph', 'word', 'rest']
 levels =  str('10')
 
 # options for reps: integer
-reps =  str('10')
+reps =  str('4')
 
 # options for reps: cfuns
 cfuns =  [str('isfc'), str('wisfc')]
 
 # options for reps: rfuns
-#rfuns =  [str('eigenvector_centrality'), str('pagerank_centrality'), str('strength')]
-rfuns =  [str('pagerank_centrality')]
+#rfuns =  [str('eigenvector_centrality'), str('pagerank_centrality'), str('PCA'), str('uMAP')]
+rfuns =  [str('strength')]
 
 # options for widths: integer
 widths = [str(5), str(10), str(20)]
 
 # options for weight functions: laplace, gaussian, mexican hat, delta
-weights = ['laplace', 'gaussian', 'delta', 'mexican_hat']
+weights = ['laplace', 'gaussian', 'mexican_hat']
 
 
 # options for debug: True or False
 debug = str('False')
 
-param_grid = [(c, r, wi, we) for c in cfuns for r in rfuns for wi in widths for we in weights]
+param_grid = [(c, r, wi, we, re) for c in cfuns for r in rfuns for wi in widths for we in weights for re in range(int(reps))]
 
 
 
 job_commands = list(np.array([list(map(lambda x: x[0]+" "+str(x[1])+" "+levels+" "+reps+
-                                                 " "+e[0]+" "+e[1]+" "+e[2]+" "+e[3]+" "+debug,
+                                                 " "+e[0]+" "+e[1]+" "+e[2]+" "+e[3]+" "+str(e[4])+" "+debug,
                                        zip([job_script]*len(cond_type), cond_type)))
                               for i, e in enumerate(param_grid)]).flat)
 
 # job_names should specify the file name of each script (as a list, of the same length as job_commands)
 job_names = list(np.array([list(map(lambda x: os.path.basename(os.path.splitext(x)[0])+'_'+levels+'_'+reps+'_'
-                                              +e[0]+'_'+e[1]+'_'+e[2]+'_'+e[3]+'_'+debug+'.sh', cond_type))
+                                              +e[0]+'_'+e[1]+'_'+e[2]+'_'+e[3]+'_'+str(e[4])+'_'+debug+'.sh', cond_type))
                            for i, e in enumerate(param_grid)]).flat)
 
 

@@ -21,12 +21,13 @@ if len(sys.argv) < 9:
 else:
     debug = eval(sys.argv[8])
 
+result_name = 'param_search'
 
 if debug:
-    results_dir = os.path.join(config['resultsdir'], cond, cfun + '_' + rfun + '_' + reps + '_' + wp + '_' + str(width) + '_debug')
+    results_dir = os.path.join(config['resultsdir'], result_name, cfun + '_' + rfun + '_' + wp + '_' + str(width) + '_debug')
 
 else:
-    results_dir = os.path.join(config['resultsdir'], cond, cfun + '_' + rfun + '_' + reps + '_' + wp + '_' + str(width))
+    results_dir = os.path.join(config['resultsdir'], result_name, cfun + '_' + rfun + '_' + wp + '_' + str(width))
 
 try:
     if not os.path.exists(results_dir):
@@ -74,32 +75,25 @@ conds = np.array(conds)
 
 append_iter = pd.DataFrame()
 
+
 iter_results = tc.optimize_weighted_timepoint_decoder(data[conds == cond], level=int(level),
-                                                      combine=corrmean_combine,
-                                                      cfun=eval(cfun),
-                                                      rfun=rfun,
-                                                      weights_fun=weights_paramter['weights'],
-                                                      weights_params=weights_paramter['params'])
-
-
-for i in range(int(reps)):
-
-    iter_results = tc.optimize_weighted_timepoint_decoder(data[conds == cond], level=int(level),
-                                        combine=corrmean_combine,
-                                        cfun=eval(cfun),
-                                        rfun=rfun,
-                                        weights_fun=weights_paramter['weights'],
-                                        weights_params=weights_paramter['params'])
-    print(iter_results)
-    iter_results['iteration'] = i
-    append_iter = append_iter.append(iter_results)
+                                    combine=corrmean_combine,
+                                    cfun=eval(cfun),
+                                    rfun=rfun,
+                                    weights_fun=weights_paramter['weights'],
+                                    weights_params=weights_paramter['params'])
+print(iter_results)
+iter_results['iteration'] = int(reps)
 
 save_file = os.path.join(results_dir, cond)
 
-results_decode = append_iter
 
-
-results_decode.to_csv(save_file + '.csv')
+if not os.path.isfile(save_file + '.csv'):
+      iter_results.to_csv(save_file + '.csv')
+else:
+    append_iter = pd.read_csv(save_file + '.csv', index_col=0)
+    append_iter = append_iter.append(iter_results)
+    append_iter.to_csv(save_file + '.csv')
 
 
 
