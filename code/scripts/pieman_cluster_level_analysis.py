@@ -21,12 +21,13 @@ if len(sys.argv) < 9:
 else:
     debug = eval(sys.argv[8])
 
+result_name = 'level_analysis'
 
 if debug:
-    results_dir = os.path.join(config['resultsdir'], cfun + '_' + rfun + '_' + wp + '_' + str(width) + '_debug', 'level_'+level)
+    results_dir = os.path.join(config['resultsdir'], result_name, cfun + '_' + rfun + '_' + wp + '_' + str(width) + '_debug', 'level_'+level)
 
 else:
-    results_dir = os.path.join(config['resultsdir'], cfun + '_' + rfun + '_' + wp + '_' + str(width), 'level_'+level)
+    results_dir = os.path.join(config['resultsdir'], result_name, cfun + '_' + rfun + '_' + wp + '_' + str(width), 'level_'+level)
 
 try:
     if not os.path.exists(results_dir):
