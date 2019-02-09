@@ -22,11 +22,14 @@ else:
     debug = eval(sys.argv[8])
 
 
+result_name = 'pca_level_analysis'
+
+
 if debug:
-    results_dir = os.path.join(config['resultsdir'], cfun + '_' + rfun + '_' + wp + '_' + str(width) + '_debug', 'level_'+level)
+    results_dir = os.path.join(config['resultsdir'], result_name, cfun + '_' + rfun + '_' + wp + '_' + str(width) + '_debug', 'level_'+level)
 
 else:
-    results_dir = os.path.join(config['resultsdir'], cfun + '_' + rfun + '_' + wp + '_' + str(width), 'level_'+level)
+    results_dir = os.path.join(config['resultsdir'], result_name, cfun + '_' + rfun + '_' + wp + '_' + str(width), 'level_'+level)
 
 try:
     if not os.path.exists(results_dir):
@@ -74,7 +77,7 @@ conds = np.array(conds)
 
 append_iter = pd.DataFrame()
 
-iter_results = tc.helpers.optimize_pca_weighted_timepoint_decoder(data[conds == cond], nfolds=2, level=int(level),
+iter_results = tc.helpers.optimize_weighted_timepoint_decoder(data[conds == cond], nfolds=2, level=int(level),
                                     combine=mean_combine,
                                     cfun=eval(cfun),
                                     rfun=rfun,
