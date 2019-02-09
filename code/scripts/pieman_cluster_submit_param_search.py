@@ -50,14 +50,14 @@ param_grid = [(c, r, wi, we, re) for c in cfuns for r in rfuns for wi in widths 
 
 
 
-job_commands = list(np.array([list(map(lambda x: x[0]+" "+str(x[1])+" "+levels+" "+reps+
-                                                 " "+e[0]+" "+e[1]+" "+e[2]+" "+e[3]+" "+str(e[4])+" "+debug,
+job_commands = list(np.array([list(map(lambda x: x[0]+" "+str(x[1])+" "+levels+" "+str(e[4])+
+                                                 " "+e[0]+" "+e[1]+" "+e[2]+" "+e[3]+" "+debug,
                                        zip([job_script]*len(cond_type), cond_type)))
                               for i, e in enumerate(param_grid)]).flat)
 
 # job_names should specify the file name of each script (as a list, of the same length as job_commands)
-job_names = list(np.array([list(map(lambda x: os.path.basename(os.path.splitext(x)[0])+'_'+levels+'_'+reps+'_'
-                                              +e[0]+'_'+e[1]+'_'+e[2]+'_'+e[3]+'_'+str(e[4])+'_'+debug+'.sh', cond_type))
+job_names = list(np.array([list(map(lambda x: os.path.basename(os.path.splitext(x)[0])+'_'+levels+'_'+str(e[4])+'_'
+                                              +e[0]+'_'+e[1]+'_'+e[2]+'_'+e[3]+'_'+debug+'.sh', cond_type))
                            for i, e in enumerate(param_grid)]).flat)
 
 
@@ -158,7 +158,7 @@ for n, c in zip(job_names, job_commands):
         if lock(next_lockfile):
             next_job = create_job(n, c)
 
-            if (socket.gethostname() == 'discovery.hpcc.dartmouth.edu') or (socket.gethostname() == 'ndoli.hpcc.dartmouth.edu'):
+            if (socket.gethostname() == 'discovery7.hpcc.dartmouth.edu') or (socket.gethostname() == 'ndoli.hpcc.dartmouth.edu'):
                 submit_command = 'echo "[SUBMITTING JOB: ' + next_job + ']"; qsub'
             else:
                 submit_command = 'echo "[RUNNING JOB: ' + next_job + ']"; sh'
