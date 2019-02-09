@@ -33,8 +33,8 @@ reps =  str('4')
 cfuns =  [str('isfc'), str('wisfc')]
 
 # options for reps: rfuns
-#rfuns =  [str('eigenvector_centrality'), str('pagerank_centrality'), str('PCA'), str('uMAP')]
-rfuns =  [str('strength')]
+#rfuns =  [str('eigenvector_centrality'), str('pagerank_centrality'), str('PCA'), str('UMAP')]
+rfuns =  [str('PCA')]
 
 # options for widths: integer
 widths = [str(5), str(10), str(20)]
