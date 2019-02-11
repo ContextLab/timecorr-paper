@@ -18,48 +18,44 @@ except:
     os.makedirs(config['resultsdir'])
 
 # each job command should be formatted as a string
-job_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pieman_cluster_param_search.py')
-
+job_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pieman_pca_chunked.py')
 
 cond_type = ['intact', 'paragraph', 'word', 'rest']
 
+# options for levels: integer
+levels = str('5')
 # options for reps: integer
-levels =  str('10')
-
-# options for reps: integer
-reps =  str('10')
+reps =  str('5')
 
 # options for reps: cfuns
-cfuns =  [str('isfc'), str('wisfc')]
+cfuns =  [str('wisfc')]
 
 # options for reps: rfuns
-#rfuns =  [str('eigenvector_centrality'), str('pagerank_centrality'), str('PCA'), str('UMAP')]
-#rfuns =  [str('PCA')]
-rfuns = [str('pagerank_centrality')]
+#rfuns =  [str('eigenvector_centrality'), str('pagerank_centrality'), str('strength')]
+rfuns =  [str('PCA')]
 
 # options for widths: integer
-widths = [str(5), str(10), str(20)]
+widths = [str(5)]
 
 # options for weight functions: laplace, gaussian, mexican hat, delta
-weights = ['laplace', 'gaussian', 'mexican_hat']
+weights = ['mexican_hat']
 
+# options for dims: integers
+dims = ['100']
 
 # options for debug: True or False
 debug = str('False')
 
-param_grid = [(c, r, wi, we, re) for c in cfuns for r in rfuns for wi in widths for we in weights for re in range(int(reps))]
-
-
-
-job_commands = list(np.array([list(map(lambda x: x[0]+" "+str(x[1])+" "+levels+" "+str(e[4])+
-                                                 " "+e[0]+" "+e[1]+" "+e[2]+" "+e[3]+" "+debug,
+job_commands = list(np.array([list(map(lambda x: x[0]+" "+str(x[1])+" "+levels+" "+str(r)+
+                                                 " "+cfuns[0]+" "+rfuns[0]+" "+widths[0]+" "+weights[0]+" "+ dims[0]+ " "+debug,
                                        zip([job_script]*len(cond_type), cond_type)))
-                              for i, e in enumerate(param_grid)]).flat)
+                              for r in range(int(reps))]).flat)
 
 # job_names should specify the file name of each script (as a list, of the same length as job_commands)
-job_names = list(np.array([list(map(lambda x: os.path.basename(os.path.splitext(x)[0])+'_'+levels+'_'+str(e[4])+'_'
-                                              +e[0]+'_'+e[1]+'_'+e[2]+'_'+e[3]+'_'+debug+'.sh', cond_type))
-                           for i, e in enumerate(param_grid)]).flat)
+job_names = list(np.array([list(map(lambda x: os.path.basename(os.path.splitext(x)[0])+'_'+levels+'_'+str(r)+'_'
+                                              +cfuns[0]+'_'+rfuns[0]+'_'+widths[0]+'_'+weights[0]+'_'+ dims[0] + '_'+debug+'.sh', cond_type))
+                           for r in range(int(reps))]).flat)
+
 
 
 # ====== MODIFY ONLY THE CODE BETWEEN THESE LINES ======
