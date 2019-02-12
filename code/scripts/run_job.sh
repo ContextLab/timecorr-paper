@@ -9,7 +9,7 @@
 #PBS -N <config['jobname']>
 
 # specify the queue the job will be added to (if more than 600, use largeq)
-#PBS -q <config['largeq']>
+#PBS -q <config['q']>
 
 # specify the number of cores and nodes (estimate 4GB of RAM per core)
 #PBS -l nodes=<config['nnodes']>:ppn=<config['ppn']>
