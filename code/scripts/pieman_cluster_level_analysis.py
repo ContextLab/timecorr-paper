@@ -48,7 +48,6 @@ pieman_conds = ['intact', 'paragraph', 'word', 'rest']
 
 weights_paramter = eval(wp)
 
-#### tiny data to debug #####
 
 if debug:
     data = []

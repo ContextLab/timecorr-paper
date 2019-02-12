@@ -25,7 +25,7 @@ cond_type = ['intact', 'paragraph', 'word', 'rest']
 # options for levels: integer
 levels = str('5')
 # options for reps: integer
-reps =  str('3')
+reps =  str('5')
 
 # options for reps: cfuns
 cfuns =  [str('wisfc')]
@@ -40,17 +40,20 @@ widths = [str(5)]
 # options for weight functions: laplace, gaussian, mexican hat, delta
 weights = ['mexican_hat']
 
+# options for dims: integers
+dims = ['100']
+
 # options for debug: True or False
 debug = str('False')
 
 job_commands = list(np.array([list(map(lambda x: x[0]+" "+str(x[1])+" "+levels+" "+str(r)+
-                                                 " "+cfuns[0]+" "+rfuns[0]+" "+widths[0]+" "+weights[0]+" "+debug,
+                                                 " "+cfuns[0]+" "+rfuns[0]+" "+widths[0]+" "+weights[0]+" "+ dims[0]+ " "+debug,
                                        zip([job_script]*len(cond_type), cond_type)))
                               for r in range(int(reps))]).flat)
 
 # job_names should specify the file name of each script (as a list, of the same length as job_commands)
 job_names = list(np.array([list(map(lambda x: os.path.basename(os.path.splitext(x)[0])+'_'+levels+'_'+str(r)+'_'
-                                              +cfuns[0]+'_'+rfuns[0]+'_'+widths[0]+'_'+weights[0]+'_'+debug+'.sh', cond_type))
+                                              +cfuns[0]+'_'+rfuns[0]+'_'+widths[0]+'_'+weights[0]+'_'+ dims[0] + '_'+debug+'.sh', cond_type))
                            for r in range(int(reps))]).flat)
 
 
