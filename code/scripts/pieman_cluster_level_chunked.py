@@ -15,27 +15,25 @@ cfun = sys.argv[4]
 rfun = sys.argv[5]
 width = int(sys.argv[6])
 wp = sys.argv[7]
-ndims = sys.argv[8]
 
-if len(sys.argv) < 10:
+if len(sys.argv) < 9:
     debug = False
 else:
-    debug = eval(sys.argv[9])
+    debug = eval(sys.argv[8])
 
-result_name = 'pca_decode_chunked'
+result_name = 'level_analysis_chunked'
 
 if debug:
-    results_dir = os.path.join(config['resultsdir'], result_name, rfun + '_debug', 'ndims_'+ ndims)
+    results_dir = os.path.join(config['resultsdir'], result_name, cfun + '_' + rfun + '_' + wp + '_' + str(width) + '_debug')
 
 else:
-    results_dir = os.path.join(config['resultsdir'], result_name, rfun , 'ndims_'+ ndims)
+    results_dir = os.path.join(config['resultsdir'], result_name, cfun + '_' + rfun + '_' + wp + '_' + str(width))
 
 try:
     if not os.path.exists(results_dir):
         os.makedirs(results_dir)
 except OSError as err:
    print(err)
-
 
 
 laplace = {'name': 'Laplace', 'weights': tc.laplace_weights, 'params': {'scale': width}}
@@ -92,15 +90,16 @@ chunks = 3
 
 for chunk in range(chunks):
 
+
     data = np.array(data_thirds[chunk])
     conds = np.array(conds_thirds[chunk])
 
     append_iter = pd.DataFrame()
 
-    iter_results = tc.helpers.pca_decoder(data[conds == cond], nfolds=2, dims=int(ndims), level=int(level),
-                                        combine=mean_combine,
+    iter_results = tc.optimize_weighted_timepoint_decoder(data[conds == cond], nfolds=2, level=int(level),
+                                        combine=corrmean_combine,
                                         cfun=eval(cfun),
-                                        rfun=None,
+                                        rfun=rfun,
                                         weights_fun=weights_paramter['weights'],
                                         weights_params=weights_paramter['params'])
 
