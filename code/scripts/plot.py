@@ -26,18 +26,25 @@ def grouped_barplot(df, x, y, hue, title=None, outfile=None):
     else:
         fig.savefig(outfile, bbox_inches='tight')
 
+## for max accuracy
+# data_dir = '/Users/lucyowen/Desktop/timecorr_env/timecorr_paper/pieman/results/param_search'
+# params =glob.glob(os.path.join(data_dir, '*'))
+#
+# acc_data = pd.DataFrame()
+# for p in params:
+#     param_name = os.path.basename(os.path.splitext(p)[0])
+#     cond =os.path.join(p, 'intact.csv')
+#     data = pd.read_csv(cond)
+#     #tmp_data = pd.DataFrame()
+#     d = {'param': param_name, 'acc': data['accuracy'].mean()}
+#     tmp_data = pd.DataFrame(data=d, index=[0])
+#     if acc_data.empty:
+#         acc_data = tmp_data
+#     else:
+#         acc_data = acc_data.append(tmp_data)
 
 
-if len(sys.argv) < 2:
-    debug = False
-else:
-    debug = True
-
-if debug:
-    data_dir = config['resultsdir']+ '_debug'
-
-else:
-    data_dir = config['resultsdir']
+data_dir = os.path.join(config['resultsdir'], 'optimize_levels')
 
 fig_dir = os.path.join(config['workingdir'], 'figs')
 
@@ -89,10 +96,7 @@ for p in params:
 
     p_split = param_name.split('_')
 
-    if debug:
-        title = p_split[0] + ' ' + p_split[1] + ' ' + p_split[-3] + ' ' + p_split[-2]
-    else:
-        title = p_split[0] + ' ' + p_split[1] + ' ' + p_split[-2] + ' ' + p_split[-1]
+    title = p_split[0] + ' ' + p_split[1] + ' ' + p_split[-2] + ' ' + p_split[-1]
 
 
     outfile = os.path.join(fig_dir, param_name + 'accuracy.png')
