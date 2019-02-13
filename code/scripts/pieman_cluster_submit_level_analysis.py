@@ -23,12 +23,14 @@ job_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pieman_c
 cond_type = ['intact', 'paragraph', 'word', 'rest']
 
 # options for levels: integer
-levels = str('5')
+#levels = [1,2,3,4,5,6,7,8,9,10]
+levels = str([1,2,3])
+
 # options for reps: integer
 reps =  str('3')
 
 # options for reps: cfuns
-cfuns =  [str('wisfc')]
+cfuns =  [str('isfc')]
 
 # options for reps: rfuns
 #rfuns =  [str('eigenvector_centrality'), str('pagerank_centrality'), str('strength')]

@@ -44,7 +44,7 @@ def grouped_barplot(df, x, y, hue, title=None, outfile=None):
 #         acc_data = acc_data.append(tmp_data)
 
 
-data_dir = os.path.join(config['resultsdir'], 'optimize_levels')
+data_dir = os.path.join(config['resultsdir'], 'level_analysis_chunked')
 
 fig_dir = os.path.join(config['workingdir'], 'figs')
 
@@ -69,39 +69,40 @@ for p in params:
         else:
             full_data = full_data.append(data)
 
-    melted_df = pd.DataFrame()
+    for t in range(3):
+        melted_df = pd.DataFrame()
+        full_data_third = full_data[full_data['third'] == t]
 
-    for c in np.arange(full_data['level'].max() + 2):
-        if c!=full_data['level'].max() + 1:
-            melted_temp_df = pd.DataFrame()
-            melted_temp_df['weights'] = full_data['level_' + str(c)]
-            melted_temp_df['level'] = full_data['level']
-            melted_temp_df['level'] = c
-            #melted_temp_df['accuracy'] = full_data['accuracy']
-            melted_temp_df['cond'] = full_data['cond']
+        for c in np.arange(full_data_third['level'].max() + 2):
+            if c!=full_data_third['level'].max() + 1:
+                melted_temp_df = pd.DataFrame()
+                melted_temp_df['weights'] = full_data_third['level_' + str(c)]
+                melted_temp_df['level'] = full_data_third['level']
+                melted_temp_df['level'] = c
+                melted_temp_df['cond'] = full_data_third['cond']
 
-            if melted_df.empty:
-                melted_df = melted_temp_df
+                if melted_df.empty:
+                    melted_df = melted_temp_df
+                else:
+                    melted_df = melted_df.append(melted_temp_df)
             else:
+
+                melted_temp_df = pd.DataFrame()
+                melted_temp_df['weights'] = full_data_third['accuracy']
+                melted_temp_df['level'] = full_data_third['level']
+                melted_temp_df['level'] = 'accuracy'
+                melted_temp_df['cond'] = full_data_third['cond']
                 melted_df = melted_df.append(melted_temp_df)
-        else:
+                full_data_third['error'] = 1-full_data_third['error']
 
-            melted_temp_df = pd.DataFrame()
-            melted_temp_df['weights'] = full_data['accuracy']
-            melted_temp_df['level'] = full_data['level']
-            melted_temp_df['level'] = 'accuracy'
-            melted_temp_df['cond'] = full_data['cond']
-            melted_df = melted_df.append(melted_temp_df)
-    full_data['error'] = 1-full_data['error']
+        p_split = param_name.split('_')
 
-    p_split = param_name.split('_')
-
-    title = p_split[0] + ' ' + p_split[1] + ' ' + p_split[-2] + ' ' + p_split[-1]
+        title = p_split[0] + ' ' + p_split[1] + ' ' + p_split[-2] + ' ' + p_split[-1] + 'third: ' + str(t)
 
 
-    outfile = os.path.join(fig_dir, param_name + 'accuracy.png')
-    #grouped_barplot(full_data, 'cond', 'accuracy', 'level', title=title, outfile=outfile)
-    grouped_barplot(melted_df, 'cond', 'weights', 'level', title=title, outfile=outfile)
+        outfile = os.path.join(fig_dir, param_name + '_'+ str(t) + '_accuracy.png')
+        #grouped_barplot(full_data, 'cond', 'accuracy', 'level', title=title, outfile=outfile)
+        grouped_barplot(melted_df, 'cond', 'weights', 'level', title=title, outfile=outfile)
 
     #outfile = os.path.join(fig_dir, param_name + 'error.png')
     #grouped_barplot(full_data, 'cond','error', 'level', title=title, outfile=outfile)
