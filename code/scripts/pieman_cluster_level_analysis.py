@@ -21,13 +21,13 @@ if len(sys.argv) < 9:
 else:
     debug = eval(sys.argv[8])
 
-result_name = 'level_analysis'
+result_name = 'level_analysis_mixing'
 
 if debug:
-    results_dir = os.path.join(config['resultsdir'], result_name, cfun + '_' + rfun + '_' + wp + '_' + str(width) + '_debug', 'level_'+level)
+    results_dir = os.path.join(config['resultsdir'], result_name, cfun + '_' + rfun + '_' + wp + '_' + str(width) + '_debug')
 
 else:
-    results_dir = os.path.join(config['resultsdir'], result_name, cfun + '_' + rfun + '_' + wp + '_' + str(width), 'level_'+level)
+    results_dir = os.path.join(config['resultsdir'], result_name, cfun + '_' + rfun + '_' + wp + '_' + str(width))
 
 try:
     if not os.path.exists(results_dir):
@@ -74,12 +74,13 @@ conds = np.array(conds)
 
 append_iter = pd.DataFrame()
 
-iter_results = tc.timepoint_decoder(data[conds == cond], nfolds=2, level=list(range(int(level))),
+iter_results = tc.helpers.weighted_timepoint_decoder(data[conds == cond], nfolds=2, optimize_levels=list(range(1,int(level))), level=int(level),
                                     combine=corrmean_combine,
                                     cfun=eval(cfun),
                                     rfun=rfun,
                                     weights_fun=weights_paramter['weights'],
                                     weights_params=weights_paramter['params'])
+
 
 print(iter_results)
 iter_results['iteration'] = int(reps)
