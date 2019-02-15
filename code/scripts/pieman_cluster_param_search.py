@@ -76,7 +76,7 @@ conds = np.array(conds)
 append_iter = pd.DataFrame()
 
 
-iter_results = tc.optimize_weighted_timepoint_decoder(data[conds == cond], level=int(level),
+iter_results = tc.helpers.weighted_timepoint_decoder(data[conds == cond], level=int(level),
                                     combine=corrmean_combine,
                                     cfun=eval(cfun),
                                     rfun=rfun,

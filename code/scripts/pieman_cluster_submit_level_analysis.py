@@ -24,7 +24,7 @@ cond_type = ['intact', 'paragraph', 'word', 'rest']
 
 # options for levels: integer
 #levels = [1,2,3,4,5,6,7,8,9,10]
-levels = str([1,2,3])
+levels = str('3')
 
 # options for reps: integer
 reps =  str('3')
