@@ -21,7 +21,7 @@ if len(sys.argv) < 9:
 else:
     debug = eval(sys.argv[8])
 
-result_name = 'param_search'
+result_name = 'level_analysis_ind'
 
 if debug:
     results_dir = os.path.join(config['resultsdir'], result_name, cfun + '_' + rfun + '_' + wp + '_' + str(width) + '_debug')
@@ -42,7 +42,7 @@ delta = {'name': '$\delta$', 'weights': tc.eye_weights, 'params': tc.eye_params}
 gaussian = {'name': 'Gaussian', 'weights': tc.gaussian_weights, 'params': {'var': width}}
 mexican_hat = {'name': 'Mexican hat', 'weights': tc.mexican_hat_weights, 'params': {'sigma': width}}
 
-pieman_data = loadmat(os.path.join(config['datadir'], 'pieman_ica100.mat'))
+pieman_data = loadmat(os.path.join(config['datadir'], 'pieman_data.mat'))
 pieman_conds = ['intact', 'paragraph', 'word', 'rest']
 
 
@@ -76,7 +76,7 @@ conds = np.array(conds)
 append_iter = pd.DataFrame()
 
 
-iter_results = tc.helpers.weighted_timepoint_decoder(data[conds == cond], level=int(level),
+iter_results = tc.helpers.timepoint_decoder(data[conds == cond], level=list(range(int(level)+1)),
                                     combine=corrmean_combine,
                                     cfun=eval(cfun),
                                     rfun=rfun,
