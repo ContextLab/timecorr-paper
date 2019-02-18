@@ -42,7 +42,7 @@ delta = {'name': '$\delta$', 'weights': tc.eye_weights, 'params': tc.eye_params}
 gaussian = {'name': 'Gaussian', 'weights': tc.gaussian_weights, 'params': {'var': width}}
 mexican_hat = {'name': 'Mexican hat', 'weights': tc.mexican_hat_weights, 'params': {'sigma': width}}
 
-pieman_data = loadmat(os.path.join(config['datadir'], 'pieman_ica100.mat'))
+pieman_data = loadmat(os.path.join(config['datadir'], 'pieman_data.mat'))
 pieman_conds = ['intact', 'paragraph', 'word', 'rest']
 
 
@@ -80,7 +80,6 @@ iter_results = tc.helpers.weighted_timepoint_decoder(data[conds == cond], nfolds
                                     rfun=rfun,
                                     weights_fun=weights_paramter['weights'],
                                     weights_params=weights_paramter['params'])
-
 
 print(iter_results)
 iter_results['iteration'] = int(reps)

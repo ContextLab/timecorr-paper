@@ -23,12 +23,12 @@ job_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pieman_c
 cond_type = ['intact', 'paragraph', 'word', 'rest']
 
 # options for levels: integer
-levels = str('5')
+levels = str('10')
 # options for reps: integer
-reps =  str('3')
+reps =  str('10')
 
 # options for reps: cfuns
-cfuns =  [str('wisfc')]
+cfuns =  [str('isfc')]
 
 # options for reps: rfuns
 #rfuns =  [str('eigenvector_centrality'), str('pagerank_centrality'), str('strength')]
@@ -41,7 +41,7 @@ widths = [str(5)]
 weights = ['mexican_hat']
 
 # options for debug: True or False
-debug = str('False')
+debug = str('True')
 
 job_commands = list(np.array([list(map(lambda x: x[0]+" "+str(x[1])+" "+levels+" "+str(r)+
                                                  " "+cfuns[0]+" "+rfuns[0]+" "+widths[0]+" "+weights[0]+" "+debug,
