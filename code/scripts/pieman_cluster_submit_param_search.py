@@ -30,22 +30,21 @@ levels =  str('10')
 reps =  str('10')
 
 # options for reps: cfuns
-cfuns =  [str('isfc'), str('wisfc')]
+cfuns =  [str('isfc')]
 
 # options for reps: rfuns
 #rfuns =  [str('eigenvector_centrality'), str('pagerank_centrality'), str('PCA'), str('UMAP')]
-#rfuns =  [str('PCA')]
-rfuns = [str('pagerank_centrality')]
+rfuns =  [str('PCA'), str('eigenvector_centrality')]
 
 # options for widths: integer
-widths = [str(5), str(10), str(20)]
+widths = [str(5)]
 
 # options for weight functions: laplace, gaussian, mexican hat, delta
-weights = ['laplace', 'gaussian', 'mexican_hat']
+weights = ['mexican_hat']
 
 
 # options for debug: True or False
-debug = str('False')
+debug = str('True')
 
 param_grid = [(c, r, wi, we, re) for c in cfuns for r in rfuns for wi in widths for we in weights for re in range(int(reps))]
 
