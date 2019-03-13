@@ -61,7 +61,7 @@ delta = {'name': '$\delta$', 'weights': tc.eye_weights, 'params': tc.eye_params}
 gaussian = {'name': 'Gaussian', 'weights': tc.gaussian_weights, 'params': {'var': width}}
 mexican_hat = {'name': 'Mexican hat', 'weights': tc.mexican_hat_weights, 'params': {'sigma': width}}
 
-pieman_data = loadmat(os.path.join(config['datadir'], 'pieman_ica100.mat'))
+pieman_data = loadmat(os.path.join(config['datadir'], 'pieman_data.mat'))
 pieman_conds = ['intact', 'paragraph', 'word', 'rest']
 
 
@@ -90,42 +90,21 @@ else:
 
 data = np.array(data)
 conds = np.array(conds)
-
 append_iter = pd.DataFrame()
-append_iter2 = pd.DataFrame()
 
-iter_results = tc.helpers.weighted_timepoint_decoder(data[conds == cond], nfolds=2, level=int(level),
+iter_results = tc.helpers.weighted_timepoint_decoder(data[conds == cond], nfolds=2, optimize_levels=list(range(0,int(level)+1)), level=int(level),
                                     combine=corrmean_combine,
                                     cfun=eval(cfun),
                                     rfun=rfun,
                                     weights_fun=weights_paramter['weights'],
                                     weights_params=weights_paramter['params'])
 
-iter_results2 = tc.helpers.weighted_timepoint_decoder(data[conds == cond], nfolds=2, level=int(level),
-                                    combine=corrmean_combine,
-                                    cfun=eval(cfun),
-                                    rfun=rfun,
-                                    weights_fun=weights_paramter['weights'],
-                                    weights_params=weights_paramter['params'], opt_init='random')
-
-iter_results3 = tc.helpers.weighted_timepoint_decoder(data[conds == cond], nfolds=2, level=int(level),
-                                    combine=corrmean_combine,
-                                    cfun=eval(cfun),
-                                    rfun=rfun,
-                                    weights_fun=weights_paramter['weights'],
-                                    weights_params=weights_paramter['params'], opt_init='last')
-
 print(iter_results)
-print(iter_results2)
-print(iter_results3)
-
 iter_results['iteration'] = int(reps)
-iter_results2['iteration'] = int(reps)
-iter_results3['iteration'] = int(reps)
+
 
 save_file = os.path.join(results_dir, cond)
-save_file2 = os.path.join(results_dir_rand, cond)
-save_file3 = os.path.join(results_dir_last, cond)
+
 
 if not os.path.isfile(save_file + '.csv'):
       iter_results.to_csv(save_file + '.csv')
@@ -133,17 +112,3 @@ else:
     append_iter = pd.read_csv(save_file + '.csv', index_col=0)
     append_iter = append_iter.append(iter_results)
     append_iter.to_csv(save_file + '.csv')
-
-if not os.path.isfile(save_file2 + '.csv'):
-      iter_results2.to_csv(save_file2 + '.csv')
-else:
-    append_iter2 = pd.read_csv(save_file2 + '.csv', index_col=0)
-    append_iter2 = append_iter2.append(iter_results2)
-    append_iter2.to_csv(save_file2 + '.csv')
-
-if not os.path.isfile(save_file3 + '.csv'):
-      iter_results3.to_csv(save_file3 + '.csv')
-else:
-    append_iter3 = pd.read_csv(save_file3 + '.csv', index_col=0)
-    append_iter3 = append_iter3.append(iter_results3)
-    append_iter3.to_csv(save_file3 + '.csv')
