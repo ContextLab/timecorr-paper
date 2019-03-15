@@ -21,7 +21,7 @@ if len(sys.argv) < 9:
 else:
     debug = eval(sys.argv[8])
 
-result_name = 'level_analysis_rand_compare'
+result_name = 'level_analysis_optimized'
 
 if debug:
     results_dir = os.path.join(config['resultsdir'], result_name, cfun + '_' + rfun + '_' + wp + '_' + str(width) + '_debug')
@@ -43,17 +43,6 @@ try:
 except OSError as err:
    print(err)
 
-try:
-    if not os.path.exists(results_dir_rand):
-        os.makedirs(results_dir_rand)
-except OSError as err:
-   print(err)
-
-try:
-    if not os.path.exists(results_dir_last):
-        os.makedirs(results_dir_last)
-except OSError as err:
-   print(err)
 
 
 laplace = {'name': 'Laplace', 'weights': tc.laplace_weights, 'params': {'scale': width}}
@@ -61,7 +50,7 @@ delta = {'name': '$\delta$', 'weights': tc.eye_weights, 'params': tc.eye_params}
 gaussian = {'name': 'Gaussian', 'weights': tc.gaussian_weights, 'params': {'var': width}}
 mexican_hat = {'name': 'Mexican hat', 'weights': tc.mexican_hat_weights, 'params': {'sigma': width}}
 
-pieman_data = loadmat(os.path.join(config['datadir'], 'pieman_data.mat'))
+pieman_data = loadmat(os.path.join(config['datadir'], 'pieman_ica100.mat'))
 pieman_conds = ['intact', 'paragraph', 'word', 'rest']
 
 
