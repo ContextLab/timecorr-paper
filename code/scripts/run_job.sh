@@ -22,7 +22,7 @@
 # set the working directory *of the job* to the specified start directory
 cd <config['startdir']>
 
-echo ACTIVATING supereeg VIRTUAL ENVIRONMENT
+echo ACTIVATING timecorr VIRTUAL ENVIRONMENT
 source activate timecorr_env
 
 # run the job

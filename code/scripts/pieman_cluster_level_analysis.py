@@ -21,13 +21,21 @@ if len(sys.argv) < 9:
 else:
     debug = eval(sys.argv[8])
 
-result_name = 'level_analysis_mixing'
+result_name = 'level_analysis_optimized'
 
 if debug:
     results_dir = os.path.join(config['resultsdir'], result_name, cfun + '_' + rfun + '_' + wp + '_' + str(width) + '_debug')
+    results_dir_rand = os.path.join(config['resultsdir'], result_name, cfun + '_' + rfun + '_' + wp + '_' + str(width) + '_rand_debug')
+    results_dir_last = os.path.join(config['resultsdir'], result_name,
+                                    cfun + '_' + rfun + '_' + wp + '_' + str(width) + '_last_debug')
+
 
 else:
     results_dir = os.path.join(config['resultsdir'], result_name, cfun + '_' + rfun + '_' + wp + '_' + str(width))
+    results_dir_rand = os.path.join(config['resultsdir'], result_name,
+                               cfun + '_' + rfun + '_' + wp + '_' + str(width) + '_rand')
+    results_dir_last = os.path.join(config['resultsdir'], result_name,
+                                    cfun + '_' + rfun + '_' + wp + '_' + str(width) + '_last')
 
 try:
     if not os.path.exists(results_dir):
@@ -42,7 +50,7 @@ delta = {'name': '$\delta$', 'weights': tc.eye_weights, 'params': tc.eye_params}
 gaussian = {'name': 'Gaussian', 'weights': tc.gaussian_weights, 'params': {'var': width}}
 mexican_hat = {'name': 'Mexican hat', 'weights': tc.mexican_hat_weights, 'params': {'sigma': width}}
 
-pieman_data = loadmat(os.path.join(config['datadir'], 'pieman_data.mat'))
+pieman_data = loadmat(os.path.join(config['datadir'], 'pieman_ica100.mat'))
 pieman_conds = ['intact', 'paragraph', 'word', 'rest']
 
 
@@ -71,10 +79,9 @@ else:
 
 data = np.array(data)
 conds = np.array(conds)
-
 append_iter = pd.DataFrame()
 
-iter_results = tc.helpers.weighted_timepoint_decoder(data[conds == cond], nfolds=2, optimize_levels=list(range(1,int(level)+1)), level=int(level),
+iter_results = tc.helpers.weighted_timepoint_decoder(data[conds == cond], nfolds=2, optimize_levels=list(range(0,int(level)+1)), level=int(level),
                                     combine=corrmean_combine,
                                     cfun=eval(cfun),
                                     rfun=rfun,
@@ -94,6 +101,3 @@ else:
     append_iter = pd.read_csv(save_file + '.csv', index_col=0)
     append_iter = append_iter.append(iter_results)
     append_iter.to_csv(save_file + '.csv')
-
-
-

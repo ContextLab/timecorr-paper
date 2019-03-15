@@ -33,7 +33,8 @@ cfuns =  [str('isfc')]
 
 # options for reps: rfuns
 #rfuns =  [str('eigenvector_centrality'), str('pagerank_centrality'), str('strength')]
-rfuns =  [str('eigenvector_centrality')]
+#rfuns =  [str('eigenvector_centrality')]
+rfuns = [str('PCA')]
 
 # options for widths: integer
 widths = [str(5)]
@@ -42,7 +43,7 @@ widths = [str(5)]
 weights = ['mexican_hat']
 
 # options for debug: True or False
-debug = str('True')
+debug = str('False')
 
 job_commands = list(np.array([list(map(lambda x: x[0]+" "+str(x[1])+" "+levels+" "+str(r)+
                                                  " "+cfuns[0]+" "+rfuns[0]+" "+widths[0]+" "+weights[0]+" "+debug,

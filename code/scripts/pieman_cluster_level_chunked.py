@@ -96,12 +96,14 @@ for chunk in range(chunks):
 
     append_iter = pd.DataFrame()
 
-    iter_results = tc.helpers.weighted_timepoint_decoder(data[conds == cond], nfolds=2, level=int(level),
-                                        combine=corrmean_combine,
-                                        cfun=eval(cfun),
-                                        rfun=rfun,
-                                        weights_fun=weights_paramter['weights'],
-                                        weights_params=weights_paramter['params'])
+    iter_results = tc.helpers.weighted_timepoint_decoder(data[conds == cond], nfolds=2,
+                                                         optimize_levels=list(range(0, int(level) + 1)),
+                                                         level=int(level),
+                                                         combine=corrmean_combine,
+                                                         cfun=eval(cfun),
+                                                         rfun=rfun,
+                                                         weights_fun=weights_paramter['weights'],
+                                                         weights_params=weights_paramter['params'])
 
     print(iter_results)
     iter_results['iteration'] = int(reps)
