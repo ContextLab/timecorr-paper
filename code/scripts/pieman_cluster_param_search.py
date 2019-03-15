@@ -21,7 +21,7 @@ if len(sys.argv) < 9:
 else:
     debug = eval(sys.argv[8])
 
-result_name = 'level_analysis_ind'
+result_name = 'level_analysis_optimized'
 
 if debug:
     results_dir = os.path.join(config['resultsdir'], result_name, cfun + '_' + rfun + '_' + wp + '_' + str(width) + '_debug')
@@ -72,18 +72,18 @@ else:
 
 data = np.array(data)
 conds = np.array(conds)
-
 append_iter = pd.DataFrame()
 
-
-iter_results = tc.helpers.timepoint_decoder(data[conds == cond], level=list(range(int(level)+1)),
+iter_results = tc.helpers.weighted_timepoint_decoder(data[conds == cond], nfolds=2, optimize_levels=list(range(0,int(level)+1)), level=int(level),
                                     combine=corrmean_combine,
                                     cfun=eval(cfun),
                                     rfun=rfun,
                                     weights_fun=weights_paramter['weights'],
                                     weights_params=weights_paramter['params'])
+
 print(iter_results)
 iter_results['iteration'] = int(reps)
+
 
 save_file = os.path.join(results_dir, cond)
 
@@ -94,7 +94,3 @@ else:
     append_iter = pd.read_csv(save_file + '.csv', index_col=0)
     append_iter = append_iter.append(iter_results)
     append_iter.to_csv(save_file + '.csv')
-
-
-
-
