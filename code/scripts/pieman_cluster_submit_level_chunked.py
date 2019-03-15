@@ -32,7 +32,7 @@ cfuns =  [str('isfc')]
 
 # options for reps: rfuns
 #rfuns =  [str('eigenvector_centrality'), str('pagerank_centrality'), str('strength')]
-rfuns =  [str('eigenvector_centrality')]
+rfuns =  [str('PCA')]
 
 # options for widths: integer
 widths = [str(5)]
