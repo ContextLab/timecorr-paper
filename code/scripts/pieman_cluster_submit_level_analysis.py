@@ -40,7 +40,7 @@ rfuns = [str('PCA')]
 widths = [str(5)]
 
 # options for weight functions: laplace, gaussian, mexican hat, delta
-weights = ['mexican_hat']
+weights = ['gaussian']
 
 # options for debug: True or False
 debug = str('False')
