@@ -264,6 +264,20 @@ directly to $\mathbf{Y}_n$.  This enables us to maintain $\mathcal{O}(n)$
 scaling with respect to $n$, rather than exponential scaling via the
 direct approach.
 
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{figs/methods_fig}
+  \caption{\textbf{Examples of time-varying weights.  Each panel
+      displays per-timepoint weights at $t = 50$, evaluated for 100
+      timepoints ($1, ..., 100$).  a. Uniform weights.} The weights
+    are timepoint-invariant; observations at all timepoints are
+    weighted equally, and do not change as a function of $t$.  This is
+    a special case of weight function that reduces dynamic
+    correlations to static correlations. }
+  \label{fig:methods_fig}
+\end{figure}
+
+
 There are many possible methods for computing $\hat{\mathbf{Y}}_n$
 from $\mathbf{Y}_n$, including traditional dimensionality reduction
 approaches and graph theory based approaches as described next.  In the
@@ -391,7 +405,7 @@ To explore how higher-order structure varies with stimulus structure
 and complexity, we used a previous neuroimaging dataset
 ~\cite{SimoEtal16}  in which participants listened to an audio recording of a story; 36 particpants listen to an intact version of the story, 18 participants listen to time-scrambled recordings of the same story where paragraphs were scrambled, 36 particpants listen to word-scrambled version and 36 participants lay in rest condition.
 
-Prior work has shown participants share similar neural responses to richly structured stimuli when compared to stimuli with less structure.  To assess whether the moment-by-moment higher order correlations were reliably preserved across participants, we used inter-subject functional connectivity (ISFC) to isolate the time-varying correlational structure (functional connectivity patterns that were specifically driven by the story participants listened to.  Following the analyses conducted by (HTFA)~\cite{MannEtal18},, We first applied HTFA to the fMRI datasets to obtain a time series of 700 node activities for every participant.  We then computed the dynamic weighted ISFC using a gaussian kernel with a width of 5. We then approximated these dynamic correlation using PCA and computed the dynamic weighted ISFC on the approximations.  We repeated this process up to 10th order approximated correlations.  
+Prior work has shown participants share similar neural responses to richly structured stimuli when compared to stimuli with less structure.  To assess whether the moment-by-moment higher order correlations were reliably preserved across participants, we used inter-subject functional connectivity (ISFC) to isolate the time-varying correlational structure (functional connectivity patterns that were specifically driven by the story participants listened to.  Following the analyses conducted by (HTFA)~\cite{MannEtal18}, We first applied HTFA to the fMRI datasets to obtain a time series of 700 node activities for every participant.  We then computed the dynamic weighted ISFC using a gaussian kernel with a width of 5. We then approximated these dynamic correlation using PCA and computed the dynamic weighted ISFC on the approximations.  We repeated this process up to 10th order approximated correlations.  
 
 To assess decoding accuracy, we randomly divided participants for each stimulus into two groups. For the zeroth order, we computed the mean factor activity for each group.  For all subsequent orders up to the tenth order, we computed the mean approximated dynamic ISFC of factor activity for each group. We then took weighted combinations of each order activity, for which we optimized by subdividing one the groups. For each group of participants in turn, we compared these activity patterns (using Pearson correlations) to estimate the story times each pattern corresponded to. 
 
