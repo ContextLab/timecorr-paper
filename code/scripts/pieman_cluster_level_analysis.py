@@ -87,7 +87,6 @@ iter_results = tc.helpers.weighted_timepoint_decoder(data[conds == cond], nfolds
                                     rfun=rfun,
                                     weights_fun=weights_paramter['weights'],
                                     weights_params=weights_paramter['params'])
-
 print(iter_results)
 iter_results['iteration'] = int(reps)
 
