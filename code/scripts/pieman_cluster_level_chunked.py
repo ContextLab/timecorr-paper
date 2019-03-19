@@ -47,6 +47,7 @@ pieman_conds = ['intact', 'paragraph', 'word', 'rest']
 
 weights_paramter = eval(wp)
 
+###### REMOVE the duplicate!!
 
 if debug:
     data_thirds = [0] * 3
