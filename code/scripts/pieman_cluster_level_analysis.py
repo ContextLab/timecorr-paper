@@ -50,18 +50,18 @@ delta = {'name': '$\delta$', 'weights': tc.eye_weights, 'params': tc.eye_params}
 gaussian = {'name': 'Gaussian', 'weights': tc.gaussian_weights, 'params': {'var': width}}
 mexican_hat = {'name': 'Mexican hat', 'weights': tc.mexican_hat_weights, 'params': {'sigma': width}}
 
+factors = 700
 pieman_data = loadmat(os.path.join(config['datadir'], 'pieman_data.mat'))
 pieman_conds = ['intact', 'paragraph', 'word', 'rest']
 
 
 weights_paramter = eval(wp)
 
-
 if debug:
     data = []
     conds = []
     for c in pieman_conds:
-        next_data = list(map(lambda i: pieman_data[c][:, i][0][:30,:10], np.arange(4)))
+        next_data = list(map(lambda i: pieman_data[c][:, i][0][:30, :10], np.arange(4)))
         data.extend(next_data)
         conds.extend([c]*len(next_data))
     del pieman_data
@@ -71,10 +71,18 @@ else:
     data = []
     conds = []
     for c in pieman_conds:
-        next_data = list(map(lambda i: pieman_data[c][:, i][0], np.arange(pieman_data[c].shape[1])))
+        print(c)
+        if c == 'paragraph':
+            if factors == 700:
+                next_data = list(map(lambda i: pieman_data[c][:, i][0], np.where(np.arange(pieman_data[c].shape[1]) != 3)[0]))
+            else:
+                next_data = list(map(lambda i: pieman_data[c][:, i][0], np.where(np.arange(pieman_data[c].shape[1]) != 0)[0]))
+        else:
+            next_data = list(map(lambda i: pieman_data[c][:, i][0], np.arange(pieman_data[c].shape[1])))
         data.extend(next_data)
         conds.extend([c]*len(next_data))
     del pieman_data
+
 
 
 data = np.array(data)

@@ -37,7 +37,7 @@ cfuns =  [str('isfc')]
 rfuns = [str('PCA')]
 
 # options for widths: integer
-widths = [str(5)]
+widths = [str(50)]
 
 # options for weight functions: laplace, gaussian, mexican hat, delta
 weights = ['gaussian']
