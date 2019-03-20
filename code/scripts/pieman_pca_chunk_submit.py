@@ -18,13 +18,11 @@ except:
     os.makedirs(config['resultsdir'])
 
 # each job command should be formatted as a string
-job_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pieman_cluster_level_analysis.py')
+job_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pieman_pca_chunk.py')
 
-#cond_type = ['intact', 'paragraph', 'word', 'rest']
-cond_type = ['paragraph']
+cond_type = ['intact', 'paragraph', 'word', 'rest']
 
 # options for levels: integer
-levels = str('10')
 
 # options for reps: integer
 reps =  str('10')
@@ -34,8 +32,7 @@ cfuns =  [str('isfc')]
 
 # options for reps: rfuns
 #rfuns =  [str('eigenvector_centrality'), str('pagerank_centrality'), str('strength')]
-#rfuns =  [str('eigenvector_centrality')]
-rfuns = [str('PCA')]
+rfuns =  [str('PCA')]
 
 # options for widths: integer
 widths = [str(10)]
@@ -43,17 +40,20 @@ widths = [str(10)]
 # options for weight functions: laplace, gaussian, mexican hat, delta
 weights = ['gaussian']
 
+# options for dims: integers
+dims = ['100']
+
 # options for debug: True or False
 debug = str('False')
 
-job_commands = list(np.array([list(map(lambda x: x[0]+" "+str(x[1])+" "+levels+" "+str(r)+
-                                                 " "+cfuns[0]+" "+rfuns[0]+" "+widths[0]+" "+weights[0]+" "+debug,
+job_commands = list(np.array([list(map(lambda x: x[0]+" "+str(x[1])+" "+'chunk'+" "+str(r)+
+                                                 " "+cfuns[0]+" "+rfuns[0]+" "+widths[0]+" "+weights[0]+" "+ dims[0]+ " "+debug,
                                        zip([job_script]*len(cond_type), cond_type)))
                               for r in range(int(reps))]).flat)
 
 # job_names should specify the file name of each script (as a list, of the same length as job_commands)
-job_names = list(np.array([list(map(lambda x: os.path.basename(os.path.splitext(x)[0])+'_'+levels+'_'+str(r)+'_'
-                                              +cfuns[0]+'_'+rfuns[0]+'_'+widths[0]+'_'+weights[0]+'_'+debug+'.sh', cond_type))
+job_names = list(np.array([list(map(lambda x: os.path.basename(os.path.splitext(x)[0])+'_'+'chunk'+'_'+str(r)+'_'
+                                              +cfuns[0]+'_'+rfuns[0]+'_'+widths[0]+'_'+weights[0]+'_'+ dims[0] + '_'+debug+'.sh', cond_type))
                            for r in range(int(reps))]).flat)
 
 
