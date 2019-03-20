@@ -2,11 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="417b68b5-4afb-4c94-9087-b4cb6c1ea5b8" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/code/scripts/pieman_cluster_level_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/scripts/pieman_cluster_level_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/scripts/pieman_cluster_level_chunked.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/scripts/pieman_cluster_level_chunked.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/scripts/pieman_cluster_param_search.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/scripts/pieman_cluster_param_search.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/notebooks/figs/isfc_PCA_gaussian_10_line_level_analysis_optimized.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/figs/isfc_PCA_gaussian_10_line_level_analysis_optimized.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/notebooks/figs/isfc_PCA_gaussian_10_normalized_line_level_analysis_optimized.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/figs/isfc_PCA_gaussian_10_normalized_line_level_analysis_optimized.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/notebooks/figs/isfc_PCA_gaussian_10_relative_line_level_analysis_optimized.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/figs/isfc_PCA_gaussian_10_relative_line_level_analysis_optimized.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/notebooks/pca_pieman.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/pca_pieman.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/notebooks/pieman_corrmats.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/pieman_corrmats.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/notebooks/pieman_optimized_levels.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/pieman_optimized_levels.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/scripts/pieman_pca_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/scripts/pieman_pca_analysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/scripts/pieman_pca_chunk.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/scripts/pieman_pca_chunk.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/figs/Accuracy_by_components.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/figs/Accuracy_by_components.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/figs/Accuracy_by_components_third_0.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/figs/Accuracy_by_components_third_0.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/figs/Accuracy_by_components_third_1.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/figs/Accuracy_by_components_third_1.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/figs/Accuracy_by_components_third_2.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/figs/Accuracy_by_components_third_2.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/paper/PlotLevelUp" beforeDir="false" afterPath="$PROJECT_DIR$/paper/PlotLevelUp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -48,10 +55,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pieman_pca_analysis.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="pieman_pca_analysis.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/scripts/pieman_pca_analysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
+            <state relative-caret-position="190">
               <caret line="45" column="11" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
             </state>
           </provider>
@@ -78,11 +85,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pieman_pca_chunk.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pieman_pca_chunk.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/scripts/pieman_pca_chunk.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
-              <caret line="57" lean-forward="true" selection-start-line="57" selection-end-line="57" />
+            <state relative-caret-position="247">
+              <caret line="45" column="11" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
               <folding>
                 <element signature="e#1#22#0" expanded="true" />
               </folding>
@@ -190,8 +197,8 @@
         <option value="$PROJECT_DIR$/code/scripts/pieman_cluster_level_analysis.py" />
         <option value="$PROJECT_DIR$/code/scripts/pieman_cluster_level_chunked.py" />
         <option value="$PROJECT_DIR$/code/scripts/pieman_cluster_param_search.py" />
-        <option value="$PROJECT_DIR$/code/scripts/pieman_pca_analysis.py" />
         <option value="$PROJECT_DIR$/code/scripts/pieman_pca_chunk.py" />
+        <option value="$PROJECT_DIR$/code/scripts/pieman_pca_analysis.py" />
       </list>
     </option>
   </component>
@@ -789,16 +796,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/scripts/pieman_pca_chunk_submit.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="41" selection-start-line="41" selection-end-line="41" />
-          <folding>
-            <element signature="e#51#76#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_level_analysis.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
@@ -826,20 +823,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/scripts/pieman_pca_analysis.py">
+    <entry file="file://$PROJECT_DIR$/code/scripts/pieman_pca_chunk_submit.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="45" column="11" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
+        <state relative-caret-position="81">
+          <caret line="41" selection-start-line="41" selection-end-line="41" />
+          <folding>
+            <element signature="e#51#76#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/scripts/pieman_pca_chunk.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="57" lean-forward="true" selection-start-line="57" selection-end-line="57" />
+        <state relative-caret-position="247">
+          <caret line="45" column="11" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
           <folding>
             <element signature="e#1#22#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/scripts/pieman_pca_analysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="45" column="11" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
         </state>
       </provider>
     </entry>

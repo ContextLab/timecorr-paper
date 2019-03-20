@@ -4,6 +4,7 @@
 \usepackage{hyperref}
 \usepackage{setspace}
 \usepackage{apacite}
+\usepackage{hyperref}
 \usepackage{natbib}
 \usepackage{pxfonts}
 \usepackage[utf8]{inputenc}
@@ -395,20 +396,30 @@ with the kernel, kernel parameters, and specific structure of the data
 in the block dataset).
 
 \subsubsection*{Timepoint decoding}
-Cite HTFA paper, summarize relevant methods.
 
 To explore how higher-order structure varies with stimulus structure
 and complexity, we used a previous neuroimaging dataset
-~\cite{SimoEtal16}  in which participants listened to an audio recording of a story; 36 particpants listen to an intact version of the story, 18 participants listen to time-scrambled recordings of the same story where paragraphs were scrambled, 36 particpants listen to word-scrambled version and 36 participants lay in rest condition.
+~\cite{SimoEtal16}  in which participants listened to an audio recording of a story; 36 particpants listen to an intact version of the story, 17 participants listen to time-scrambled recordings of the same story where paragraphs were scrambled, 36 particpants listen to word-scrambled version and 36 participants lay in rest condition.
 
-Prior work has shown participants share similar neural responses to richly structured stimuli when compared to stimuli with less structure.  To assess whether the moment-by-moment higher order correlations were reliably preserved across participants, we used inter-subject functional connectivity (ISFC) to isolate the time-varying correlational structure (functional connectivity patterns that were specifically driven by the story participants listened to.  Following the analyses conducted by (HTFA)~\cite{MannEtal18}, We first applied HTFA to the fMRI datasets to obtain a time series of 700 node activities for every participant.  We then computed the dynamic weighted ISFC using a gaussian kernel with a width of 5. We then approximated these dynamic correlation using PCA and computed the dynamic weighted ISFC on the approximations.  We repeated this process up to 10th order approximated correlations.  
+Prior work has shown participants share similar neural responses to
+richly structured stimuli when compared to stimuli with less
+structure.  To assess whether the moment-by-moment higher order
+correlations were reliably preserved across participants, we used
+inter-subject functional connectivity (ISFC) to isolate the
+time-varying correlational structure (functional connectivity patterns
+that were specifically driven by the story participants listened to.
+Following the analyses conducted by (HTFA)~\cite{MannEtal18}, we first
+applied \textit{hierarchical topographic factor analysis} (HTFA) to the fMRI datasets to obtain a time series of 700 node activities for every participant.  We then computed the dynamic weighted ISFC using a gaussian kernel with a width of 5. We then approximated these dynamic correlation using PCA and computed the dynamic weighted ISFC on the approximations.  We repeated this process up to 10th order approximated correlations.  
 
-To assess decoding accuracy, we randomly divided participants for each stimulus into two groups. For the zeroth order, we computed the mean factor activity for each group.  For all subsequent orders up to the tenth order, we computed the mean approximated dynamic ISFC of factor activity for each group. We then took weighted combinations of each order activity, for which we optimized by subdividing one the groups. For each group of participants in turn, we compared these activity patterns (using Pearson correlations) to estimate the story times each pattern corresponded to. 
+To assess decoding accuracy, we randomly divided participants for each stimulus into training and testing groups. For the zeroth order, we computed the mean factor activity for each group.  For all subsequent orders up to the tenth order, we computed the mean approximated dynamic ISFC of factor activity for each group.  For each group of participants in turn, we compared these activity patterns (using Pearson correlations) to estimate the story times each pattern corresponded to. 
+
+Specifically, we asked, for each timepoint: what are the correlations
+between the first group's and second group's activity patterns at each
+order.  We then took weighted mixture of the correlation matrices at
+each order using mixing parameter, $\phi$, where $0 <\phi< 1$ reflects a
+weighted mixture of order based decoding. We optimized  $\phi$, by subdividing the training group. We note that the decoding test we used is a conservative in which we count a timepoint label as incorrect if it is not an exact match.
 
 
-
-
- 
 
 \section*{Results}
 \subsubsection*{Synthetic data}
@@ -416,8 +427,47 @@ Figure: overall timecourse of recovery, also recovery near
 event boundaries.
 
 \subsubsection*{Neuroimaging dataset~\citep{SimoEtal16}}
-Figures: decoding by level, predictions by level
+Figures: decoding by level
+For our decoding analysis, we used HTFA-derived node activities
+~\cite{MannEtal18} from fMRI data collected as participants listened
+to an audio recording of a story (intact condition; 36 participants),
+listened to time scrambled recordings of the same story (17
+participants in the paragraph-scrambled condition listened to the
+paragraphs in a randomized order and 36 in the word-scrambled
+condition listened to the words in a randomized order), or lay resting
+with their eyes open in the scanner (rest condition; 36
+participants). We sought to demonstrate how higher-order correlations
+may be used to examine dynamic interactions of brain patterns in
+(real) multi-subject fMRI datasets. This story listening dataset was
+collected as part of a separate study, where the full imaging
+parameters, image preprocessing methods, and experimental details may
+be found~\citep{SimoEtal16}. The dataset is available at
+\href{url}{http://arks. princeton.edu/ark:/88435/dsp015d86p269k}.
 
+We next evaluated if our model of high-order correlations in brain activity can capture cognitively relevant brain patterns. We performed a decoding analysis, using cross validation to estimate (using other participants’ data) which parts of the story each weighted-mixture of higher-order brain activity pattern corresponded to (see \textit{Materials and methods}). We note that our primary goal was not to achieve perfect decoding accuracy, but rather to use decoding accuracy as a benchmark for assessing whether different neural features specifically capture cognitively relevant brain patterns.
+
+Separately for each experimental condition, we divided participants
+into two groups. For the zeroth order, we computed the mean factor
+activity for each group.  For all subsequent orders up to the tenth
+order, we computed the mean approximated dynamic ISFC of factor
+activity for each group (see \textit{Materials and methods}).  For
+each order, we correlated the group 1 activity patterns with group 2
+activity patterns.  We then subdivided the group 1 to obtain an
+optimal weighting parameter for each order’s correlation matrix using
+the same cross validation method. We used the optimal weighting
+parameters to obtain a weighted-mixture of each order’s correlation
+matrix. Using these correlations, we labeled the group 1 timepoints
+using the group 2 timepoints with which they were most highly
+correlated; we then computed the proportion of correctly labeled group
+1 timepoints. (We also performed the symmetric analysis whereby we
+labeled the group 2 timepoints using the group 1 timepoints as a
+template.) We repeated this procedure 10 times (randomly re-assigning
+participants to the two groups each time) to obtain a distribution of
+decoding accuracies for each experimental condition. (There were 272
+timepoints for paragraph condition, 300 timepoints for intact and word
+conditions, and 400 timepoints for rest condition,  so chance
+performance on this decoding test is was $\frac{1}{272}$,
+$\frac{1}{300}$, and $\frac{1}{400}$ respectively. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Discussion}
