@@ -43,13 +43,14 @@ delta = {'name': '$\delta$', 'weights': tc.eye_weights, 'params': tc.eye_params}
 gaussian = {'name': 'Gaussian', 'weights': tc.gaussian_weights, 'params': {'var': width}}
 mexican_hat = {'name': 'Mexican hat', 'weights': tc.mexican_hat_weights, 'params': {'sigma': width}}
 
-factors=100
+factors = 100
 
 if factors == 100:
-    pieman_name = '../../data/pieman_ica100.mat'
+    pieman_name = 'pieman_ica100.mat'
 else:
-    pieman_name = '../../data/pieman_data.mat'
+    pieman_name = 'pieman_data.mat'
 
+pieman_data = loadmat(os.path.join(config['datadir'], pieman_name))
 pieman_conds = ['intact', 'paragraph', 'word', 'rest']
 
 

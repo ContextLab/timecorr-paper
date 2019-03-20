@@ -53,10 +53,11 @@ mexican_hat = {'name': 'Mexican hat', 'weights': tc.mexican_hat_weights, 'params
 factors = 700
 
 if factors == 100:
-    pieman_name = '../../data/pieman_ica100.mat'
+    pieman_name = 'pieman_ica100.mat'
 else:
-    pieman_name = '../../data/pieman_data.mat'
+    pieman_name = 'pieman_data.mat'
 
+pieman_data = loadmat(os.path.join(config['datadir'], pieman_name))
 pieman_conds = ['intact', 'paragraph', 'word', 'rest']
 
 
