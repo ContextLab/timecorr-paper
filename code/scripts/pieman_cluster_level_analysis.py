@@ -51,7 +51,12 @@ gaussian = {'name': 'Gaussian', 'weights': tc.gaussian_weights, 'params': {'var'
 mexican_hat = {'name': 'Mexican hat', 'weights': tc.mexican_hat_weights, 'params': {'sigma': width}}
 
 factors = 700
-pieman_data = loadmat(os.path.join(config['datadir'], 'pieman_data.mat'))
+
+if factors == 100:
+    pieman_name = '../../data/pieman_ica100.mat'
+else:
+    pieman_name = '../../data/pieman_data.mat'
+
 pieman_conds = ['intact', 'paragraph', 'word', 'rest']
 
 
