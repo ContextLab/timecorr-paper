@@ -111,7 +111,7 @@ brain data varies as a function of the cognitive richness of the
 stimulus.
 
 \section*{Methods}
-There are two basic steps to our approach.  In the first step, we take
+There are two basic steps to our approach (Fig.~\ref{fig:methods_fig}).  In the first step, we take
 a number-of-timepoints ($T$) by number-of-features ($F$)
 \textit{matrix of observations} ($\mathbf{X}$) and we return a $T$ by
 $\frac{F^2 - F}{2}$ \textit{matrix of dynamic correlations}
@@ -385,7 +385,17 @@ gauging how much explanatory power the recovered correlations held
 with respect to the observed data.
 
 \subsubsection*{Generating synthetic data}
-Ramping dataset and block dataset.  Create an example figure for both.
+Ramping dataset and block dataset. Add details (Fig.~\ref{fig:synthetic_data})
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{figs/synthetic_data.pdf}
+  \caption{\textbf{Dynamic correlation recovery with synthetic data.
+      a.Recovery using a constant dataset.} Using constant dataset,
+    how well can we recover using different
+    kernels. \textbf{b. Recovery using random dataset.}
+    \textbf{c. Ramping recovery.}  \textbf{d. Block recovery} blah}
+  \label{fig:synthetic_data}
+\end{figure}
 
 \subsubsection*{Recovery of ground truth parameters from synthetic
   data}
