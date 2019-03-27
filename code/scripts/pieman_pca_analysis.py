@@ -43,7 +43,7 @@ delta = {'name': '$\delta$', 'weights': tc.eye_weights, 'params': tc.eye_params}
 gaussian = {'name': 'Gaussian', 'weights': tc.gaussian_weights, 'params': {'var': width}}
 mexican_hat = {'name': 'Mexican hat', 'weights': tc.mexican_hat_weights, 'params': {'sigma': width}}
 
-factors = 700
+factors = 100
 
 if factors == 100:
     pieman_name = 'pieman_ica100.mat'
@@ -86,6 +86,16 @@ data = np.array(data)
 conds = np.array(conds)
 
 append_iter = pd.DataFrame()
+# #
+# from timecorr.helpers import isfc, autofc, mean_combine, corrmean_combine, vec2mat
+# weights_fun=weights_paramter['weights']
+# weights_params=weights_paramter['params']
+# combine = corrmean_combine
+# #
+# #
+# all_data = np.array(data)
+# try_data = np.asarray(tc.timecorr([x for x in all_data[conds == 'intact']], cfun=autofc, rfun=rfun,
+#                                                  weights_function=weights_fun, weights_params=weights_params))
 
 iter_results = tc.helpers.pca_decoder(data[conds == cond], nfolds=2, dims=int(ndims),
                                     combine=mean_combine,

@@ -111,7 +111,7 @@ brain data varies as a function of the cognitive richness of the
 stimulus.
 
 \section*{Methods}
-There are two basic steps to our approach.  In the first step, we take
+There are two basic steps to our approach (Fig.~\ref{fig:methods_fig}).  In the first step, we take
 a number-of-timepoints ($T$) by number-of-features ($F$)
 \textit{matrix of observations} ($\mathbf{X}$) and we return a $T$ by
 $\frac{F^2 - F}{2}$ \textit{matrix of dynamic correlations}
@@ -376,20 +376,33 @@ weights; Fig.~\ref{fig:weights}).  We then turned to a series of
 analyses on a (real) neuroimaging dataset where the ground truth
 correlations were \textit{not} known.  We evaluated whether the
 recovered correlations could be used to accurately label held-out
-neuroimaging data with the time at which it was collected, and also
-whether the history of correlations (and higher-order correlations)
-from time 0 to $t-1$ could be used to predict future activity patterns
-at time $t$.  We used these latter evaluations (using timepoint
-decoding and predictions of held-out future data) as a proxy for
+neuroimaging data with the time at which it was collected.  We used this latter evaluations (using timepoint
+decoding) as a proxy for
 gauging how much explanatory power the recovered correlations held
 with respect to the observed data.
 
 \subsubsection*{Generating synthetic data}
-Ramping dataset and block dataset.  Create an example figure for both.
+Ramping dataset and block dataset. Add details (Fig.~\ref{fig:synthetic_data})
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{figs/synthetic_data.pdf}
+  \caption{\textbf{Dynamic correlation recovery with synthetic data.
+      a.Recovery using a constant dataset.} Using constant dataset,
+    how well can we recover using different
+    kernels. \textbf{b. Recovery using random dataset.}
+    \textbf{c. Ramping recovery.}  \textbf{d. Block recovery} blah}
+  \label{fig:synthetic_data}
+\end{figure}
 
 \subsubsection*{Recovery of ground truth parameters from synthetic
   data}
-Apply timecorr with a given kernel, then correlate each recovered
+
+To explore recovery of a constant correlation, we created a random
+correlation matrix and and added a small amount of Gaussian noise to 
+
+
+We applied timecorr with a given kernel Fig.~\ref{fig:weights}) to
+synthetic data, then correlate each recovered
 correlation matrix with the ground truth.  Explore how recovery varies
 with the kernel, kernel parameters, and specific structure of the data
 (e.g. slow changes as in the ramping dataset, versus rapid changes as
@@ -411,13 +424,24 @@ that were specifically driven by the story participants listened to.
 Following the analyses conducted by (HTFA)~\cite{MannEtal18}, we first
 applied \textit{hierarchical topographic factor analysis} (HTFA) to the fMRI datasets to obtain a time series of 700 node activities for every participant.  We then computed the dynamic weighted ISFC using a gaussian kernel with a width of 5. We then approximated these dynamic correlation using PCA and computed the dynamic weighted ISFC on the approximations.  We repeated this process up to 10th order approximated correlations.  
 
-To assess decoding accuracy, we randomly divided participants for each stimulus into training and testing groups. For the zeroth order, we computed the mean factor activity for each group.  For all subsequent orders up to the tenth order, we computed the mean approximated dynamic ISFC of factor activity for each group.  For each group of participants in turn, we compared these activity patterns (using Pearson correlations) to estimate the story times each pattern corresponded to. 
-
-Specifically, we asked, for each timepoint: what are the correlations
+To assess decoding accuracy, we randomly divided participants for each
+stimulus into training and testing groups. For the zeroth order, we
+computed the mean factor activity for each group.  For all subsequent
+orders up to the tenth order, we computed the mean approximated
+dynamic ISFC of factor activity for each group. To assess how
+additional higher-order correlations contribute to decoding accuracy,
+for each order we included a weighted-mixutre (described below) of the activity patterns of all
+previous orders.  For each group of participants in turn, we compared these activity patterns (using Pearson correlations) to estimate the story times each pattern corresponded to. Specifically, we asked, for each timepoint: what are the correlations
 between the first group's and second group's activity patterns at each
-order.  We then took weighted mixture of the correlation matrices at
-each order using mixing parameter, $\phi$, where $0 <\phi< 1$ reflects a
-weighted mixture of order based decoding. We optimized  $\phi$, by subdividing the training group. We note that the decoding test we used is a conservative in which we count a timepoint label as incorrect if it is not an exact match.
+order. We note that the decoding test we used is a conservative in which we count a timepoint label as incorrect if it is not an exact match.
+
+For each order we obtained the weighted-mixture of the correlation
+matrices for the current order and all previous orders using mixing parameter , $\phi$, where $0 <\phi< 1$ reflects a
+weighted mixture of order based decoding Fig.~\ref{fig:decode_level}
+Panel C. ). We calculated  $\phi$, by
+subdividing the training group and using the quasi-Newton method of
+Broyden, Fletcher, Goldfarb, and Shanno (BFGS) for optimization. We
+repeated this cross-validation process 100 times. 
 
 
 
@@ -427,7 +451,6 @@ Figure: overall timecourse of recovery, also recovery near
 event boundaries.
 
 \subsubsection*{Neuroimaging dataset~\citep{SimoEtal16}}
-Figures: decoding by level
 For our decoding analysis, we used HTFA-derived node activities
 ~\cite{MannEtal18} from fMRI data collected as participants listened
 to an audio recording of a story (intact condition; 36 participants),
@@ -443,6 +466,29 @@ collected as part of a separate study, where the full imaging
 parameters, image preprocessing methods, and experimental details may
 be found~\citep{SimoEtal16}. The dataset is available at
 \href{url}{http://arks. princeton.edu/ark:/88435/dsp015d86p269k}.
+Bars of each color display cross-validated decoding performance for decoders trained using different sets of neural features: whole-brain patterns of voxel activities
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{figs/decode_level.pdf}
+  \caption{\textbf{Decoding by order.
+      a. Relative decoding accuracy by order.} Ribbons of each
+    color display cross-validated decoding performance for each condition (intact, paragraph, word,
+    and rest. Decoders were trained using increasingly more
+    higher-order information and this ribbons are displayed relative
+    to chance at 0. The red dots indicates
+    maximum decoding accuracy for each condition. \textbf{b. Normalized decoding accuracy
+      by order.}  We normalized the decoding accuracy by order to better
+    visualize the order with the maximum decoding accuracy for each
+    condition. \textbf{c. Optimized weights.} Bar heights indicate the
+    optimized mixing paramete $\phi$ of each contributing order up to
+    and including the order with the maximum
+    decoding accuracy for each contributing order
+  For the order with maximum decoding accuracy by condition, we show
+  barplots of the optimized weights $\phi$  for each contributing
+  order.}
+  \label{fig:decoding_level}
+\end{figure}
+
 
 We next evaluated if our model of high-order correlations in brain activity can capture cognitively relevant brain patterns. We performed a decoding analysis, using cross validation to estimate (using other participants’ data) which parts of the story each weighted-mixture of higher-order brain activity pattern corresponded to (see \textit{Materials and methods}). We note that our primary goal was not to achieve perfect decoding accuracy, but rather to use decoding accuracy as a benchmark for assessing whether different neural features specifically capture cognitively relevant brain patterns.
 
@@ -450,28 +496,49 @@ Separately for each experimental condition, we divided participants
 into two groups. For the zeroth order, we computed the mean factor
 activity for each group.  For all subsequent orders up to the tenth
 order, we computed the mean approximated dynamic ISFC of factor
-activity for each group (see \textit{Materials and methods}).  For
+activity for each group (see \textit{Materials and methods}), and
+combined in a weighted mixutre with all previous orders
+(i.e. cross-validation for the second
+order contained a weighted-mixture of zeroth, first, and second order \textbf{c. Optimized weights.}.)  For
 each order, we correlated the group 1 activity patterns with group 2
 activity patterns.  We then subdivided the group 1 to obtain an
 optimal weighting parameter for each order’s correlation matrix using
 the same cross validation method. We used the optimal weighting
-parameters to obtain a weighted-mixture of each order’s correlation
+parameters to obtain a weighted-mixture (see \textit{Materials and methods}) of each order’s correlation
 matrix. Using these correlations, we labeled the group 1 timepoints
 using the group 2 timepoints with which they were most highly
 correlated; we then computed the proportion of correctly labeled group
 1 timepoints. (We also performed the symmetric analysis whereby we
 labeled the group 2 timepoints using the group 1 timepoints as a
-template.) We repeated this procedure 10 times (randomly re-assigning
+template.) We repeated this procedure 100 times (randomly re-assigning
 participants to the two groups each time) to obtain a distribution of
 decoding accuracies for each experimental condition. (There were 272
 timepoints for paragraph condition, 300 timepoints for intact and word
 conditions, and 400 timepoints for rest condition,  so chance
 performance on this decoding test is was $\frac{1}{272}$,
-$\frac{1}{300}$, and $\frac{1}{400}$ respectively. 
+$\frac{1}{300}$, and $\frac{1}{400}$ respectively.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{figs/corrmats.pdf}
+  \caption{\textbf{Inter-subject correlations by order.
+      a. Inter-subject correlation heatmaps by order.}  Heatmaps for
+    each order of how correlated each subject is with every other
+    subject grouped by condition (intact (I), paragraph
+    (P), word (W),
+    and rest (R)). \textbf{b. Mean correlation for each
+      condition by order.}
+   Bar heights indicate inter-subject correlations by conditon for each order.}
+  \label{fig:corrmats}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Discussion}
 \begin{itemize}
+
+\item Decoding accuracy best for level 2 data for all but rest
+  condition.  Could be that the brain is 2nd order or that fMRI can
+  only reliable give 2nd order.  
 \item multiple timescale representations (a la Hasson group) implies
 first-order network interactions.  higher-order interactions imply
 generalizations between interacting representations (e.g. mirrored
@@ -479,6 +546,14 @@ schema, a la Norman/Baldassano/Hasson).  possibly cite NTB 2013
 science review, using as evidence that this is where the field is
 going (voxels $\rightarrow$ patterns (L0) $\rightarrow$ interactions (L1) $\rightarrow$ higher
 order patterns (L2$+$).
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{figs/direction_of_field.pdf}
+  \caption{\textbf{Direction of the field.} }
+  \label{fig:direction_of_field}
+\end{figure}
+
 \item related approaches: sliding window, phase-based correlations,
 within-ROI spatial correlations at each timepoint, granger
 causality, other explit models (e.g. virtual brain).
