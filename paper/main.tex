@@ -396,6 +396,11 @@ Ramping dataset and block dataset. Add details (Fig.~\ref{fig:synthetic_data})
 
 \subsubsection*{Recovery of ground truth parameters from synthetic
   data}
+
+To explore recovery of a constant correlation, we created a random
+correlation matrix and and added a small amount of Gaussian noise to 
+
+
 We applied timecorr with a given kernel Fig.~\ref{fig:weights}) to
 synthetic data, then correlate each recovered
 correlation matrix with the ground truth.  Explore how recovery varies
@@ -461,18 +466,23 @@ collected as part of a separate study, where the full imaging
 parameters, image preprocessing methods, and experimental details may
 be found~\citep{SimoEtal16}. The dataset is available at
 \href{url}{http://arks. princeton.edu/ark:/88435/dsp015d86p269k}.
-
+Bars of each color display cross-validated decoding performance for decoders trained using different sets of neural features: whole-brain patterns of voxel activities
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{figs/decode_level.pdf}
   \caption{\textbf{Decoding by order.
-      a. Relative decoding accuracy by order.} Relative to chance,
-    decoding accuracy for each condition (intact, paragraph, word,
-    and rest) as a function of increasingly more orders.  The red dots indicates
+      a. Relative decoding accuracy by order.} Ribbons of each
+    color display cross-validated decoding performance for each condition (intact, paragraph, word,
+    and rest. Decoders were trained using increasingly more
+    higher-order information and this ribbons are displayed relative
+    to chance at 0. The red dots indicates
     maximum decoding accuracy for each condition. \textbf{b. Normalized decoding accuracy
       by order.}  We normalized the decoding accuracy by order to better
     visualize the order with the maximum decoding accuracy for each
-    condition. \textbf{c. Optimized weights.}
+    condition. \textbf{c. Optimized weights.} Bar heights indicate the
+    optimized mixing paramete $\phi$ of each contributing order up to
+    and including the order with the maximum
+    decoding accuracy for each contributing order
   For the order with maximum decoding accuracy by condition, we show
   barplots of the optimized weights $\phi$  for each contributing
   order.}
@@ -512,19 +522,23 @@ $\frac{1}{300}$, and $\frac{1}{400}$ respectively.
   \centering
   \includegraphics[width=\textwidth]{figs/corrmats.pdf}
   \caption{\textbf{Inter-subject correlations by order.
-      a. Inter-subject correlation heatmaps by order.}  Heatmap
-    denoting how correlated each subject is with every other subject
-    for each order, and grouped by condition (intact (I), paragraph
+      a. Inter-subject correlation heatmaps by order.}  Heatmaps for
+    each order of how correlated each subject is with every other
+    subject grouped by condition (intact (I), paragraph
     (P), word (W),
-    and rest (R)). \textbf{b. Distribution of correlations for each
-      condition by order}
-   Inter-subject correlations by conditon for each order.}
+    and rest (R)). \textbf{b. Mean correlation for each
+      condition by order.}
+   Bar heights indicate inter-subject correlations by conditon for each order.}
   \label{fig:corrmats}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Discussion}
 \begin{itemize}
+
+\item Decoding accuracy best for level 2 data for all but rest
+  condition.  Could be that the brain is 2nd order or that fMRI can
+  only reliable give 2nd order.  
 \item multiple timescale representations (a la Hasson group) implies
 first-order network interactions.  higher-order interactions imply
 generalizations between interacting representations (e.g. mirrored
@@ -532,6 +546,14 @@ schema, a la Norman/Baldassano/Hasson).  possibly cite NTB 2013
 science review, using as evidence that this is where the field is
 going (voxels $\rightarrow$ patterns (L0) $\rightarrow$ interactions (L1) $\rightarrow$ higher
 order patterns (L2$+$).
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{figs/direction_of_field.pdf}
+  \caption{\textbf{Direction of the field.} }
+  \label{fig:direction_of_field}
+\end{figure}
+
 \item related approaches: sliding window, phase-based correlations,
 within-ROI spatial correlations at each timepoint, granger
 causality, other explit models (e.g. virtual brain).
