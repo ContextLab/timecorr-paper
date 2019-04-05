@@ -12,9 +12,9 @@ if (socket.gethostname() == 'Lucys-MacBook-Pro-3.local') or (socket.gethostname(
     config['startdir'] = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))  # directory to start the job in
     config['template'] = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'run_job_local.sh')
 else:
-    config['datadir'] = '/idata/cdl/lowen/timecorr_paper/pieman/data'
-    config['workingdir'] = '/idata/cdl/lowen/timecorr_paper/pieman'
-    config['startdir'] = '/idata/cdl/lowen'
+    config['datadir'] = '/dartfs/rc/lab/D/DBIC/CDL/f002s72/timecorr_paper/pieman/data'
+    config['workingdir'] = '/dartfs/rc/lab/D/DBIC/CDL/f002s72/timecorr_paper/pieman'
+    config['startdir'] = '/dartfs/rc/lab/D/DBIC/CDL/f002s72'
     config['template'] = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'run_job.sh')
 
 # job creation options
