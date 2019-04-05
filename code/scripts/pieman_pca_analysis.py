@@ -86,16 +86,6 @@ data = np.array(data)
 conds = np.array(conds)
 
 append_iter = pd.DataFrame()
-# #
-# from timecorr.helpers import isfc, autofc, mean_combine, corrmean_combine, vec2mat
-# weights_fun=weights_paramter['weights']
-# weights_params=weights_paramter['params']
-# combine = corrmean_combine
-# #
-# #
-# all_data = np.array(data)
-# try_data = np.asarray(tc.timecorr([x for x in all_data[conds == 'intact']], cfun=autofc, rfun=rfun,
-#                                                  weights_function=weights_fun, weights_params=weights_params))
 
 iter_results = tc.helpers.pca_decoder(data[conds == cond], nfolds=2, dims=int(ndims),
                                     combine=mean_combine,
