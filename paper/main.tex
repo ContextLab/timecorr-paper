@@ -14,8 +14,8 @@
 \linenumbers
 
 
-\title{An examination of the high-order dynamic interactions
-  underlying multi-dimensional timeseries data} \author{Lucy
+\title{High-order dynamic neural correlations reflect naturalistic processing
+in humans} \author{Lucy
   L. W. Owen$^1$, Thomas H. Chang$^{1,2}$, and\
   Jeremy R. Manning\textsuperscript{$1, \dagger$}\\
   [0.1in]$^1$Department of Psychological and Brain
@@ -31,28 +31,25 @@
 
 
 \begin{abstract}
-  Most complex systems reflect dynamic interactions between myriad
-  evolving components (e.g., interacting molecules, interacting brain
-  systems, interacting individuals within a social network or
-  ecological system, coordinated components within a mechanical or
-  digital device, etc.).  Despite that these interactions are central
-  to the full system's behavior (e.g., removing a component from the
-  full system can change the entire system's behavior), dynamic
-  interactions cannot typically be directly measured.  Rather, the
-  interactions must be inferred through their hypothesized role in
-  guiding the dynamics of system components.  Here we use a
-  model-based approach to inferring dynamic interactions from
-  timeseries data.  In addition to examining first-order interactions
-  (e.g., between pairs of components) we also examine higher-order
-  interactions (e.g., that characterize mirrored structure in the
-  patterns of interaction dynamics displayed by different subsets of
-  components).  We apply our approach to two datasets.  First, we use
-  a synthetic dataset, for which the underlying dynamic interactions
-  are known, to show that our model recovers those ground-truth
-  dynamic interactions.  We also apply our model to a neuroimaging
-  dataset and show that the high-order dynamic interactions exhibited
-  by brain data vary meaningfully as a function of the cognitive
-  ``richness'' of the stimulus people are experiencing.
+  Our thoughts arise from coordinated activity patterns across our
+  brain.  We examined high-order dynamic correlations in functional
+  neuroimaging data collect as human participants listened to
+  different auditory stimuli varying in cognitive richness, along with
+  an additional resting state condition.  Our approach combines a
+  kernel-based method for estimating the dynamic functional
+  correlations that are similar (within task) across participants,
+  along with a dimensionality reduction approach that enables us to
+  efficiently compute high-order correlations in the data.  We trained
+  classifiers to decode the precise time, relative to the start of the
+  stimulus, when a given neural pattern was recorded.  We trained
+  these classifiers using the neural activity timeseries, first-order
+  dynamic correlations, and higher-order correlations (up to
+  tenth-order correlations), and asked which types of features led to
+  the highest decoding accuracy.  We found that second-order
+  correlations consistently yielded the highest decoding accuracy in
+  all of the listening conditions of the experiment, whereas
+  first-order correlations yielded the highest decoding accuracy at
+  rest.
 \end{abstract}
 
 \doublespacing
