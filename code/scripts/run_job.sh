@@ -21,8 +21,11 @@
 
 # set the working directory *of the job* to the specified start directory
 cd <config['startdir']>
-module load python
+
 echo ACTIVATING timecorr VIRTUAL ENVIRONMENT
+
+module load python
+
 source activate timecorr_env
 
 # run the job
