@@ -20,8 +20,8 @@ except:
 # each job command should be formatted as a string
 job_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pieman_cluster_level_analysis.py')
 
-#cond_type = ['intact', 'paragraph', 'word', 'rest']
-cond_type = ['paragraph']
+cond_type = ['intact', 'word', 'rest']
+#cond_type = ['paragraph']
 
 # options for levels: integer
 levels = str('10')
@@ -156,7 +156,7 @@ for n, c in zip(job_names, job_commands):
             next_job = create_job(n, c)
 
             if (socket.gethostname() == 'discovery7.hpcc.dartmouth.edu') or (socket.gethostname() == 'ndoli.hpcc.dartmouth.edu'):
-                submit_command = 'echo "[SUBMITTING JOB: ' + next_job + ']"; qsub'
+                submit_command = 'echo "[SUBMITTING JOB: ' + next_job + ']"; mksub'
             else:
                 submit_command = 'echo "[RUNNING JOB: ' + next_job + ']"; sh'
 
