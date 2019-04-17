@@ -38,10 +38,10 @@ rfuns =  [str('PCA')]
 widths = [str(5)]
 
 # options for weight functions: laplace, gaussian, mexican hat, delta
-weights = ['mexican_hat']
+weights = ['gaussian']
 
 # options for debug: True or False
-debug = str('True')
+debug = str('False')
 
 job_commands = list(np.array([list(map(lambda x: x[0]+" "+str(x[1])+" "+levels+" "+str(r)+
                                                  " "+cfuns[0]+" "+rfuns[0]+" "+widths[0]+" "+weights[0]+" "+debug,
