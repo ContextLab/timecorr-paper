@@ -2,33 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="417b68b5-4afb-4c94-9087-b4cb6c1ea5b8" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/block_recovery_10.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/block_recovery_10.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/block_recovery_100.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/block_recovery_100.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/block_recovery_20.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/block_recovery_20.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/block_recovery_50.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/block_recovery_50.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/constant_recovery_10.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/constant_recovery_10.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/constant_recovery_20.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/constant_recovery_20.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/constant_recovery_50.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/constant_recovery_50.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_level_analysis_optimized_700.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_level_analysis_optimized_700.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_line_level_analysis_optimized.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_line_level_analysis_optimized.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_normalized_line_level_analysis_optimized.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_normalized_line_level_analysis_optimized.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_relative_line_level_analysis_optimized.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_relative_line_level_analysis_optimized.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/ramping_recovery_10.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/ramping_recovery_10.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/ramping_recovery_100.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/ramping_recovery_100.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/ramping_recovery_20.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/ramping_recovery_20.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/ramping_recovery_50.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/ramping_recovery_50.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/random_recovery_10.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/random_recovery_10.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/random_recovery_100.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/random_recovery_100.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/random_recovery_20.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/random_recovery_20.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/random_recovery_50.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/random_recovery_50.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/notebooks/pieman_optimized_levels.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/pieman_optimized_levels.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/notebooks/synthetic_data.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/synthetic_data.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_chunked.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_chunked.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/scripts/run_job.sh" beforeDir="false" afterPath="$PROJECT_DIR$/code/scripts/run_job.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/paper/PlotLevelUp" beforeDir="false" afterPath="$PROJECT_DIR$/paper/PlotLevelUp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/paper/main.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/paper/main.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paper/main.tex" beforeDir="false" afterPath="$PROJECT_DIR$/paper/main.tex" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -93,8 +79,8 @@
       <file leaf-file-name="config.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/scripts/config.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="58" />
+            <state relative-caret-position="304">
+              <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="59" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -126,8 +112,8 @@
       <file leaf-file-name="pieman_cluster_level_chunked.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_level_chunked.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-923">
-              <caret line="52" selection-start-line="52" selection-end-line="52" />
+            <state relative-caret-position="191">
+              <caret line="107" selection-start-line="107" selection-end-line="107" />
             </state>
           </provider>
         </entry>
@@ -136,7 +122,7 @@
         <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_chunked.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-40">
-              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
               <folding>
                 <element signature="e#51#76#0" expanded="true" />
               </folding>
@@ -232,7 +218,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="67" />
     <option name="y" value="23" />
     <option name="width" value="1472" />
@@ -410,7 +396,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="23" width="1472" height="1005" extended-state="1" />
+    <frame x="67" y="23" width="1472" height="1005" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -848,16 +834,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/scripts/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="58" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/code/scripts/run_job.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="551">
@@ -878,17 +854,27 @@
     <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_chunked.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-40">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
           <folding>
             <element signature="e#51#76#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/code/scripts/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_level_chunked.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-923">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
+        <state relative-caret-position="191">
+          <caret line="107" selection-start-line="107" selection-end-line="107" />
         </state>
       </provider>
     </entry>
