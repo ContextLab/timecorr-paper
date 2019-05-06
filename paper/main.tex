@@ -265,9 +265,12 @@ direct approach.
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{figs/methods_fig}
-  \caption{\textbf{Computing higher order correlations. } Correlations
-  are computed then approximated to the same size as original data.
-  This process is repeated to computer }
+  \caption{\textbf{Computing higher order correlations. } Dynamic
+    correlations
+  are computed then approximated to the same size as original data
+  using dimensionality reduction.
+  This process is repeated, and can be used to compute up to any
+  arbitrary order with compuations scaling linearly (as opposed to exponentially) with order. }
   \label{fig:methods_fig}
 \end{figure}
 
@@ -388,15 +391,31 @@ covariance matrix $K(t)$, for each of the 300 timepoints and sampled from a
 Gaussian distribution centered on $K(t)$.
 
 To generate synthetic data from a dynamically changing covariance
-matrix (ramping covariance matrix Fig.~\ref{fig:synthetic_data},  C.),
+matrix (Ramping, Fig.~\ref{fig:synthetic_data},  C.),
 we generated two random covariance
-matrices, $K_{1}$ and $K_{2}$.  We then computed a covariance matrix
-for each of the 300 timepoint, $K(t)$ 
+matrices, $K_{1}$ and $K_{2}$.  We then computed a weighted average covariance matrix
+for each of the 300 timepoint, $K(t)$, 
 by taking the linearly spaced weights ($w$) of the two random matrices, 
 \begin{align}
-K(t) = w(t) * K_{1} + 1 - w(t) *  K_{2}
+K(t) = w(t) * K_{1} + (1 - w(t)) *  K_{2},
 \end{align}
+and for each of the 300 timepoints sampled from a
+Gaussian distribution centered on $K(t)$. We also explored
+recovery by comparing this ramping synthetic data to only the first random covariance matrix $K_{1}$
+(First, Fig.~\ref{fig:synthetic_data},  C.) and using only the last
+random covariance matrix $K_{2}$ (Last, Fig.~\ref{fig:synthetic_data},
+C.). 
 
+For the synthetic data containing block structure, we followed the same
+process of creating synthetic data sampled from a constant covariance
+matrix (see above) but sampled from a new random covariance matrix
+after each 60 consecutive timepoints.  We then pieced the blocks together
+to create a sythetic dataset with 300 total timepoints but drawn from
+5 separate covariance matrices. We then compared recovery using the
+total dataset (All, Fig.~\ref{fig:synthetic_data},  D.) or limiting to
+the block specific covariance matrix (Block 1-5, Fig.~\ref{fig:synthetic_data},  D.).
+
+(Fig.~\ref{fig:synthetic_data},  D.) , 
 
 (Fig.~\ref{fig:synthetic_data})
 
@@ -404,11 +423,12 @@ K(t) = w(t) * K_{1} + 1 - w(t) *  K_{2}
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{figs/synthetic_data.pdf}
-  \caption{\textbf{Dynamic correlation recovery with synthetic data.
-      a.Recovery using a constant dataset.} Using constant dataset,
-    how well can we recover using different
-    kernels. \textbf{b. Recovery using random dataset.}
-    \textbf{c. Ramping recovery.}  \textbf{d. Block recovery} blah}
+  \caption{\textbf{Dynamic correlation recovery with synthetic data. } Using synthetic data containing different
+    underlying correlational structure,
+   we test how well we can recover using two kernels (delta and gaussian,
+    width = 10).  We plot recovery using of datasets containing the
+    following underlying structure:
+    \textbf{a. Constant. b. Random. c. Ramping.  d. Block.}}
   \label{fig:synthetic_data}
 \end{figure}
 
@@ -419,7 +439,7 @@ K(t) = w(t) * K_{1} + 1 - w(t) *  K_{2}
 We applied timecorr, using delta and gaussian kernels
 Fig.~\ref{fig:weights}) to each of these 
 synthetic datasets, then correlate each recovered
-correlation matrix with the ground truth.  Explore how recovery varies
+correlation matrix with the ground truth.  We explore how recovery varies
 with the kernel and the specific structure of the data
 (e.g. slow changes as in the ramping dataset, versus rapid changes as
 in the block dataset).
@@ -534,22 +554,11 @@ conditions, and 400 timepoints for rest condition,  so chance
 performance on this decoding test is was $\frac{1}{272}$,
 $\frac{1}{300}$, and $\frac{1}{400}$ respectively.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=\textwidth]{figs/corrmats.pdf}
-  \caption{\textbf{Inter-subject correlations by order.
-      a. Inter-subject correlation heatmaps by order.}  Heatmaps for
-    each order of how correlated each subject is with every other
-    subject grouped by condition (intact (I), paragraph
-    (P), word (W),
-    and rest (R)). \textbf{b. Mean correlation for each
-      condition by order.}
-   Bar heights indicate inter-subject correlations by conditon for each order.}
-  \label{fig:corrmats}
-\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Discussion}
+
+
 \begin{itemize}
 
 \item Decoding accuracy best for level 2 data for all but rest
