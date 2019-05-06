@@ -16,6 +16,8 @@ rfun = sys.argv[5]
 width = int(sys.argv[6])
 wp = sys.argv[7]
 
+chunks = 2
+
 if len(sys.argv) < 9:
     debug = False
 else:
@@ -57,58 +59,56 @@ weights_paramter = eval(wp)
 ###### REMOVE the duplicate!!
 
 if debug:
-    data_thirds = [0] * 3
-    conds_thirds = [0] * 3
+    data_chunks = [0] * chunks
+    conds_chunks = [0] * chunks
     divided = 0
-    for third in list(range(3)):
+    for chunk_amt in list(range(chunks)):
         data = []
         conds = []
         for c in pieman_conds:
-            next_data = list(map(lambda i: pieman_data[c][:, i][0][divided:divided+10,:20], np.arange(4)))
+            next_data = list(map(lambda i: pieman_data[c][:, i][0][divided:divided+(30/chunks),:20], np.arange(4)))
             data.extend(next_data)
             conds.extend([c]*len(next_data))
 
-        conds_thirds[third] = conds
-        data_thirds[third] = data
-        divided += 10
+        conds_chunks[chunk_amt] = conds
+        data_chunks[chunk_amt] = data
+        divided += (30/chunks)
 
     del pieman_data
 
 else:
 
-    data_thirds = [0] * 3
-    conds_thirds = [0] * 3
+    data_chunks = [0] * chunks
+    conds_chunks = [0] * chunks
     divided = 0
-    for third in list(range(3)):
+    for chunk_amt in list(range(chunks)):
         data = []
         conds = []
         for c in pieman_conds:
             if c == 'paragraph':
                 if factors == 700:
                     next_data = list(
-                        map(lambda i: pieman_data[c][:, i][0][divided:divided+100,:], np.where(np.arange(pieman_data[c].shape[1]) != 3)[0]))
+                        map(lambda i: pieman_data[c][:, i][0][divided:divided+(300/chunks),:], np.where(np.arange(pieman_data[c].shape[1]) != 3)[0]))
                 else:
                     next_data = list(
-                        map(lambda i: pieman_data[c][:, i][0][divided:divided+100,:], np.where(np.arange(pieman_data[c].shape[1]) != 0)[0]))
+                        map(lambda i: pieman_data[c][:, i][0][divided:divided+(300/chunks),:], np.where(np.arange(pieman_data[c].shape[1]) != 0)[0]))
             else:
                 next_data = list(map(lambda i: pieman_data[c][:, i][0], np.arange(pieman_data[c].shape[1])))
             data.extend(next_data)
             conds.extend([c]*len(next_data))
 
-        conds_thirds[third] = conds
-        data_thirds[third] = data
-        divided += 100
+        conds_chunks[chunk_amt] = conds
+        data_chunks[chunk_amt] = data
+        divided += (300/chunks)
 
     del pieman_data
-
-chunks = 3
 
 
 for chunk in range(chunks):
 
 
-    data = np.array(data_thirds[chunk])
-    conds = np.array(conds_thirds[chunk])
+    data = np.array(data_chunks[chunk])
+    conds = np.array(conds_chunks[chunk])
 
     append_iter = pd.DataFrame()
 

@@ -2,17 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="417b68b5-4afb-4c94-9087-b4cb6c1ea5b8" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/code/figs/block_recovery_10.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/block_recovery_10.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/constant_recovery_10.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/constant_recovery_10.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_0_accuracy.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_0_accuracy.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_1_accuracy.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_1_accuracy.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_2_accuracy.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_2_accuracy.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_level_analysis_optimized_700.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_level_analysis_optimized_700.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_line_level_analysis_optimized.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_line_level_analysis_optimized.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_normalized_line_level_analysis_chunked.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_normalized_line_level_analysis_chunked.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_normalized_line_level_analysis_optimized.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_normalized_line_level_analysis_optimized.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_relative_line_level_analysis_optimized.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_relative_line_level_analysis_optimized.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/ramping_recovery_10.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/ramping_recovery_10.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/random_recovery_10.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/random_recovery_10.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/notebooks/pieman_optimized_levels.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/pieman_optimized_levels.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/notebooks/synthetic_data.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/synthetic_data.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/scripts/pieman_cluster_level_chunked.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/scripts/pieman_cluster_level_chunked.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/scripts/pieman_pca_chunk.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/scripts/pieman_pca_chunk.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/paper/PlotLevelUp" beforeDir="false" afterPath="$PROJECT_DIR$/paper/PlotLevelUp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paper/figs/corrmats.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/paper/figs/synthetic_data.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/paper/figs/synthetic_data.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/paper/main.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/paper/main.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/paper/main.tex" beforeDir="false" afterPath="$PROJECT_DIR$/paper/main.tex" afterDir="false" />
     </list>
@@ -112,8 +117,8 @@
       <file leaf-file-name="pieman_cluster_level_chunked.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_level_chunked.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="107" selection-start-line="107" selection-end-line="107" />
+            <state relative-caret-position="1216">
+              <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
             </state>
           </provider>
         </entry>
@@ -121,7 +126,7 @@
       <file leaf-file-name="pieman_cluster_submit_level_chunked.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_chunked.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-40">
+            <state relative-caret-position="-22">
               <caret line="11" selection-start-line="11" selection-end-line="11" />
               <folding>
                 <element signature="e#51#76#0" expanded="true" />
@@ -174,7 +179,11 @@
       <find>wcorr</find>
       <find>reduce</find>
       <find>qsub</find>
+      <find>_thirds</find>
     </findStrings>
+    <replaceStrings>
+      <replace>_chunks</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -195,7 +204,6 @@
         <option value="$PROJECT_DIR$/code/scripts/pieman_pca_analysis_submit.py" />
         <option value="$PROJECT_DIR$/code/scripts/pieman_pca_chunk_submit.py" />
         <option value="$PROJECT_DIR$/code/scripts/pieman_cluster_level_analysis.py" />
-        <option value="$PROJECT_DIR$/code/scripts/pieman_cluster_level_chunked.py" />
         <option value="$PROJECT_DIR$/code/scripts/pieman_cluster_param_search.py" />
         <option value="$PROJECT_DIR$/code/scripts/pieman_pca_chunk.py" />
         <option value="$PROJECT_DIR$/../timecorr/timecorr/helpers.py" />
@@ -206,6 +214,7 @@
         <option value="$PROJECT_DIR$/code/scripts/run_job.sh" />
         <option value="$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_analysis.py" />
         <option value="$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_chunked.py" />
+        <option value="$PROJECT_DIR$/code/scripts/pieman_cluster_level_chunked.py" />
       </list>
     </option>
   </component>
@@ -218,7 +227,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="67" />
     <option name="y" value="23" />
     <option name="width" value="1472" />
@@ -396,7 +405,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="23" width="1472" height="1005" extended-state="0" />
+    <frame x="67" y="23" width="1472" height="1005" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -409,6 +418,7 @@
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4970874" weight="0.25422534" />
       <window_info anchor="bottom" id="Docker" order="7" />
       <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32983682" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" sideWeight="0.50291264" side_tool="true" weight="0.25845072" />
@@ -419,7 +429,6 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32983682" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -751,6 +760,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="703">
           <caret line="44" selection-start-line="44" selection-end-line="52" selection-end-column="54" />
+          <folding>
+            <element signature="e#1#22#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -851,16 +863,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_chunked.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-40">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="e#51#76#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/code/scripts/config.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
@@ -871,10 +873,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_chunked.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-22">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#51#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_level_chunked.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="107" selection-start-line="107" selection-end-line="107" />
+        <state relative-caret-position="1216">
+          <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
         </state>
       </provider>
     </entry>
