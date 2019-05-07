@@ -205,8 +205,8 @@ correlations from moment to moment, $\mathbf{Y}$.  Suppose that one
 has access to a set of multiple observation matrices that reflect the
 same phenomenon.  For example, one might collect neuroimaging data
 from several experimental participants, as each participant performs
-the same task (or sequence of tasks).  Let $\{ mathbf{X}_1,
-mathbf{X}_2, ..., mathbf{X}_P\}$ reflect the $T$ by $F$ observation
+the same task (or sequence of tasks).  Let $\mathbf{X}_1$,
+$\mathbf{X}_2$, ..., $\mathbf{X}_P$ reflect the $T$ by $F$ observation
 matrices for each of $P$ participants in an experiment.  We can use
 \textit{inter-subject functional connectivity}~\citep[ISFC;
 ][]{SimoEtal16} to compute the degree of stimulus-driven correlations
@@ -234,7 +234,7 @@ participants, $\bar{\mathbf{X}}_{ \backslash i}$:
   \backslash i} Z\left( \mathbf{X}_i \right) \right),
 \end{align}
 where $ \backslash i$ denotes the set of all participants other than
-participant $i$. In this way, the $T$ by $\left( \frac{F^2 - F}{2}
+participant $\i$. In this way, the $T$ by $\left( \frac{F^2 - F}{2}
   + F \right)$
 matrix $\bar{\mathbf{C}}$ is the time-varying extension of the ISFC
 approach developed by \cite{SimoEtal16}.
@@ -391,46 +391,23 @@ covariance matrix $K(t)$, for each of the 300 timepoints and sampled from a
 Gaussian distribution centered on $K(t)$.
 
 To generate synthetic data from a dynamically changing covariance
-matrix (Ramping, Fig.~\ref{fig:synthetic_data},  C.),
+matrix (Fig.~\ref{fig:synthetic_data},  C.),
 we generated two random covariance
 matrices, $K_{1}$ and $K_{2}$.  We then computed a weighted average covariance matrix
 for each of the 300 timepoint, $K(t)$, 
 by taking the linearly spaced weights ($w$) of the two random matrices, 
 \begin{align}
-K(t) = w(t) * K_{1} + (1 - w(t)) *  K_{2},
+K(t) = w(t) * K_{1} + (1 - w(t)) *  K_{2}, \\\label{eqn:ramping}
 \end{align}
 and for each of the 300 timepoints sampled from a
-Gaussian distribution centered on $K(t)$. We also explored
-recovery by comparing this ramping synthetic data to only the first random covariance matrix $K_{1}$
-(First, Fig.~\ref{fig:synthetic_data},  C.) and using only the last
-random covariance matrix $K_{2}$ (Last, Fig.~\ref{fig:synthetic_data},
-C.). 
+Gaussian distribution centered on $K(t)$.
 
-For the synthetic data containing block structure, we followed the same
+Lastly, for the synthetic data containing block structure (Fig.~\ref{fig:synthetic_data},  D.), we followed the same
 process of creating synthetic data sampled from a constant covariance
 matrix (see above) but sampled from a new random covariance matrix
-after each 60 consecutive timepoints.  We then pieced the blocks together
+after 60 consecutive timepoints.  We then pieced the blocks together
 to create a sythetic dataset with 300 total timepoints but drawn from
-5 separate covariance matrices. We then compared recovery using the
-total dataset (All, Fig.~\ref{fig:synthetic_data},  D.) or limiting to
-the block specific covariance matrix (Block 1-5, Fig.~\ref{fig:synthetic_data},  D.).
-
-(Fig.~\ref{fig:synthetic_data},  D.) , 
-
-(Fig.~\ref{fig:synthetic_data})
-
-
-\begin{figure}
-  \centering
-  \includegraphics[width=\textwidth]{figs/synthetic_data.pdf}
-  \caption{\textbf{Dynamic correlation recovery with synthetic data. } Using synthetic data containing different
-    underlying correlational structure,
-   we test how well we can recover using two kernels (delta and gaussian,
-    width = 10).  We plot recovery using of datasets containing the
-    following underlying structure:
-    \textbf{a. Constant. b. Random. c. Ramping.  d. Block.}}
-  \label{fig:synthetic_data}
-\end{figure}
+5 separate covariance matrices. 
 
 \subsubsection*{Recovery of ground truth parameters from synthetic
   data}
@@ -440,9 +417,17 @@ We applied timecorr, using delta and gaussian kernels
 Fig.~\ref{fig:weights}) to each of these 
 synthetic datasets, then correlate each recovered
 correlation matrix with the ground truth.  We explore how recovery varies
-with the kernel and the specific structure of the data
-(e.g. slow changes as in the ramping dataset, versus rapid changes as
-in the block dataset).
+with the kernel and the specific structure of the data. For the
+ramping synthetic dataset (Fig.~\ref{fig:synthetic_data},  C.)  and for the
+block synthetic dataset (Fig.~\ref{fig:synthetic_data},  D.)  we made further
+comparisons of the timecorr recovered correlation matrices. We
+compared the ramping recovered correlation matrices to only the first random covariance matrix $K_{1}$
+(First, Fig.~\ref{fig:synthetic_data},  C.) and to only the last
+random covariance matrix $K_{2}$ (Last, Fig.~\ref{fig:synthetic_data},
+C.) from Equation~\ref{eqn:ramping}. We also compared the block recovered correlation matrices in to
+the block specific covariance matrix (Block 1-5,
+Fig.~\ref{fig:synthetic_data},  D.).
+
 
 \subsubsection*{Timepoint decoding}
 
@@ -483,8 +468,49 @@ repeated this cross-validation process 100 times.
 
 \section*{Results}
 \subsubsection*{Synthetic data}
-Figure: overall timecourse of recovery, also recovery near
-event boundaries.
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{figs/synthetic_data.pdf}
+  \caption{\textbf{Dynamic correlation recovery with synthetic data. } Using synthetic data containing different
+    underlying correlational structure,
+   we test how well we can recover dynamic correlation matrices using two kernels (delta and gaussian,
+    width = 10) when compared to groud truth.  We plot recovery using of datasets containing the
+    following underlying structure:
+    \textbf{a. Constant. b. Random. c. Ramping.  d. Block.}}
+  \label{fig:synthetic_data}
+\end{figure}
+
+To assess the performance of dynamic correlation recovery using
+timecorr, we varied width the kernel and the specific structure of the data. We applied timecorr, using delta and gaussian kernels
+Fig.~\ref{fig:weights}) to each of the following  
+synthetic datasets: constant, random, ramping, and block.  We then correlated each recovered
+correlation matrix with the ground truth. 
+
+For the constant synthetic dataset, a gaussian kernel (width=10)
+outperformed the delta kernel (Fig.~\ref{fig:synthetic_data},  A.).  This is in contrast with the random
+synthetic dataset, for which the delta kernel best captures the
+rapidly changing structure (Fig.~\ref{fig:synthetic_data},  B.). For
+the ramping synthetic dataset, the slow changing strucutre within the
+data is best
+captured by the gaussian kernel and the best recovery occurs in the
+middle (Ramping, Fig.~\ref{fig:synthetic_data},
+C.). In addition to comparing the timecorr recovered correlation
+matrices to the ground truth, we
+further compared the ramping recovered correlation matrices to only the first random covariance matrix $K_{1}$
+(First, Fig.~\ref{fig:synthetic_data},  C.) and to only the last
+random covariance matrix $K_{2}$ (Last, Fig.~\ref{fig:synthetic_data},
+C.), both of which perform best at the beginning and end respectively.
+
+Similary for the block sythetic dataset, we compared the timecorr
+recovered correlation matrices to the ground truth as well as to each
+block-specific covariance matrix (Block 1-5,
+Fig.~\ref{fig:synthetic_data},  D.).  Although the structure is
+changing by block, the gaussian kernel once again outperforms the
+delta kernel.  Performance does however drop near even boundaries for
+when using the gaussian kernel. 
+
 
 \subsubsection*{Neuroimaging dataset~\citep{SimoEtal16}}
 For our decoding analysis, we used HTFA-derived node activities
@@ -535,7 +561,7 @@ order, we computed the mean approximated dynamic ISFC of factor
 activity for each group (see \textit{Materials and methods}), and
 combined in a weighted mixutre with all previous orders
 (i.e. cross-validation for the second
-order contained a weighted-mixture of zeroth, first, and second order \textbf{c. Optimized weights.}.)  For
+order contained a weighted-mixture of zeroth, first, and second order (Fig.~\ref{fig:decoding_level},  C.).  For
 each order, we correlated the group 1 activity patterns with group 2
 activity patterns.  We then subdivided the group 1 to obtain an
 optimal weighting parameter for each order’s correlation matrix using
@@ -553,6 +579,18 @@ timepoints for paragraph condition, 300 timepoints for intact and word
 conditions, and 400 timepoints for rest condition,  so chance
 performance on this decoding test is was $\frac{1}{272}$,
 $\frac{1}{300}$, and $\frac{1}{400}$ respectively.
+
+We found that, during each of the listening conditions in the
+experiment, classifiers that incorporated second-order correlations
+yielded consistently higher accuracy than classifiers trained only on
+lower-order patterns (Fig.~\ref{fig:decoding_level},  A.).  (Incorporating higher-order correlations did
+not further improve decoding accuracy.)  By contrast, these
+higher-order correlations were not necessary to support (minimally
+above chance) decoding during a control rest condition.  This suggests
+that the cognitive processing that supported the listening conditions
+involved second-order (or higher) network dynamics. 
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -587,6 +625,35 @@ diagnosis (e.g. psychiatric disorders as network flow problems--
 gratton work?), social network dynamics (e.g. financial markets,
 social media interactions)
 \end{itemize}
+
+Dynamic interactions between brain structures underlie our thoughts.
+We developed a model of neural dynamics that takes in a feature
+timeseries and outputs estimated first-order network dynamics (i.e.,
+dynamic functional correlations), second-order network dynamics
+(reflecting homologous networks that dynamically form and disperse),
+and higher-order network dynamics (up to tenth-order dynamic
+correlations).  After validating our model using synthetic data, we
+applied the approach to an fMRI dataset
+~\citep{SimoEtal16} in which participants listened to an audio recording of a story, as well as scrambled versions of the same story (where the scrambling was applied at different temporal scales).  We trained classifiers to take the output of the model and decode the timepoint in the story (or scrambled story) that the participants were listening to. We found that, during each of the listening conditions in the
+experiment, classifiers that incorporated up to second-order correlations
+yielded consistently higher accuracy than classifiers trained only on
+lower-order patterns (Fig.~\ref{fig:decoding_level},  A.).  (Incorporating higher-order correlations did
+not further improve decoding accuracy.)  By contrast, these
+higher-order correlations were not necessary to support (minimally
+above chance) decoding during a control rest condition.  This suggests
+that the cognitive processing that supported the listening conditions
+involved second-order (or higher) network dynamics.
+
+Although we found decoding accuracy was best for second-order network dynamics for all but rest
+  condition, it is unclear if this is a product of the brain or the
+  data collection technique .  It could be that the brain is
+  second-order or it could be that fMRI can
+  only reliably give second-order interactions.  Exploring this method
+  with other data collection technique will be important to
+  disentangle this question.
+  
+
+
 
 \subsection*{Concluding remarks}
 the universe is complicated and we need scalable approaches to
