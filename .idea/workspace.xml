@@ -2,24 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="417b68b5-4afb-4c94-9087-b4cb6c1ea5b8" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_0_accuracy.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_0_accuracy.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_1_accuracy.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_1_accuracy.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_2_accuracy.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_2_accuracy.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_level_analysis_optimized_700.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_level_analysis_optimized_700.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_line_level_analysis_optimized.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_line_level_analysis_optimized.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_normalized_line_level_analysis_chunked.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_normalized_line_level_analysis_chunked.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_normalized_line_level_analysis_optimized.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_normalized_line_level_analysis_optimized.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_relative_line_level_analysis_optimized.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_relative_line_level_analysis_optimized.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/notebooks/pieman_optimized_levels.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/pieman_optimized_levels.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/notebooks/synthetic_data.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/synthetic_data.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/scripts/pieman_cluster_level_chunked.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/scripts/pieman_cluster_level_chunked.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/scripts/pieman_pca_chunk.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/scripts/pieman_pca_chunk.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/paper/PlotLevelUp" beforeDir="false" afterPath="$PROJECT_DIR$/paper/PlotLevelUp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paper/figs/corrmats.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/paper/figs/synthetic_data.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/paper/figs/synthetic_data.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paper/main.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/paper/main.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paper/main.tex" beforeDir="false" afterPath="$PROJECT_DIR$/paper/main.tex" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -118,7 +101,7 @@
         <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_level_chunked.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1216">
-              <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
+              <caret line="71" selection-start-line="71" selection-end-line="71" />
             </state>
           </provider>
         </entry>
@@ -227,9 +210,8 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="67" />
-    <option name="y" value="23" />
+  <component name="ProjectFrameBounds">
+    <option name="y" value="45" />
     <option name="width" value="1472" />
     <option name="height" value="1005" />
   </component>
@@ -405,8 +387,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="23" width="1472" height="1005" extended-state="1" />
-    <editor active="true" />
+    <frame x="0" y="45" width="1472" height="1005" extended-state="0" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5013587" side_tool="true" weight="0.3934611" />
@@ -886,7 +867,7 @@
     <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_level_chunked.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1216">
-          <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
         </state>
       </provider>
     </entry>
