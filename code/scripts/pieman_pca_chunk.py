@@ -58,8 +58,8 @@ weights_paramter = eval(wp)
 
 
 if debug:
-    data_thirds = [0] * 3
-    conds_thirds = [0] * 3
+    data_chunks = [0] * 3
+    conds_chunks = [0] * 3
     divided = 0
     for third in list(range(3)):
         data = []
@@ -69,16 +69,16 @@ if debug:
             data.extend(next_data)
             conds.extend([c]*len(next_data))
 
-        conds_thirds[third] = conds
-        data_thirds[third] = data
+        conds_chunks[third] = conds
+        data_chunks[third] = data
         divided += 10
 
     del pieman_data
 
 else:
 
-    data_thirds = [0] * 3
-    conds_thirds = [0] * 3
+    data_chunks = [0] * 3
+    conds_chunks = [0] * 3
     divided = 0
     for third in list(range(3)):
         data = []
@@ -97,8 +97,8 @@ else:
             data.extend(next_data)
             conds.extend([c]*len(next_data))
 
-        conds_thirds[third] = conds
-        data_thirds[third] = data
+        conds_chunks[third] = conds
+        data_chunks[third] = data
         divided += 100
 
     del pieman_data
@@ -108,8 +108,8 @@ chunks = 3
 
 for chunk in range(chunks):
 
-    data = np.array(data_thirds[chunk])
-    conds = np.array(conds_thirds[chunk])
+    data = np.array(data_chunks[chunk])
+    conds = np.array(conds_chunks[chunk])
 
     append_iter = pd.DataFrame()
 
