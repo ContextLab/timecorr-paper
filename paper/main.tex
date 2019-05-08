@@ -234,7 +234,7 @@ participants, $\bar{\mathbf{X}}_{ \backslash i}$:
   \backslash i} Z\left( \mathbf{X}_i \right) \right),
 \end{align}
 where $ \backslash i$ denotes the set of all participants other than
-participant $\i$. In this way, the $T$ by $\left( \frac{F^2 - F}{2}
+participant $i$. In this way, the $T$ by $\left( \frac{F^2 - F}{2}
   + F \right)$
 matrix $\bar{\mathbf{C}}$ is the time-varying extension of the ISFC
 approach developed by \cite{SimoEtal16}.
@@ -415,8 +415,9 @@ to create a sythetic dataset with 300 total timepoints but drawn from
 
 We applied timecorr, using delta and gaussian kernels
 Fig.~\ref{fig:weights}) to each of these 
-synthetic datasets, then correlate each recovered
-correlation matrix with the ground truth.  We explore how recovery varies
+synthetic datasets, then correlated each recovered
+correlation matrix with the ground truth.  We repeated this process 10
+times and explored how recovery varies
 with the kernel and the specific structure of the data. For the
 ramping synthetic dataset (Fig.~\ref{fig:synthetic_data},  C.)  and for the
 block synthetic dataset (Fig.~\ref{fig:synthetic_data},  D.)  we made further
@@ -458,7 +459,7 @@ order. We note that the decoding test we used is a conservative in which we coun
 
 For each order we obtained the weighted-mixture of the correlation
 matrices for the current order and all previous orders using mixing parameter , $\phi$, where $0 <\phi< 1$ reflects a
-weighted mixture of order based decoding Fig.~\ref{fig:decode_level}
+weighted mixture of order based decoding Fig.~\ref{fig:decoding_level}
 Panel C. ). We calculated  $\phi$, by
 subdividing the training group and using the quasi-Newton method of
 Broyden, Fletcher, Goldfarb, and Shanno (BFGS) for optimization. We
@@ -596,20 +597,6 @@ involved second-order (or higher) network dynamics.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Discussion}
 
-
-\begin{itemize}
-
-\item Decoding accuracy best for level 2 data for all but rest
-  condition.  Could be that the brain is 2nd order or that fMRI can
-  only reliable give 2nd order.  
-\item multiple timescale representations (a la Hasson group) implies
-first-order network interactions.  higher-order interactions imply
-generalizations between interacting representations (e.g. mirrored
-schema, a la Norman/Baldassano/Hasson).  possibly cite NTB 2013
-science review, using as evidence that this is where the field is
-going (voxels $\rightarrow$ patterns (L0) $\rightarrow$ interactions (L1) $\rightarrow$ higher
-order patterns (L2$+$).
-
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{figs/direction_of_field.pdf}
@@ -617,48 +604,61 @@ order patterns (L2$+$).
   \label{fig:direction_of_field}
 \end{figure}
 
-\item related approaches: sliding window, phase-based correlations,
-within-ROI spatial correlations at each timepoint, granger
-causality, other explit models (e.g. virtual brain).
-\item other applications: molecular interactions (protein folding?),
-diagnosis (e.g. psychiatric disorders as network flow problems--
-gratton work?), social network dynamics (e.g. financial markets,
-social media interactions)
-\end{itemize}
 
-Dynamic interactions between brain structures underlie our thoughts.
-We developed a model of neural dynamics that takes in a feature
-timeseries and outputs estimated first-order network dynamics (i.e.,
-dynamic functional correlations), second-order network dynamics
+
+Although dynamic interactions between brain structures underlie our
+thoughts, the ways in which we can study these patterns are
+limited. One challenge in studying dynamic interactions is the
+computational resources required to calculate higher-order correlations. 
+We developed a computationally tractable model of network dynamics (Fig.~\ref{fig:methods_fig}) that takes in a feature
+timeseries and outputs approximated first-order dynamics (i.e.,
+dynamic functional correlations), second-order dynamics
 (reflecting homologous networks that dynamically form and disperse),
 and higher-order network dynamics (up to tenth-order dynamic
-correlations).  After validating our model using synthetic data, we
+correlations).
+
+We first validated our model using synthetic data, and explored how
+recovery varied with different underlying data structures  and kernels.   We then 
 applied the approach to an fMRI dataset
 ~\citep{SimoEtal16} in which participants listened to an audio recording of a story, as well as scrambled versions of the same story (where the scrambling was applied at different temporal scales).  We trained classifiers to take the output of the model and decode the timepoint in the story (or scrambled story) that the participants were listening to. We found that, during each of the listening conditions in the
 experiment, classifiers that incorporated up to second-order correlations
 yielded consistently higher accuracy than classifiers trained only on
-lower-order patterns (Fig.~\ref{fig:decoding_level},  A.).  (Incorporating higher-order correlations did
-not further improve decoding accuracy.)  By contrast, these
+lower-order patterns (Fig.~\ref{fig:decoding_level},  A.), and
+incorporating more higher-order correlations did
+not further improve decoding accuracy.  By contrast, these
 higher-order correlations were not necessary to support (minimally
 above chance) decoding during a control rest condition.  This suggests
 that the cognitive processing that supported the listening conditions
 involved second-order (or higher) network dynamics.
 
-Although we found decoding accuracy was best for second-order network dynamics for all but rest
+Although we found decoding accuracy was best when incorporating
+higher-order network dynamics for all but rest
   condition, it is unclear if this is a product of the brain or the
   data collection technique .  It could be that the brain is
   second-order or it could be that fMRI can
-  only reliably give second-order interactions.  Exploring this method
+  only reliably give second-order interactions. Exploring this method
   with other data collection technique will be important to
   disentangle this question.
-  
 
 
 
-\subsection*{Concluding remarks}
-the universe is complicated and we need scalable approaches to
-studying how the pieces are interacting to make sense of it.  one
-small step for mankind, and so on.
+  \subsection*{Concluding remarks}
+
+How can we better understand how these brain patterns changing over
+time? How to quantify the potential network dynamics that we might be
+driving these changes? One way to judge the techniques of the future is
+to look at the trajectory of the fMRI field so far has taken so far
+(Fig.~\ref{fig:methods_fig}).  The field started with 
+univariate activation, measuring the average activity for each voxel.
+Analyses of multivariate activation followed, looking at spatial patterns of
+activity over voxels. Next, correlations of activity were explored, first
+with measures like resting connectivity that take temporal correlation
+between a seed voxel and all other voxels then with full connectivty
+that measure all pairwise correlations.  Additionally, this path of increasing
+complexity also moved from static to dynamic measurements.  One
+logical next step in this trajectory would be dynamic higher-order
+correlations. We have created a method 
+to support these calculations.  
 
 \section*{Acknowledgements}
 We acknowledge discussions with Luke Chang, Hany Farid, Paxton
