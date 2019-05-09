@@ -413,7 +413,7 @@ to create a sythetic dataset with 300 total timepoints but drawn from
   data}
 
 
-We applied timecorr, using delta and gaussian kernels
+We applied timecorr, using delta and gaussian (width = 10) kernels
 Fig.~\ref{fig:weights}) to each of these 
 synthetic datasets, then correlated each recovered
 correlation matrix with the ground truth.  We repeated this process 10
@@ -584,8 +584,8 @@ $\frac{1}{300}$, and $\frac{1}{400}$ respectively.
 We found that, during each of the listening conditions in the
 experiment, classifiers that incorporated second-order correlations
 yielded consistently higher accuracy than classifiers trained only on
-lower-order patterns (Fig.~\ref{fig:decoding_level},  A.).  (Incorporating higher-order correlations did
-not further improve decoding accuracy.)  By contrast, these
+lower-order patterns (Fig.~\ref{fig:decoding_level},  A.), and incorporating higher-order correlations did
+not further improve decoding accuracy.  By contrast, these
 higher-order correlations were not necessary to support (minimally
 above chance) decoding during a control rest condition.  This suggests
 that the cognitive processing that supported the listening conditions
@@ -644,8 +644,8 @@ higher-order network dynamics for all but rest
 
   \subsection*{Concluding remarks}
 
-How can we better understand how these brain patterns changing over
-time? How to quantify the potential network dynamics that we might be
+How can we better understand how brain patterns change over
+time? How can we quantify the potential network dynamics that might be
 driving these changes? One way to judge the techniques of the future is
 to look at the trajectory of the fMRI field so far has taken so far
 (Fig.~\ref{fig:methods_fig}).  The field started with 
@@ -658,7 +658,8 @@ that measure all pairwise correlations.  Additionally, this path of increasing
 complexity also moved from static to dynamic measurements.  One
 logical next step in this trajectory would be dynamic higher-order
 correlations. We have created a method 
-to support these calculations.  
+to support these calculations by scalably approximating dynamic higher-order
+correlations.  
 
 \section*{Acknowledgements}
 We acknowledge discussions with Luke Chang, Hany Farid, Paxton
