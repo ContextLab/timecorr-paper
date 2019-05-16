@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="417b68b5-4afb-4c94-9087-b4cb6c1ea5b8" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/block_recovery_10.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/block_recovery_10.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/constant_recovery_10.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/constant_recovery_10.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/ramping_recovery_10.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/ramping_recovery_10.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/random_recovery_10.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/random_recovery_10.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/notebooks/synthetic_data.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/synthetic_data.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/notebooks/Untitled.ipynb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/paper/PlotLevelUp" beforeDir="false" afterPath="$PROJECT_DIR$/paper/PlotLevelUp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -219,7 +214,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="y" value="45" />
     <option name="width" value="1472" />
     <option name="height" value="1005" />
@@ -396,7 +391,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="45" width="1472" height="1005" extended-state="0" />
+    <frame x="0" y="45" width="1472" height="1005" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
