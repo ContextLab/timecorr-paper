@@ -16,7 +16,7 @@ rfun = sys.argv[5]
 width = int(sys.argv[6])
 wp = sys.argv[7]
 
-chunks = 2
+chunks = 3
 
 if len(sys.argv) < 9:
     debug = False
@@ -80,26 +80,27 @@ else:
 
     data_chunks = [0] * chunks
     conds_chunks = [0] * chunks
-    divided = 0
     for chunk_amt in list(range(chunks)):
         data = []
         conds = []
         for c in pieman_conds:
+            c_time = pieman_data[c][0][0].shape[0]
+            divided = int(c_time / chunks)
             if c == 'paragraph':
                 if factors == 700:
                     next_data = list(
-                        map(lambda i: pieman_data[c][:, i][0][divided:divided+(300/chunks),:], np.where(np.arange(pieman_data[c].shape[1]) != 3)[0]))
+                        map(lambda i: pieman_data[c][:, i][0][int(divided*chunk_amt):int(divided*(chunk_amt+1)),:], np.where(np.arange(pieman_data[c].shape[1]) != 3)[0]))
                 else:
                     next_data = list(
-                        map(lambda i: pieman_data[c][:, i][0][divided:divided+(300/chunks),:], np.where(np.arange(pieman_data[c].shape[1]) != 0)[0]))
+                        map(lambda i: pieman_data[c][:, i][0][int(divided*chunk_amt):int(divided*(chunk_amt+1)),:], np.where(np.arange(pieman_data[c].shape[1]) != 0)[0]))
             else:
-                next_data = list(map(lambda i: pieman_data[c][:, i][0], np.arange(pieman_data[c].shape[1])))
+                next_data = list(map(lambda i: pieman_data[c][:, i][0][int(divided*chunk_amt):int(divided*(chunk_amt+1)),:], np.arange(pieman_data[c].shape[1])))
             data.extend(next_data)
             conds.extend([c]*len(next_data))
 
+
         conds_chunks[chunk_amt] = conds
         data_chunks[chunk_amt] = data
-        divided += (300/chunks)
 
     del pieman_data
 
