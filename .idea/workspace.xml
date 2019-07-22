@@ -3,8 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="417b68b5-4afb-4c94-9087-b4cb6c1ea5b8" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/scripts/pieman_cluster_level_chunked.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/scripts/pieman_cluster_level_chunked.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_chunked.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_chunked.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_0_accuracy.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_0_accuracy.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_1_accuracy.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_1_accuracy.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_2_accuracy.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_2_accuracy.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_normalized_line_level_analysis_chunked.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_normalized_line_level_analysis_chunked.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/notebooks/pieman_decoding_params.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/pieman_decoding_params.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/notebooks/pieman_optimized_levels.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/pieman_optimized_levels.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/paper/PlotLevelUp" beforeDir="false" afterPath="$PROJECT_DIR$/paper/PlotLevelUp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -68,10 +72,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pieman_cluster_param_search.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="pieman_cluster_param_search.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_param_search.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-432">
+            <state relative-caret-position="703">
               <caret line="44" selection-start-line="44" selection-end-line="52" selection-end-column="54" />
             </state>
           </provider>
@@ -115,7 +119,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pieman_cluster_submit_level_chunked.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pieman_cluster_submit_level_chunked.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_chunked.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="157">
@@ -210,8 +214,8 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="73" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="72" />
     <option name="y" value="45" />
     <option name="width" value="1472" />
     <option name="height" value="1005" />
@@ -388,8 +392,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="73" y="45" width="1472" height="1005" extended-state="0" />
-    <editor active="true" />
+    <frame x="72" y="45" width="1472" height="1005" extended-state="1" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5013587" side_tool="true" weight="0.3934611" />
@@ -806,13 +809,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_param_search.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-432">
-          <caret line="44" selection-start-line="44" selection-end-line="52" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../seizure-tracking/code/scripts/make_bos/edf2bos.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -840,6 +836,13 @@
           <folding>
             <element signature="e#51#76#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_param_search.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="703">
+          <caret line="44" selection-start-line="44" selection-end-line="52" selection-end-column="54" />
         </state>
       </provider>
     </entry>
