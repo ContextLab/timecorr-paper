@@ -2,13 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="417b68b5-4afb-4c94-9087-b4cb6c1ea5b8" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_0_accuracy.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_0_accuracy.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_1_accuracy.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_1_accuracy.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_2_accuracy.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_2_accuracy.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_normalized_line_level_analysis_chunked.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/isfc_PCA_gaussian_10_normalized_line_level_analysis_chunked.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/notebooks/pieman_decoding_params.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/pieman_decoding_params.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/notebooks/pieman_optimized_levels.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/pieman_optimized_levels.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/PCA_norm_ave_level_analysis_optimized_param_search.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/PCA_norm_ave_level_analysis_optimized_param_search.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/PCA_rel_ave_level_analysis_optimized_param_search.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/PCA_rel_ave_level_analysis_optimized_param_search.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/PCA_weights_ave_level_analysis_optimized_param_search.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/PCA_weights_ave_level_analysis_optimized_param_search.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/PCA_z_ave_level_analysis_optimized_param_search.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/PCA_z_ave_level_analysis_optimized_param_search.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/eigenvector_norm_ave_level_analysis_optimized_param_search.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/eigenvector_norm_ave_level_analysis_optimized_param_search.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/eigenvector_rel_ave_level_analysis_optimized_param_search.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/eigenvector_rel_ave_level_analysis_optimized_param_search.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/eigenvector_weights_ave_level_analysis_optimized_param_search.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/eigenvector_weights_ave_level_analysis_optimized_param_search.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/eigenvector_z_ave_level_analysis_optimized_param_search.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/eigenvector_z_ave_level_analysis_optimized_param_search.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/notebooks/brain_plots.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/brain_plots.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/notebooks/decode_levels.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/decode_levels.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/notebooks/pieman_corrmats.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/pieman_corrmats.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/paper/PlotLevelUp" beforeDir="false" afterPath="$PROJECT_DIR$/paper/PlotLevelUp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -75,8 +79,8 @@
       <file leaf-file-name="pieman_cluster_param_search.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_param_search.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="703">
-              <caret line="44" selection-start-line="44" selection-end-line="52" selection-end-column="54" />
+            <state relative-caret-position="608">
+              <caret line="39" selection-start-line="39" selection-end-line="39" selection-end-column="88" />
             </state>
           </provider>
         </entry>
@@ -89,7 +93,7 @@
       <file leaf-file-name="pieman_cluster_level_chunked.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_level_chunked.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1925">
+            <state relative-caret-position="2090">
               <caret line="117" column="38" selection-start-line="117" selection-start-column="38" selection-end-line="117" selection-end-column="38" />
               <folding>
                 <element signature="e#1#22#0" expanded="true" />
@@ -101,7 +105,7 @@
       <file leaf-file-name="codecs.py" pinned="false" current-in-tab="false">
         <entry file="file:///usr/local/Cellar/python/3.6.5_1/Frameworks/Python.framework/Versions/3.6/lib/python3.6/codecs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
+            <state relative-caret-position="5852">
               <caret line="308" selection-start-line="308" selection-end-line="308" />
             </state>
           </provider>
@@ -122,7 +126,7 @@
       <file leaf-file-name="pieman_cluster_submit_level_chunked.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_chunked.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
+            <state relative-caret-position="2831">
               <caret line="155" column="79" selection-start-line="155" selection-start-column="79" selection-end-line="155" selection-end-column="79" />
               <folding>
                 <element signature="e#51#76#0" expanded="true" />
@@ -393,6 +397,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="72" y="45" width="1472" height="1005" extended-state="1" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5013587" side_tool="true" weight="0.3934611" />
@@ -407,7 +412,7 @@
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" sideWeight="0.50291264" side_tool="true" weight="0.25845072" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.4986413" visible="true" weight="0.3934611" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4986413" weight="0.3934611" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -420,24 +425,24 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Favorites" order="1" sideWeight="0.50291264" side_tool="true" weight="0.25422534" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4970874" weight="0.25422534" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32983682" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32983682" />
-      <window_info anchor="bottom" id="Python Console" order="10" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49929577" visible="true" weight="0.4079254" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="bottom" id="Terminal" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5007042" side_tool="true" weight="0.4079254" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32983682" />
       <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info id="Favorites" order="1" sideWeight="0.50291264" side_tool="true" weight="0.25422534" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32983682" />
+      <window_info anchor="bottom" id="Python Console" order="10" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -759,9 +764,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="11" column="118" selection-start-line="11" selection-start-column="118" selection-end-line="11" selection-end-column="118" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -814,14 +816,14 @@
     </entry>
     <entry file="file:///usr/local/Cellar/python/3.6.5_1/Frameworks/Python.framework/Versions/3.6/lib/python3.6/codecs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
+        <state relative-caret-position="5852">
           <caret line="308" selection-start-line="308" selection-end-line="308" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_level_chunked.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1925">
+        <state relative-caret-position="2090">
           <caret line="117" column="38" selection-start-line="117" selection-start-column="38" selection-end-line="117" selection-end-column="38" />
           <folding>
             <element signature="e#1#22#0" expanded="true" />
@@ -831,7 +833,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_chunked.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
+        <state relative-caret-position="2831">
           <caret line="155" column="79" selection-start-line="155" selection-start-column="79" selection-end-line="155" selection-end-column="79" />
           <folding>
             <element signature="e#51#76#0" expanded="true" />
@@ -841,8 +843,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_param_search.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="703">
-          <caret line="44" selection-start-line="44" selection-end-line="52" selection-end-column="54" />
+        <state relative-caret-position="608">
+          <caret line="39" selection-start-line="39" selection-end-line="39" selection-end-column="88" />
         </state>
       </provider>
     </entry>
