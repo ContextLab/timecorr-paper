@@ -373,16 +373,16 @@ gauging how much explanatory power the recovered correlations held
 with respect to the observed data.
 
 \subsubsection*{Generating synthetic data}
-To explore recovery of a constant covariance (Fig.~\ref{fig:synthetic_data},  A.), we generated syntheic
+To explore recovery of a constant covariance (Fig.~\ref{fig:synthetic_data},  a.), we generated syntheic
 data sampled from a constant covariance matrix. To do this, we created one random
 covariance matrix, $K$, with 50 features, and for each of the 300 timepoints  we
 sampled from a Gaussian distribution centered on $K$.  Similarly, we generated synthetic data
-sampled from a random covariance matrix (Fig.~\ref{fig:synthetic_data},  B.) by creating a new random
+sampled from a random covariance matrix (Fig.~\ref{fig:synthetic_data}, b.) by creating a new random
 covariance matrix $K(t)$, for each of the 300 timepoints and sampled from a
 Gaussian distribution centered on $K(t)$.
 
 To generate synthetic data from a dynamically changing covariance
-matrix (Fig.~\ref{fig:synthetic_data},  C.),
+matrix (Fig.~\ref{fig:synthetic_data},  c.),
 we generated two random covariance
 matrices, $K_{1}$ and $K_{2}$.  We then computed a weighted average covariance matrix
 for each of the 300 timepoint, $K(t)$, 
@@ -393,7 +393,7 @@ K(t) = w(t) * K_{1} + (1 - w(t)) *  K_{2}, \\\label{eqn:ramping}
 and for each of the 300 timepoints sampled from a
 Gaussian distribution centered on $K(t)$.
 
-Lastly, for the synthetic data containing block structure (Fig.~\ref{fig:synthetic_data},  D.), we followed the same
+Lastly, for the synthetic data containing block structure (Fig.~\ref{fig:synthetic_data},  d.), we followed the same
 process of creating synthetic data sampled from a constant covariance
 matrix (see above) but sampled from a new random covariance matrix
 after 60 consecutive timepoints.  We then pieced the blocks together
@@ -410,15 +410,15 @@ synthetic datasets, then correlated each recovered
 correlation matrix with the ground truth.  We repeated this process 10
 times and explored how recovery varies
 with the kernel and the specific structure of the data. For the
-ramping synthetic dataset (Fig.~\ref{fig:synthetic_data},  C.)  and for the
-block synthetic dataset (Fig.~\ref{fig:synthetic_data},  D.)  we made further
+ramping synthetic dataset (Fig.~\ref{fig:synthetic_data},  c.)  and for the
+block synthetic dataset (Fig.~\ref{fig:synthetic_data},  d.)  we made further
 comparisons of the timecorr recovered correlation matrices. We
 compared the ramping recovered correlation matrices to only the first random covariance matrix $K_{1}$
-(First, Fig.~\ref{fig:synthetic_data},  C.) and to only the last
+(First, Fig.~\ref{fig:synthetic_data},  c.) and to only the last
 random covariance matrix $K_{2}$ (Last, Fig.~\ref{fig:synthetic_data},
-C.) from Equation~\ref{eqn:ramping}. We also compared the block recovered correlation matrices in to
+c.) from Equation~\ref{eqn:ramping}. We also compared the block recovered correlation matrices in to
 the block specific covariance matrix (Block 1-5,
-Fig.~\ref{fig:synthetic_data},  D.).
+Fig.~\ref{fig:synthetic_data},  d.).
 
 
 \subsubsection*{Timepoint decoding}
@@ -456,7 +456,7 @@ order. We note that the decoding test we used is a conservative in which we coun
 For each order we obtained the weighted-mixture of the correlation
 matrices for the current order and all previous orders using mixing parameter, $\phi$, where $0 <\phi< 1$ reflects a
 weighted mixture of order based decoding Fig.~\ref{fig:decoding_level}
-Panel C. ). We calculated  $\phi$, by
+Panel c. ). We calculated  $\phi$, by
 subdividing the training group and using the quasi-Newton method of
 Broyden, Fletcher, Goldfarb, and Shanno (BFGS ~\citep{NoceWrig06}) for optimization. We
 repeated this cross-validation process 10 times for each parameter set. 
@@ -487,24 +487,24 @@ synthetic datasets: constant, random, ramping, and block.  We then correlated ea
 correlation matrix with the ground truth. 
 
 For the constant synthetic dataset, a gaussian kernel (width=10)
-outperformed the delta kernel (Fig.~\ref{fig:synthetic_data},  A.).  This is in contrast with the random
+outperformed the delta kernel (Fig.~\ref{fig:synthetic_data},  a.).  This is in contrast with the random
 synthetic dataset, for which the delta kernel best captures the
-rapidly changing structure (Fig.~\ref{fig:synthetic_data},  B.). For
+rapidly changing structure (Fig.~\ref{fig:synthetic_data},  b.). For
 the ramping synthetic dataset, the slow changing strucutre within the
 data is best
 captured by the gaussian kernel and the best recovery occurs in the
 middle (Ramping, Fig.~\ref{fig:synthetic_data},
-C.). In addition to comparing the timecorr recovered correlation
+c.). In addition to comparing the timecorr recovered correlation
 matrices to the ground truth, we
 further compared the ramping recovered correlation matrices to only the first random covariance matrix $K_{1}$
-(First, Fig.~\ref{fig:synthetic_data},  C.) and to only the last
+(First, Fig.~\ref{fig:synthetic_data},  c.) and to only the last
 random covariance matrix $K_{2}$ (Last, Fig.~\ref{fig:synthetic_data},
-C.), both of which perform best at the beginning and end respectively.
+c.), both of which perform best at the beginning and end respectively.
 
 Similary for the block sythetic dataset, we compared the timecorr
 recovered correlation matrices to the ground truth as well as to each
 block-specific covariance matrix (Block 1-5,
-Fig.~\ref{fig:synthetic_data},  D.).  Although the structure is
+Fig.~\ref{fig:synthetic_data},  d.).  Although the structure is
 changing by block, the gaussian kernel once again outperforms the
 delta kernel.  Performance does however drop near even boundaries for
 when using the gaussian kernel. 
@@ -564,7 +564,7 @@ activity for each group (see \textit{Materials and methods}), and
 combined in a weighted mixutre with all previous orders
 (i.e. cross-validation for the second
 order contained a weighted-mixture of zeroth, first, and second order
-(Fig.~\ref{fig:decoding_level}, c. and f.).  For
+(Fig.~\ref{fig:decoding_level}, c.\&f.).  For
 each order, we correlated the group 1 activity patterns with group 2
 activity patterns.  We then subdivided the group 1 to obtain an
 optimal weighting parameter for each order’s correlation matrix using
@@ -597,8 +597,8 @@ consistently showed up across all parameters.
     centrality to approximate higher-order correlations for the intact
     listening condition, we plot the
     strongest 25\% absolute value
-    mean correlation for \textbf{a. order 1. b. order 2. c. order 3.,
-      and d. order 4}, representing the degree of agreement by
+    mean correlation for order: \textbf{a. 1. b. 2. c. 3.,
+      and d. 4}, representing the degree of agreement by
     location pair over time.}
   \label{fig:brain_plots}
 \end{figure}
@@ -635,8 +635,7 @@ involved higher-order network dynamics.
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{figs/direction_of_field.pdf}
-  \caption{\textbf{Direction of the field (adapted from
-      ~\citep{Turk13}).} The evolution of fMRI analyses started with
+  \caption{\textbf{Direction of the field (adapted from~\citep{Turk13}).} The evolution of fMRI analyses started with
     univariate activation, which refers to
     the average amplitude of BOLD activity evoked by events of an
     experimental condition. Next, multivariate classifiers are trained
@@ -680,7 +679,7 @@ timepoint in the story (or scrambled story) that the participants were
 listening to. We found that, during the intact listening condition in the
 experiment, classifiers that incorporated higher-order correlations
 yielded consistently higher accuracy than classifiers trained only on
-lower-order patterns (Fig.~\ref{fig:decoding_level},  a. d.).  By contrast, these
+lower-order patterns (Fig.~\ref{fig:decoding_level},  a.\&d.).  By contrast, these
 higher-order correlations were not necessary to support decoding the other
 listening conditions and (minimally
 above chance) during a control rest condition.  This suggests
@@ -690,7 +689,7 @@ involved second-order (or higher) network dynamics.
 Although we found decoding accuracy was best when incorporating
 higher-order network dynamics for all but rest
   condition, it is unclear if this is a product of the brain or the
-  data collection technique .  It could be that the brain is
+  data collection technique.  It could be that the brain is
   second-order or it could be that fMRI can
   only reliably give second-order interactions. Exploring this method
   with other data collection technique will be important to
