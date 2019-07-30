@@ -32,20 +32,20 @@ in humans} \author{Lucy
 
 \begin{abstract}
   Our thoughts arise from coordinated activity patterns across our
-  brain.  We examined high-order dynamic correlations in functional
+  brain. We examined high-order dynamic correlations in functional
   neuroimaging data collect as human participants listened to
   different auditory stimuli varying in cognitive richness, along with
-  an additional resting state condition.  Our approach combines a
+  an additional resting state condition. Our approach combines a
   kernel-based method for estimating the dynamic functional
   correlations that are similar (within task) across participants,
   along with a dimensionality reduction approach that enables us to
-  efficiently compute high-order correlations in the data.  We trained
+  efficiently compute high-order correlations in the data. We trained
   classifiers to decode the precise time, relative to the start of the
-  stimulus, when a given neural pattern was recorded.  We trained
+  stimulus, when a given neural pattern was recorded. We trained
   these classifiers using the neural activity timeseries, first-order
   dynamic correlations, and higher-order correlations (up to
   tenth-order correlations), and asked which types of features led to
-  the highest decoding accuracy.  We found that higher-order
+  the highest decoding accuracy. We found that higher-order
   correlations consistently yielded higher decoding accuracy for
   the most cogntively rich condition of the experiment, whereas
   first-order correlations or raw data yielded the highest decoding accuracy at
@@ -55,11 +55,17 @@ in humans} \author{Lucy
 \doublespacing
 
 \section*{Introduction}
-To understand the neuronal computations that support cognition, we must understand the cooperative dynamics of populations of neurons.  These populations of neurons interact within each brain structure, and the structures interact to form complex and dynamic networks.  These interactions, at each scale, vary according to the functions our brains are carrying out.  
+To understand the neuronal computations that support cognition, we
+must understand the cooperative dynamics of populations of neurons.
+These populations of neurons interact within each brain structure, and
+the structures interact to form complex and dynamic networks. These
+interactions, at each scale, vary according to the functions our
+brains are carrying out and recent work has shown these dynamic
+complex patterns support consciousness~\citep{DemeEtal19}.
 
 In the last several decades, advances in functional magnetic resonance
 image (fMRI) analyses have evolved to better characterize these
-interactions of brain structures.  As Turk-Brown (2013) outlines,
+interactions of brain structures.  As~\cite{Turk13} outlines,
 analyses using multivariate patterns of activity have given an advance
 over univariate activity patterns because they allow relative
 contributions of voxels to be combined and better assess distrubted
@@ -69,13 +75,21 @@ rich and complex spatiotemporal organization of spontaneous brain
 activity.  Functional connectivity (FC) has further characterized the
 cognitive state dependency of this network organization.
 
-Recent work has shown that FC fluctuates over time (Chang and Glover, 2010), and the assumed stationarity of these analyses may be too simple to capture the dynamic nature of brain activity.  Additionally, recent work show that dynamic correlations between multivariate voxel patterns can add an additional boost (Manning, 2018).  Following this line of reasoning, we expect higher-order network
+Recent work has shown that FC fluctuates over time~\citep{ChanGlov10}~\citep[for review]{LuriEtal19}, and the assumed stationarity of these analyses may be too
+simple to capture the dynamic nature of brain activity.  Additionally,
+recent work has shown that temporal
+variability in functional connectivity predicts attention task
+performance~\citep{FongEtal18} and that
+dynamic correlations between multivariate voxel patterns can add an
+additional boost compared to static multivariate voxel patterns alone~\citep{MannEtal18}.
+
+Following this line of reasoning, we expect higher-order network
 dynamics might provide even richer insights into the neural basis of
 cognition. We sought to test this hypothesis by developing an approach
 to inferring high-order network dynamics from timeseries data,
 validating the approach using synthetic data, and then applying the approach to
-a neuroimaging dataset comprising data collected as participants listened to a story~\citep{SimoEtal16}. We tested the hypothesis that as people listen to stimuli varying in cognitive richness, the neural patterns that
-support processing of those stimuli vary with respect to the order of the dynamic interactions recruited.
+a neuroimaging dataset comprising data collected as participants
+listened to a story varying in cognitive richness~\citep{SimoEtal16}. 
 
 \section*{Methods}
 A major challenge to studying such patterns is that typically neither
@@ -440,12 +454,12 @@ between the first group's and second group's activity patterns at each
 order. We note that the decoding test we used is a conservative in which we count a timepoint label as incorrect if it is not an exact match.
 
 For each order we obtained the weighted-mixture of the correlation
-matrices for the current order and all previous orders using mixing parameter , $\phi$, where $0 <\phi< 1$ reflects a
+matrices for the current order and all previous orders using mixing parameter, $\phi$, where $0 <\phi< 1$ reflects a
 weighted mixture of order based decoding Fig.~\ref{fig:decoding_level}
 Panel C. ). We calculated  $\phi$, by
 subdividing the training group and using the quasi-Newton method of
-Broyden, Fletcher, Goldfarb, and Shanno (BFGS) for optimization. We
-repeated this cross-validation process 100 times. 
+Broyden, Fletcher, Goldfarb, and Shanno (BFGS ~\citep{NoceWrig06}) for optimization. We
+repeated this cross-validation process 10 times for each parameter set. 
 
 
 
@@ -512,23 +526,23 @@ collected as part of a separate study, where the full imaging
 parameters, image preprocessing methods, and experimental details may
 be found~\citep{SimoEtal16}. The dataset is available at
 \href{url}{http://arks. princeton.edu/ark:/88435/dsp015d86p269k}.
-Bars of each color display cross-validated decoding performance for decoders trained using different sets of neural features: whole-brain patterns of voxel activities
+
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{figs/decode_level.pdf}
   \caption{\textbf{Decoding by order.
-      a. d. Relative decoding accuracy by order.} Ribbons of each
+      a.\&d. Relative decoding accuracy by order.} Ribbons of each
     color display cross-validated decoding performance averaged over
     all parameters for each condition (intact, paragraph, word,
     and rest) using PCA (a.) or eigenvector centrality (d.) to
     approximate correlations. Decoders were trained using increasingly more
     higher-order information and this ribbons are displayed relative
     to chance at 0. The red dots indicates
-    maximum decoding accuracy for each condition. \textbf{b. e. Z-transformed decoding accuracy
+    maximum decoding accuracy for each condition. \textbf{b.\&e. Z-transformed decoding accuracy
       by order.}  We Z-transformed the decoding accuracy by order to better
     visualize the order with the maximum decoding accuracy for each
     condition using PCA (b.) or eigenvector centrality (e.) to
-    approximate correlations. \textbf{c. f. Optimized weights.} Bar heights indicate the
+    approximate correlations. \textbf{c.\&f. Optimized weights.} Bar heights indicate the
     optimized mixing paramete $\phi$ of each contributing order up to
     and including the order with the maximum
     decoding accuracy for each contributing order using PCA (c.) or eigenvector centrality (f.) to
@@ -584,7 +598,8 @@ consistently showed up across all parameters.
     listening condition, we plot the
     strongest 25\% absolute value
     mean correlation for \textbf{a. order 1. b. order 2. c. order 3.,
-      and d. order 4}.}
+      and d. order 4}, representing the degree of agreement by
+    location pair over time.}
   \label{fig:brain_plots}
 \end{figure}
 
@@ -599,9 +614,10 @@ network that are similar over time.
 We found for both PCA and eigenvector centrality, during the intact condition in the
 experiment, classifiers that incorporated higher-order correlations
 yielded consistently higher accuracy than classifiers trained only on
-lower-order patterns (Fig.~\ref{fig:decoding_level},  a. d.).  We plot
+lower-order patterns (Fig.~\ref{fig:decoding_level},  a.\&d.).  We plot
 the average correlations for up to the fourth order for the intact
-condition Fig.~\ref{fig:brain_plots}.  By
+condition (Fig.~\ref{fig:brain_plots}) representing the degree of
+agreement by location pair over time.  By
 contrast, we found that incorporating higher-order (greater than first
 order) correlations did
 not further improve decoding accuracy for the other listening
@@ -619,8 +635,8 @@ involved higher-order network dynamics.
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{figs/direction_of_field.pdf}
-  \caption{\textbf{Direction of the field adapted from
-      ~\citep{Turk13}.} The evolution of fMRI analyses started with
+  \caption{\textbf{Direction of the field (adapted from
+      ~\citep{Turk13}).} The evolution of fMRI analyses started with
     univariate activation, which refers to
     the average amplitude of BOLD activity evoked by events of an
     experimental condition. Next, multivariate classifiers are trained
@@ -639,7 +655,7 @@ involved higher-order network dynamics.
 
 
 
-Based on prior work (CITE) and following the direction of the field ~\citep{Turk13} we think our thoughts might be encoded in
+Based on prior work ~\citep{Deme19} and following the direction of the field ~\citep{Turk13} we think our thoughts might be encoded in
 dynamic network patterns, and possibly higher order network
 patterns (Fig.~\ref{fig:direction_of_field}). We sought to test this hypothesis by developing an approach
 to inferring high-order network dynamics from timeseries data. 
@@ -720,4 +736,5 @@ J.R.M.  Analyses: L.L.W.O and J.R.M.
 \bibliography{CDL-bibliography/memlab}
 
 \end{document}
+
 
