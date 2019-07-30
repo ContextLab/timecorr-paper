@@ -32,82 +32,73 @@ in humans} \author{Lucy
 
 \begin{abstract}
   Our thoughts arise from coordinated activity patterns across our
-  brain.  We examined high-order dynamic correlations in functional
+  brain. We examined high-order dynamic correlations in functional
   neuroimaging data collect as human participants listened to
   different auditory stimuli varying in cognitive richness, along with
-  an additional resting state condition.  Our approach combines a
+  an additional resting state condition. Our approach combines a
   kernel-based method for estimating the dynamic functional
   correlations that are similar (within task) across participants,
   along with a dimensionality reduction approach that enables us to
-  efficiently compute high-order correlations in the data.  We trained
+  efficiently compute high-order correlations in the data. We trained
   classifiers to decode the precise time, relative to the start of the
-  stimulus, when a given neural pattern was recorded.  We trained
+  stimulus, when a given neural pattern was recorded. We trained
   these classifiers using the neural activity timeseries, first-order
   dynamic correlations, and higher-order correlations (up to
   tenth-order correlations), and asked which types of features led to
-  the highest decoding accuracy.  We found that second-order
-  correlations consistently yielded the highest decoding accuracy in
-  all of the listening conditions of the experiment, whereas
-  first-order correlations yielded the highest decoding accuracy at
-  rest.
+  the highest decoding accuracy. We found that higher-order
+  correlations consistently yielded higher decoding accuracy for
+  the most cogntively rich condition of the experiment, whereas
+  first-order correlations or raw data yielded the highest decoding accuracy at
+   for the less cogntively rich conditions as well as rest.
 \end{abstract}
 
 \doublespacing
 
 \section*{Introduction}
-The dynamics of the observable universe are meaningful in three
-respects.  First, the behaviors of the \textit{atomic units} that
-exhibit those dynamics are highly interrelated.  The actions of one
-unit typically have implications for one or more other units.  In
-other words, there is non-trivial \textit{correlational structure}
-defining how different units interact with and relate to each other.
-Second, that correlational structure is \textit{hierarchical} in the
-sense that it exists on many spatiotemporal scales.  The way one group
-of units interacts may relate to how another group of units interact,
-and the interactions between those groups may exhibit some rich
-structure.  Third, the structure at each level of this correlational
-hierarchy changes from moment to moment, reflecting the ``behavior''
-of the full system.
+To understand the neuronal computations that support cognition, we
+must understand the cooperative dynamics of populations of neurons.
+These populations of neurons interact within each brain structure, and
+the structures interact to form complex and dynamic networks. These
+interactions, at each scale, vary according to the functions our
+brains are carrying out and recent work has shown these dynamic
+complex patterns support consciousness~\citep{DemeEtal19}.
 
-These three properties (rich correlations, hierarchical organization,
-and dynamics) are major hallmarks of many complex systems.  For
-example, within a single cell, the cellular components interact at
-many spatiotemporal scales, and those interactions change according to
-what that single cell is doing.  Within a single human brain, the
-individual neurons interact within each brain structure, and the
-structures interact to form complex networks.  The interactions at
-each scale vary according to the functions our brains are carrying
-out.  And within social groups, interactions at different scales
-(e.g., between individuals, family units, communities, etc.) vary over
-time according to changing goals and external constraints.
+In the last several decades, advances in functional magnetic resonance
+image (fMRI) analyses have evolved to better characterize these
+interactions of brain structures.  As~\cite{Turk13} outlines,
+analyses using multivariate patterns of activity have given an advance
+over univariate activity patterns because they allow relative
+contributions of voxels to be combined and better assess distrubted
+representations. Resting-state connectivity (RS) fMRI, which is the
+temporal correlation of regions during rest, has shed light on the
+rich and complex spatiotemporal organization of spontaneous brain
+activity.  Functional connectivity (FC) has further characterized the
+cognitive state dependency of this network organization.
 
-Although many systems exhibit rich dynamic correlations at many
-scales, a major challenge to studying such patterns is that typically
-neither the correlations nor the hierarchical organizations of those
-correlations may be directly observed.  Rather, these fundamental
-properties must be inferred indirectly by examining the observable
-parts of the system-- e.g., the behaviors of the individual atomic
-units of that system.  In the \textit{Methods} section, we propose a
-series of mathematical operations that may be used to recover dynamic
-correlations at a range of scales (i.e., orders of interaction).  In
-the \textit{Results} section, we demonstrate how our approach may be
-applied to multi-dimensional timeseries data: a synthetic dataset
-where the underlying dynamic correlations are known (we use this
-dataset to validate our approach), and a neuroimaging dataset
-comprising data collected as participants listened to a
-story~\citep{SimoEtal16}.  In different experimental conditions in the
-neuroimaging study, participants listened to altered versions of the
-story that varied in cognitive richness: the intact story (fully
-engaging), a scrambled version of the story where the paragraphs were
-presented in a randomized order (moderately engaging), a second
-scrambled condition where the words were presented in a random order
-(minimally engaging), and a ``rest'' condition where the participants
-did not listen to any version of the story (control condition).  We
-use the neuroimaging dataset to examine how higher-order structure in
-brain data varies as a function of the cognitive richness of the
-stimulus.
+Recent work has shown that FC fluctuates over time~\citep{ChanGlov10}~\citep[for review]{LuriEtal19}, and the assumed stationarity of these analyses may be too
+simple to capture the dynamic nature of brain activity.  Additionally,
+recent work has shown that temporal
+variability in functional connectivity predicts attention task
+performance~\citep{FongEtal18} and that
+dynamic correlations between multivariate voxel patterns can add an
+additional boost compared to static multivariate voxel patterns alone~\citep{MannEtal18}.
+
+Following this line of reasoning, we expect higher-order network
+dynamics might provide even richer insights into the neural basis of
+cognition. We sought to test this hypothesis by developing an approach
+to inferring high-order network dynamics from timeseries data,
+validating the approach using synthetic data, and then applying the approach to
+a neuroimaging dataset comprising data collected as participants
+listened to a story varying in cognitive richness~\citep{SimoEtal16}. 
 
 \section*{Methods}
+A major challenge to studying such patterns is that typically neither
+the correlations nor the hierarchical organizations of those
+correlations may be directly observed.  Rather, these fundamental
+properties must be inferred indirectly by examining the observable
+parts of the system-- e.g., the behaviors of the individual units of
+that system.  Here we propose a series of mathematical operations that may be used to approximate dynamic correlations at a range of scales (i.e., orders of interaction).
+
 There are two basic steps to our approach (Fig.~\ref{fig:methods_fig}).  In the first step, we take
 a number-of-timepoints ($T$) by number-of-features ($F$)
 \textit{matrix of observations} ($\mathbf{X}$) and we return a $T$ by
@@ -382,16 +373,16 @@ gauging how much explanatory power the recovered correlations held
 with respect to the observed data.
 
 \subsubsection*{Generating synthetic data}
-To explore recovery of a constant covariance (Fig.~\ref{fig:synthetic_data},  A.), we generated syntheic
+To explore recovery of a constant covariance (Fig.~\ref{fig:synthetic_data},  a.), we generated syntheic
 data sampled from a constant covariance matrix. To do this, we created one random
 covariance matrix, $K$, with 50 features, and for each of the 300 timepoints  we
 sampled from a Gaussian distribution centered on $K$.  Similarly, we generated synthetic data
-sampled from a random covariance matrix (Fig.~\ref{fig:synthetic_data},  B.) by creating a new random
+sampled from a random covariance matrix (Fig.~\ref{fig:synthetic_data}, b.) by creating a new random
 covariance matrix $K(t)$, for each of the 300 timepoints and sampled from a
 Gaussian distribution centered on $K(t)$.
 
 To generate synthetic data from a dynamically changing covariance
-matrix (Fig.~\ref{fig:synthetic_data},  C.),
+matrix (Fig.~\ref{fig:synthetic_data},  c.),
 we generated two random covariance
 matrices, $K_{1}$ and $K_{2}$.  We then computed a weighted average covariance matrix
 for each of the 300 timepoint, $K(t)$, 
@@ -402,7 +393,7 @@ K(t) = w(t) * K_{1} + (1 - w(t)) *  K_{2}, \\\label{eqn:ramping}
 and for each of the 300 timepoints sampled from a
 Gaussian distribution centered on $K(t)$.
 
-Lastly, for the synthetic data containing block structure (Fig.~\ref{fig:synthetic_data},  D.), we followed the same
+Lastly, for the synthetic data containing block structure (Fig.~\ref{fig:synthetic_data},  d.), we followed the same
 process of creating synthetic data sampled from a constant covariance
 matrix (see above) but sampled from a new random covariance matrix
 after 60 consecutive timepoints.  We then pieced the blocks together
@@ -419,15 +410,15 @@ synthetic datasets, then correlated each recovered
 correlation matrix with the ground truth.  We repeated this process 10
 times and explored how recovery varies
 with the kernel and the specific structure of the data. For the
-ramping synthetic dataset (Fig.~\ref{fig:synthetic_data},  C.)  and for the
-block synthetic dataset (Fig.~\ref{fig:synthetic_data},  D.)  we made further
+ramping synthetic dataset (Fig.~\ref{fig:synthetic_data},  c.)  and for the
+block synthetic dataset (Fig.~\ref{fig:synthetic_data},  d.)  we made further
 comparisons of the timecorr recovered correlation matrices. We
 compared the ramping recovered correlation matrices to only the first random covariance matrix $K_{1}$
-(First, Fig.~\ref{fig:synthetic_data},  C.) and to only the last
+(First, Fig.~\ref{fig:synthetic_data},  c.) and to only the last
 random covariance matrix $K_{2}$ (Last, Fig.~\ref{fig:synthetic_data},
-C.) from Equation~\ref{eqn:ramping}. We also compared the block recovered correlation matrices in to
+c.) from Equation~\ref{eqn:ramping}. We also compared the block recovered correlation matrices in to
 the block specific covariance matrix (Block 1-5,
-Fig.~\ref{fig:synthetic_data},  D.).
+Fig.~\ref{fig:synthetic_data},  d.).
 
 
 \subsubsection*{Timepoint decoding}
@@ -444,7 +435,12 @@ inter-subject functional connectivity (ISFC) to isolate the
 time-varying correlational structure (functional connectivity patterns
 that were specifically driven by the story participants listened to.
 Following the analyses conducted by (HTFA)~\cite{MannEtal18}, we first
-applied \textit{hierarchical topographic factor analysis} (HTFA) to the fMRI datasets to obtain a time series of 700 node activities for every participant.  We then computed the dynamic weighted ISFC using a gaussian kernel with a width of 5. We then approximated these dynamic correlation using PCA and computed the dynamic weighted ISFC on the approximations.  We repeated this process up to 10th order approximated correlations.  
+applied \textit{hierarchical topographic factor analysis} (HTFA) to
+the fMRI datasets to obtain a time series of 700 node activities for
+every participant.  We then computed the dynamic weighted ISFC using a
+range of kernels and widths.  Specifically, we used Gaussian, Laplace,
+and mexican hat kernels, as well as widths of 5, 10, 20, and 50.  We
+then approximated these dynamic correlation using two reduction measures, PCA and eigenvector centrality, and computed the dynamic weighted ISFC on the approximations.  We repeated this process up to 10th order approximated correlations.  
 
 To assess decoding accuracy, we randomly divided participants for each
 stimulus into training and testing groups. For the zeroth order, we
@@ -458,12 +454,12 @@ between the first group's and second group's activity patterns at each
 order. We note that the decoding test we used is a conservative in which we count a timepoint label as incorrect if it is not an exact match.
 
 For each order we obtained the weighted-mixture of the correlation
-matrices for the current order and all previous orders using mixing parameter , $\phi$, where $0 <\phi< 1$ reflects a
+matrices for the current order and all previous orders using mixing parameter, $\phi$, where $0 <\phi< 1$ reflects a
 weighted mixture of order based decoding Fig.~\ref{fig:decoding_level}
-Panel C. ). We calculated  $\phi$, by
+Panel c. ). We calculated  $\phi$, by
 subdividing the training group and using the quasi-Newton method of
-Broyden, Fletcher, Goldfarb, and Shanno (BFGS) for optimization. We
-repeated this cross-validation process 100 times. 
+Broyden, Fletcher, Goldfarb, and Shanno (BFGS ~\citep{NoceWrig06}) for optimization. We
+repeated this cross-validation process 10 times for each parameter set. 
 
 
 
@@ -484,30 +480,31 @@ repeated this cross-validation process 100 times.
 \end{figure}
 
 To assess the performance of dynamic correlation recovery using
-timecorr, we varied width the kernel and the specific structure of the data. We applied timecorr, using delta and gaussian kernels
+timecorr, we varied width the kernel and the specific structure of the
+data. We applied timecorr, using delta and gaussian kernels
 Fig.~\ref{fig:weights}) to each of the following  
 synthetic datasets: constant, random, ramping, and block.  We then correlated each recovered
 correlation matrix with the ground truth. 
 
 For the constant synthetic dataset, a gaussian kernel (width=10)
-outperformed the delta kernel (Fig.~\ref{fig:synthetic_data},  A.).  This is in contrast with the random
+outperformed the delta kernel (Fig.~\ref{fig:synthetic_data},  a.).  This is in contrast with the random
 synthetic dataset, for which the delta kernel best captures the
-rapidly changing structure (Fig.~\ref{fig:synthetic_data},  B.). For
+rapidly changing structure (Fig.~\ref{fig:synthetic_data},  b.). For
 the ramping synthetic dataset, the slow changing strucutre within the
 data is best
 captured by the gaussian kernel and the best recovery occurs in the
 middle (Ramping, Fig.~\ref{fig:synthetic_data},
-C.). In addition to comparing the timecorr recovered correlation
+c.). In addition to comparing the timecorr recovered correlation
 matrices to the ground truth, we
 further compared the ramping recovered correlation matrices to only the first random covariance matrix $K_{1}$
-(First, Fig.~\ref{fig:synthetic_data},  C.) and to only the last
+(First, Fig.~\ref{fig:synthetic_data},  c.) and to only the last
 random covariance matrix $K_{2}$ (Last, Fig.~\ref{fig:synthetic_data},
-C.), both of which perform best at the beginning and end respectively.
+c.), both of which perform best at the beginning and end respectively.
 
 Similary for the block sythetic dataset, we compared the timecorr
 recovered correlation matrices to the ground truth as well as to each
 block-specific covariance matrix (Block 1-5,
-Fig.~\ref{fig:synthetic_data},  D.).  Although the structure is
+Fig.~\ref{fig:synthetic_data},  d.).  Although the structure is
 changing by block, the gaussian kernel once again outperforms the
 delta kernel.  Performance does however drop near even boundaries for
 when using the gaussian kernel. 
@@ -529,23 +526,27 @@ collected as part of a separate study, where the full imaging
 parameters, image preprocessing methods, and experimental details may
 be found~\citep{SimoEtal16}. The dataset is available at
 \href{url}{http://arks. princeton.edu/ark:/88435/dsp015d86p269k}.
-Bars of each color display cross-validated decoding performance for decoders trained using different sets of neural features: whole-brain patterns of voxel activities
+
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{figs/decode_level.pdf}
   \caption{\textbf{Decoding by order.
-      a. Relative decoding accuracy by order.} Ribbons of each
-    color display cross-validated decoding performance for each condition (intact, paragraph, word,
-    and rest. Decoders were trained using increasingly more
+      a.\&d. Relative decoding accuracy by order.} Ribbons of each
+    color display cross-validated decoding performance averaged over
+    all parameters for each condition (intact, paragraph, word,
+    and rest) using PCA (a.) or eigenvector centrality (d.) to
+    approximate correlations. Decoders were trained using increasingly more
     higher-order information and this ribbons are displayed relative
     to chance at 0. The red dots indicates
-    maximum decoding accuracy for each condition. \textbf{b. Normalized decoding accuracy
-      by order.}  We normalized the decoding accuracy by order to better
+    maximum decoding accuracy for each condition. \textbf{b.\&e. Z-transformed decoding accuracy
+      by order.}  We Z-transformed the decoding accuracy by order to better
     visualize the order with the maximum decoding accuracy for each
-    condition. \textbf{c. Optimized weights.} Bar heights indicate the
+    condition using PCA (b.) or eigenvector centrality (e.) to
+    approximate correlations. \textbf{c.\&f. Optimized weights.} Bar heights indicate the
     optimized mixing paramete $\phi$ of each contributing order up to
     and including the order with the maximum
-    decoding accuracy for each contributing order
+    decoding accuracy for each contributing order using PCA (c.) or eigenvector centrality (f.) to
+    approximate correlations.
   For the order with maximum decoding accuracy by condition, we show
   barplots of the optimized weights $\phi$  for each contributing
   order.}
@@ -562,7 +563,8 @@ order, we computed the mean approximated dynamic ISFC of factor
 activity for each group (see \textit{Materials and methods}), and
 combined in a weighted mixutre with all previous orders
 (i.e. cross-validation for the second
-order contained a weighted-mixture of zeroth, first, and second order (Fig.~\ref{fig:decoding_level},  C.).  For
+order contained a weighted-mixture of zeroth, first, and second order
+(Fig.~\ref{fig:decoding_level}, c.\&f.).  For
 each order, we correlated the group 1 activity patterns with group 2
 activity patterns.  We then subdivided the group 1 to obtain an
 optimal weighting parameter for each order’s correlation matrix using
@@ -575,21 +577,54 @@ correlated; we then computed the proportion of correctly labeled group
 labeled the group 2 timepoints using the group 1 timepoints as a
 template.) We repeated this procedure 100 times (randomly re-assigning
 participants to the two groups each time) to obtain a distribution of
-decoding accuracies for each experimental condition. (There were 272
+decoding accuracies for each experimental condition. There were 272
 timepoints for paragraph condition, 300 timepoints for intact and word
 conditions, and 400 timepoints for rest condition,  so chance
 performance on this decoding test is was $\frac{1}{272}$,
 $\frac{1}{300}$, and $\frac{1}{400}$ respectively.
+ 
+We repeated this process for each set of parameters, varying kernel
+type and width, and averaged over the reduction technique used to
+approximate the higher-order correlations (PCA Fig.~\ref{fig:decoding_level},  a.-c. and eigenvector
+centrality Fig.~\ref{fig:decoding_level},  d.-f.).  Since there is no ground truth in these analyses, and we did not know
+which parameters best capture the data, we instead report a robustness
+search by averaging over the parameters and reporting which results
+consistently showed up across all parameters.
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{figs/brain_plots.pdf}
+  \caption{\textbf{Average correlations by order for the intact listening condition.} Using eigenvector
+    centrality to approximate higher-order correlations for the intact
+    listening condition, we plot the
+    strongest 25\% absolute value
+    mean correlation for order: \textbf{a. 1. b. 2. c. 3.,
+      and d. 4}, representing the degree of agreement by
+    location pair over time.}
+  \label{fig:brain_plots}
+\end{figure}
 
-We found that, during each of the listening conditions in the
-experiment, classifiers that incorporated second-order correlations
+The two methods used to approximate the higher-order correlations (PCA Fig.~\ref{fig:decoding_level},  a.-c. and eigenvector
+centrality Fig.~\ref{fig:decoding_level},  d.-f.) capture different
+facets of the activity patterns.  Using PCA, the higher-order
+correlations are all linked to the original activity patterns, whereas
+eigenvectory centrality breaks the immediate link with specific brain
+areas and instead characterizes the position of the nodes in the
+network that are similar over time.
+
+We found for both PCA and eigenvector centrality, during the intact condition in the
+experiment, classifiers that incorporated higher-order correlations
 yielded consistently higher accuracy than classifiers trained only on
-lower-order patterns (Fig.~\ref{fig:decoding_level},  A.), and incorporating higher-order correlations did
-not further improve decoding accuracy.  By contrast, these
-higher-order correlations were not necessary to support (minimally
-above chance) decoding during a control rest condition.  This suggests
-that the cognitive processing that supported the listening conditions
-involved second-order (or higher) network dynamics. 
+lower-order patterns (Fig.~\ref{fig:decoding_level},  a.\&d.).  We plot
+the average correlations for up to the fourth order for the intact
+condition (Fig.~\ref{fig:brain_plots}) representing the degree of
+agreement by location pair over time.  By
+contrast, we found that incorporating higher-order (greater than first
+order) correlations did
+not further improve decoding accuracy for the other listening
+conditions or rest condition.  This suggests
+that the cognitive processing that supported the most cognitively rich
+condition
+involved higher-order network dynamics. 
 
 
 
@@ -600,15 +635,31 @@ involved second-order (or higher) network dynamics.
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{figs/direction_of_field.pdf}
-  \caption{\textbf{Direction of the field.} }
+  \caption{\textbf{Direction of the field (adapted from~\citep{Turk13}).} The evolution of fMRI analyses started with
+    univariate activation, which refers to
+    the average amplitude of BOLD activity evoked by events of an
+    experimental condition. Next, multivariate classifiers are trained
+    on patterns of activation across voxels to decode distributed
+    representations for specific events. The next, resting
+    connectivity, is the temporal correlation of one or more seed
+    regions with the remainder of the brain during rest. Additionally,
+    task-based connectivity examines how these correlations differ by
+    cognitive state. Following this increasing trajectory of
+    increasing complexity, full connectivity considers all pairwise
+    correlations in the brain, most commonly at rest.  Next, dynamic
+    full connectivity considers how full connectivity changes over
+    time. Continuing this line of reasoning, we expect higher-order network dynamics might provide even richer insights into the neural basis of cognition.}
   \label{fig:direction_of_field}
 \end{figure}
 
 
 
-Although dynamic interactions between brain structures underlie our
-thoughts, the ways in which we can study these patterns are
-limited. One challenge in studying dynamic interactions is the
+Based on prior work ~\citep{Deme19} and following the direction of the field ~\citep{Turk13} we think our thoughts might be encoded in
+dynamic network patterns, and possibly higher order network
+patterns (Fig.~\ref{fig:direction_of_field}). We sought to test this hypothesis by developing an approach
+to inferring high-order network dynamics from timeseries data. 
+
+One challenge in studying dynamic interactions is the
 computational resources required to calculate higher-order correlations. 
 We developed a computationally tractable model of network dynamics (Fig.~\ref{fig:methods_fig}) that takes in a feature
 timeseries and outputs approximated first-order dynamics (i.e.,
@@ -618,23 +669,27 @@ and higher-order network dynamics (up to tenth-order dynamic
 correlations).
 
 We first validated our model using synthetic data, and explored how
-recovery varied with different underlying data structures  and kernels.   We then 
+recovery varied with different underlying data structures and kernels.   We then 
 applied the approach to an fMRI dataset
-~\citep{SimoEtal16} in which participants listened to an audio recording of a story, as well as scrambled versions of the same story (where the scrambling was applied at different temporal scales).  We trained classifiers to take the output of the model and decode the timepoint in the story (or scrambled story) that the participants were listening to. We found that, during each of the listening conditions in the
-experiment, classifiers that incorporated up to second-order correlations
+~\citep{SimoEtal16} in which participants listened to an audio
+recording of a story, as well as scrambled versions of the same story
+(where the scrambling was applied at different temporal scales).  We
+trained classifiers to take the output of the model and decode the
+timepoint in the story (or scrambled story) that the participants were
+listening to. We found that, during the intact listening condition in the
+experiment, classifiers that incorporated higher-order correlations
 yielded consistently higher accuracy than classifiers trained only on
-lower-order patterns (Fig.~\ref{fig:decoding_level},  A.), and
-incorporating more higher-order correlations did
-not further improve decoding accuracy.  By contrast, these
-higher-order correlations were not necessary to support (minimally
-above chance) decoding during a control rest condition.  This suggests
-that the cognitive processing that supported the listening conditions
+lower-order patterns (Fig.~\ref{fig:decoding_level},  a.\&d.).  By contrast, these
+higher-order correlations were not necessary to support decoding the other
+listening conditions and (minimally
+above chance) during a control rest condition.  This suggests
+that the cognitive processing that supported the most cogntively rich listening conditions
 involved second-order (or higher) network dynamics.
 
 Although we found decoding accuracy was best when incorporating
 higher-order network dynamics for all but rest
   condition, it is unclear if this is a product of the brain or the
-  data collection technique .  It could be that the brain is
+  data collection technique.  It could be that the brain is
   second-order or it could be that fMRI can
   only reliably give second-order interactions. Exploring this method
   with other data collection technique will be important to
@@ -680,4 +735,5 @@ J.R.M.  Analyses: L.L.W.O and J.R.M.
 \bibliography{CDL-bibliography/memlab}
 
 \end{document}
+
 
