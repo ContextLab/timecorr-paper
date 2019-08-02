@@ -75,11 +75,11 @@ rich and complex spatiotemporal organization of spontaneous brain
 activity.  Functional connectivity (FC) has further characterized the
 cognitive state dependency of this network organization.
 
-Recent work has shown that FC fluctuates over time~\citep{ChanGlov10}~\citep[for review]{LuriEtal19}, and the assumed stationarity of these analyses may be too
+Recent work has shown that FC fluctuates over time~\citep{ChanGlov10}~\citep[for review]{LuriEtal18}, and the assumed stationarity of these analyses may be too
 simple to capture the dynamic nature of brain activity.  Additionally,
 recent work has shown that temporal
 variability in functional connectivity predicts attention task
-performance~\citep{FongEtal18} and that
+performance~\citep{FongEtal19} and that
 dynamic correlations between multivariate voxel patterns can add an
 additional boost compared to static multivariate voxel patterns alone~\citep{MannEtal18}.
 
@@ -472,8 +472,10 @@ repeated this cross-validation process 10 times for each parameter set.
   \includegraphics[width=\textwidth]{figs/synthetic_data.pdf}
   \caption{\textbf{Dynamic correlation recovery with synthetic data. } Using synthetic data containing different
     underlying correlational structure,
-   we test how well we can recover dynamic correlation matrices using two kernels (delta and gaussian,
-    width = 10) when compared to groud truth.  We plot recovery using of datasets containing the
+   we test how well we can recover dynamic correlation matrices using
+   different kernels when compared to groud truth.  We compare the results using a delta kernel
+   with averaged results from several kernels (Gaussian, Laplace, and
+   mexican hat) and several widths (5, 10, 20, and 50).  We plot recovery using of datasets containing the
     following underlying structure:
     \textbf{a. Constant. b. Random. c. Ramping.  d. Block.}}
   \label{fig:synthetic_data}
@@ -594,11 +596,10 @@ consistently showed up across all parameters.
   \centering
   \includegraphics[width=\textwidth]{figs/brain_plots.pdf}
   \caption{\textbf{Average correlations by order for the intact listening condition.} Using eigenvector
-    centrality to approximate higher-order correlations for the intact
-    listening condition, we plot the
+    centrality to approximate higher-order correlations for \textbf{a.-d. intact, e.-h. paragraph scrambled,
+      i.-l. word scrambled, and m.-p. rest } conditions, we plot the
     strongest 25\% absolute value
-    mean correlation for order: \textbf{a. 1. b. 2. c. 3.,
-      and d. 4}, representing the degree of agreement by
+    mean correlation for first through fourth orders, representing the degree of agreement by
     location pair over time.}
   \label{fig:brain_plots}
 \end{figure}
@@ -654,7 +655,7 @@ involved higher-order network dynamics.
 
 
 
-Based on prior work ~\citep{Deme19} and following the direction of the field ~\citep{Turk13} we think our thoughts might be encoded in
+Based on prior work ~\citep{DemeEtal19} and following the direction of the field ~\citep{Turk13} we think our thoughts might be encoded in
 dynamic network patterns, and possibly higher order network
 patterns (Fig.~\ref{fig:direction_of_field}). We sought to test this hypothesis by developing an approach
 to inferring high-order network dynamics from timeseries data. 
