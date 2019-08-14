@@ -32,11 +32,11 @@ raw_params = raw_parameter['params']
 
 result_name = 'corrs_ordered_up'
 
-results_dir = os.path.join(config['resultsdir'], result_name, cfun + '_' + rfun + '_' + smooth + '_' + str(width))
+corrsdir = os.path.join(config['resultsdir'], result_name, cfun + '_' + rfun + '_' + smooth + '_' + str(width))
 
 try:
-    if not os.path.exists(results_dir):
-        os.makedirs(results_dir)
+    if not os.path.exists(corrsdir):
+        os.makedirs(corrsdir)
 except OSError as err:
    print(err)
 
@@ -67,12 +67,6 @@ conds.extend([cond] * len(next_data))
 
 all_data = np.array(data)
 conds = np.array(conds)
-
-corrsdir = os.path.join(results_dir, smooth + '_' + str(50) + '_orderedup_corrs')
-
-if not os.path.exists(corrsdir):
-    os.makedirs(corrsdir)
-
 
 combine = corrmean_combine
 
