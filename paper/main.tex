@@ -668,11 +668,16 @@ consistently showed up across all parameters.
   \centering
   \includegraphics[width=\textwidth]{figs/brain_plots.pdf}
   \caption{\textbf{Average correlations by order for the intact listening condition.} Using eigenvector
-    centrality to approximate higher-order correlations for \textbf{a.-d. intact, e.-h. paragraph scrambled,
-      i.-l. word scrambled, and m.-p. rest } conditions, we plot the
-    strongest 25\% absolute value
-    mean correlation for first through fourth orders, representing the degree of agreement by
-    location pair over time.}
+    centrality to approximate higher-order correlations for the
+    intact, paragraph scrambled, word scrambled, and rest condition.
+    We plot the
+    strongest 50\% absolute value
+    mean correlation for \textbf{a.-d. first order, e.-h. second order,
+      i.-l. third order, and m.-p. fourth order }, representing the degree of agreement by
+    location pair over time.  To demonstrate how this method is
+    computationally scalable, we also approximated
+    \textbf{a.-d. fifteenth order} dynamic correlation, which would be
+    possible to compute using conventional methods since it would require more bits to represent the solution than there are molecules in the universe.}
   \label{fig:brain_plots}
 \end{figure}
 

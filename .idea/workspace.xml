@@ -2,26 +2,45 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="417b68b5-4afb-4c94-9087-b4cb6c1ea5b8" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/PCA_norm_ave_level_analysis_optimized_param_search.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/PCA_norm_ave_level_analysis_optimized_param_search.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/PCA_rel_ave_level_analysis_optimized_param_search.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/PCA_rel_ave_level_analysis_optimized_param_search.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/PCA_z_ave_level_analysis_optimized_param_search.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/PCA_z_ave_level_analysis_optimized_param_search.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/PCA_weights_ave_level_analysis_optimized_param_search.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/PCA_weights_ave_level_analysis_optimized_param_search.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/intact.edge" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/intact.edge" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/intact.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/intact.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/paragraph.edge" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/paragraph.edge" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/paragraph.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/paragraph.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/rest.edge" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/rest.edge" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/rest.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/rest.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/word.edge" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/word.edge" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/word.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/word.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_2/mean/intact.edge" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_2/mean/intact.edge" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_2/mean/intact.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_2/mean/intact.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_2/mean/paragraph.edge" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_2/mean/paragraph.edge" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_2/mean/paragraph.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_2/mean/paragraph.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_2/mean/rest.edge" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_2/mean/rest.edge" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_2/mean/rest.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_2/mean/rest.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_2/mean/word.edge" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_2/mean/word.edge" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_2/mean/word.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_2/mean/word.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_3/mean/intact.edge" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_3/mean/intact.edge" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_3/mean/intact.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_3/mean/intact.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_3/mean/paragraph.edge" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_3/mean/paragraph.edge" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_3/mean/paragraph.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_3/mean/paragraph.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_3/mean/rest.edge" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_3/mean/rest.edge" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_3/mean/rest.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_3/mean/rest.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_3/mean/word.edge" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_3/mean/word.edge" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_3/mean/word.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_3/mean/word.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_4/mean/intact.edge" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_4/mean/intact.edge" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_4/mean/intact.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_4/mean/intact.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_4/mean/paragraph.edge" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_4/mean/paragraph.edge" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_4/mean/paragraph.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_4/mean/paragraph.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_4/mean/rest.edge" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_4/mean/rest.edge" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/eigenvector_norm_ave_level_analysis_optimized_param_search.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/eigenvector_norm_ave_level_analysis_optimized_param_search.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/eigenvector_rel_ave_level_analysis_optimized_param_search.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/eigenvector_rel_ave_level_analysis_optimized_param_search.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/figs/eigenvector_z_ave_level_analysis_optimized_param_search.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/eigenvector_z_ave_level_analysis_optimized_param_search.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_4/mean/word.edge" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_4/mean/word.edge" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_4/mean/word.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_4/mean/word.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/eigenvector_weights_ave_level_analysis_optimized_param_search.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/eigenvector_weights_ave_level_analysis_optimized_param_search.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/notebooks/brain_plots.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/brain_plots.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/notebooks/decode_levels.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/decode_levels.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/notebooks/make_gif.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/make_gif.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/notebooks/ordered_correlations.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/ordered_correlations.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/scripts/pieman_cluster_order_up.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/scripts/pieman_cluster_order_up.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/scripts/pieman_cluster_submit_order_up.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/scripts/pieman_cluster_submit_order_up.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/paper/PlotLevelUp" beforeDir="false" afterPath="$PROJECT_DIR$/paper/PlotLevelUp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paper/figs/brain_plots.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/paper/figs/brain_plots.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paper/main.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/paper/main.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paper/main.tex" beforeDir="false" afterPath="$PROJECT_DIR$/paper/main.tex" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -136,8 +155,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="250" column="17" selection-start-line="250" selection-start-column="17" selection-end-line="250" selection-end-column="17" />
+            <state relative-caret-position="131">
+              <caret line="237" column="21" selection-start-line="237" selection-start-column="21" selection-end-line="237" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -229,7 +248,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="72" />
     <option name="y" value="23" />
     <option name="width" value="1472" />
@@ -407,7 +426,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="72" y="23" width="1472" height="1005" extended-state="0" />
+    <frame x="72" y="23" width="1472" height="1005" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -856,8 +875,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="250" column="17" selection-start-line="250" selection-start-column="17" selection-end-line="250" selection-end-column="17" />
+        <state relative-caret-position="131">
+          <caret line="237" column="21" selection-start-line="237" selection-start-column="21" selection-end-line="237" selection-end-column="21" />
         </state>
       </provider>
     </entry>
