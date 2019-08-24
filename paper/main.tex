@@ -170,7 +170,7 @@ correlations in a $T$ (timepoints) by $K$ (features) multivariate
 timeseries, $\mathbf{X}_0$.  This yields a $T$ by $\mathcal{O}(K^2)$ matrix of
 dynamic correlations, $\mathbf{Y}_1$, where each row comprises the upper
 triangle of the correlation matrix at a single timepoint, reshaped
-into a row vector.  Second, we apply a dimensionality reduction step
+into a row vector (this reshaped vector is $(\frac{K^2 - K}{2})$-dimensional).  Second, we apply a dimensionality reduction step
 to project the matrix of dynamic correlations back onto a
 $K$-dimensional space.  This yields a $T$ by $K$ matrix, $\mathbf{X}_1$, that
 reflects an approximation of the dynamic correlations reflected in the
@@ -272,7 +272,7 @@ Here $\mathrm{timecorr}(\mathbf{X}(\cdot, i), \mathbf{X}(\cdot, j),
   \kappa_t)$ reflects the correlation at time $t$ between columns $i$
   and $j$ of $\mathbf{X}$, estimated using the kernel $\kappa_t$.
 
-\subsubsection*{Inter-subject dynamic correlations}
+\subsubsection*{Dynamic inter-subject functional connectivity (DISFC)}
 Equation~\ref{eqn:timecorr} provides a means of taking a single
 observation matrix, $\mathbf{X}_n$ and estimating the dynamic
 correlations from moment to moment, $\mathbf{Y}_{n+1}$.  Suppose that
@@ -309,21 +309,39 @@ participants, $\bar{\mathbf{X}}_n^{ \backslash p}$:
   \backslash p} Z\left( \mathbf{X}_n^q \right) \right),
 \end{align}
 where $\backslash p$ denotes the set of all participants other than
-participant $p$. In this way, the $T$ by $\mathcal{O}(K^2)$
+participant $p$. In this way, the $T$ by $\frac{K^2 - K}{2}$ DISFC
 matrix $\bar{\mathbf{C}}$ provides a time-varying extension of the ISFC
 approach developed by \cite{SimoEtal16}.
 
 \subsection*{Low-dimensional representations of dynamic
   correlations}
 
-Given a $T$ by $\mathcal{O}(K^2)$ matrix of dynamic correlations,
-$\mathbf{Y}_n$, we propose two general approaches to computing a $T$ by $K$
-low-dimensional representation of these correlations, $\mathbf{X}_n$.
-The first approach uses dimensionality reduction algorithms to project
-$\mathbf{Y}_n$ onto a $K$-dimensional space.  The second approach uses
-graph-theoretic measures to characterize the relative positions of
-each feature ($k \in \left[1, ..., K \right]$) in the network defined
-by the correlation matrix at each timepoint. \textbf{JRM STOPPED HERE}
+Given a $T$ by $\frac{K^2 - K}{2}$ matrix of dynamic correlations,
+$\mathbf{Y}_n$, we propose two general approaches to computing a $T$
+by $K$ low-dimensional representation of these correlations,
+$\mathbf{X}_n$.  The first approach uses dimensionality reduction
+algorithms to project $\mathbf{Y}_n$ onto a $K$-dimensional space.
+The second approach uses graph-theoretic measures to characterize the
+relative positions of each feature ($k \in \left[1, ..., K \right]$)
+in the network defined by the correlation matrix at each timepoint.
+
+Because $\mathbf{X}_n$ will have the same shape as the original data
+$\mathbf{X}_0$, approximating $\mathbf{Y}_n$ with a lower-dimensional
+$\mathbf{X}_n$ enables us to estimate high-order dynamic correlations
+in a scalable way.  Given a $T$ by $K$ input matrix, the output of
+Equation~\ref{eqn:timecorr} requires $\mathcal{O}(TK^2)$ space to
+store.  Repeated applications of Equation~\ref{eqn:timecorr} (i.e.,
+computing dynamic correlations between the columns of the outputted
+dynamic correlation matrix) each require exponentially more space; in
+general the $n^\mathrm{th}$-order dynamic correlations of a $T$ by $K$
+timeseries occupies $\mathcal{O}(TK^{2n})$ space.  However, when we
+approximate the output of Equation~\ref{eqn:timecorr} with a $T$ by
+$K$ matrix (as described next), it becomes feasible to compute even
+very high-order correlations in high-dimensional data.  Specifically,
+approximating the $n^\mathrm{th}$-order dynamic correlations of a $T$
+by $K$ timeseries requires only $\mathcal{O}(TK^2)$ space-- the same
+as would be required to compute first-order dynamic
+correlations. \textbf{JRM STOPPED HERE}
 
 \subsubsection*{Dimensionality reduction-based approaches to computing
   $\mathbf{X}_n$}
