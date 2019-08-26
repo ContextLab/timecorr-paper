@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="417b68b5-4afb-4c94-9087-b4cb6c1ea5b8" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/intact.edge" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/intact.edge" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/intact.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/intact.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/paragraph.edge" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/paragraph.edge" afterDir="false" />
@@ -250,7 +248,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="72" />
     <option name="y" value="23" />
     <option name="width" value="1472" />
