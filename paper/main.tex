@@ -166,124 +166,130 @@ structures.
 \section*{Methods}
 Our general approach to comprises four general steps.  First, we
 derive a kernel-based approach to computing dynamic pairwise
-correlations in a multivariate timeseries.  Next, we apply a
-dimensionality reduction step to \textbf{JRM STOPPED HERE}
+correlations in a $T$ (timepoints) by $K$ (features) multivariate
+timeseries, $\mathbf{X}_0$.  This yields a $T$ by $\mathcal{O}(K^2)$ matrix of
+dynamic correlations, $\mathbf{Y}_1$, where each row comprises the upper
+triangle of the correlation matrix at a single timepoint, reshaped
+into a row vector (this reshaped vector is $(\frac{K^2 - K}{2})$-dimensional).  Second, we apply a dimensionality reduction step
+to project the matrix of dynamic correlations back onto a
+$K$-dimensional space.  This yields a $T$ by $K$ matrix, $\mathbf{X}_1$, that
+reflects an approximation of the dynamic correlations reflected in the
+original data.  Third, we use repeated applications of the
+kernel-based dynamic correlation step to $\mathbf{X}_n$ and the dimensionality
+reduction step to the resulting $\mathbf{Y}_{n+1}$ to estimate high-order
+dynamnic correlations.  Each application of these steps to a $T$ by
+$K$ time series $\mathbf{X}_n$ yields a $T$ by $K$ matrix, $\mathbf{X}_{n+1}$, that
+reflects the dynamic correlations between the columns of $\mathbf{X}_n$.  In
+this way, we refer to $n$ as the \textit{order} of the timeseries,
+where $\mathbf{X}_0$ (order 0) denotes the original data and $\mathbf{X}_n$ denotes
+$n^\mathrm{th}$-order dynamic correlations between the columns of
+$\mathbf{X}_0$.  Finally, we use a cross-validation--based decoding approach to
+evaluate how well information contained in a given order (or weighted
+mixture of orders) may be used to decode relevant cognitive states.
+If including a given $\mathbf{X}_n$ in the feature set yields higher
+classification accuracy on held-out data, we interpret this as
+evidence that the given cognitive states are reflected in patterns of
+$n^\mathrm{th}$-order correlations.
 
-
-A major challenge to studying such patterns is that typically neither
-the correlations nor the hierarchical organizations of those
-correlations may be directly observed.  Rather, these fundamental
-properties must be inferred indirectly by examining the observable
-parts of the system-- e.g., the behaviors of the individual units of
-that system.  Here we propose a series of mathematical operations that may be used to approximate dynamic correlations at a range of scales (i.e., orders of interaction).
-
-There are two basic steps to our approach (Fig.~\ref{fig:methods_fig}).  In the first step, we take
-a number-of-timepoints ($T$) by number-of-features ($F$)
-\textit{matrix of observations} ($\mathbf{X}$) and we return a $T$ by
-$\frac{F^2 - F}{2}$ \textit{matrix of dynamic correlations}
-($\mathbf{Y}$).  Here $\mathbf{Y_0}$ describes, at each moment, how
-all of the features (columns of $\mathbf{X}$) are inferred to be
-interacting.  (Since the interactions are assumed to be non-recurrent
-and symmetric, only the upper triangle of the full correlation matrix
-is computed.)  In the second step, we project $\mathbf{Y_0}$ onto an
-$F$-dimensional space, resulting in a new $T$ by $F$ matrix
-$\mathbf{Y_1}$.  Note that $\mathbf{Y_1}$ contains information about
-the correlation dynamics present in $\mathbf{X}$, but represented in a
-compressed number of dimensions.  By repeatedly applying these two
-steps in sequence, we can examine and explore higher order dynamic
-correlations in $\mathbf{X}$.
-
-\subsection*{Dynamic correlations}
+\subsection*{Kernel-based approach for computing dynamic correlations}
 Given a matrix of observations, we can compute the (static)
-correlations between any pair of observations, $\mathbf{X}_i$ and
-$\mathbf{X}_j$ using:
+Pearson's correlation between any pair of columns, $\mathbf{X}(\cdot, i)$ and
+$\mathbf{X}(\cdot, j)$ using~\citep{Pear01}:
 \begin{align}
-  \mathrm{corr}(\mathbf{X}_i, \mathbf{X}_j) &= \frac{\sum_{t=1}^T \left(\mathbf{X}_i(t)
-                                              -
-                                              \bar{\mathbf{X}_i}\right) \left(\mathbf{X}_j(t)
-                                              -
-                                              \bar{\mathbf{X}_j}\right)}{\sqrt{\sum_{t=1}^T
-                                              \sigma^2_{\mathbf{X}_i} 
-                                              \sigma^2_{\mathbf{X}_j}}},~\mathrm{where}\\\label{eqn:corr}
-  \bar{\mathbf{X}_k} &= \sum_{t=1}^T
-                       \mathbf{X}_k(t),~\mathrm{and}\\
-  \sigma^2_{\mathbf{X}_k} &= \sum_{t=1}^T \left( \mathbf{X}_k -
-                            \bar{\mathbf{X}_k} \right)^2 
+  \mathrm{corr}(\mathbf{X}(\cdot, i), \mathbf{X}(\cdot, j)) &=
+                                                              \frac{\sum_{t=1}^T
+                                                              \left(\mathbf{X}(t,
+                                                              i)
+                                                              -
+                                                              \bar{\mathbf{X}(\cdot,
+                                                              i)}\right)
+                                                              \left(\mathbf{X}(t,
+                                                              j)
+                                                              -
+                                                              \bar{\mathbf{X}(\cdot, j)}\right)}{\sqrt{\sum_{t=1}^T
+                                                              \sigma^2_{\mathbf{X}(\cdot, i)} 
+                                                              \sigma^2_{\mathbf{X}(\cdot, j)}}},~\mathrm{where}\\\label{eqn:corr}
+  \bar{\mathbf{X}(\cdot, k)} &= \sum_{t=1}^T
+                       \mathbf{X}(t, k),~\mathrm{and}\\
+  \sigma^2_{\mathbf{X}(\cdot, k)} &= \sum_{t=1}^T \left( \mathbf{X}(t, k) -
+                            \bar{\mathbf{X}(\cdot, k)} \right)^2 
 \end{align}
-
 We can generalize this formula to compute time-varying correlations by
-incorporating a \textit{weight function} that takes a time $t$ as input,
-and returns how much the observed data every timepoint (including $t$)
-contribute to the correlations at time $t$ (Fig.~\ref{fig:weights}).
+incorporating a \textit{kernel function} that takes a time $t$ as
+input, and returns how much the observed data at each timepoint
+$\tau \in \left[ -\infty, \infty \right]$ contributes to the estimated instantaneous
+correlation at time $t$ (Fig.~\ref{fig:kernels}).
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{figs/kernels}
-  \caption{\textbf{Examples of time-varying weights.  Each panel
-      displays per-timepoint weights at $t = 50$, evaluated for 100
-      timepoints ($1, ..., 100$).  a. Uniform weights.} The weights
-    are timepoint-invariant; observations at all timepoints are
-    weighted equally, and do not change as a function of $t$.  This is
-    a special case of weight function that reduces dynamic
-    correlations to static correlations.  \textbf{b. Dirac delta
-      function.} Only the observation at timepoint $t$ is given weight
-    (of 1), and weights for observations at all other timepoints are
-    set to 0.  \textbf{c. Gaussian weights.} Each observation's
-    weights fall off in time according to a Gaussian probability
-    density function centered on $\mu = t$.  Weights derived using
-    several different example variance parameters ($\sigma^2$ are
-    displayed.  \textbf{d. Laplace weights.}  Each observation's
-    weights fall off in time according to a Laplace probability
-    density function centered on $\mu = t$.  Weights derived using
-    several different example scale parameters ($b$) are displayed.
-    \textbf{e. Mexican hat (Ricker wavelet) weights.}  Each
-    observation's weights fall off in time according to a Ricker
-    wavelet centered on $t$.  This function highlights the
-    \textit{contrasts} between local versus surrounding activity
-    patterns in estimating dynamic correlations. Weights derived using
-    several different example width parameters ($\sigma$) are
-    displayed.  }
-  \label{fig:weights}
+  \caption{\textbf{Examples of kernel functions.} Each panel
+    displays per-timepoint weights at $t = 50$, evaluated for 100
+    timepoints ($\tau \in \left[1, ..., 100\right]$).  \textbf{a. Uniform
+      kernel.} The weights are timepoint-invariant; observations at
+    all timepoints are weighted equally, and do not change as a
+    function of $\tau$.  This is a special case of weight function that
+    reduces dynamic correlations to static correlations.
+    \textbf{b. Dirac $\delta$ kernel.} Only the observation at
+    timepoint $t$ is given a non-zero weight (of 1).
+    \textbf{c. Gaussian kernels.} Each kernel's weights fall off
+    in time according to a Gaussian probability density function
+    centered on time $t$.  Weights derived using several different
+    example variance parameters ($\sigma^2$ are displayed.
+    \textbf{d. Laplace kernels.}  Each kernel's weights fall off
+    in time according to a Laplace probability density function
+    centered on time $t$.  Weights derived using several different
+    example scale parameters ($b$) are displayed.  \textbf{e. Mexican
+      hat (Ricker wavelet) kernels.}  Each kernel's weights fall
+    off in time according to a Ricker wavelet centered on time $t$.  This
+    function highlights the \textit{contrasts} between local versus
+    surrounding activity patterns in estimating dynamic
+    correlations. Weights derived using several different example
+    width parameters ($\sigma$) are displayed.}
+  \label{fig:kernels}
 \end{figure}
 
-Given a weight function $w(t)$ for timepoint $t$, evaluated at
-timepoints in the interval $\left[ 1, ..., T \right]$, we can extend the static correlation formula
-in Equation~\ref{eqn:corr} to reflect an \textit{instantaneous
-  correlation} at timepoint $t$:
+Given a kernel function $\kappa_t(\cdot)$ for timepoint $t$,
+evaluated at timepoints $\tau \in \left[ 1, ..., T \right]$, we
+can update the static correlation formula in Equation~\ref{eqn:corr}
+to estimate the \textit{instantaneous correlation} at timepoint $t$:
 \begin{align}
-  \mathrm{timecorr}(\mathbf{X}_i, \mathbf{X}_j, t) &= \frac{\sum_{t=1}^T \left(\mathbf{X}_i(t)
-                                              -
-                                              \widetilde{\mathbf{X}}_i(t)\right) \left(\mathbf{X}_j(t)
-                                              -
-                                              \widetilde{\mathbf{X}}_j(t)\right)}{\sqrt{\sum_{t=1}^T
-                                              \widetilde{\sigma}^2_{\mathbf{X}_i}(t) 
-                                              \widetilde{\sigma}^2_{\mathbf{X}_j}}(t)},~\mathrm{where}\\\label{eqn:timecorr}
-  \widetilde{\mathbf{X}}_k(t) &= \sum_{i=1}^T
-                       w(t, i)\mathbf{X}_k(i),\\
-  \widetilde{\sigma}^2_{\mathbf{X}_k}(t) &= \sum_{i=1}^T \left( \mathbf{X}_k(i) -
-                            \widetilde{\mathbf{X}}_k(t) \right)^2,
+  \mathrm{timecorr}_{\kappa_t}\left(\mathbf{X}(\cdot, i), \mathbf{X}(\cdot, j)\right) &= \frac{\sum_{\tau=1}^T \left( \mathbf{X}(\tau, i) -
+                                       \widetilde{\mathbf{X}}_{\kappa_t}(i) \right)
+                                 \left( \mathbf{X}(\tau, j) -
+                                        \widetilde{\mathbf{X}}_{\kappa_t}(j)\right)}
+              {\sqrt{\sum_{\tau=1}^T
+                                              \widetilde{\sigma}_{\kappa_t}^2(\mathbf{X}(\cdot,
+                                                                                        i))
+                                              \widetilde{\sigma}_{\kappa_t}^2(\mathbf{X}(\cdot, j))}},~\mathrm{where}\\\label{eqn:timecorr}
+  \widetilde{\mathbf{X}}_{\kappa_t}(t, k) &= \sum_{\tau=1}^T
+                       \kappa_t(\tau, k)\mathbf{X}(\tau, k),\\
+  \widetilde{\sigma}_{\kappa_t}^2(\mathbf{X}(\cdot, k)) &= \sum_{\tau=1}^T
+                                                  \left(
+                                                  \mathbf{X}(\tau, k) -
+                            \widetilde{\mathbf{X}}_{\kappa_t}(t, k) \right)^2.
 \end{align}
-and $w(t, i)$ is shorthand for $w(t)$ evaluated at timepoint $i$.
-Equation~\ref{eqn:timecorr} may be used to estimate the instantaneous
-correlations between every pair of observations, at each timepoint
-(i.e., $\mathbf{Y}$).
+Here $\mathrm{timecorr}(\mathbf{X}(\cdot, i), \mathbf{X}(\cdot, j),
+  \kappa_t)$ reflects the correlation at time $t$ between columns $i$
+  and $j$ of $\mathbf{X}$, estimated using the kernel $\kappa_t$.
 
-\subsubsection*{Inter-subject dynamic correlations}
+\subsubsection*{Dynamic inter-subject functional connectivity (DISFC)}
 Equation~\ref{eqn:timecorr} provides a means of taking a single
-observation matrix, $\mathbf{X}$ and estimating the dynamic
-correlations from moment to moment, $\mathbf{Y}$.  Suppose that one
-has access to a set of multiple observation matrices that reflect the
-same phenomenon.  For example, one might collect neuroimaging data
+observation matrix, $\mathbf{X}_n$ and estimating the dynamic
+correlations from moment to moment, $\mathbf{Y}_{n+1}$.  Suppose that
+one has access to a set of multiple observation matrices that reflect
+the same phenomenon.  For example, one might collect neuroimaging data
 from several experimental participants, as each participant performs
-the same task (or sequence of tasks).  Let $\mathbf{X}_1$,
-$\mathbf{X}_2$, ..., $\mathbf{X}_P$ reflect the $T$ by $F$ observation
-matrices for each of $P$ participants in an experiment.  We can use
+the same task (or sequence of tasks).  Let $\mathbf{X}_n^1$,
+$\mathbf{X}_n^2$, ..., $\mathbf{X}_n^P$ reflect the $T$ by $K$
+observation matrices ($n = 0$) or reduced correlation matrices
+($n > 0$) for each of $P$ participants in an experiment.  We can use
 \textit{inter-subject functional connectivity}~\citep[ISFC;
 ][]{SimoEtal16} to compute the degree of stimulus-driven correlations
 reflected in the multi-participant dataset at a given timepoint $t$
 using:
 \begin{align}
-\bar{\mathbf{C}}(t) = M\left(R\left(\frac{1}{2P} \sum_{i=1}^P
-  Z\left(Y_i(t)\right)^\mathrm{T} + Z\left(Y_i,(t)\right)\right)\right),
+\bar{\mathbf{C}}(t) = M\left(R\left(\frac{1}{2P} \sum_{p=1}^P
+  Z\left(Y_n^p(t)\right)^\mathrm{T} + Z\left(Y_n^p(t)\right)\right)\right),
 \end{align}
 where $M$ extracts and vectorizes the diagonal and upper triangle of a symmetric
 matrix, $Z$ is the Fisher $z$-transformation~\citep{Zar10}:
@@ -294,63 +300,51 @@ $R$ is the inverse of $Z$:
 \begin{align}
 R(z) = \frac{\exp(2z - 1)}{\exp(2z + 1)},
 \end{align}
-and $\mathbf{Y}_i(t)$ denotes the correlation matrix
-(Eqn.~\ref{eqn:corr}) between each column of $\mathbf{X}_i$ and each
-column of the average observations from all \textit{other}
-participants, $\bar{\mathbf{X}}_{ \backslash i}$:
+and $\mathbf{Y}_n^p(t)$ denotes the correlation matrix
+(Eqn.~\ref{eqn:corr}) between each column of $\mathbf{X}_n^p$ and each
+column of the average $\mathbf{X}_n$ from all \textit{other}
+participants, $\bar{\mathbf{X}}_n^{ \backslash p}$:
 \begin{align}
-  \bar{\mathbf{X}}_{ \backslash i} = R\left(\frac{1}{P-1}\sum_{i \in
-  \backslash i} Z\left( \mathbf{X}_i \right) \right),
+  \bar{\mathbf{X}}_n^{ \backslash p} = R\left(\frac{1}{P-1}\sum_{q \in
+  \backslash p} Z\left( \mathbf{X}_n^q \right) \right),
 \end{align}
-where $ \backslash i$ denotes the set of all participants other than
-participant $i$. In this way, the $T$ by $\left( \frac{F^2 - F}{2}
-  + F \right)$
-matrix $\bar{\mathbf{C}}$ is the time-varying extension of the ISFC
+where $\backslash p$ denotes the set of all participants other than
+participant $p$. In this way, the $T$ by $\frac{K^2 - K}{2}$ DISFC
+matrix $\bar{\mathbf{C}}$ provides a time-varying extension of the ISFC
 approach developed by \cite{SimoEtal16}.
 
-\subsection*{Higher-order correlations}
-Given a timeseries of dynamic correlations (e.g., obtained using
-Eqn.~\ref{eqn:timecorr}), higher-order correlations reflect the
-dynamic correlations between columns of $\mathbf{Y}$.  Given unlimited
-computing resources, one could use repeated applications of
-Equation~\ref{eqn:timecorr} to estimate these higher-order
-correlations (i.e., substituting in the previous output, $\mathbf{Y}$,
-for the input, $\mathbf{X}$ in the equation).  However, because each
-output $\mathbf{Y}$ has $\mathcal{O}(F^2)$ columns relative to $F$ columns in
-the input $\mathbf{X}$, the output of Equation~\ref{eqn:timecorr}
-grows with the square of the number of repeated applications (total
-cost of computing $n$\textsuperscript{th} order correlations is
-$\mathcal{O}(F^{2n})$ for $n \in \mathcal{J}, n > 0$).  When $F$ or $n$ is large,
-this approach quickly becomes intractable.
+\subsection*{Low-dimensional representations of dynamic
+  correlations}
 
-To make progress in computing $\mathbf{Y_{n+1}}$, we can approximate
-$\mathbf{Y}_n$ by computing an $\mathcal{O}(F)$-dimensional embedding of
-$\mathbf{Y}_n$, termed $\hat{\mathbf{Y}}_n$, and then we can apply
-Equation~\ref{eqn:timecorr} to $\hat{\mathbf{Y}}_n$ rather than
-directly to $\mathbf{Y}_n$.  This enables us to maintain $\mathcal{O}(n)$
-scaling with respect to $n$, rather than exponential scaling via the
-direct approach.
+Given a $T$ by $\frac{K^2 - K}{2}$ matrix of dynamic correlations,
+$\mathbf{Y}_n$, we propose two general approaches to computing a $T$
+by $K$ low-dimensional representation of these correlations,
+$\mathbf{X}_n$.  The first approach uses dimensionality reduction
+algorithms to project $\mathbf{Y}_n$ onto a $K$-dimensional space.
+The second approach uses graph-theoretic measures to characterize the
+relative positions of each feature ($k \in \left[1, ..., K \right]$)
+in the network defined by the correlation matrix at each timepoint.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.5\textwidth]{figs/methods_fig}
-  \caption{\textbf{Computing higher order correlations. } Dynamic
-    correlations
-  are computed then approximated to the same size as original data
-  using dimensionality reduction.
-  This process is repeated, and can be used to compute up to any
-  arbitrary order with compuations scaling linearly (as opposed to exponentially) with order. }
-  \label{fig:methods_fig}
-\end{figure}
-
-
-There are many possible methods for computing $\hat{\mathbf{Y}}_n$
-from $\mathbf{Y}_n$, including traditional dimensionality reduction
-approaches and graph theory based approaches as described next.  In the
-\textit{Discussion} section we elaborate on other potential approaches.
+Because $\mathbf{X}_n$ will have the same shape as the original data
+$\mathbf{X}_0$, approximating $\mathbf{Y}_n$ with a lower-dimensional
+$\mathbf{X}_n$ enables us to estimate high-order dynamic correlations
+in a scalable way.  Given a $T$ by $K$ input matrix, the output of
+Equation~\ref{eqn:timecorr} requires $\mathcal{O}(TK^2)$ space to
+store.  Repeated applications of Equation~\ref{eqn:timecorr} (i.e.,
+computing dynamic correlations between the columns of the outputted
+dynamic correlation matrix) each require exponentially more space; in
+general the $n^\mathrm{th}$-order dynamic correlations of a $T$ by $K$
+timeseries occupies $\mathcal{O}(TK^{2n})$ space.  However, when we
+approximate the output of Equation~\ref{eqn:timecorr} with a $T$ by
+$K$ matrix (as described next), it becomes feasible to compute even
+very high-order correlations in high-dimensional data.  Specifically,
+approximating the $n^\mathrm{th}$-order dynamic correlations of a $T$
+by $K$ timeseries requires only $\mathcal{O}(TK^2)$ space-- the same
+as would be required to compute first-order dynamic
+correlations. \textbf{JRM STOPPED HERE}
 
 \subsubsection*{Dimensionality reduction-based approaches to computing
-  $\hat{\mathbf{Y}}_n$}
+  $\mathbf{X}_n$}
 
 Commonly used dimensionality reduction algorithms include Principal
 Components Analysis~\citep[PCA; ][]{Pear01}, Probabilistic
@@ -388,8 +382,8 @@ that mapping either becomes less cleanly defined in
 $\hat{\mathbf{Y}}_n$ due to the reweightings and/or nonlinear
 transformations.
 
-\subsubsection*{Graph theory-based approaches to computing
-  $\hat{\mathbf{Y}}_n$}
+\subsubsection*{Graph theoretic approaches to computing
+  $\mathbf{X}_n$}
 
 Graph theoretic measures take as input a matrix of interactions (e.g.,
 using the above notation, an $F \times F$ correlation matrix or
@@ -434,6 +428,50 @@ graph-theory approach does not.  Instead, the graph-theory
 characterizes the nature and timecourse of each feature's
 \textit{participation} in the network.
 
+
+\subsection*{Higher-order correlations}
+Given a timeseries of dynamic correlations (e.g., obtained using
+Eqn.~\ref{eqn:timecorr}), higher-order correlations reflect the
+dynamic correlations between columns of $\mathbf{Y}$.  Given unlimited
+computing resources, one could use repeated applications of
+Equation~\ref{eqn:timecorr} to estimate these higher-order
+correlations (i.e., substituting in the previous output, $\mathbf{Y}$,
+for the input, $\mathbf{X}$ in the equation).  However, because each
+output $\mathbf{Y}$ has $\mathcal{O}(F^2)$ columns relative to $F$ columns in
+the input $\mathbf{X}$, the output of Equation~\ref{eqn:timecorr}
+grows with the square of the number of repeated applications (total
+cost of computing $n$\textsuperscript{th} order correlations is
+$\mathcal{O}(F^{2n})$ for $n \in \mathcal{J}, n > 0$).  When $F$ or $n$ is large,
+this approach quickly becomes intractable.
+
+To make progress in computing $\mathbf{Y_{n+1}}$, we can approximate
+$\mathbf{Y}_n$ by computing an $\mathcal{O}(F)$-dimensional embedding of
+$\mathbf{Y}_n$, termed $\hat{\mathbf{Y}}_n$, and then we can apply
+Equation~\ref{eqn:timecorr} to $\hat{\mathbf{Y}}_n$ rather than
+directly to $\mathbf{Y}_n$.  This enables us to maintain $\mathcal{O}(n)$
+scaling with respect to $n$, rather than exponential scaling via the
+direct approach.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\textwidth]{figs/methods_fig}
+  \caption{\textbf{Computing higher order correlations. } Dynamic
+    correlations
+  are computed then approximated to the same size as original data
+  using dimensionality reduction.
+  This process is repeated, and can be used to compute up to any
+  arbitrary order with compuations scaling linearly (as opposed to exponentially) with order. }
+  \label{fig:methods_fig}
+\end{figure}
+
+
+There are many possible methods for computing $\hat{\mathbf{Y}}_n$
+from $\mathbf{Y}_n$, including traditional dimensionality reduction
+approaches and graph theory based approaches as described next.  In the
+\textit{Discussion} section we elaborate on other potential approaches.
+
+
+
 \subsection*{Evaluation metrics}
 We evaluate our approach to extracting dynamic correlations and
 higher-order correlations using several metrics detailed next.  First,
@@ -441,7 +479,7 @@ we generated synthetic data using known time-varying correlations, and
 then we evaluated the fidelity with which Equation~\ref{eqn:timecorr}
 could recover those correlations (for synthetic datasets with
 different properties, and using different kernels to define the
-weights; Fig.~\ref{fig:weights}).  We then turned to a series of
+weights; Fig.~\ref{fig:kernels}).  We then turned to a series of
 analyses on a (real) neuroimaging dataset where the ground truth
 correlations were \textit{not} known.  We evaluated whether the
 recovered correlations could be used to accurately label held-out
@@ -483,7 +521,7 @@ to create a sythetic dataset with 300 total timepoints but drawn from
 
 
 We applied timecorr, using delta and gaussian (width = 10) kernels
-Fig.~\ref{fig:weights}) to each of these 
+Fig.~\ref{fig:kernels}) to each of these 
 synthetic datasets, then correlated each recovered
 correlation matrix with the ground truth.  We repeated this process 10
 times and explored how recovery varies
@@ -562,7 +600,7 @@ repeated this cross-validation process 10 times for each parameter set.
 To assess the performance of dynamic correlation recovery using
 timecorr, we varied width the kernel and the specific structure of the
 data. We applied timecorr, using delta and gaussian kernels
-Fig.~\ref{fig:weights}) to each of the following  
+Fig.~\ref{fig:kernels}) to each of the following  
 synthetic datasets: constant, random, ramping, and block.  We then correlated each recovered
 correlation matrix with the ground truth. 
 
