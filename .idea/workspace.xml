@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="417b68b5-4afb-4c94-9087-b4cb6c1ea5b8" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/intact.edge" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/intact.edge" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/intact.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/intact.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/paragraph.edge" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/paragraph.edge" afterDir="false" />
@@ -34,6 +35,7 @@
       <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_4/mean/word.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_4/mean/word.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/notebooks/neurosynth_analysis.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/neurosynth_analysis.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/paper/PlotLevelUp" beforeDir="false" afterPath="$PROJECT_DIR$/paper/PlotLevelUp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paper/main.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/paper/main.pdf" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -426,7 +428,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="72" y="23" width="1472" height="1005" extended-state="1" />
+    <frame x="72" y="23" width="1472" height="1005" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -452,27 +454,27 @@
       <window_info anchor="bottom" id="Find" order="1" weight="0.32983682" />
     </layout>
     <layout-to-restore>
-      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" weight="0.32919955" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32919955" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info id="Favorites" order="1" sideWeight="0.50291264" side_tool="true" weight="0.25845072" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4970874" weight="0.25422534" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32983682" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32919955" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32983682" />
+      <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.4986413" visible="true" weight="0.3934611" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="bottom" id="Terminal" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5013587" side_tool="true" weight="0.3934611" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32983682" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32983682" />
-      <window_info anchor="bottom" id="Python Console" order="10" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info id="Favorites" order="1" sideWeight="0.50291264" side_tool="true" weight="0.25845072" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
