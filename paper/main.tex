@@ -164,32 +164,49 @@ by high-order dynamic patterns of communication between brain
 structures.
 
 \section*{Methods}
-Our general approach to comprises four general steps.  First, we
-derive a kernel-based approach to computing dynamic pairwise
-correlations in a $T$ (timepoints) by $K$ (features) multivariate
-timeseries, $\mathbf{X}_0$.  This yields a $T$ by $\mathcal{O}(K^2)$ matrix of
-dynamic correlations, $\mathbf{Y}_1$, where each row comprises the upper
-triangle of the correlation matrix at a single timepoint, reshaped
-into a row vector (this reshaped vector is $(\frac{K^2 - K}{2})$-dimensional).  Second, we apply a dimensionality reduction step
-to project the matrix of dynamic correlations back onto a
-$K$-dimensional space.  This yields a $T$ by $K$ matrix, $\mathbf{X}_1$, that
-reflects an approximation of the dynamic correlations reflected in the
-original data.  Third, we use repeated applications of the
-kernel-based dynamic correlation step to $\mathbf{X}_n$ and the dimensionality
-reduction step to the resulting $\mathbf{Y}_{n+1}$ to estimate high-order
-dynamnic correlations.  Each application of these steps to a $T$ by
-$K$ time series $\mathbf{X}_n$ yields a $T$ by $K$ matrix, $\mathbf{X}_{n+1}$, that
-reflects the dynamic correlations between the columns of $\mathbf{X}_n$.  In
-this way, we refer to $n$ as the \textit{order} of the timeseries,
-where $\mathbf{X}_0$ (order 0) denotes the original data and $\mathbf{X}_n$ denotes
-$n^\mathrm{th}$-order dynamic correlations between the columns of
-$\mathbf{X}_0$.  Finally, we use a cross-validation--based decoding approach to
-evaluate how well information contained in a given order (or weighted
-mixture of orders) may be used to decode relevant cognitive states.
-If including a given $\mathbf{X}_n$ in the feature set yields higher
-classification accuracy on held-out data, we interpret this as
-evidence that the given cognitive states are reflected in patterns of
-$n^\mathrm{th}$-order correlations.
+Our general approach to comprises four general steps
+(Fig.~\ref{fig:methods}).  First, we derive a kernel-based approach to
+computing dynamic pairwise correlations in a $T$ (timepoints) by $K$
+(features) multivariate timeseries, $\mathbf{X}_0$.  This yields a $T$
+by $\mathcal{O}(K^2)$ matrix of dynamic correlations, $\mathbf{Y}_1$,
+where each row comprises the upper triangle of the correlation matrix
+at a single timepoint, reshaped into a row vector (this reshaped
+vector is $(\frac{K^2 - K}{2})$-dimensional).  Second, we apply a
+dimensionality reduction step to project the matrix of dynamic
+correlations back onto a $K$-dimensional space.  This yields a $T$ by
+$K$ matrix, $\mathbf{X}_1$, that reflects an approximation of the
+dynamic correlations reflected in the original data.  Third, we use
+repeated applications of the kernel-based dynamic correlation step to
+$\mathbf{X}_n$ and the dimensionality reduction step to the resulting
+$\mathbf{Y}_{n+1}$ to estimate high-order dynamnic correlations.  Each
+application of these steps to a $T$ by $K$ time series $\mathbf{X}_n$
+yields a $T$ by $K$ matrix, $\mathbf{X}_{n+1}$, that reflects the
+dynamic correlations between the columns of $\mathbf{X}_n$.  In this
+way, we refer to $n$ as the \textit{order} of the timeseries, where
+$\mathbf{X}_0$ (order 0) denotes the original data and $\mathbf{X}_n$
+denotes $n^\mathrm{th}$-order dynamic correlations between the columns
+of $\mathbf{X}_0$.  Finally, we use a cross-validation--based decoding
+approach to evaluate how well information contained in a given order
+(or weighted mixture of orders) may be used to decode relevant
+cognitive states.  If including a given $\mathbf{X}_n$ in the feature
+set yields higher classification accuracy on held-out data, we
+interpret this as evidence that the given cognitive states are
+reflected in patterns of $n^\mathrm{th}$-order correlations.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.4\textwidth]{figs/methods_fig}
+  \caption{\textbf{Estimating dynamnic high-order correlations.}  Given
+    a $T$ by $K$ matrix of multivariate timeseries data,
+    $\mathbf{Y}_n$ (where $n \in \mathbb{N}, n \geq 0$), we use
+    Equation~\ref{eqn:timecorr} to compute a timeseries of
+    $K$ by $K$ correlation matrices, $\mathbf{Y}_{n+1}$.  We then
+    approximate $\mathbf{Y}_{n+1}$ with the $T$ by $K$ matrix
+    $\mathbf{X}_{n+1}$.  This process may be repeated to scalably estimate
+    iteratively higher-order correlations in the data.}
+  \label{fig:methods}
+\end{figure}
+
 
 \subsection*{Kernel-based approach for computing dynamic correlations}
 Given a matrix of observations, we can compute the (static)
@@ -325,29 +342,11 @@ The second approach uses graph-theoretic measures to characterize the
 relative positions of each feature ($k \in \left[1, ..., K \right]$)
 in the network defined by the correlation matrix at each timepoint.
 
-Because $\mathbf{X}_n$ will have the same shape as the original data
-$\mathbf{X}_0$, approximating $\mathbf{Y}_n$ with a lower-dimensional
-$\mathbf{X}_n$ enables us to estimate high-order dynamic correlations
-in a scalable way.  Given a $T$ by $K$ input matrix, the output of
-Equation~\ref{eqn:timecorr} requires $\mathcal{O}(TK^2)$ space to
-store.  Repeated applications of Equation~\ref{eqn:timecorr} (i.e.,
-computing dynamic correlations between the columns of the outputted
-dynamic correlation matrix) each require exponentially more space; in
-general the $n^\mathrm{th}$-order dynamic correlations of a $T$ by $K$
-timeseries occupies $\mathcal{O}(TK^{2n})$ space.  However, when we
-approximate the output of Equation~\ref{eqn:timecorr} with a $T$ by
-$K$ matrix (as described next), it becomes feasible to compute even
-very high-order correlations in high-dimensional data.  Specifically,
-approximating the $n^\mathrm{th}$-order dynamic correlations of a $T$
-by $K$ timeseries requires only $\mathcal{O}(TK^2)$ space-- the same
-as would be required to compute first-order dynamic
-correlations. \textbf{JRM STOPPED HERE}
-
 \subsubsection*{Dimensionality reduction-based approaches to computing
   $\mathbf{X}_n$}
 
-Commonly used dimensionality reduction algorithms include Principal
-Components Analysis~\citep[PCA; ][]{Pear01}, Probabilistic
+The modern library of dimensionality reduction algorithms include
+Principal Components Analysis~\citep[PCA; ][]{Pear01}, Probabilistic
 PCA~\citep[PPCA; ][]{TippBish99}, Exploratory Factor
 Analysis~\citep[EFA; ][]{Spea04}, Independent Components
 Analysis~\citep[ICA; ][]{JuttHera91, ComoEtal91}, $t$-Stochastic
@@ -360,45 +359,64 @@ Latent Source Analysis (TLSA)~\cite{GersEtal11}, Dictionary
 learning~\citep{MairEtal09a, MairEtal09b}, deep
 autoencoders~\citep{HintSala06}, among others.  While complete
 characterizations of each of these algorithms is beyond the scope of
-the present manuscript, the general intuition driving these
-approaches is to compute the $\hat{\mathbf{Y}}$ with $i$ columns that
-is closest to the original $\mathbf{Y}$ with $j$ columns, and where
-(typically) $i \ll j$.  The different approaches place different
-constraints on what properties $\hat{\mathbf{Y}}$ must satisfy and
-which aspects of the data are compared (and how) to characterize the
-match between $\hat{\mathbf{Y}}$ and  $\mathbf{Y}$.
+the present manuscript, the general intuition driving these approaches
+is to compute the $T$ by $I$ matrix, $\mathbf{X}$, that is closest
+to the original $T$ by $J$ matrix, $\mathbf{Y}$, where (typically)
+$I \ll J$.  The different approaches place different constraints on
+what properties $\mathbf{X}$ must satisfy and which aspects of
+the data are compared (and how) to characterize the match between
+$\mathbf{X}$ and $\mathbf{Y}$.
 
 Applying dimensionality reduction algorithms to $\mathbf{Y}$ yields a
-$\hat{\mathbf{Y}}$ whose columns reflect weighted combinations (or
-nonlinear transformations) of the original columns of $\mathbf{Y}$.
-This has two main consequences.  First, with each repeated
-dimensionality reduction, the resulting $\hat{\mathbf{Y}}_n$ has lower
-and lower fidelity (with respect to what the ``true'' $\mathbf{Y}_n$
-might have looked like without using dimensionality reduction to
-maintain scalability).  In other words, computing $\hat{\mathbf{Y}}_n$
-is a lossy operation.  Second, whereas the columns of $\mathbf{Y}_n$
-may be mapped directly onto pairs of columns of $\mathbf{Y}_{n-1}$,
-that mapping either becomes less cleanly defined in
-$\hat{\mathbf{Y}}_n$ due to the reweightings and/or nonlinear
-transformations.
+$\mathbf{X}$ whose columns reflect weighted combinations (or nonlinear
+transformations) of the original columns of $\mathbf{Y}$.  This has
+two main consequences.  First, with each repeated dimensionality
+reduction, the resulting $\mathbf{X}_n$ has lower and lower fidelity
+(with respect to what the ``true'' $\mathbf{Y}_n$ might have looked
+like without using dimensionality reduction to maintain scalability).
+In other words, computing $\mathbf{X}_n$ is a lossy operation.
+Second, whereas each columns of $\mathbf{Y}_n$ may always be mapped
+directly onto specific pairs of columns of $\mathbf{Y}_{n-1}$, the
+columns of $\mathbf{X}_n$ reflect weighted combinations and/or
+nonlinear transformations of the columns of $\mathbf{Y}_n$.  Many
+dimensionality reduction algorithms are invertable (or approximately
+invertable).  However, attempting to map a given $\mathbf{X}_n$ back
+onto the original feature space of $\mathbf{Y}_0$ will usually require
+$\mathcal{O}(TK^{2n})$ space and therefore quickly becomes intractable
+as $n$ or $K$ grow large.
 
 \subsubsection*{Graph theoretic approaches to computing
   $\mathbf{X}_n$}
+The above dimensionality reduction approaches to approximating a given
+$\mathbf{Y}_n$ with a lower-dimensional $\mathbf{X}_n$ preserve a
+(potentially recombined and transformed) mapping back to the original
+data in $\mathbf{Y}_0$.  We also explore graph theoretic approaches
+that forgo a preserved mapping back to the original data in favor of
+preserving each feature's relative \textit{position} in the broader
+network of interactions and connections.  To illustrate the
+distinction between the two general approaches we explore, suppose a
+network comprises nodes $A$, $B$, and $C$.  If $A$ and $B$ exhibit
+uncorrelated activity patterns, the functional connection between
+them will be (by definition) close to 0.  However, if $A$ and $B$ each
+interact with $C$ in similar ways, we might attempt to capture those
+similarities using a measure that reflects the how $A$ and $B$
+interact in the network.
 
-Graph theoretic measures take as input a matrix of interactions (e.g.,
-using the above notation, an $F \times F$ correlation matrix or
-binarized correlation matrix reconstituded from a single timepoint's
-row of $\mathbf{Y}$) and return as output a set of $F$ measures
-describing how each node (feature) sits within that interactions
-matrix with respect to the rest of the population.  Common measures
-include betweeness centrality~\citep[the proportion of shortest paths
-between each pair of nodes in the population that involves the given
-node in question; e.g., ][]{Newm05, OpsaEtal10, Bart04, GeisEtal08,
-  Free77}; diversity and dissimilarity~\citep[characterizations of how
-differently connected a given node is from others in the population;
-e.g., ][]{Rao82, Lin09, RicoSzei06}; Eigenvector centrality and
-pagerank centrality~\citep[measures of how influential a given node is
-within the broader network; e.g., ][]{Newm08, Bona07, LohmEtal10,
+In general, graph theoretic measures take as input a matrix of
+interactions (e.g., using the above notation, an $K$ by $K$
+correlation matrix or binarized correlation matrix reconstituded from
+a single timepoint's row of $\mathbf{Y}$) and return as output a set
+of $K$ measures describing how each node (feature) sits within that
+correlation matrix with respect to the rest of the population.  Widely
+used measures include betweeness centrality~\citep[the proportion of
+shortest paths between each pair of nodes in the population that
+involves the given node in question; e.g., ][]{Newm05, OpsaEtal10,
+  Bart04, GeisEtal08, Free77}; diversity and
+dissimilarity~\citep[characterizations of how differently connected a
+given node is from others in the population; e.g., ][]{Rao82, Lin09,
+  RicoSzei06}; Eigenvector centrality and pagerank
+centrality~\citep[measures of how influential a given node is within
+the broader network; e.g., ][]{Newm08, Bona07, LohmEtal10,
   HaluEtal13}; transfer entropy and flow coefficients~\citep[a measure
 of how much information is flowing from a given node to other nodes in
 the network; e.g., ][]{HoneEtal07, Schr00}; $k$-coreness
@@ -409,66 +427,40 @@ close neighbors in the network; e.g., ][]{RubiSpor10}; participation
 coefficient~\citep[a measure of the diversity of a node's connections
 to different sub-graphs in the network; e.g., ][]{RubiSpor10}; and
 sub-graph centrality~\citep[a measure of a node's participation in all
-of the network's sub-graphs; e.g., ][]{EstrRodr05}.
+of the network's sub-graphs; e.g., ][]{EstrRodr05}; among others.
 
-As an alternative to the above dimensionality reduction approach to
-embedding $\mathbf{Y}_n$ in a lower-dimensional space, but still
-allowing for scalable explorations of higher-order structure in the
-data, we also explore using the above graph theoretic measures as a
-means of obtaining $\hat{\mathbf{Y}}_n$.  In particular: for a given
-graph theoretic measure, $\eta: \mathcal{R}^{F \times F} \rightarrow
-\mathcal{R}^F$, we can use $\eta$ to tranform each row of
-$\mathbf{Y}_n$ in a way that characterizes the corresponding
-graph-theoretic properties of each column.  Whereas the dimensionality
-reduction approach to computing $\hat{\mathbf{Y}}_n$ is lossy,
-the graph-theory approach is lossless.  However, whereas the
-dimensionality reduction approach maintains ties (direct or indirect)
-to the original activity patterns reflected in $\mathbf{Y}_{n-1}$, the
-graph-theory approach does not.  Instead, the graph-theory
-characterizes the nature and timecourse of each feature's
-\textit{participation} in the network.
+For a given graph theoretic measure,
+$\eta: \mathcal{R}^{K \times K} \rightarrow \mathbb{R}^K$, we can use
+$\eta$ to tranform each row of $\mathbf{Y}_n$ in a way that
+characterizes the corresponding graph-theoretic properties of each
+column.  This results in a new $T$ by $K$ matrix, $\mathbf{X}_n$, that
+reflects how the features reflected in the columns of $\mathbf{Y}_n$
+participate in the network during each timepoint (row).
 
 
 \subsection*{Higher-order correlations}
-Given a timeseries of dynamic correlations (e.g., obtained using
-Eqn.~\ref{eqn:timecorr}), higher-order correlations reflect the
-dynamic correlations between columns of $\mathbf{Y}$.  Given unlimited
-computing resources, one could use repeated applications of
-Equation~\ref{eqn:timecorr} to estimate these higher-order
-correlations (i.e., substituting in the previous output, $\mathbf{Y}$,
-for the input, $\mathbf{X}$ in the equation).  However, because each
-output $\mathbf{Y}$ has $\mathcal{O}(F^2)$ columns relative to $F$ columns in
-the input $\mathbf{X}$, the output of Equation~\ref{eqn:timecorr}
-grows with the square of the number of repeated applications (total
-cost of computing $n$\textsuperscript{th} order correlations is
-$\mathcal{O}(F^{2n})$ for $n \in \mathcal{J}, n > 0$).  When $F$ or $n$ is large,
-this approach quickly becomes intractable.
 
-To make progress in computing $\mathbf{Y_{n+1}}$, we can approximate
-$\mathbf{Y}_n$ by computing an $\mathcal{O}(F)$-dimensional embedding of
-$\mathbf{Y}_n$, termed $\hat{\mathbf{Y}}_n$, and then we can apply
-Equation~\ref{eqn:timecorr} to $\hat{\mathbf{Y}}_n$ rather than
-directly to $\mathbf{Y}_n$.  This enables us to maintain $\mathcal{O}(n)$
-scaling with respect to $n$, rather than exponential scaling via the
-direct approach.
+Because $\mathbf{X}_n$ has the same shape as the original data
+$\mathbf{X}_0$, approximating $\mathbf{Y}_n$ with a lower-dimensional
+$\mathbf{X}_n$ enables us to estimate high-order dynamic correlations
+in a scalable way.  Given a $T$ by $K$ input matrix, the output of
+Equation~\ref{eqn:timecorr} requires $\mathcal{O}(TK^2)$ space to
+store.  Repeated applications of Equation~\ref{eqn:timecorr} (i.e.,
+computing dynamic correlations between the columns of the outputted
+dynamic correlation matrix) each require exponentially more space; in
+general the $n^\mathrm{th}$-order dynamic correlations of a $T$ by $K$
+timeseries occupies $\mathcal{O}(TK^{2n})$ space.  However, when we
+approximate or summarize the output of Equation~\ref{eqn:timecorr} with a $T$ by
+$K$ matrix (as described above), it becomes feasible to compute even
+very high-order correlations in high-dimensional data.  Specifically,
+approximating the $n^\mathrm{th}$-order dynamic correlations of a $T$
+by $K$ timeseries requires only $\mathcal{O}(TK^2)$ additional space--
+the same as would be required to compute first-order dynamic
+correlations. In other words, the space required to store $n+1$
+multivariate timeseries reflecting up to $n^\mathrm{th}$ order
+correlations in the original data scales linearly with $n$ using our
+approach (Fig.~\ref{fig:methods}). \textbf{JRM STOPPED HERE}
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.5\textwidth]{figs/methods_fig}
-  \caption{\textbf{Computing higher order correlations. } Dynamic
-    correlations
-  are computed then approximated to the same size as original data
-  using dimensionality reduction.
-  This process is repeated, and can be used to compute up to any
-  arbitrary order with compuations scaling linearly (as opposed to exponentially) with order. }
-  \label{fig:methods_fig}
-\end{figure}
-
-
-There are many possible methods for computing $\hat{\mathbf{Y}}_n$
-from $\mathbf{Y}_n$, including traditional dimensionality reduction
-approaches and graph theory based approaches as described next.  In the
-\textit{Discussion} section we elaborate on other potential approaches.
 
 
 
@@ -783,7 +775,7 @@ to inferring high-order network dynamics from timeseries data.
 
 One challenge in studying dynamic interactions is the
 computational resources required to calculate higher-order correlations. 
-We developed a computationally tractable model of network dynamics (Fig.~\ref{fig:methods_fig}) that takes in a feature
+We developed a computationally tractable model of network dynamics (Fig.~\ref{fig:methods}) that takes in a feature
 timeseries and outputs approximated first-order dynamics (i.e.,
 dynamic functional correlations), second-order dynamics
 (reflecting homologous networks that dynamically form and disperse),
@@ -825,7 +817,7 @@ How can we better understand how brain patterns change over
 time? How can we quantify the potential network dynamics that might be
 driving these changes? One way to judge the techniques of the future is
 to look at the trajectory of the fMRI field so far has taken so far
-(Fig.~\ref{fig:methods_fig}).  The field started with 
+(Fig.~\ref{fig:methods}).  The field started with 
 univariate activation, measuring the average activity for each voxel.
 Analyses of multivariate activation followed, looking at spatial patterns of
 activity over voxels. Next, correlations of activity were explored, first
