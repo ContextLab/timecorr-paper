@@ -461,8 +461,37 @@ multivariate timeseries reflecting up to $n^\mathrm{th}$ order
 correlations in the original data scales linearly with $n$ using our
 approach (Fig.~\ref{fig:methods}). \textbf{JRM STOPPED HERE}
 
+\subsection*{Data}
+We examined two types of data: synthetic data and human functional
+neuroimaging data.  We constructed and leveraged the synthetic data to
+evaluate our general approach.  Specifically, we tested how well
+Equation~\ref{eqn:timecorr} could be used to recover known dynamic
+correlations using different choices of kernel ($\kappa$;
+Fig.~\ref{fig:kernels}), for each of several synthetic datasets that
+exhibited different temporal properties.  We applied our approach to a
+functional neuroimaging dataset to test the hypothesis that ongoing
+cognitive processing is reflected in high-order dynamic correlations.
+We used an across-participant classification test to estimate whether
+dynamic correlations of different orders contain information about
+which timepoint in a story participants were listening to.
 
+\subsubsection*{Synthetic data}
+\paragraph*{Constant.}
+\paragraph*{Random.}
+\paragraph*{Ramping.}
+\paragraph*{Event.}
 
+\subsubsection*{Functional neuroimaging data collected during story
+  listening}
+
+\subsection*{Estimating high-order correlations in neuroimaging data}
+
+\subsection*{Temporal decoding}
+\subsubsection*{Forward inference, cross validation, and feature selection}
+\subsubsection*{Identifying robust decoding results}
+\subsubsection*{Reverse inference}
+
+\textbf{JRM OUTLINE STOPPED HERE}
 
 \subsection*{Evaluation metrics}
 We evaluate our approach to extracting dynamic correlations and
@@ -725,26 +754,54 @@ eigenvectory centrality breaks the immediate link with specific brain
 areas and instead characterizes the position of the nodes in the
 network that are similar over time.
 
-We found for both PCA and eigenvector centrality, during the intact condition in the
-experiment, classifiers that incorporated higher-order correlations
-yielded consistently higher accuracy than classifiers trained only on
-lower-order patterns (Fig.~\ref{fig:decoding_level},  a.\&d.).  We plot
-the average correlations for up to the fourth order for the intact
-condition (Fig.~\ref{fig:brain_plots}) representing the degree of
-agreement by location pair over time.  By
-contrast, we found that incorporating higher-order (greater than first
-order) correlations did
-not further improve decoding accuracy for the other listening
-conditions or rest condition.  This suggests
-that the cognitive processing that supported the most cognitively rich
-condition
-involved higher-order network dynamics. 
+We found for both PCA and eigenvector centrality, during the intact
+condition in the experiment, classifiers that incorporated
+higher-order correlations yielded consistently higher accuracy than
+classifiers trained only on lower-order patterns
+(Fig.~\ref{fig:decoding_level}, a.\&d.).  We plot the average
+correlations for up to the fourth order for the intact condition
+(Fig.~\ref{fig:brain_plots}) representing the degree of agreement by
+location pair over time.  By contrast, we found that incorporating
+higher-order (greater than first order) correlations did not further
+improve decoding accuracy for the other listening conditions or rest
+condition.  This suggests that the cognitive processing that supported
+the most cognitively rich condition involved higher-order network
+dynamics.
 
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Discussion}
+
+\begin{itemize}
+  \item Methods advances: kernel-based dynamic correlations, extension to
+    dynamic ISFC, efficient method for estimating high-order dynamic
+    correlations, identifying robust results by averaging
+  \item Discoveries:
+    \begin{itemize}
+      \item Dimensionality reduction and graph theoretic approaches
+        give different insights into the data and identify different
+        patterns as being relevant to cognition (different peak
+        orders).
+        \item An insight common to both approaches is that high-order
+          (greater than first order) dynamic correlations are
+          informative about ongoing high-level cognitive processing.
+          As the level of cognitive processing decreases, cognition is
+          reflected by lower-order correlations.
+        \item Correlations at different orders are also associated
+          with different networks of brain regions.  However, which
+          networks reflect which types of interactions depends on the
+          current task.  In general, lower order correlations during
+          auditory listening reflect processing of low-level
+          (auditory) features; mid-order correlations reflect speech
+          and linguistic processing; higher-order correlations reflect
+          across-sensory integration (e.g. ties to visual areas) and
+          cognitive control areas.  This hierarchy dissolves during
+          lower-order cognitive processing.
+      \end{itemize}
+  \end{itemize}
+
 
 \begin{figure}
   \centering
