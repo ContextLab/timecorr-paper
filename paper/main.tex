@@ -143,10 +143,10 @@ histories of different features.
 
 We validated our approach using synthetic data where the underlying
 correlations were known.  We then applied our framework to a
-neuroimaging dataset collected as 125 participants listened to either
-an audio recording of a ten-minute story or a temporally scrambled
-version of the story, or underwent a resting state
-scan~\citep{SimoEtal16}.  We used a subset of the data to train
+neuroimaging dataset collected as participants
+listened to either an audio recording of a ten-minute story or a
+temporally scrambled version of the story, or underwent a resting
+state scan~\citep{SimoEtal16}.  We used a subset of the data to train
 across-participant classifiers to decode listening times using a blend
 of neural features (comprising neural activity patterns, as well as
 different orders of correlations between those patterns that were
@@ -154,14 +154,13 @@ inferred using our computational framework).  We found that both the
 PCA-based and eigenvector centrality-based approaches yielded neural
 patterns that could be used to decode accurately.  Both approaches
 also yielded the best decoding accuracy for data collected during
-(intact) story listening when high-order (PCA:
-second-order; eigenvector centrality: fourth-order) dynamic
-correlation patterns were included as features.  When we trained
-classifiers on the scambled stories or resting state data, only
-lower-order dynamic patterns were informative to the decoders.  Taken
-together, our results indicate that high-level cognition is supported
-by high-order dynamic patterns of communication between brain
-structures.
+(intact) story listening when high-order (PCA: second-order;
+eigenvector centrality: fourth-order) dynamic correlation patterns
+were included as features.  When we trained classifiers on the
+scambled stories or resting state data, only lower-order dynamic
+patterns were informative to the decoders.  Taken together, our
+results indicate that high-level cognition is supported by high-order
+dynamic patterns of communication between brain structures.
 
 \section*{Methods}
 Our general approach to comprises four general steps
@@ -203,8 +202,10 @@ reflected in patterns of $n^\mathrm{th}$-order correlations.
     $K$ by $K$ correlation matrices, $\mathbf{Y}_{n+1}$.  We then
     approximate $\mathbf{Y}_{n+1}$ with the $T$ by $K$ matrix
     $\mathbf{X}_{n+1}$.  This process may be repeated to scalably estimate
-    iteratively higher-order correlations in the data.}
-  \label{fig:methods}
+    iteratively higher-order correlations in the data.  Note that the
+    transposes of $\mathbf{Y}_n$ and $\mathbf{X}_{n+1}$ are displayed
+    in the figure for compactness.
+  \label{fig:methods}}
 \end{figure}
 
 
@@ -430,7 +431,7 @@ sub-graph centrality~\citep[a measure of a node's participation in all
 of the network's sub-graphs; e.g., ][]{EstrRodr05}; among others.
 
 For a given graph theoretic measure,
-$\eta: \mathcal{R}^{K \times K} \rightarrow \mathbb{R}^K$, we can use
+$\eta: \mathbb{R}^{K \times K} \rightarrow \mathbb{R}^K$, we can use
 $\eta$ to tranform each row of $\mathbf{Y}_n$ in a way that
 characterizes the corresponding graph-theoretic properties of each
 column.  This results in a new $T$ by $K$ matrix, $\mathbf{X}_n$, that
@@ -459,7 +460,7 @@ the same as would be required to compute first-order dynamic
 correlations. In other words, the space required to store $n+1$
 multivariate timeseries reflecting up to $n^\mathrm{th}$ order
 correlations in the original data scales linearly with $n$ using our
-approach (Fig.~\ref{fig:methods}). \textbf{JRM STOPPED HERE}
+approach (Fig.~\ref{fig:methods}).
 
 \subsection*{Data}
 We examined two types of data: synthetic data and human functional
@@ -476,10 +477,73 @@ dynamic correlations of different orders contain information about
 which timepoint in a story participants were listening to.
 
 \subsubsection*{Synthetic data}
-\paragraph*{Constant.}
-\paragraph*{Random.}
-\paragraph*{Ramping.}
-\paragraph*{Event.}
+We constructed a total of 40 multivariate timeseries, collectively
+reflecting a total of 4 different patterns of dynamic correlations
+(i.e., 10 datasets reflecting each type of dynamic pattern).  Each
+timeseries comprised 50 features (dimensions) that varied over 300
+timepoints.  The observations at each timepoint were drawn from a
+zero-mean multivariate Gaussian distribution with a covariance matrix
+defined for each timepoint as described below.  We drew the observations at
+each timepoint independently from the draws at all other timepoints;
+in other words, for each observation $s_t \sim
+\mathcal{N}\left(\mathbf{0}, \mathbf{\Sigma}_t\right)$ at timepoint $t$, $p(s_t) = p(s_t | p_{\backslash t})$.
+
+\paragraph*{Constant.}  We generated data with stable underlying
+correlations to evaluate how Equation~\ref{eqn:timecorr} characterized
+correlation ``dynamics'' when the ground truth correlations were
+static.  We constructed 10 multivariate timeseries, whose observations
+were each drawn from a single (stable) Gaussian distribution.  For
+each dataset, we constructed a random covariance matrix,
+$\mathbf{\Sigma}_m$:
+\begin{align}
+  \mathbf{C}(i, j) &\sim \mathcal{N}(0, 1)\\
+  \mathbf{\Sigma}_m &= \mathbf{C}
+                                          \mathbf{C}^\top~\mathrm{, where}\label{eqn:randcorr}
+  \end{align}
+  $i, j \in \left[1, 2, ..., 50 \right]$.  In other words, all of the
+  observations (for each of the 300 timepoints) within each dataset
+  were drawn from a multivariate Gaussian distribution with the same
+  covariance matrix, and the 10 datasets each used a different
+  covariance matrix.
+  
+  \paragraph*{Random.}  We generated a second set of 10 synthetic
+  datasets whose observations at each timepoint were drawn from a
+  Gaussian distribution with a new randomly constructed (using
+  Eqn.~\ref{eqn:randcorr}) covariance matrix.  Because each
+  timepoint's covariance matrix was drawn independently of the
+  covariance matrices for all other timepoints, these datasets
+  provided a test of reconstruction accuracy in the absence of any
+  meaningful underlying temporal structure in the dynamic correlations
+  underlying the data.
+  
+  \paragraph*{Ramping.}  We generated a third set of 10 synthetic
+  datasets whose underlying correlations changed gradually over time.
+  For each dataset, we constructed two \textit{anchor} correlation
+  matrices using Equation~\ref{eqn:randcorr},
+  $\mathbf{\Sigma}_{\mathrm{start}}$ and
+  $\mathbf{\Sigma}_{\mathrm{end}}$.  For each of the 300 timepoints in
+  each dataset, we drew the observations from a multivariate Gaussian
+  distribution whose covariance matrix at each timepoint $t \in
+  \left[0, ..., 299\right]$ was given by
+  \begin{align}
+    \mathbf{\Sigma}_t = \left( 1 - \frac{1 - t}{299} \right)
+    \mathbf{\Sigma}_{\mathrm{start}} + \frac{t}{299}\mathbf{\Sigma}_{\mathrm{end}}.
+  \end{align}
+The gradually changing correlations underlying these datasets allow us
+to evaluate the recovery of dynamic correlations when each timepoint's
+correlation matrix is unique (as in the random datasets), but where
+the correlation dynamics are structured.
+  
+\paragraph*{Event.} We generated a fourth set of 10 synthetic datasets
+whose underlying correlation matrices exhibited prolonged intervals of
+stability, intersperced with abrupt changes.  For each dataset, we
+used Equation~\ref{fig:randcorr} to generate 5 random covariance
+matrices.  We constructed a timeseries where each set of 60 consecutive samples
+was drawn from a Gaussian with the same covariance matrix.  These
+datasets were intended to simulate a system that undergoes occasional
+abrupt state changes.
+
+\textbf{JRM STOPPED HERE}
 
 \subsubsection*{Functional neuroimaging data collected during story
   listening}
