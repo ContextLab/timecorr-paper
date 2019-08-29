@@ -7,6 +7,8 @@ cmap = 'autumn_r'
 
 neurosynth_dir ='../figs/neurosynth_data'
 
+fig_dir = '../figs'
+
 bo_dir = os.path.join(neurosynth_dir, 'bos')
 
 n_f_dir = os.path.join(neurosynth_dir, 'figs')
@@ -72,4 +74,4 @@ for c in conditions:
     b_obj_proj_right.project_sources(s_obj_all, clim=(0, 4), cmap=cmap)
     sc.add_to_subplot(b_obj_proj_right, row=0, col=3, rotate='right', use_this_cam=True)
 
-    sc.screenshot(os.path.join(n_f_dir, f'{c}_largest_abs.png'), transparent=True)
+    sc.screenshot(os.path.join(fig_dir, f'{c}_largest_abs.png'), transparent=True)
