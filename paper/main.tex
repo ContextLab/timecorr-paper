@@ -313,7 +313,7 @@ reflected in the multi-participant dataset at a given timepoint $t$
 using:
 \begin{align}
 \bar{\mathbf{C}}(t) = M\left(R\left(\frac{1}{2P} \sum_{p=1}^P
-  Z\left(Y_n^p(t)\right)^\mathrm{T} + Z\left(Y_n^p(t)\right)\right)\right),
+  Z\left(Y_n^p(t)\right)^\mathrm{T} + Z\left(Y_n^p(t)\right)\right)\right),\label{eqn:disfc}
 \end{align}
 where $M$ extracts and vectorizes the diagonal and upper triangle of a symmetric
 matrix, $Z$ is the Fisher $z$-transformation~\citep{Zar10}:
@@ -562,19 +562,22 @@ paragraphs in a randomized order and 36 in the word-scrambled
 condition listened to the words in a randomized order), or lay resting
 with their eyes open in the scanner (rest condition; 36
 participants).  Full neuroimaging details may be found in the original
-paper~\citep{SimoEtal16}.
+paper for which the data were collected~\citep{SimoEtal16}.
 
-Following our prior related work, we used hierarchical topographic
-factor analysis~\citep{MannEtal18} to derive a compact representation
-of the data.  In brief, this approach approximates the timeseries of
-voxel activations (44,415 voxels) using a much smaller number of
-radial basis function nodes (in this case 700 nodes).  This provides a
-convenient representation for examining full-brain network dynamics.
-All of the analyses we carried out on the neuroimaging dataset were
-performed in this lower-dimensional space.  Code for carrying out
-hierarchical topographic factor analyses on fMRI data may be found as
-part of the BrainIAK toolbox~\citep{brainiak}, which may be downloaded
-at \href{https://brainiak.org/}{brainiak.org}.
+\paragraph{Hierarchical topographic factor analysis (HTFA).}
+Following our prior related work, we used HTFA~\citep{MannEtal18} to
+derive a compact representation of the data.  In brief, this approach
+approximates the timeseries of voxel activations (44,415 voxels) using
+a much smaller number of radial basis function nodes (in this case 700
+nodes).  This provides a convenient representation for examining
+full-brain network dynamics.  All of the analyses we carried out on
+the neuroimaging dataset were performed in this lower-dimensional
+space.  In other words, each participant's data matrix,
+$\mathbf{Y}_0$, was a number-of-timepoints by 700 matrix of
+HTFA-derived factor weights (where the row and column labels were
+matched across participants).  Code for carrying out HTFA on fMRI data
+may be found as part of the BrainIAK toolbox~\citep{brainiak}, which
+may be downloaded at \href{https://brainiak.org/}{brainiak.org}.
 
 \subsection*{Temporal decoding}
 We sought to identify neural patterns that reflected participants'
@@ -591,58 +594,59 @@ used an across-participants temporal decoding test developed by
 patterns reflected ongoing stimulus-driven cognitive processing across
 people.  The approach entails using a subset of the data to train a
 classifier to decode which stimulus timepoint (i.e., moment in the
-story participants listened to).  We use decoding accuracy on held-out
-data (from held-out participants) as a proxy for the extent to which
-the inputted neural patterns reflected stimulus-driven cognitive
-processing in a similar way across individuals.  \textbf{JRM STOPPED HERE}
+story participants listened to).  We use decoding (forward inference)
+accuracy on held-out data, from held-out participants, as a proxy for
+the extent to which the inputted neural patterns reflected
+stimulus-driven cognitive processing in a similar way across
+individuals.
 
-\subsubsection*{Forward inference}
+\subsubsection*{Forward inference and decoding accuracy}
+We used an across-participants correlation-based classifier to decode
+which stimulus timepoint matched a given neural pattern.  We first
+divided the participants into two groups: a template group,
+$\mathcal{G}_{\mathrm{template}}$, and a to-be-decoded group,
+$\mathcal{G}_{\mathrm{decode}}$.  We used Equation~\ref{eqn:disfc} to
+compute a DISFC matrix for each group
+($\bar{\textbf{C}}_{\mathrm{template}}$ and
+$\bar{\textbf{C}}_{\mathrm{decode}}$, respectively).  We then
+correlated the rows of $\bar{\textbf{C}}_{\mathrm{template}}$ and
+$\bar{\textbf{C}}_{\mathrm{decode}}$ to form a number-of-timepoints by
+number-of-timepoints decoding matrix, $\mathbf{\Lambda}$.  In this
+way, the rows of $\mathbf{\Lambda}$ reflected timepoints from the
+template group, while the columns reflected timepoints from the
+to-be-decoded group.  We assigned temporal labels to each row
+$\bar{\textbf{C}}_{\mathrm{decode}}$ using the row of
+$\bar{\textbf{C}}_{\mathrm{template}}$ to which it was most highly
+correlated.  We then repeated this decoding procedure, but using
+$\mathcal{G}_{\mathrm{decode}}$ as the template group and
+$\mathcal{G}_{\mathrm{template}}$ as the to-be-decoded group.  Given
+the true timepoint labels (for each group), we defined the
+\textit{decoding accuracy} as the proportion of correctly decoded
+timepoints, across both groups.
 
-
-\subsubsection*{Cross validation}
 \subsubsection*{Feature selection}
+We sought to examine which types of neural features (i.e.,
+activations, first-order dynamic correlations, and higher-order
+dynamic correlations) were informative to the temporal decoders.
+Using the notation above, these features correspond to $\mathbf{Y}_0$,
+$\mathbf{X}_1$, $\mathbf{X}_2$, $\mathbf{X}_3$, and so on (we examined
+up to tenth order correlations, or $\mathbf{X}_{10}$).  Separately for
+each of these types of features, we \textbf{JRM STOPPED HERE}--
+compute lambda, then compute optimal weighted mix using half of the
+template data, then decode the to-be-decoded data using those weights.
+
+From below: quasi-Newton method of Broyden, Fletcher, Goldfarb, and Shanno (BFGS
+~\citep{NoceWrig06}) for optimization. We repeated this
+cross-validation process 10 times for each parameter set.
+
 \subsubsection*{Identifying robust decoding results}
+Params: Gaussian, Laplace, mexican hat kernels.  Widths of 5, 10, 20,
+and 50.
+
 \subsubsection*{Reverse inference}
-
-\textbf{JRM OUTLINE STOPPED HERE}
-
-
-
-\subsubsection*{Timepoint decoding}
-
-Prior work has shown participants share similar neural responses to
-richly structured stimuli when compared to stimuli with less
-structure.  To assess whether the moment-by-moment higher order
-correlations were reliably preserved across participants, we used
-inter-subject functional connectivity (ISFC) to isolate the
-time-varying correlational structure (functional connectivity patterns
-that were specifically driven by the story participants listened to.
-Following the analyses conducted by (HTFA)~\cite{MannEtal18}, we first
-applied \textit{hierarchical topographic factor analysis} (HTFA) to
-the fMRI datasets to obtain a time series of 700 node activities for
-every participant.  We then computed the dynamic weighted ISFC using a
-range of kernels and widths.  Specifically, we used Gaussian, Laplace,
-and mexican hat kernels, as well as widths of 5, 10, 20, and 50.  We
-then approximated these dynamic correlation using two reduction measures, PCA and eigenvector centrality, and computed the dynamic weighted ISFC on the approximations.  We repeated this process up to 10th order approximated correlations.  
-
-To assess decoding accuracy, we randomly divided participants for each
-stimulus into training and testing groups. For the zeroth order, we
-computed the mean factor activity for each group.  For all subsequent
-orders up to the tenth order, we computed the mean approximated
-dynamic ISFC of factor activity for each group. To assess how
-additional higher-order correlations contribute to decoding accuracy,
-for each order we included a weighted-mixutre (described below) of the activity patterns of all
-previous orders.  For each group of participants in turn, we compared these activity patterns (using Pearson correlations) to estimate the story times each pattern corresponded to. Specifically, we asked, for each timepoint: what are the correlations
-between the first group's and second group's activity patterns at each
-order. We note that the decoding test we used is a conservative in which we count a timepoint label as incorrect if it is not an exact match.
-
-For each order we obtained the weighted-mixture of the correlation
-matrices for the current order and all previous orders using mixing parameter, $\phi$, where $0 <\phi< 1$ reflects a
-weighted mixture of order based decoding Fig.~\ref{fig:decoding_level}
-Panel c. ). We calculated  $\phi$, by
-subdividing the training group and using the quasi-Newton method of
-Broyden, Fletcher, Goldfarb, and Shanno (BFGS ~\citep{NoceWrig06}) for optimization. We
-repeated this cross-validation process 10 times for each parameter set. 
+top 10 strongest correlations for each level; identify endpoint nodes
+(RBFs); make map (threshold at $\theta$-- \textbf{JRM NOTE: what
+  threshold did you use, Lucy?}); decode using neurosynth (cite).
 
 
 

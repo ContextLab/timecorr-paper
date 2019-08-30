@@ -1,5 +1,56 @@
 
 
+
+
+\subsubsection*{Timepoint decoding}
+
+Prior work has shown participants share similar neural responses to
+richly structured stimuli when compared to stimuli with less
+structure.  To assess whether the moment-by-moment higher order
+correlations were reliably preserved across participants, we used
+inter-subject functional connectivity (ISFC) to isolate the
+time-varying correlational structure (functional connectivity patterns
+that were specifically driven by the story participants listened to.
+Following the analyses conducted by (HTFA)~\cite{MannEtal18}, we first
+applied \textit{hierarchical topographic factor analysis} (HTFA) to
+the fMRI datasets to obtain a time series of 700 node activities for
+every participant.  We then computed the dynamic weighted ISFC using a
+range of kernels and widths.  Specifically, we used Gaussian, Laplace,
+and mexican hat kernels, as well as widths of 5, 10, 20, and 50.  We
+then approximated these dynamic correlation using two reduction measures, PCA and eigenvector centrality, and computed the dynamic weighted ISFC on the approximations.  We repeated this process up to 10th order approximated correlations.  
+
+To assess decoding accuracy, we randomly divided participants for each
+stimulus into training and testing groups. For the zeroth order, we
+computed the mean factor activity for each group.  For all subsequent
+orders up to the tenth order, we computed the mean approximated
+dynamic ISFC of factor activity for each group. To assess how
+additional higher-order correlations contribute to decoding accuracy,
+for each order we included a weighted-mixutre (described below) of the activity patterns of all
+previous orders.  For each group of participants in turn, we compared these activity patterns (using Pearson correlations) to estimate the story times each pattern corresponded to. Specifically, we asked, for each timepoint: what are the correlations
+between the first group's and second group's activity patterns at each
+order. We note that the decoding test we used is a conservative in which we count a timepoint label as incorrect if it is not an exact match.
+
+For each order we obtained the weighted-mixture of the correlation
+matrices for the current order and all previous orders using mixing parameter, $\phi$, where $0 <\phi< 1$ reflects a
+weighted mixture of order based decoding Fig.~\ref{fig:decoding_level}
+Panel c. ). We calculated  $\phi$, by
+subdividing the training group and using the quasi-Newton method of
+Broyden, Fletcher, Goldfarb, and Shanno (BFGS ~\citep{NoceWrig06}) for optimization. We
+repeated this cross-validation process 10 times for each parameter set. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \subsection*{Evaluation metrics}
 We evaluate our approach to extracting dynamic correlations and
 higher-order correlations using several metrics detailed next.  First,
