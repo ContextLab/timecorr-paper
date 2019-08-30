@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="417b68b5-4afb-4c94-9087-b4cb6c1ea5b8" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/code/figs/PCA_norm_ave_level_analysis_optimized_param_search.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/PCA_norm_ave_level_analysis_optimized_param_search.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/PCA_rel_ave_level_analysis_optimized_param_search.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/PCA_rel_ave_level_analysis_optimized_param_search.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/PCA_z_ave_level_analysis_optimized_param_search.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/PCA_z_ave_level_analysis_optimized_param_search.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/intact.edge" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/intact.edge" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/intact.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/intact.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/paragraph.edge" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_1/mean/paragraph.edge" afterDir="false" />
@@ -32,7 +35,17 @@
       <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_4/mean/rest.edge" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_4/mean/rest.edge" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_4/mean/word.edge" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_4/mean/word.edge" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_4/mean/word.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/corrs/mean_corrs/level_4/mean/word.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/eigenvector_norm_ave_level_analysis_optimized_param_search.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/eigenvector_norm_ave_level_analysis_optimized_param_search.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/eigenvector_rel_ave_level_analysis_optimized_param_search.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/eigenvector_rel_ave_level_analysis_optimized_param_search.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/eigenvector_z_ave_level_analysis_optimized_param_search.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/eigenvector_z_ave_level_analysis_optimized_param_search.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/stats_heatmaps_PCA.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/stats_heatmaps_PCA.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figs/stats_heatmaps_eigenvector.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/code/figs/stats_heatmaps_eigenvector.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/notebooks/decode_levels.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/decode_levels.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/scripts/animate_largest.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/scripts/animate_largest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/paper/PlotLevelUp" beforeDir="false" afterPath="$PROJECT_DIR$/paper/PlotLevelUp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paper/figs/decode_level.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/paper/figs/decode_level.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paper/figs/stats_heatmaps.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/paper/figs/stats_heatmaps.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paper/figs/stats_heatmaps_horiz.pdf" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -55,6 +68,7 @@
     <SUITE FILE_PATH="coverage/timecorr_paper$pieman_pca_analysis.coverage" NAME="pieman_pca_analysis Coverage Results" MODIFIED="1553602168093" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code/scripts" />
     <SUITE FILE_PATH="coverage/timecorr_paper$pieman_pca_chunk.coverage" NAME="pieman_pca_chunk Coverage Results" MODIFIED="1553133049458" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code/scripts" />
     <SUITE FILE_PATH="coverage/timecorr_paper$pieman_cluster_level_analysis.coverage" NAME="pieman_cluster_level_analysis Coverage Results" MODIFIED="1558639729183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code/scripts" />
+    <SUITE FILE_PATH="coverage/timecorr_paper$animate_largest.coverage" NAME="animate_largest Coverage Results" MODIFIED="1567114374521" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code/scripts" />
     <SUITE FILE_PATH="coverage/timecorr_paper$pieman_pca_chunked.coverage" NAME="pieman_pca_chunked Coverage Results" MODIFIED="1549836402590" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code/scripts" />
     <SUITE FILE_PATH="coverage/timecorr_paper$pieman_cluster_param_search.coverage" NAME="pieman_cluster_param_search Coverage Results" MODIFIED="1550779758286" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code/scripts" />
     <SUITE FILE_PATH="coverage/timecorr_paper$pieman_cluster_submit_param_search.coverage" NAME="pieman_cluster_submit_param_search Coverage Results" MODIFIED="1549681568585" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code/scripts" />
@@ -75,11 +89,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="animate_largest.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="animate_largest.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/scripts/animate_largest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="728">
-              <caret line="76" selection-start-line="76" selection-end-line="76" />
+            <state relative-caret-position="296">
+              <caret line="58" selection-start-line="58" selection-end-line="58" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -96,7 +110,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="plot_largest_abs.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="plot_largest_abs.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/scripts/plot_largest_abs.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="290">
@@ -219,13 +233,13 @@
         <option value="$PROJECT_DIR$/code/scripts/pieman_cluster_submit_order_up.py" />
         <option value="$PROJECT_DIR$/code/figs/stats/README.md" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/code/scripts/animate_largest.py" />
         <option value="$PROJECT_DIR$/code/scripts/plot_smallest.py" />
         <option value="$PROJECT_DIR$/code/scripts/plot_largest.py" />
         <option value="$PROJECT_DIR$/paper/PlotLevelUp/pycore/tikzeng.py" />
         <option value="$PROJECT_DIR$/paper/PlotLevelUp/README.md" />
         <option value="$PROJECT_DIR$/paper/PlotLevelUp/plot_method_fig/methods_fig.py" />
         <option value="$PROJECT_DIR$/code/scripts/plot_largest_abs.py" />
+        <option value="$PROJECT_DIR$/code/scripts/animate_largest.py" />
       </list>
     </option>
   </component>
@@ -269,7 +283,26 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.plot_largest_abs">
+  <component name="RunManager" selected="Python.animate_largest">
+    <configuration name="animate_largest" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="timecorr-paper" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/code/scripts" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/code/scripts/animate_largest.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <configuration name="pieman_cluster_level_analysis" type="PythonConfigurationType" factoryName="Python">
       <module name="timecorr-paper" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -304,25 +337,6 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/code/scripts/pieman_cluster_order_up.py" />
       <option name="PARAMETERS" value="paragraph 16 isfc eigenvector_centrality 3 laplace" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="pieman_cluster_submit_level_analysis" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="timecorr-paper" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/code/scripts" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_analysis.py" />
-      <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -386,19 +400,19 @@
     </configuration>
     <list>
       <item itemvalue="Python.pieman_cluster_level_analysis" />
-      <item itemvalue="Python.pieman_cluster_submit_level_analysis" />
       <item itemvalue="Python.pieman_cluster_submit_order_up" />
       <item itemvalue="Python.pieman_cluster_order_up" />
       <item itemvalue="Python.plot_largest" />
       <item itemvalue="Python.plot_largest_abs" />
+      <item itemvalue="Python.animate_largest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.animate_largest" />
         <item itemvalue="Python.plot_largest_abs" />
         <item itemvalue="Python.plot_largest" />
         <item itemvalue="Python.pieman_cluster_submit_order_up" />
         <item itemvalue="Python.pieman_cluster_order_up" />
-        <item itemvalue="Python.pieman_cluster_submit_level_analysis" />
       </list>
     </recent_temporary>
   </component>
@@ -416,8 +430,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="71" y="23" width="1472" height="1005" extended-state="1" />
-    <editor active="true" />
+    <frame x="71" y="23" width="1472" height="1005" extended-state="0" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5013587" side_tool="true" weight="0.3934611" />
@@ -544,6 +557,11 @@
           <line>28</line>
           <option name="timeStamp" value="134" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/code/scripts/animate_largest.py</url>
+          <line>55</line>
+          <option name="timeStamp" value="136" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -552,7 +570,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="136" />
+      <option name="time" value="137" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -821,16 +839,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/scripts/animate_largest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="728">
-          <caret line="76" selection-start-line="76" selection-end-line="76" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/code/scripts/plot_largest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="259">
@@ -859,6 +867,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="290">
           <caret line="73" column="55" selection-start-line="73" selection-start-column="55" selection-end-line="73" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/scripts/animate_largest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
