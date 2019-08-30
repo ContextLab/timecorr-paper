@@ -7,6 +7,8 @@ cmap = 'autumn_r'
 
 neurosynth_dir ='../figs/neurosynth_data'
 
+fig_dir = '../figs'
+
 bo_dir = os.path.join(neurosynth_dir, 'bos')
 
 n_f_dir = os.path.join(neurosynth_dir, 'figs')
@@ -50,6 +52,12 @@ sc = SceneObj(bgcolor='white', size=(500, 500))
 CBAR_STATE = dict(cbtxtsz=12, clim=[0, 6], txtsz=10., width=.1, cbtxtsh=3.,
                   rect=(-.3, -2., 1., 4.))
 KW = dict(title_size=14., zoom=1)
+
+sc_blank = SceneObj(bgcolor='white', size=(500, 500))
+b_obj_proj_blank = BrainObj(template_brain, hemisphere='left', translucent=False)
+sc_blank.add_to_subplot(b_obj_proj_blank, row=0, col=0, rotate='left', use_this_cam=True)
+sc_blank.screenshot(os.path.join(fig_dir, 'blank.png'), transparent=True)
+
 
 s_obj_1 = SourceObj('iEEG', xyz1, data=data1, cmap=cmap)
 s_obj_1.color_sources(data=data1)
