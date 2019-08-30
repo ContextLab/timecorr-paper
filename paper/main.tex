@@ -624,14 +624,63 @@ the true timepoint labels (for each group), we defined the
 \textit{decoding accuracy} as the proportion of correctly decoded
 timepoints, across both groups.
 
-\subsubsection*{Feature selection}
+\subsubsection*{Feature selection and testing}
 We sought to examine which types of neural features (i.e.,
 activations, first-order dynamic correlations, and higher-order
 dynamic correlations) were informative to the temporal decoders.
 Using the notation above, these features correspond to $\mathbf{Y}_0$,
 $\mathbf{X}_1$, $\mathbf{X}_2$, $\mathbf{X}_3$, and so on (we examined
-up to tenth order correlations, or $\mathbf{X}_{10}$).  Separately for
-each of these types of features, we \textbf{JRM STOPPED HERE}--
+up to tenth order correlations, or $\mathbf{X}_{10}$).
+
+One challenge to fairly evaluating high-order correlations is that if
+the kernel used in Equation~\ref{eqn:timecorr} is wider than a single
+timepoint, each repeated application of the equation will result in
+further temporal blur.  Because our primary assessment metric is
+temporal decoding accuracy, this unfairly biases against detecting
+meaningful signal in higher-order correlations (relative to
+lower-order correlations).  We attempted to mitigate temporal blur in
+estimating each $\mathbf{X}_n$ by using a Dirac $\delta$ function
+kernel (which places all of its mass over a single timepoint;
+Fig.~\ref{fig:kernels}b) to compute each lower-order correlation
+($\mathbf{X}_1, \mathbf{X}_2, ..., \mathbf{X}_{n-1}$).  We then used a
+(potentially wider, as described below) kernel to compute $\mathbf{X}_{n}$ from
+$\mathbf{X}_{n-1}$.  In this way, temporal blurring was applied only in the
+last step of computing $\mathbf{X}_n$.  We note that, because each
+$\mathbf{X}_n$ is a low-dimensional representation of the
+corresponding $\mathbf{Y}_n$, the higher-order correlations we
+estimated reflect true correlations in the data with lower-fidelity
+than estimates of lower-order correlations.
+
+After computing each
+$\mathbf{X}_1, \mathbf{X}_2, ..., \mathbf{X}_{n-1}$ for each
+participant, we divided participants into two equally sized groups
+($\pm 1$ for odd numbers of participants):
+$\mathcal{G}_{\mathrm{train}}$ and $\mathcal{G}_{\mathrm{test}}$.  We
+then further subdivided $\mathcal{G}_{\mathrm{train}}$ into
+$\mathcal{G}_{\mathrm{train}_1}$ and $\mathcal{G}_{\mathrm{train}_2}$.
+We then computed $\mathbf{\Lambda}$ temporal correlation matrices for
+each type of neural feature, using $\mathcal{G}_{\mathrm{train}_1}$
+and $\mathcal{G}_{\mathrm{train}_2}$.  This resulted in $n+1$
+$\mathbf{\Lambda}$ matrices (one for the original timeseries of neural
+activations, and one for each of $n$ orders of dynamic correlations).
+Our objective was to find a set of weights of each of these
+$\mathbf{\Lambda}$ matrices such that the weighted average of the
+$n+1$ matrices yielded the highest decoding accuracy.  We used
+quasi-Newton gradient ascent~\citep{NoceWrig06}, using decoding
+accuracy as the objective function to be maximized, to find an optimal
+set of training data-derived weights, $\phi_{0, 1, ..., n}$, where
+$\sum_{i=0}^n \phi_i = 1$ and where
+$\phi_i \geq 0 \forall i \in \left[0, 1, ..., n\right]$.
+
+After estimating an optimal set of weights, we computed a new set of
+$n + 1$ $\mathbf{\Lambda}$ matrices correlating timepoints from  $\mathcal{G}_{\mathrm{train}}$
+and $\mathcal{G}_{\mathrm{test}}$.  
+
+
+\textbf{JRM STOPPED HERE}--
+say something about delta function kernel to avoid something at higher
+orders, then in the last order use a gaussian, laplace, or mexican hat kernel.
+
 compute lambda, then compute optimal weighted mix using half of the
 template data, then decode the to-be-decoded data using those weights.
 
