@@ -543,12 +543,29 @@ was drawn from a Gaussian with the same covariance matrix.  These
 datasets were intended to simulate a system that undergoes occasional
 abrupt state changes.
 
-\textbf{JRM STOPPED HERE}
-
 \subsubsection*{Functional neuroimaging data collected during story
   listening}
+We examined an fMRI dataset collected by \cite{SimoEtal16} that the
+authors have made publically available at
+http://arks.princeton.edu/ark:/88435/dsp015d86p269k.  The dataset
+comprises neuroimaging data collected as participants listened
+to an audio recording of a story (intact condition; 36 participants),
+listened to time scrambled recordings of the same story (17
+participants in the paragraph-scrambled condition listened to the
+paragraphs in a randomized order and 36 in the word-scrambled
+condition listened to the words in a randomized order), or lay resting
+with their eyes open in the scanner (rest condition; 36
+participants).  Full neuroimaging details may be found in the original
+paper~\citep{SimoEtal16}.
 
-\subsection*{Estimating high-order correlations in neuroimaging data}
+Following our prior related work, we used hierarchical topographic
+factor analysis~\citep{MannEtal18} to derive a compact representation
+of the data.  In brief, this approach approximates the timeseries of voxel
+activations (44,415 voxels) using a much smaller number of radial
+basis function nodes (in this case 700 nodes).  This provides a convenient
+representation for examining full-brain network dynamics.  All of the
+analyses we carried out on the neuroimaging dataset were performed in
+this lower-dimensional space. \textbf{JRM STOPPED HERE}
 
 \subsection*{Temporal decoding}
 \subsubsection*{Forward inference, cross validation, and feature selection}
@@ -557,69 +574,6 @@ abrupt state changes.
 
 \textbf{JRM OUTLINE STOPPED HERE}
 
-\subsection*{Evaluation metrics}
-We evaluate our approach to extracting dynamic correlations and
-higher-order correlations using several metrics detailed next.  First,
-we generated synthetic data using known time-varying correlations, and
-then we evaluated the fidelity with which Equation~\ref{eqn:timecorr}
-could recover those correlations (for synthetic datasets with
-different properties, and using different kernels to define the
-weights; Fig.~\ref{fig:kernels}).  We then turned to a series of
-analyses on a (real) neuroimaging dataset where the ground truth
-correlations were \textit{not} known.  We evaluated whether the
-recovered correlations could be used to accurately label held-out
-neuroimaging data with the time at which it was collected.  We used this latter evaluations (using timepoint
-decoding) as a proxy for
-gauging how much explanatory power the recovered correlations held
-with respect to the observed data.
-
-\subsubsection*{Generating synthetic data}
-To explore recovery of a constant covariance (Fig.~\ref{fig:synthetic_data},  a.), we generated syntheic
-data sampled from a constant covariance matrix. To do this, we created one random
-covariance matrix, $K$, with 50 features, and for each of the 300 timepoints  we
-sampled from a Gaussian distribution centered on $K$.  Similarly, we generated synthetic data
-sampled from a random covariance matrix (Fig.~\ref{fig:synthetic_data}, b.) by creating a new random
-covariance matrix $K(t)$, for each of the 300 timepoints and sampled from a
-Gaussian distribution centered on $K(t)$.
-
-To generate synthetic data from a dynamically changing covariance
-matrix (Fig.~\ref{fig:synthetic_data},  c.),
-we generated two random covariance
-matrices, $K_{1}$ and $K_{2}$.  We then computed a weighted average covariance matrix
-for each of the 300 timepoint, $K(t)$, 
-by taking the linearly spaced weights ($w$) of the two random matrices, 
-\begin{align}
-K(t) = w(t) * K_{1} + (1 - w(t)) *  K_{2}, \\\label{eqn:ramping}
-\end{align}
-and for each of the 300 timepoints sampled from a
-Gaussian distribution centered on $K(t)$.
-
-Lastly, for the synthetic data containing block structure (Fig.~\ref{fig:synthetic_data},  d.), we followed the same
-process of creating synthetic data sampled from a constant covariance
-matrix (see above) but sampled from a new random covariance matrix
-after 60 consecutive timepoints.  We then pieced the blocks together
-to create a sythetic dataset with 300 total timepoints but drawn from
-5 separate covariance matrices. 
-
-\subsubsection*{Recovery of ground truth parameters from synthetic
-  data}
-
-
-We applied timecorr, using delta and gaussian (width = 10) kernels
-Fig.~\ref{fig:kernels}) to each of these 
-synthetic datasets, then correlated each recovered
-correlation matrix with the ground truth.  We repeated this process 10
-times and explored how recovery varies
-with the kernel and the specific structure of the data. For the
-ramping synthetic dataset (Fig.~\ref{fig:synthetic_data},  c.)  and for the
-block synthetic dataset (Fig.~\ref{fig:synthetic_data},  d.)  we made further
-comparisons of the timecorr recovered correlation matrices. We
-compared the ramping recovered correlation matrices to only the first random covariance matrix $K_{1}$
-(First, Fig.~\ref{fig:synthetic_data},  c.) and to only the last
-random covariance matrix $K_{2}$ (Last, Fig.~\ref{fig:synthetic_data},
-c.) from Equation~\ref{eqn:ramping}. We also compared the block recovered correlation matrices in to
-the block specific covariance matrix (Block 1-5,
-Fig.~\ref{fig:synthetic_data},  d.).
 
 
 \subsubsection*{Timepoint decoding}
@@ -713,22 +667,6 @@ delta kernel.  Performance does however drop near even boundaries for
 when using the gaussian kernel. 
 
 
-\subsubsection*{Neuroimaging dataset~\citep{SimoEtal16}}
-For our decoding analysis, we used HTFA-derived node activities
-~\cite{MannEtal18} from fMRI data collected as participants listened
-to an audio recording of a story (intact condition; 36 participants),
-listened to time scrambled recordings of the same story (17
-participants in the paragraph-scrambled condition listened to the
-paragraphs in a randomized order and 36 in the word-scrambled
-condition listened to the words in a randomized order), or lay resting
-with their eyes open in the scanner (rest condition; 36
-participants). We sought to demonstrate how higher-order correlations
-may be used to examine dynamic interactions of brain patterns in
-(real) multi-subject fMRI datasets. This story listening dataset was
-collected as part of a separate study, where the full imaging
-parameters, image preprocessing methods, and experimental details may
-be found~\citep{SimoEtal16}. The dataset is available at
-\href{url}{http://arks. princeton.edu/ark:/88435/dsp015d86p269k}.
 
 \begin{figure}
   \centering

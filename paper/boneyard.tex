@@ -1,5 +1,77 @@
 
 
+\subsection*{Evaluation metrics}
+We evaluate our approach to extracting dynamic correlations and
+higher-order correlations using several metrics detailed next.  First,
+we generated synthetic data using known time-varying correlations, and
+then we evaluated the fidelity with which Equation~\ref{eqn:timecorr}
+could recover those correlations (for synthetic datasets with
+different properties, and using different kernels to define the
+weights; Fig.~\ref{fig:kernels}).  We then turned to a series of
+analyses on a (real) neuroimaging dataset where the ground truth
+correlations were \textit{not} known.  We evaluated whether the
+recovered correlations could be used to accurately label held-out
+neuroimaging data with the time at which it was collected.  We used this latter evaluations (using timepoint
+decoding) as a proxy for
+gauging how much explanatory power the recovered correlations held
+with respect to the observed data.
+
+\subsubsection*{Generating synthetic data}
+To explore recovery of a constant covariance (Fig.~\ref{fig:synthetic_data},  a.), we generated syntheic
+data sampled from a constant covariance matrix. To do this, we created one random
+covariance matrix, $K$, with 50 features, and for each of the 300 timepoints  we
+sampled from a Gaussian distribution centered on $K$.  Similarly, we generated synthetic data
+sampled from a random covariance matrix (Fig.~\ref{fig:synthetic_data}, b.) by creating a new random
+covariance matrix $K(t)$, for each of the 300 timepoints and sampled from a
+Gaussian distribution centered on $K(t)$.
+
+To generate synthetic data from a dynamically changing covariance
+matrix (Fig.~\ref{fig:synthetic_data},  c.),
+we generated two random covariance
+matrices, $K_{1}$ and $K_{2}$.  We then computed a weighted average covariance matrix
+for each of the 300 timepoint, $K(t)$, 
+by taking the linearly spaced weights ($w$) of the two random matrices, 
+\begin{align}
+K(t) = w(t) * K_{1} + (1 - w(t)) *  K_{2}, \\\label{eqn:ramping}
+\end{align}
+and for each of the 300 timepoints sampled from a
+Gaussian distribution centered on $K(t)$.
+
+Lastly, for the synthetic data containing block structure (Fig.~\ref{fig:synthetic_data},  d.), we followed the same
+process of creating synthetic data sampled from a constant covariance
+matrix (see above) but sampled from a new random covariance matrix
+after 60 consecutive timepoints.  We then pieced the blocks together
+to create a sythetic dataset with 300 total timepoints but drawn from
+5 separate covariance matrices. 
+
+\subsubsection*{Recovery of ground truth parameters from synthetic
+  data}
+
+
+We applied timecorr, using delta and gaussian (width = 10) kernels
+Fig.~\ref{fig:kernels}) to each of these 
+synthetic datasets, then correlated each recovered
+correlation matrix with the ground truth.  We repeated this process 10
+times and explored how recovery varies
+with the kernel and the specific structure of the data. For the
+ramping synthetic dataset (Fig.~\ref{fig:synthetic_data},  c.)  and for the
+block synthetic dataset (Fig.~\ref{fig:synthetic_data},  d.)  we made further
+comparisons of the timecorr recovered correlation matrices. We
+compared the ramping recovered correlation matrices to only the first random covariance matrix $K_{1}$
+(First, Fig.~\ref{fig:synthetic_data},  c.) and to only the last
+random covariance matrix $K_{2}$ (Last, Fig.~\ref{fig:synthetic_data},
+c.) from Equation~\ref{eqn:ramping}. We also compared the block recovered correlation matrices in to
+the block specific covariance matrix (Block 1-5,
+Fig.~\ref{fig:synthetic_data},  d.).
+
+
+
+
+
+
+
+
+
 
 A major challenge to studying such patterns is that typically neither
 the correlations nor the hierarchical organizations of those
