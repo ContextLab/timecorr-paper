@@ -190,7 +190,13 @@ approach to evaluate how well information contained in a given order
 cognitive states.  If including a given $\mathbf{X}_n$ in the feature
 set yields higher classification accuracy on held-out data, we
 interpret this as evidence that the given cognitive states are
-reflected in patterns of $n^\mathrm{th}$-order correlations.
+reflected in patterns of $n^\mathrm{th}$-order correlations.  All of
+the code used to produce the figures and results in this manuscript,
+along with links to the corresponding datasets, may be found at
+\href{https://github.com/ContextLab/timecorr-paper}{github.com/ContextLab/timecorr-paper}.  In addition, we have
+released a Python toolbox for computing dynamic high-order
+correlations in timeseries data; our toolbox may be found at
+\href{https://timecorr.readthedocs.io/}{timecorr.readthedocs.io}. \textbf{JRM NOTE: CHECK LINK}
 
 \begin{figure}
   \centering
@@ -547,7 +553,7 @@ abrupt state changes.
   listening}
 We examined an fMRI dataset collected by \cite{SimoEtal16} that the
 authors have made publically available at
-http://arks.princeton.edu/ark:/88435/dsp015d86p269k.  The dataset
+\href{http://arks.princeton.edu/ark:/88435/dsp015d86p269k}{arks.princeton.edu/ark:/88435/dsp015d86p269k}.  The dataset
 comprises neuroimaging data collected as participants listened
 to an audio recording of a story (intact condition; 36 participants),
 listened to time scrambled recordings of the same story (17
@@ -560,15 +566,41 @@ paper~\citep{SimoEtal16}.
 
 Following our prior related work, we used hierarchical topographic
 factor analysis~\citep{MannEtal18} to derive a compact representation
-of the data.  In brief, this approach approximates the timeseries of voxel
-activations (44,415 voxels) using a much smaller number of radial
-basis function nodes (in this case 700 nodes).  This provides a convenient
-representation for examining full-brain network dynamics.  All of the
-analyses we carried out on the neuroimaging dataset were performed in
-this lower-dimensional space. \textbf{JRM STOPPED HERE}
+of the data.  In brief, this approach approximates the timeseries of
+voxel activations (44,415 voxels) using a much smaller number of
+radial basis function nodes (in this case 700 nodes).  This provides a
+convenient representation for examining full-brain network dynamics.
+All of the analyses we carried out on the neuroimaging dataset were
+performed in this lower-dimensional space.  Code for carrying out
+hierarchical topographic factor analyses on fMRI data may be found as
+part of the BrainIAK toolbox~\citep{brainiak}, which may be downloaded
+at \href{https://brainiak.org/}{brainiak.org}.
 
 \subsection*{Temporal decoding}
-\subsubsection*{Forward inference, cross validation, and feature selection}
+We sought to identify neural patterns that reflected participants'
+ongoing cognitive processing of incoming stimulus information.  As
+reviewed by \cite{SimoEtal16}, one way of homing in on these
+stimulus-driven neural patterns is to compare activity patterns across
+individuals (e.g., using ISFC analyses).  In particular, neural
+patterns will be similar across individuals, to the extent that the
+neural patterns under consideration are stimulus driven, and to the
+extent that the corresponding cognitive representations are reflected
+in similar spatial patterns across people.  Following this logic, we
+used an across-participants temporal decoding test developed by
+\cite{MannEtal18} to assess the degree to which different neural
+patterns reflected ongoing stimulus-driven cognitive processing across
+people.  The approach entails using a subset of the data to train a
+classifier to decode which stimulus timepoint (i.e., moment in the
+story participants listened to).  We use decoding accuracy on held-out
+data (from held-out participants) as a proxy for the extent to which
+the inputted neural patterns reflected stimulus-driven cognitive
+processing in a similar way across individuals.  \textbf{JRM STOPPED HERE}
+
+\subsubsection*{Forward inference}
+
+
+\subsubsection*{Cross validation}
+\subsubsection*{Feature selection}
 \subsubsection*{Identifying robust decoding results}
 \subsubsection*{Reverse inference}
 
@@ -577,10 +609,6 @@ this lower-dimensional space. \textbf{JRM STOPPED HERE}
 
 
 \subsubsection*{Timepoint decoding}
-
-To explore how higher-order structure varies with stimulus structure
-and complexity, we used a previous neuroimaging dataset
-~\cite{SimoEtal16}  in which participants listened to an audio recording of a story; 36 particpants listen to an intact version of the story, 17 participants listen to time-scrambled recordings of the same story where paragraphs were scrambled, 36 particpants listen to word-scrambled version and 36 participants lay in rest condition.
 
 Prior work has shown participants share similar neural responses to
 richly structured stimuli when compared to stimuli with less
