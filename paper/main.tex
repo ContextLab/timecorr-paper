@@ -624,7 +624,7 @@ the true timepoint labels (for each group), we defined the
 \textit{decoding accuracy} as the proportion of correctly decoded
 timepoints, across both groups.
 
-\subsubsection*{Feature selection and testing}
+\subsubsection*{Feature weighting and testing}
 We sought to examine which types of neural features (i.e.,
 activations, first-order dynamic correlations, and higher-order
 dynamic correlations) were informative to the temporal decoders.
@@ -673,22 +673,35 @@ $\sum_{i=0}^n \phi_i = 1$ and where
 $\phi_i \geq 0 \forall i \in \left[0, 1, ..., n\right]$.
 
 After estimating an optimal set of weights, we computed a new set of
-$n + 1$ $\mathbf{\Lambda}$ matrices correlating timepoints from  $\mathcal{G}_{\mathrm{train}}$
-and $\mathcal{G}_{\mathrm{test}}$.  
+$n + 1$ $\mathbf{\Lambda}$ matrices correlating the DISFC patterns
+from $\mathcal{G}_{\mathrm{train}}$ and $\mathcal{G}_{\mathrm{test}}$
+at each timepoint.  We use the resulting decoding accuracy of
+$\mathcal{G}_{\mathrm{test}}$ timepoints to estimate how informative
+the set up neural features containing up to $n^\mathrm{th}$ order
+correlations were.
 
+We used a permutation-based procedure to form a stable estimate of
+decoding accuracy for each set of neural features.  In particular, we
+computed the decoding accuracy for each of 10 random group assignments of
+$\mathcal{G}_{\mathrm{train}}$ and $\mathcal{G}_{\mathrm{test}}$.  We
+report the mean accuracy (and 95\% confidence intervals) for each set
+of neural features.
 
-\textbf{JRM STOPPED HERE}--
-say something about delta function kernel to avoid something at higher
-orders, then in the last order use a gaussian, laplace, or mexican hat kernel.
-
-compute lambda, then compute optimal weighted mix using half of the
-template data, then decode the to-be-decoded data using those weights.
-
-From below: quasi-Newton method of Broyden, Fletcher, Goldfarb, and Shanno (BFGS
-~\citep{NoceWrig06}) for optimization. We repeated this
-cross-validation process 10 times for each parameter set.
 
 \subsubsection*{Identifying robust decoding results}
+For synthetic data where the true underyling dynamic correlations are
+known, we are able to directly evaluate how well the recovered
+correlations match the ground truth, for different choices of kernel
+shape and width.  For real-world data (where the ground truth is not
+known), we use decoding accuracy to estimate whether a given set of
+neural features reliably reflects ongoing stimulus-driven cognitive
+processing.  We cannot know which choice of kernel most accurately
+reflects the ``true'' information content of the data.  For example, a
+given kernel might highlight particular temporal aspects of the data
+in a way that enhances or diminishes decoding performance.
+\textbf{JRM STOPPED HERE}
+
+
 Params: Gaussian, Laplace, mexican hat kernels.  Widths of 5, 10, 20,
 and 50.
 
