@@ -721,10 +721,13 @@ dependent (within the space of parameters we examined).
 \textbf{JRM STOPPED HERE}
 
 \subsubsection*{Reverse inference}
-top 10 strongest correlations for each level; identify endpoint nodes
-(RBFs); make map (threshold at $\theta$-- \textbf{JRM NOTE: what
-  threshold did you use, Lucy?}); decode using neurosynth (cite).
-
+copying from lucy's message on slack:
+- for each order, compute the average (pairwise) correlations
+- pick the 10 strongest (absolute value) correlations
+- find the RBFs on the endpoints of those correlations (i.e. the features being correlated)
+- make a map by summing together those (thresholded at 0.999) RBFs
+- decode with neurosynth
+- print out top 10 terms
 
 
 \section*{Results}
