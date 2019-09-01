@@ -689,21 +689,36 @@ of neural features.
 
 
 \subsubsection*{Identifying robust decoding results}
-For synthetic data where the true underyling dynamic correlations are
-known, we are able to directly evaluate how well the recovered
-correlations match the ground truth, for different choices of kernel
-shape and width.  For real-world data (where the ground truth is not
-known), we use decoding accuracy to estimate whether a given set of
-neural features reliably reflects ongoing stimulus-driven cognitive
-processing.  We cannot know which choice of kernel most accurately
-reflects the ``true'' information content of the data.  For example, a
-given kernel might highlight particular temporal aspects of the data
-in a way that enhances or diminishes decoding performance.
+The temporal decoding procedure we use to estimate which neural
+features support ongoing cognitive processing is goverened by many
+parameters.  For example, Equation~\ref{eqn:timecorr} requires
+defining a kernel function, which can take on different shapes and
+widths.  For a fixed set of neural features, each of these parameters
+can yield different decoding accuracies.  Further, the best decoding
+accuracy for a given timepoint may be reliably achieved by one set of
+parameters, whereas the best decoding accuracy for another timepoint
+might be reliably achieved by a different set of parameters, and the
+best decoding accuracy across \textit{all} timepoints might be
+reliably achieved by still another different set of parameters.
+Rather than attempting to maximize decoding accuracy, we sought to
+discover the trends in the data that were robust to specific
+classifier parameters choices.  Specifically, we sought to
+characterize how decoding accuracy varied (under different
+experimental conditions) as a function of which neural features were
+considered.
+
+To identify decoding results that were robust to specific classifier
+parameter choices, we repeated our decoding analyses that substituted
+in a variety of kernel shapes and widths for
+Equation~\ref{eqn:timecorr}.  We examined Gaussian
+(Fig.~\ref{fig:kernels}c), Laplace (Fig.~\ref{fig:kernels}d), and
+Mexican Hat (Fig.~\ref{fig:kernels}e) kernels, each with widths of 5,
+10, 20, and 50 samples.  We then report the average decoding
+accuracies across all of these parameter choices.  This enabled us to
+(roughly) factor out performance characteristics that were parameter
+dependent (within the space of parameters we examined).
+
 \textbf{JRM STOPPED HERE}
-
-
-Params: Gaussian, Laplace, mexican hat kernels.  Widths of 5, 10, 20,
-and 50.
 
 \subsubsection*{Reverse inference}
 top 10 strongest correlations for each level; identify endpoint nodes

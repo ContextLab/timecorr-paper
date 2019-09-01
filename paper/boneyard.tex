@@ -2,6 +2,36 @@
 
 
 
+
+For synthetic data where the true underyling dynamic correlations are
+known, we are able to directly evaluate how well the recovered
+correlations match the ground truth, for different choices of kernel
+shape and width.  In contrast, or real-world data (where the ground
+truth is not known), we use decoding accuracy to estimate whether a
+given set of neural features reliably reflects ongoing stimulus-driven
+cognitive processing.  However, under different circumstances,
+different classifier properties (e.g., kernel shapes, kernel widths,
+classification algorithm, etc.) will give rise to different decoding
+accuracies.  We can average over different cross validation group
+assignments to improve the stability of the decoding accuracy
+assessments (to factor out effects due to particular group
+assignments), but 
+
+cannot know whether a given 
+
+
+Because decoding accuracy is an indirect
+reflection of how much a given set of neural features 
+
+We cannot know which choice of kernel most accurately
+reflects the ``true'' information content of the data.
+
+For example, a
+given kernel might highlight particular temporal aspects of the data
+in a way that enhances or diminishes decoding performance.
+\textbf{JRM STOPPED HERE}
+
+
 \subsubsection*{Timepoint decoding}
 
 Prior work has shown participants share similar neural responses to
