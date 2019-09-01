@@ -568,7 +568,7 @@ paper for which the data were collected~\citep{SimoEtal16}.
 Following our prior related work, we used HTFA~\citep{MannEtal18} to
 derive a compact representation of the data.  In brief, this approach
 approximates the timeseries of voxel activations (44,415 voxels) using
-a much smaller number of radial basis function nodes (in this case 700
+a much smaller number of radial basis function (RBF) nodes (in this case 700
 nodes).  This provides a convenient representation for examining
 full-brain network dynamics.  All of the analyses we carried out on
 the neuroimaging dataset were performed in this lower-dimensional
@@ -718,19 +718,80 @@ accuracies across all of these parameter choices.  This enabled us to
 (roughly) factor out performance characteristics that were parameter
 dependent (within the space of parameters we examined).
 
-\textbf{JRM STOPPED HERE}
 
 \subsubsection*{Reverse inference}
-copying from lucy's message on slack:
-- for each order, compute the average (pairwise) correlations
-- pick the 10 strongest (absolute value) correlations
-- find the RBFs on the endpoints of those correlations (i.e. the features being correlated)
-- make a map by summing together those (thresholded at 0.999) RBFs
-- decode with neurosynth
-- print out top 10 terms
+The dynamic patterns we examine comprise high-dimensional correlation
+patterns at each timepoint.  To help interpret the resulting patterns
+in the context of other studies, we created summary maps by computing
+the across-timepoint average pairwise correlations at each order of
+analysis (first order, second order, etc., up to fifteenth order
+correlations).  We selected the 10 strongest (absolute value)
+correlations at each order.  Each correlation is between the dynamic
+activity patterns (or patterns of dynamic high-order correlations)
+measured at two RBF nodes (see \textit{Hierarchical Topographic Factor
+  Analysis}).  Therefore, the 10 strongest correlations involved up to
+20 RBF nodes.  Each RBF defines a spatial function whose activations
+range from 0 to 1.  We thresholded each RBF at 0.999 to construct a
+map of spherical components that denoted the endpoints of the 10
+strongest correlations.  We then carried out a meta analysis using
+Neurosynth~\citep{RubiEtal17} to identify the 10 terms most commonly
+associated with the given map.  This resulted in a set of 10 terms
+associated with the average dynamic correlation patterns at each order.
+
 
 
 \section*{Results}
+\textbf{JRM STOPPED HERE}
+
+%overview: first validate our approach with synthetic data, then apply
+%to fMRI data
+
+%synthetic data: we can recover dynamic correlations using different
+%kernels
+% wider kernels (Laplace, Gaussian) performed best when the
+% correlations varied in a temporally structured way
+% delta function kernels were best when the correlations varied
+% randomly over time
+% overall we recovered the structure we embedded in the data under all
+% synthetic datasets we tested.  our approach performed best when the
+% underlying correlational structure was either constant or gradually
+% changing.  our approach performed worst when the underlying
+% correlations varied randomly for one timepoint to the next.
+
+% we used temporal decoders to identify cognitivly relevant neural
+% patterns in fMRI data (see forward inference section of methods).
+% we explored two approaches to effiently computing high-order
+% correlations: PCA (dimensionality reduction) and eigenvector
+% centrality (graph measure).  both approaches yielded qualitatively
+% similar results for the story listening conditions: intact story was
+% best decoded using high-order correlations, whereas scrambled
+% stories were best decoded using lower-order correlations.  both
+% approaches also yielded slightly above-chance decoding of resting state times
+% (perhaps picking up on decreasing attention and/or increasing
+% mind-wandering as the resting state scan progressed).  The PCA-based
+% approach achieved the highest decoding accuracy using
+% non-correlational (activation-based) data, whereas the eigenvector
+% centrality approach identified second-order correlations as being
+% most informative about resting state times.
+
+% finally, we sought to identify which specific brain areas were
+% involved in supporting cognition through high-order interactions.
+% we used the eigenvector centrality results, which preserves the
+% original feature space when characterizing high-order dynamic
+% correlations.  we found that first and second-order correlations
+% reflected auditory and speech processing in all of the story
+% listening conditions.  during intact story listening, third order
+% correlations reflected integration with visual areas, and fourth
+% order correlations recruited high-level cognition regions.  however,
+% during listening to temporally scrambled stories, these higher-order
+% correlations did not involve visual areas or high-order cognitive
+% control regions.  during rest we found a much different set of
+% patterns.  first order correlations involved counting networks; second-order
+% correlations recruited visual networks; third-order correlations
+% recruited working memory networks; fourth-order correlations
+% recruited episodic memory areas.
+
+
 \subsubsection*{Synthetic data}
 
 
