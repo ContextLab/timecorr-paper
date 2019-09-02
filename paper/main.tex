@@ -107,18 +107,18 @@ code is carried by activity patterns that directly reflect ongoing
 cognition~\citep[e.g., following][]{HaxbEtal01, NormEtal06}, versus
 the dynamic properties of the network structure itself, independent of
 specific activity patterns in any given set of regions~\citep[e.g.,
-following][]{BassEtal06}.  For example, graph theoretic measures such
-as centrality and degree~\citep{BullSpor09} may be used to estimate
-how a given brain structure is ``communicating'' with other
-structures, independently of the specific neural representations
-carried by those structures.  If one considers a brain region's graph
-theoretic position in the network (e.g., its eigenvector centrality)
-as a dynamic property, one can compare how the positions of different
-regions are correlated, and/or how those patterns of correlations change
-over time.  We can also compute higher-order patterns in these
-correlations to characterize homologous subgraphs in the connectome
-that display similar changes in their constituent brain structures'
-interactions with the rest of the brain.
+following][]{BassEtal06}.  For example, graph measures such as
+centrality and degree~\citep{BullSpor09} may be used to estimate how a
+given brain structure is ``communicating'' with other structures,
+independently of the specific neural representations carried by those
+structures.  If one considers a brain region's position in the network
+(e.g., its eigenvector centrality) as a dynamic property, one can
+compare how the positions of different regions are correlated, and/or
+how those patterns of correlations change over time.  We can also
+compute higher-order patterns in these correlations to characterize
+homologous subgraphs in the connectome that display similar changes in
+their constituent brain structures' interactions with the rest of the
+brain.
 
 To gain insights into the above aspects of the neural code, we
 developed a computational framework for estimating dynamic high-order
@@ -352,7 +352,7 @@ $\mathbf{Y}_n$, we propose two general approaches to computing a $T$
 by $K$ low-dimensional representation of these correlations,
 $\mathbf{X}_n$.  The first approach uses dimensionality reduction
 algorithms to project $\mathbf{Y}_n$ onto a $K$-dimensional space.
-The second approach uses graph-theoretic measures to characterize the
+The second approach uses graph measures to characterize the
 relative positions of each feature ($k \in \left[1, ..., K \right]$)
 in the network defined by the correlation matrix at each timepoint.
 
@@ -399,12 +399,12 @@ onto the original feature space of $\mathbf{Y}_0$ will usually require
 $\mathcal{O}(TK^{2n})$ space and therefore quickly becomes intractable
 as $n$ or $K$ grow large.
 
-\subsubsection*{Graph theoretic approaches to computing
+\subsubsection*{Graph measure approaches to computing
   $\mathbf{X}_n$}
 The above dimensionality reduction approaches to approximating a given
 $\mathbf{Y}_n$ with a lower-dimensional $\mathbf{X}_n$ preserve a
 (potentially recombined and transformed) mapping back to the original
-data in $\mathbf{Y}_0$.  We also explore graph theoretic approaches
+data in $\mathbf{Y}_0$.  We also explore graph measure approaches
 that forgo a preserved mapping back to the original data in favor of
 preserving each feature's relative \textit{position} in the broader
 network of interactions and connections.  To illustrate the
@@ -416,7 +416,7 @@ interact with $C$ in similar ways, we might attempt to capture those
 similarities using a measure that reflects the how $A$ and $B$
 interact in the network.
 
-In general, graph theoretic measures take as input a matrix of
+In general, graph measures take as input a matrix of
 interactions (e.g., using the above notation, an $K$ by $K$
 correlation matrix or binarized correlation matrix reconstituded from
 a single timepoint's row of $\mathbf{Y}$) and return as output a set
@@ -443,10 +443,10 @@ to different sub-graphs in the network; e.g., ][]{RubiSpor10}; and
 sub-graph centrality~\citep[a measure of a node's participation in all
 of the network's sub-graphs; e.g., ][]{EstrRodr05}; among others.
 
-For a given graph theoretic measure,
+For a given graph measure,
 $\eta: \mathbb{R}^{K \times K} \rightarrow \mathbb{R}^K$, we can use
 $\eta$ to tranform each row of $\mathbf{Y}_n$ in a way that
-characterizes the corresponding graph-theoretic properties of each
+characterizes the corresponding graph properties of each
 column.  This results in a new $T$ by $K$ matrix, $\mathbf{X}_n$, that
 reflects how the features reflected in the columns of $\mathbf{Y}_n$
 participate in the network during each timepoint (row).
@@ -765,48 +765,44 @@ different sets of neural features to estimate which types of features
 reflected ongoing cognitive processing.
 
 \subsection*{Recovering known dynamic correlations from synthetic data}
-
-
-
-%synthetic data: we can recover dynamic correlations using different
-%kernels
-% wider kernels (Laplace, Gaussian) performed best when the
-% correlations varied in a temporally structured way
-% delta function kernels were best when the correlations varied
-% randomly over time
-% overall we recovered the structure we embedded in the data under all
-% synthetic datasets we tested.  our approach performed best when the
-% underlying correlational structure was either constant or gradually
-% changing.  our approach performed worst when the underlying
-% correlations varied randomly for one timepoint to the next.
+We generated synthetic datasets that differed in how the underlying
+correlations changed over time.  For each dataset, we applied
+Equation~\ref{eqn:timecorr} with a variety of kernel shapes and
+widths.  We assessed how well the true underlying correlations at each
+timepoint matched the recovered correlations
+(Fig.~\ref{fig:synthetic}).  For every kernel and dataset we tested,
+our approach recovered the correlation dynamics we embedded into the
+data.  However, the quality of these recoveries varied across
+different synthetic datasets in a kernel-dependent way.
 
 
 \begin{figure}[tp]
   \centering
   \includegraphics[width=\textwidth]{figs/synthetic_data.pdf}
   \caption{\textbf{Recovering known dynamic correlations from
-      synthetic data.}  Each panel displays the average correlations between
-    the vectorized upper triangles of the recovered correlation matrix
-    at each timepoint and either the true underlying correlation at each timepoint or a
-    reference correlation matrix.  (The averages are taken across 10
-    different randomly generated synthetic datasets.) Error ribbons
-    denote 95\% confidence intervals (taken across datasets). Different colors denote different
-    kernel shapes, whereas the shading within each color type denotes
-    kernel widths.  For a complete description of each synthetic
-    dataset, see \textit{Synthetic data}.  \textbf{a. Constant
-      correlations.} These datasets have a stable (unchanging)
-    underlying correlation matrix.  \textbf{b. Random
-      correlations.}  These datasets are generated using a new
-    independently drawn correlation matrix at each new timepoint.  \textbf{c. Ramping
-      correlations.}  These datasets are generated by smoothly varying
-    the underlying correlations between the randomly drawn
-    correlation matrices at first and last timepoints.  The left
-    panel displays the correlations between the recovered dynamic
-    correlations and the underlying ground truth correlations.  The
-    middle panel compares the recovered correlations with the
-    \textit{first} timepoint's correlation matrix.  The right panel
-    compares the recovered correlations with the
-    \textit{last} timepoint's correlation matrix.
+      synthetic data.}  Each panel displays the average correlations
+    between the vectorized upper triangles of the recovered
+    correlation matrix at each timepoint and either the true
+    underlying correlation at each timepoint or a reference
+    correlation matrix.  (The averages are taken across 10 different
+    randomly generated synthetic datasets of the given category.)
+    Error ribbons denote 95\% confidence intervals (taken across
+    datasets). Different colors denote different kernel shapes,
+    whereas the shading within each color type denotes kernel widths.
+    For a complete description of each synthetic dataset, see
+    \textit{Synthetic data}.  \textbf{a. Constant correlations.} These
+    datasets have a stable (unchanging) underlying correlation matrix.
+    \textbf{b. Random correlations.}  These datasets are generated
+    using a new independently drawn correlation matrix at each new
+    timepoint.  \textbf{c. Ramping correlations.}  These datasets are
+    generated by smoothly varying the underlying correlations between
+    the randomly drawn correlation matrices at first and last
+    timepoints.  The left panel displays the correlations between the
+    recovered dynamic correlations and the underlying ground truth
+    correlations.  The middle panel compares the recovered
+    correlations with the \textit{first} timepoint's correlation
+    matrix.  The right panel compares the recovered correlations with
+    the \textit{last} timepoint's correlation matrix.
     \textbf{d. Event-based correlations.}  These datasets are each
     generated using five randomly drawn correlation matrices that each
     remain stable for a fifth of the total timecourse.  The left panel
@@ -814,7 +810,114 @@ reflected ongoing cognitive processing.
     correlations and the underlying ground truth correlations.  The
     right panels compare the recovered correlations with the
     correlation matrices unique to each event.}
-  \label{fig:synthetic_data}
+  \label{fig:synthetic}
+\end{figure}
+
+In general, wide monotonic kernels (Laplace, Gaussian) performed best
+when the correlations varied gradually from moment-to-moment
+(Figs.~\ref{fig:synthetic}a, c, and d).  \textbf{TODO: Say something
+  about kernel widths within a shape.}  In the extreme, as the rate of
+change in correlations approaches 0 (Fig.~\ref{fig:synthetic}a), an
+infinitely wide kernel would exactly recover the Pearson's correlation
+(e.g., compare Eqns.~\ref{eqn:corr} and \ref{eqn:timecorr}).
+
+When the correlation dynamics were unstructured in time
+(Fig.~\ref{fig:synthetic}b), a Dirac $\delta$ kernel (infinitely
+narrow) performed best.  This is because, when every timepoint's
+correlations are independent of the correlations in every other
+timepoint, averaging data over time dilutes the available signal.
+\textbf{TODO: Say something about kernel widths within a shape.}
+
+\subsection*{Cognitively relevant dynamic high-order correlations in
+  fMRI data}
+We used across-participant temporal decoders to identify cognitively
+relevant neural patterns in fMRI data (see \textit{Forward inference
+  and decoding accuracy}).  The dataset we examined~\citep[collected
+by][]{SimoEtal16} comprised four experimental conditions that exposed
+participants to stimuli that varied systematically in how cognitively
+engaging they were.  The \textit{intact} experimental condition had
+participants listen to an audio recording of a 10-minute story.  The
+\textit{paragraph}-scrambled experimental condition had participants
+listen to a temporally scrambled version of the story, where the
+paragraphs occurred out of order (but where the same total set of
+paragraphs were presented over the full listening interval).  All
+participants in this condition experienced the scrambled paragraphs in
+the same order.  The \textit{word}-scrambled experimental condition
+had participants listen to a temporally scrambled version of the story
+where the words in the story occurred in a random order.  All
+participants in the word conditions experienced the scrambled words in
+the same order.  Finally, in a \textit{rest} experimental condition
+participants lay in the scanner with no overt stimulus, with their
+eyes open (blinking as needed).  This dataset provided a convenient
+means of testing our hypothesis that different levels of cognitive
+engagement might be supported by different orders of complex brain
+activity dynamics.
+
+In brief, we computed timeseries of dynamic high-order correlations
+that were similar across participants in each of two randomly assigned
+groups: a training group and a test group.  We then trained
+classifiers on the training group's data to match each sample from the
+test group with a stimulus timepoint.  Each classifier comprised a
+weighted blend of neural patterns that reflected up to
+$n^\mathrm{th}$-order dynamic correlations (see \textit{Feature
+  weighting and testing}).  We repeated this process for
+$n \in \left\{ 0, 1, 2, ..., 10 \right\}$.  Our examinations of synthetic
+data suggested that none of the kernels we examined were ``universal''
+in the sense of optimally recovering underlying correlations
+regardless of the structure of those correlations.  In our analyses of
+neural data, we therefore averaged our decoding results over a variety
+of kernel shapes and widths in order to identify results that were
+robust to specific kernel parameters (also see \textit{Identifying
+  robust decoding results}).
+
+Our approach to estimating dynamic high-order correlations requires
+mapping the high-dimensional feature space of correlations (a $T$ by
+$\mathcal{O}(K^2)$ matrix) onto a lower-dimensional $T$ by $K$ matrix.
+We carried out two sets of analyses that differed in how this mapping
+was computed.  The first set of analyses used PCA to find a
+low-dimensional embedding of the original dynamic correlation matrices
+(Fig.~\ref{fig:decoding}a,b).  The second set of analyses
+characterized correlations in dynamics of each feature's eigenvector
+centrality, but did not preserve the underlying activity dynamics
+(Fig.~\ref{fig:decoding}c,d).
+
+\begin{figure}[hp]
+  \centering
+  \includegraphics[width=\textwidth]{figs/decode_level.pdf}
+  \caption{\textbf{Across-participant decoding accuracy varies with
+      correlation order and cognitive engagement.}
+    \textbf{a. Decoding accuracy as a function of order: PCA.} \textit{Order}
+    ($x$-axis) refers to the maximum order of dynamic correlations that were
+    available to the classifiers (see \textit{Feature weighting and
+      testing}).  The reported across-participant decoding accuracies
+    are averaged over all kernel shapes and widths (see
+    \textit{Identifying robust decoding results}).  The $y$-values are
+    displayed relative to chance accuracy.    The error bars
+    denote 95\% confidence intervals across cross-validation folds
+    (i.e., random assignments of participants to the training and test
+    sets).  The colors denote the experimental condition.  Arrows
+    denote sets of features that yielded reliably higher (upwards
+    facing) or lower (downward facing) decoding accuracy than the mean
+    of all other features (via a two-tailed test, thresholded at $p <
+    0.05$).  The circled values represent the maximum decoding
+    accuracy within each experimental condition.
+    \textbf{b. Normalized decoding accuracy as a function of order: PCA.}
+    This panel displays the same results as Panel a, but here each
+    curve has been normalized to have a maximum value of 1 and and a
+    minimum value of 0 (including the upper and lower bounds of the
+    respective 95\% confidence intervals).  Panels a and b used PCA to
+    project each high-dimensional pattern of dynamic correlations onto
+    a lower-dimensional space.  \textbf{c.  Decoding accuracy as a
+      function of order: eigenvector centrality.} This panel is in the
+    same format as Panel a, but here eigenvector centrality has been
+    used to project the high-dimensional patterns of dynamic
+    correlations onto a lower-dimensional space.
+    \textbf{d. Noramlized decoding accuracy as a function of order:
+      eigenvector centrality.} This panel is in the same format as
+    Panel b, but here eigenvector centrality has been
+    used to project the high-dimensional patterns of dynamic
+    correlations onto a lower-dimensional space.}
+  \label{fig:decoding}
 \end{figure}
 
 
@@ -855,143 +958,8 @@ reflected ongoing cognitive processing.
 % recruited episodic memory areas.
 
 
-\subsubsection*{Synthetic data}
 
 
-
-To assess the performance of dynamic correlation recovery using
-timecorr, we varied width the kernel and the specific structure of the
-data. We applied timecorr, using delta and gaussian kernels
-Fig.~\ref{fig:kernels}) to each of the following  
-synthetic datasets: constant, random, ramping, and block.  We then correlated each recovered
-correlation matrix with the ground truth. 
-
-For the constant synthetic dataset, a gaussian kernel (width=10)
-outperformed the delta kernel (Fig.~\ref{fig:synthetic_data},  a.).  This is in contrast with the random
-synthetic dataset, for which the delta kernel best captures the
-rapidly changing structure (Fig.~\ref{fig:synthetic_data},  b.). For
-the ramping synthetic dataset, the slow changing strucutre within the
-data is best
-captured by the gaussian kernel and the best recovery occurs in the
-middle (Ramping, Fig.~\ref{fig:synthetic_data},
-c.). In addition to comparing the timecorr recovered correlation
-matrices to the ground truth, we
-further compared the ramping recovered correlation matrices to only the first random covariance matrix $K_{1}$
-(First, Fig.~\ref{fig:synthetic_data},  c.) and to only the last
-random covariance matrix $K_{2}$ (Last, Fig.~\ref{fig:synthetic_data},
-c.), both of which perform best at the beginning and end respectively.
-
-Similary for the block sythetic dataset, we compared the timecorr
-recovered correlation matrices to the ground truth as well as to each
-block-specific covariance matrix (Block 1-5,
-Fig.~\ref{fig:synthetic_data},  d.).  Although the structure is
-changing by block, the gaussian kernel once again outperforms the
-delta kernel.  Performance does however drop near even boundaries for
-when using the gaussian kernel. 
-
-
-
-\begin{figure}
-  \centering
-  \includegraphics[width=\textwidth]{figs/decode_level.pdf}
-  \caption{\textbf{Decoding by order.
-      a.\&d. Relative decoding accuracy by order.} Ribbons of each
-    color display cross-validated decoding performance averaged over
-    all parameters for each condition (intact, paragraph, word,
-    and rest) using PCA (a.) or eigenvector centrality (d.) to
-    approximate correlations. Decoders were trained using increasingly more
-    higher-order information and this ribbons are displayed relative
-    to chance at 0. The red dots indicates
-    maximum decoding accuracy for each condition. \textbf{b.\&e. Z-transformed decoding accuracy
-      by order.}  We Z-transformed the decoding accuracy by order to better
-    visualize the order with the maximum decoding accuracy for each
-    condition using PCA (b.) or eigenvector centrality (e.) to
-    approximate correlations. \textbf{c.\&f. Optimized weights.} Bar heights indicate the
-    optimized mixing paramete $\phi$ of each contributing order up to
-    and including the order with the maximum
-    decoding accuracy for each contributing order using PCA (c.) or eigenvector centrality (f.) to
-    approximate correlations.
-  For the order with maximum decoding accuracy by condition, we show
-  barplots of the optimized weights $\phi$  for each contributing
-  order.}
-  \label{fig:decoding_level}
-\end{figure}
-
-
-We next evaluated if our model of high-order correlations in brain activity can capture cognitively relevant brain patterns. We performed a decoding analysis, using cross validation to estimate (using other participants’ data) which parts of the story each weighted-mixture of higher-order brain activity pattern corresponded to (see \textit{Materials and methods}). We note that our primary goal was not to achieve perfect decoding accuracy, but rather to use decoding accuracy as a benchmark for assessing whether different neural features specifically capture cognitively relevant brain patterns.
-
-Separately for each experimental condition, we divided participants
-into two groups. For the zeroth order, we computed the mean factor
-activity for each group.  For all subsequent orders up to the tenth
-order, we computed the mean approximated dynamic ISFC of factor
-activity for each group (see \textit{Materials and methods}), and
-combined in a weighted mixutre with all previous orders
-(i.e. cross-validation for the second
-order contained a weighted-mixture of zeroth, first, and second order
-(Fig.~\ref{fig:decoding_level}, c.\&f.).  For
-each order, we correlated the group 1 activity patterns with group 2
-activity patterns.  We then subdivided the group 1 to obtain an
-optimal weighting parameter for each order’s correlation matrix using
-the same cross validation method. We used the optimal weighting
-parameters to obtain a weighted-mixture (see \textit{Materials and methods}) of each order’s correlation
-matrix. Using these correlations, we labeled the group 1 timepoints
-using the group 2 timepoints with which they were most highly
-correlated; we then computed the proportion of correctly labeled group
-1 timepoints. (We also performed the symmetric analysis whereby we
-labeled the group 2 timepoints using the group 1 timepoints as a
-template.) We repeated this procedure 100 times (randomly re-assigning
-participants to the two groups each time) to obtain a distribution of
-decoding accuracies for each experimental condition. There were 272
-timepoints for paragraph condition, 300 timepoints for intact and word
-conditions, and 400 timepoints for rest condition,  so chance
-performance on this decoding test is was $\frac{1}{272}$,
-$\frac{1}{300}$, and $\frac{1}{400}$ respectively.
- 
-We repeated this process for each set of parameters, varying kernel
-type and width, and averaged over the reduction technique used to
-approximate the higher-order correlations (PCA Fig.~\ref{fig:decoding_level},  a.-c. and eigenvector
-centrality Fig.~\ref{fig:decoding_level},  d.-f.).  Since there is no ground truth in these analyses, and we did not know
-which parameters best capture the data, we instead report a robustness
-search by averaging over the parameters and reporting which results
-consistently showed up across all parameters.
-\begin{figure}
-  \centering
-  \includegraphics[width=\textwidth]{figs/brain_plots.pdf}
-  \caption{\textbf{Average correlations by order for the intact listening condition.} Using eigenvector
-    centrality to approximate higher-order correlations for the
-    intact, paragraph scrambled, word scrambled, and rest condition.
-    We plot the
-    strongest 50\% absolute value
-    mean correlation for \textbf{a.-d. first order, e.-h. second order,
-      i.-l. third order, and m.-p. fourth order }, representing the degree of agreement by
-    location pair over time.  To demonstrate how this method is
-    computationally scalable, we also approximated
-    \textbf{a.-d. fifteenth order} dynamic correlation, which would be
-    possible to compute using conventional methods since it would require more bits to represent the solution than there are molecules in the universe.}
-  \label{fig:brain_plots}
-\end{figure}
-
-The two methods used to approximate the higher-order correlations (PCA Fig.~\ref{fig:decoding_level},  a.-c. and eigenvector
-centrality Fig.~\ref{fig:decoding_level},  d.-f.) capture different
-facets of the activity patterns.  Using PCA, the higher-order
-correlations are all linked to the original activity patterns, whereas
-eigenvectory centrality breaks the immediate link with specific brain
-areas and instead characterizes the position of the nodes in the
-network that are similar over time.
-
-We found for both PCA and eigenvector centrality, during the intact
-condition in the experiment, classifiers that incorporated
-higher-order correlations yielded consistently higher accuracy than
-classifiers trained only on lower-order patterns
-(Fig.~\ref{fig:decoding_level}, a.\&d.).  We plot the average
-correlations for up to the fourth order for the intact condition
-(Fig.~\ref{fig:brain_plots}) representing the degree of agreement by
-location pair over time.  By contrast, we found that incorporating
-higher-order (greater than first order) correlations did not further
-improve decoding accuracy for the other listening conditions or rest
-condition.  This suggests that the cognitive processing that supported
-the most cognitively rich condition involved higher-order network
-dynamics.
 
 
 
