@@ -778,7 +778,7 @@ different synthetic datasets in a kernel-dependent way.
 
 \begin{figure}[tp]
   \centering
-  \includegraphics[width=\textwidth]{figs/synthetic_data.pdf}
+  \includegraphics[width=\textwidth]{figs/synthetic_data}
   \caption{\textbf{Recovering known dynamic correlations from
       synthetic data.}  Each panel displays the average correlations
     between the vectorized upper triangles of the recovered
@@ -883,7 +883,7 @@ centrality, but did not preserve the underlying activity dynamics
 
 \begin{figure}[hp]
   \centering
-  \includegraphics[width=\textwidth]{figs/decode_level.pdf}
+  \includegraphics[width=\textwidth]{figs/decode_level}
   \caption{\textbf{Across-participant decoding accuracy varies with
       correlation order and cognitive engagement.}
     \textbf{a. Decoding accuracy as a function of order: PCA.}
@@ -954,30 +954,69 @@ using PCA) and also with the changing relative positions that
 different brain areas occupy in their associated networks
 (characterized using eigenvector centrality).
 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\textwidth]{figs/most_abs}
+  \caption{\textbf{Top terms associated with the endpoints of the
+      strongest correlations.}  Each color corresponds to one order of
+    correlations, averaged across participants and time. The inflated
+    brain plots display the locations of the endpoints of the 10
+    strongest (absolute value) correlations at each order, projected
+    onto the cortical surface~\citep{CombEtal19}.  The lists of terms
+    on the right display the top five Neurosynth
+    terms~\citep{RubiEtal17} decoded from the corresponding brain maps
+    for each order.  Each row displays data from a different
+    experimental condition.  Additional maps and their corresponding
+    Neurosynth terms may be found in the \textit{Supplementary
+      materials} (intact: Figure S1; paragraph: Figure S2; word:
+    Figure S3; rest: Figure S4).}
+  \label{fig:neurosynth}
+\end{figure}
+
+Having established that patterns of high-order correlations are
+informative to decoders, we next wondered which specific networks of
+brain regions contributed most to these patterns.  As a representative
+example, we selected the kernel parameters that yielded decoding
+accuracies that best matched the average accuracies across all of the
+kernel parameters we examined.  Using Figure~\ref{decoding}c as a
+template, the best-matching kernel was a Laplace kernel with a width
+of 50 (Fig.~\ref{fig:kernels}d).  We used this kernel to compute a
+single $K$ by $K$ $n^\mathrm{th}$-order correlation matrix for each
+experimental condition, along with the Neurosynth~\citep{RubiEtal17}
+terms most highly associated with each of these matrices
+(Fig.~\ref{fig:neurosynth}; see \textit{Reverse inference}).
+
+For all of the story listening conditions (intact, paragraph, and
+word), we found that first- and second-order correlations were most
+strongly associated with auditory and speech processing.  During
+intact story listening, third-order correlations reflected integration
+with visual areas, and fourth-order correlations reflected integration
+with areas associated with high-level cognition and cognitive control,
+such as the ventrolateral prefrontal cortex.  However, during
+listening to temporally scrambled stories, these higher-order
+correlations instead involved interactions with additional regions
+associated with speech and semantic processing.  By contrast, we found
+a much different set of patterns in the resting state data.
+First-order resting state correlations were most strongly associated
+with regions involved in counting and numerical understanding.
+Second-order resting state correlations were strongest in visual
+areas; third-order correlations were strongest in task-positive areas;
+and fourth-order correlations were strongest in regions associated
+with autobiographical and episodic memory.  We carried out analogous
+analyses to create maps (and decode the top associated Neurosynth
+terms) for up to fifteenth-order correlations (Figs. S1, S2, S3, and
+S4).  Of note, examining fifteenth-order correlations between 700
+nodes using conventional methods would have required storing roughly
+$\frac{700^{2 \times 15}}{2} \approx 1.13 \times 10^{85}$ floating point
+numbers-- assuming single-precision (32 bits each), this would require
+roughly 32 times as many bits as there are molecules in the known
+universe!  Although these fifteenth-order correlations do appear
+(visually) to have some well-formed structure, we provide this latter
+example primarily as a demonstration of the efficiency and scalability
+of our approach.
+
+
 \textbf{JRM STOPPED HERE}
-
-
-
-
-% finally, we sought to identify which specific brain areas were
-% involved in supporting cognition through high-order interactions.
-% we used the eigenvector centrality results, which preserves the
-% original feature space when characterizing high-order dynamic
-% correlations.  we found that first and second-order correlations
-% reflected auditory and speech processing in all of the story
-% listening conditions.  during intact story listening, third order
-% correlations reflected integration with visual areas, and fourth
-% order correlations recruited high-level cognition regions.  however,
-% during listening to temporally scrambled stories, these higher-order
-% correlations did not involve visual areas or high-order cognitive
-% control regions.  during rest we found a much different set of
-% patterns.  first order correlations involved counting networks; second-order
-% correlations recruited visual networks; third-order correlations
-% recruited working memory networks; fourth-order correlations
-% recruited episodic memory areas.
-
-
-
 
 
 
@@ -1017,7 +1056,7 @@ different brain areas occupy in their associated networks
 
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{figs/direction_of_field.pdf}
+  \includegraphics[width=\textwidth]{figs/direction_of_field}
   \caption{\textbf{Direction of the field (adapted from~\citep{Turk13}).} The evolution of fMRI analyses started with
     univariate activation, which refers to
     the average amplitude of BOLD activity evoked by events of an

@@ -1,4 +1,66 @@
 
+% finally, we sought to identify which specific brain areas were
+% involved in supporting cognition through high-order interactions.
+% we used the eigenvector centrality results, which preserves the
+% original feature space when characterizing high-order dynamic
+% correlations.  we found that first and second-order correlations
+% reflected auditory and speech processing in all of the story
+% listening conditions.  during intact story listening, third order
+% correlations reflected integration with visual areas, and fourth
+% order correlations recruited high-level cognition regions.  however,
+% during listening to temporally scrambled stories, these higher-order
+% correlations did not involve visual areas or high-order cognitive
+% control regions.  during rest we found a much different set of
+% patterns.  first order correlations involved counting networks; second-order
+% correlations recruited visual networks; third-order correlations
+% recruited working memory networks; fourth-order correlations
+% recruited episodic memory areas.
+
+
+
+
+
+
+\subsubsection*{Reverse inference}
+The dynamic patterns we examine comprise high-dimensional correlation
+patterns at each timepoint.  To help interpret the resulting patterns
+in the context of other studies, we created summary maps by computing
+the across-timepoint average pairwise correlations at each order of
+analysis (first order, second order, etc., up to fifteenth order
+correlations).  We selected the 10 strongest (absolute value)
+correlations at each order.  Each correlation is between the dynamic
+activity patterns (or patterns of dynamic high-order correlations)
+measured at two RBF nodes (see \textit{Hierarchical Topographic Factor
+  Analysis}).  Therefore, the 10 strongest correlations involved up to
+20 RBF nodes.  Each RBF defines a spatial function whose activations
+range from 0 to 1.  We thresholded each RBF at 0.999 to construct a
+map of spherical components that denoted the endpoints of the 10
+strongest correlations.  We then carried out a meta analysis using
+Neurosynth~\citep{RubiEtal17} to identify the 10 terms most commonly
+associated with the given map.  This resulted in a set of 10 terms
+associated with the average dynamic correlation patterns at each
+order.
+
+
+%%%%
+For each order $n \in \{1, 2, 3, 4}$
+we used the selected kernel to compute the $(n-1)^\mathrm{th}$-order
+DISFC timeseries across all participants (for $n = 1$ we simply
+averaged the ``order 0'' activity timeseries across participants).  We
+then computed the average $n^\mathrm{th}$-order correlations (over
+time) by correlating the columns of the $(n-1)^\mathrm{th}$-order
+DISFC timeseries.  This yielded a single $K$ by $K$
+$n^\mathrm{th}$-order correlation matrix.  Separately for each
+experimental condition and order of correlations, we identified the
+endpoints of the 10 strongest (absolute value) correlations
+(Fig.~\ref{fig:neurosynth}).
+
+
+
+
+We used this kernel to compute 
+%%%%
+
 
 % we used temporal decoders to identify cognitivly relevant neural
 % patterns in fMRI data (see forward inference section of methods).
