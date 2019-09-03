@@ -1,5 +1,24 @@
 
 
+% we used temporal decoders to identify cognitivly relevant neural
+% patterns in fMRI data (see forward inference section of methods).
+% we explored two approaches to effiently computing high-order
+% correlations: PCA (dimensionality reduction) and eigenvector
+% centrality (graph measure).  both approaches yielded qualitatively
+% similar results for the story listening conditions: intact story was
+% best decoded using high-order correlations, whereas scrambled
+% stories were best decoded using lower-order correlations.  both
+% approaches also yielded slightly above-chance decoding of resting state times
+% (perhaps picking up on decreasing attention and/or increasing
+% mind-wandering as the resting state scan progressed).  The PCA-based
+% approach achieved the highest decoding accuracy using
+% non-correlational (activation-based) data, whereas the eigenvector
+% centrality approach identified second-order correlations as being
+% most informative about resting state times.
+
+
+
+
 We next evaluated if our model of high-order correlations in brain activity can capture cognitively relevant brain patterns. We performed a decoding analysis, using cross validation to estimate (using other participants’ data) which parts of the story each weighted-mixture of higher-order brain activity pattern corresponded to (see \textit{Materials and methods}). We note that our primary goal was not to achieve perfect decoding accuracy, but rather to use decoding accuracy as a benchmark for assessing whether different neural features specifically capture cognitively relevant brain patterns.
 
 Separately for each experimental condition, we divided participants
