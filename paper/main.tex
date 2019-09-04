@@ -575,7 +575,7 @@ the correlation dynamics are structured.
 \paragraph*{Event.} We generated a fourth set of 10 synthetic datasets
 whose underlying correlation matrices exhibited prolonged intervals of
 stability, intersperced with abrupt changes.  For each dataset, we
-used Equation~\ref{fig:randcorr} to generate 5 random covariance
+used Equation~\ref{eqn:randcorr} to generate 5 random covariance
 matrices.  We constructed a timeseries where each set of 60 consecutive samples
 was drawn from a Gaussian with the same covariance matrix.  These
 datasets were intended to simulate a system that undergoes occasional
@@ -1003,7 +1003,7 @@ informative to decoders, we next wondered which specific networks of
 brain regions contributed most to these patterns.  As a representative
 example, we selected the kernel parameters that yielded decoding
 accuracies that best matched the average accuracies across all of the
-kernel parameters we examined.  Using Figure~\ref{decoding}c as a
+kernel parameters we examined.  Using Figure~\ref{fig:decoding}c as a
 template, the best-matching kernel was a Laplace kernel with a width
 of 50 (Fig.~\ref{fig:kernels}d).  We used this kernel to compute a
 single $K$ by $K$ $n^\mathrm{th}$-order correlation matrix for each
@@ -1100,13 +1100,13 @@ richer and more structured patterns of network interactions
 \item \cite{MackEtal17}: richer task structure is supported by more complex (higher
 rank) brain patterns in the prefrontal cortex
 
-\item \cite{LuriEtal19}: review of time-varying connectivity
+\item \cite{LuriEtal18}: review of time-varying connectivity
 
-\item \cite{FongEtal18}: higher variability in dynamic functional connectivity
+\item \cite{FongEtal19}: higher variability in dynamic functional connectivity
 predicts worse attention.  also, dymamic functional connectivity
 improves attention predictions over static functional connectivity.
 
-\item \cite{ParkEtal17}: dynamic causal modelling: compute causal interaction
+\item \cite{ParkEtal18b}: dynamic causal modelling: compute causal interaction
 dynamics in multivariate timeseries data.  important to consider
 causation in interpreting the direction of information flow reflected
 in the patterns we identified through our analyses.
@@ -1150,7 +1150,7 @@ event-specific network dynamics.
 \item \cite{ColeEtal19}: potential artifacts or spurious insights that affect
 standard functional connectivity analyses (not sure this applies)
 
-\item \cite{RichEtal18}: simulations for benchmarking time-varying connectivity
+\item \cite{ThomEtal18}: simulations for benchmarking time-varying connectivity
 methods (should we use this? seems useful! could potentially replace
 synthetic data section)
 
