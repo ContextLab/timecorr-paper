@@ -68,15 +68,15 @@ hypothesized) mental states or cognitive
 representations~\citep[e.g.,][]{HaxbEtal01, NormEtal06, TongPrat12,
   MitcEtal08a, KamiTong05, NishEtal11, PereEtal18, HuthEtal12,
   HuthEtal16}.  Training decoding models on different types of neural
-features can also help to elucidate which specific aspects of neural
-activity patterns are informative about cognition-- and, by extension,
-which types of neural activity patterns might comprise the neural
-code.  For example, prior work has used region of interest analyses to
-estimate the anatomical locations of specific neural
-representations~\citep[e.g.,][]{EtzeEtal09}, or to compare the
-relative contributions to the neural code of multivariate activity
-patterns versus patterns of dynamic correlations between neural
-activity patterns~\citep[e.g.,][]{MannEtal18, FongEtal19}.  An
+features (Fig.~\ref{fig:patterns}a) can also help to elucidate which
+specific aspects of neural activity patterns are informative about
+cognition-- and, by extension, which types of neural activity patterns
+might comprise the neural code.  For example, prior work has used
+region of interest analyses to estimate the anatomical locations of
+specific neural representations~\citep[e.g.,][]{EtzeEtal09}, or to
+compare the relative contributions to the neural code of multivariate
+activity patterns versus patterns of dynamic correlations between
+neural activity patterns~\citep[e.g.,][]{MannEtal18, FongEtal19}.  An
 emerging theme in this literature is that cognition is mediated by
 complex dynamic interactions between brain
 structures~\citep{SporHone06, BassEtal06, Turk13, DemeEtal19}.
@@ -84,22 +84,26 @@ structures~\citep{SporHone06, BassEtal06, Turk13, DemeEtal19}.
 
 \begin{figure}[tp]
   \centering
-  \includegraphics[width=0.65\textwidth]{figs/direction_of_field}
-  \caption{\textbf{Neural patterns.} The evolution of fMRI analyses started with
-    univariate activation, which refers to
-    the average amplitude of BOLD activity evoked by events of an
-    experimental condition. Next, multivariate classifiers are trained
-    on patterns of activation across voxels to decode distributed
-    representations for specific events. The next, resting
-    connectivity, is the temporal correlation of one or more seed
-    regions with the remainder of the brain during rest. Additionally,
-    task-based connectivity examines how these correlations differ by
-    cognitive state. Following this increasing trajectory of
-    increasing complexity, full connectivity considers all pairwise
-    correlations in the brain, most commonly at rest.  Next, dynamic
-    full connectivity considers how full connectivity changes over
-    time. Continuing this line of reasoning, we expect higher-order network dynamics might provide even richer insights into the neural basis of cognition.}
-  \label{fig:direction_of_field}
+  \includegraphics[width=\textwidth]{figs/patterns}
+  \caption{\textbf{Neural patterns.  a. A space of neural analyses}
+    Within-brain analyses are carried out within a single brain,
+    whereas across-brain analyses compare neural patterns across two
+    or more individuals' brains.  Univariate analyses characterize the
+    activities of individual units (e.g., nodes, small networks,
+    hierarchies of networks, etc.), whereas multivariate analyses
+    characterize the patterns of activities across units.  Order 0
+    patterns involve individual nodes; order 1 patterns involve
+    node-node interactions; order 2 (and higher) patterns relate to
+    interactions between homologous networks.  Each of these patterns
+    may be static (e.g., averaging over time) or dynamic.
+    \textbf{b. Summarizing neural patterns.}  To efficiently compute
+    with complex neural patterns, it can be useful to characterize the
+    patterns using summary measures.  Dimensionality reduction
+    algorithms project the patterns onto lower-dimensional spaces
+    whose dimensions reflect weighted combinations of the dimensions
+    in the original space.  Graph measures characterize each unit's
+    participation in its associated network.}
+  \label{fig:patterns}
 \end{figure}
 
 Studies of the neural code to date have primarily focused on
@@ -151,16 +155,16 @@ provides timepoint-by-timepoint estimates of the first-order
 correlations, second-order correlations, and so on (up to tenth-order
 correlations in this manuscript).  Our approach combines a
 kernel-based method for computing dynamic correlations in timeseries
-data with a dimensionality reduction step that projects the resulting
-dynamic correlations into a low-dimensional space.  We explored two
-dimensionality reduction approaches: principle components
-analysis~\citep[PCA;][]{Pear01}, which preserves an approximately invertable
-transformation back to the original data; and a second non-invertible
-algorithm that explored patterns in eigenvector
-centrality~\citep{Land95}.  This latter approach characterizes
-correlations between each feature dimension's relative
-\textit{position} in the network in favor of the specific activity
-histories of different features.
+data with a dimensionality reduction step (Fig.~\ref{fig:patterns}b)
+that projects the resulting dynamic correlations into a
+low-dimensional space.  We explored two dimensionality reduction
+approaches: principle components analysis~\citep[PCA;][]{Pear01},
+which preserves an approximately invertable transformation back to the
+original data; and a second non-invertible algorithm that explored
+patterns in eigenvector centrality~\citep{Land95}.  This latter
+approach characterizes correlations between each feature dimension's
+relative \textit{position} in the network in favor of the specific
+activity histories of different features.
 
 We validated our approach using synthetic data where the underlying
 correlations were known.  We then applied our framework to a
