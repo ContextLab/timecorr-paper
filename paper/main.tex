@@ -1047,100 +1047,126 @@ of our approach.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Discussion}
+We tested the hypothesis that high-level cognition is supported by
+high-order brain network dynamics.  We examined high-order network
+dynamics in functional neuroimaging data collected during a story
+listening experiment.  When participants listened to an auditory
+recording of the story, participants exhibited similar high-order
+brain network dynamics.  By contrast, when participants instead
+listened to temporally scrambled recordings of the story, only
+lower-order brain network dynamics were similar across participants.
+Our results indicate that higher orders of network interactions
+support higher-level aspects of cognitive processing
+(Fig.\ref{fig:discussion}).
 
+\begin{figure}[tp]
+  \centering
+  \includegraphics[width=0.6\textwidth]{figs/discussion}
+  \caption{\textbf{Proposed high-order network dynamics underlying
+      high-level cognition.}
+    Higher orders of network interactions support higher-level aspects
+    of cognitive processing.  When tasks evoke richer, deeper, and/or
+    higher-level processing, this is reflected in higher-order network
+    interactions.}
+  \label{fig:discussion}
+\end{figure}
+
+Identifying higher-order network dynamics associated with high-level
+cognition required several important methods advances.  First, we used
+kernel-based dynamic correlations to extended the notion of (static)
+inter-subject functional connectivity~\citep{SimoEtal16} to a dynamic
+measure of inter-subject functional connectivity (DISFC) that does not
+rely on sliding windows, and that may be computed at individual
+timepoints.  This allowed us to precisely characterize stimulus-evoked
+network dynamics that were similar across individuals.  Second, we
+developed a computational framework for efficiently and scalably estimating
+high-order dynamic correlations.  Our approach uses dimensionality
+reduction algorithms and graph measures to obtain low-dimensional
+embeddings of patterns of network dynamics.  Third, we developed an
+analysis framework for identifying robust decoding results by carrying
+out our analyses using a range of parameter values and then
+identifying which results were robust to specific parameter choices.
+
+Relevant literature:
 \begin{itemize}
-  \item Methods advances: kernel-based dynamic correlations, extension to
-    dynamic ISFC, efficient method for estimating high-order dynamic
-    correlations, identifying robust results by averaging
-  \item Discoveries:
-    \begin{itemize}
-      \item Dimensionality reduction and graph theoretic approaches
-        give different insights into the data and identify different
-        patterns as being relevant to cognition (different peak
-        orders).
-        \item An insight common to both approaches is that high-order
-          (greater than first order) dynamic correlations are
-          informative about ongoing high-level cognitive processing.
-          As the level of cognitive processing decreases, cognition is
-          reflected by lower-order correlations.
-        \item Correlations at different orders are also associated
-          with different networks of brain regions.  However, which
-          networks reflect which types of interactions depends on the
-          current task.  In general, lower order correlations during
-          auditory listening reflect processing of low-level
-          (auditory) features; mid-order correlations reflect speech
-          and linguistic processing; higher-order correlations reflect
-          across-sensory integration (e.g. ties to visual areas) and
-          cognitive control areas.  This hierarchy dissolves during
-          lower-order cognitive processing.
-      \end{itemize}
-  \end{itemize}
+\item \cite{SoloEtal19}: more complex concepts involve more complex network
+dynamics
+
+\item \cite{DemeEtal19}: human consciousness is supported by dynamic
+complex patterns of brain signal coordination.  studied the brains of
+healthy vs minimally conscious patients; conscious patients displayed
+richer and more structured patterns of network interactions
+
+\item \cite{MackEtal17}: richer task structure is supported by more complex (higher
+rank) brain patterns in the prefrontal cortex
+
+\item \cite{LuriEtal19}: review of time-varying connectivity
+
+\item \cite{FongEtal18}: higher variability in dynamic functional connectivity
+predicts worse attention.  also, dymamic functional connectivity
+improves attention predictions over static functional connectivity.
+
+\item \cite{ParkEtal17}: dynamic causal modelling: compute causal interaction
+dynamics in multivariate timeseries data.  important to consider
+causation in interpreting the direction of information flow reflected
+in the patterns we identified through our analyses.
+
+\item \cite{PretEtal17}: another review of time varying connectivity
+
+\item \cite{RoyEtal19}: memories are distributed across functionally connected
+brain areas
+
+\item \cite{FallEtal19}: the timescale of spontaneous resting state
+  fMRI increases with structural connectivity strength (in mouse and
+  human brains)
+
+\item \cite{LiegEtal19}: dynamic resting state functional connectivity best captures
+task-based phenotypes (processing speed, fluid intelligence), whereas
+static and dynamic functional connectivity equally capture
+self-reported measures like loneliness and life satisfaction.  suggest
+that different timescales of connectivity dynamics reflect different
+aspects of behavior.
+
+\item \cite{ZhenEtal19}: characterize brain connectectomes at different geometric
+scales
+
+\item \cite{McInJirs19}: neural processes reflect system interactions that occur on
+relatively low-dimensional manifolds, thereby constraining possible
+functional configurations.  (motivation for dimensionality reduction
+approach?)
+
+\item \cite{TokeSomm19}: another approach to reducing dimensionality of network
+interactions, using spectral clustering
+
+\item \cite{ZouEtal19}: another review of complex network dynamics in timeseries
+data
+
+\item \cite{ShapEtal19}: state-based analyses of network dynamics using hidden
+semi-Markov models.  could be a useful direction for extended our
+work; for example, we could define kernel functions to only integrate
+within an ``event.''  This could potentially improve resolution of
+event-specific network dynamics.
+
+\item \cite{ColeEtal19}: potential artifacts or spurious insights that affect
+standard functional connectivity analyses (not sure this applies)
+
+\item \cite{RichEtal18}: simulations for benchmarking time-varying connectivity
+methods (should we use this? seems useful! could potentially replace
+synthetic data section)
+
+\item \cite{ChanGlob09}
+
+\item \cite{SizeEtal18}
+
+\item \cite{ReimEtal17}
+
+\item \cite{GonzEtal19}
+
+\item \cite{BetzEtal19}
+
+\end{itemize}
 
 
-
-
-
-Based on prior work ~\citep{DemeEtal19} and following the direction of the field ~\citep{Turk13} we think our thoughts might be encoded in
-dynamic network patterns, and possibly higher order network
-patterns (Fig.~\ref{fig:direction_of_field}). We sought to test this hypothesis by developing an approach
-to inferring high-order network dynamics from timeseries data. 
-
-One challenge in studying dynamic interactions is the
-computational resources required to calculate higher-order correlations. 
-We developed a computationally tractable model of network dynamics (Fig.~\ref{fig:methods}) that takes in a feature
-timeseries and outputs approximated first-order dynamics (i.e.,
-dynamic functional correlations), second-order dynamics
-(reflecting homologous networks that dynamically form and disperse),
-and higher-order network dynamics (up to tenth-order dynamic
-correlations).
-
-We first validated our model using synthetic data, and explored how
-recovery varied with different underlying data structures and kernels.   We then 
-applied the approach to an fMRI dataset
-~\citep{SimoEtal16} in which participants listened to an audio
-recording of a story, as well as scrambled versions of the same story
-(where the scrambling was applied at different temporal scales).  We
-trained classifiers to take the output of the model and decode the
-timepoint in the story (or scrambled story) that the participants were
-listening to. We found that, during the intact listening condition in the
-experiment, classifiers that incorporated higher-order correlations
-yielded consistently higher accuracy than classifiers trained only on
-lower-order patterns (Fig.~\ref{fig:decoding_level},  a.\&d.).  By contrast, these
-higher-order correlations were not necessary to support decoding the other
-listening conditions and (minimally
-above chance) during a control rest condition.  This suggests
-that the cognitive processing that supported the most cogntively rich listening conditions
-involved second-order (or higher) network dynamics.
-
-Although we found decoding accuracy was best when incorporating
-higher-order network dynamics for all but rest
-  condition, it is unclear if this is a product of the brain or the
-  data collection technique.  It could be that the brain is
-  second-order or it could be that fMRI can
-  only reliably give second-order interactions. Exploring this method
-  with other data collection technique will be important to
-  disentangle this question.
-
-
-
-  \subsection*{Concluding remarks}
-
-How can we better understand how brain patterns change over
-time? How can we quantify the potential network dynamics that might be
-driving these changes? One way to judge the techniques of the future is
-to look at the trajectory of the fMRI field so far has taken so far
-(Fig.~\ref{fig:methods}).  The field started with 
-univariate activation, measuring the average activity for each voxel.
-Analyses of multivariate activation followed, looking at spatial patterns of
-activity over voxels. Next, correlations of activity were explored, first
-with measures like resting connectivity that take temporal correlation
-between a seed voxel and all other voxels then with full connectivty
-that measure all pairwise correlations.  Additionally, this path of increasing
-complexity also moved from static to dynamic measurements.  One
-logical next step in this trajectory would be dynamic higher-order
-correlations. We have created a method 
-to support these calculations by scalably approximating dynamic higher-order
-correlations.  
 
 \section*{Acknowledgements}
 We acknowledge discussions with Luke Chang, Hany Farid, Paxton
