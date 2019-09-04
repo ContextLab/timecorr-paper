@@ -81,6 +81,27 @@ emerging theme in this literature is that cognition is mediated by
 complex dynamic interactions between brain
 structures~\citep{SporHone06, BassEtal06, Turk13, DemeEtal19}.
 
+
+\begin{figure}[tp]
+  \centering
+  \includegraphics[width=0.65\textwidth]{figs/direction_of_field}
+  \caption{\textbf{Neural patterns.} The evolution of fMRI analyses started with
+    univariate activation, which refers to
+    the average amplitude of BOLD activity evoked by events of an
+    experimental condition. Next, multivariate classifiers are trained
+    on patterns of activation across voxels to decode distributed
+    representations for specific events. The next, resting
+    connectivity, is the temporal correlation of one or more seed
+    regions with the remainder of the brain during rest. Additionally,
+    task-based connectivity examines how these correlations differ by
+    cognitive state. Following this increasing trajectory of
+    increasing complexity, full connectivity considers all pairwise
+    correlations in the brain, most commonly at rest.  Next, dynamic
+    full connectivity considers how full connectivity changes over
+    time. Continuing this line of reasoning, we expect higher-order network dynamics might provide even richer insights into the neural basis of cognition.}
+  \label{fig:direction_of_field}
+\end{figure}
+
 Studies of the neural code to date have primarily focused on
 univariate or multivariate neural patterns~\citep[for review
 see][]{NormEtal06}, or (more recently) on patterns of dynamic
@@ -881,7 +902,7 @@ characterized correlations in dynamics of each feature's eigenvector
 centrality, but did not preserve the underlying activity dynamics
 (Fig.~\ref{fig:decoding}c,d).
 
-\begin{figure}[hp]
+\begin{figure}[tp]
   \centering
   \includegraphics[width=\textwidth]{figs/decode_level}
   \caption{\textbf{Across-participant decoding accuracy varies with
@@ -954,7 +975,7 @@ using PCA) and also with the changing relative positions that
 different brain areas occupy in their associated networks
 (characterized using eigenvector centrality).
 
-\begin{figure}[ht]
+\begin{figure}[tp]
   \centering
   \includegraphics[width=\textwidth]{figs/most_abs}
   \caption{\textbf{Top terms associated with the endpoints of the
@@ -1054,25 +1075,6 @@ of our approach.
   \end{itemize}
 
 
-\begin{figure}
-  \centering
-  \includegraphics[width=\textwidth]{figs/direction_of_field}
-  \caption{\textbf{Direction of the field (adapted from~\citep{Turk13}).} The evolution of fMRI analyses started with
-    univariate activation, which refers to
-    the average amplitude of BOLD activity evoked by events of an
-    experimental condition. Next, multivariate classifiers are trained
-    on patterns of activation across voxels to decode distributed
-    representations for specific events. The next, resting
-    connectivity, is the temporal correlation of one or more seed
-    regions with the remainder of the brain during rest. Additionally,
-    task-based connectivity examines how these correlations differ by
-    cognitive state. Following this increasing trajectory of
-    increasing complexity, full connectivity considers all pairwise
-    correlations in the brain, most commonly at rest.  Next, dynamic
-    full connectivity considers how full connectivity changes over
-    time. Continuing this line of reasoning, we expect higher-order network dynamics might provide even richer insights into the neural basis of cognition.}
-  \label{fig:direction_of_field}
-\end{figure}
 
 
 
