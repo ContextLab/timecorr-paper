@@ -699,7 +699,7 @@ $\mathbf{X}_n$.  We note that, because each $\mathbf{X}_n$ is a
 low-dimensional representation of the corresponding $\mathbf{Y}_n$,
 the higher-order correlations we estimated reflect true correlations
 in the data with lower-fidelity than estimates of lower-order
-correlations.  Thefore, even after correcting for temporal blurring,
+correlations.  Therefore, even after correcting for temporal blurring,
 our approach is still biased against finding meaningful signal in
 higher-order correlations.
 
@@ -982,26 +982,27 @@ versions of the story were best decoded by lower-order correlations
 centrality/paragraph: order zero; eigenvector centrality/word: order
 zero).  The two sets of analyses yielded different decoding results on
 resting state data (Fig.~\ref{fig:decoding}: purple lines).  We note
-that the resting state times could be decoded reliably, but only very
-slightly above chance; we speculate that the decoders might have
-picked up on attentional drift, boredom, or tiredness; we hypothesize
-these all increase throughout the resting state scan.  Our decoders
-might be picking up on aspects of these loosely defined cognitive
-states that are common across individuals.  The PCA-based approach
-achieved the highest resting state decoding accuracy using order zero
-features (non-correlational activation-based), whereas the eigenvector
-centrality-based approach achieved the highest resting state decoding
-accuracy using second-order correlations.  Taken together, these
-analyses indicate that high-level cognitive processing (while
-listening to the intact story) is reflected in the dynamics of
-high-order correlations in brain activity, whereas lower-level
-cognitive processing (while listening to scrambled versions of the
-story that lack rich meaning) is reflected in the dynamics of
-lower-order correlations and non-correlational activity dynamics.
-Further, these patterns are associated both with the underlying
-activity patterns (characterized using PCA) and also with the changing
-relative positions that different brain areas occupy in their
-associated networks (characterized using eigenvector centrality).
+that while the resting state times could be decoded reliably, the
+accuracies were only very slightly above chance.  We speculate that
+the decoders might have picked up on attentional drift, boredom, or
+tiredness; we hypothesize these all increase throughout the resting
+state scan.  The decoders might be picking up on aspects of these
+loosely defined cognitive states that are common across individuals.
+The PCA-based approach achieved the highest resting state decoding
+accuracy using order zero features (non-correlational,
+activation-based), whereas the eigenvector centrality-based approach
+achieved the highest resting state decoding accuracy using
+second-order correlations.  Taken together, these analyses indicate
+that high-level cognitive processing (while listening to the intact
+story) is reflected in the dynamics of high-order correlations in
+brain activity, whereas lower-level cognitive processing (while
+listening to scrambled versions of the story that lack rich meaning)
+is reflected in the dynamics of lower-order correlations and
+non-correlational activity dynamics.  Further, these patterns are
+associated both with the underlying activity patterns (characterized
+using PCA) and also with the changing relative positions that
+different brain areas occupy in their associated networks
+(characterized using eigenvector centrality).
 
 \begin{figure}[tp]
   \centering
@@ -1037,7 +1038,7 @@ terms most highly associated with each of these matrices
 
 For all of the story listening conditions (intact, paragraph, and
 word), we found that first- and second-order correlations were most
-strongly associated with auditory and speech processing.  During
+strongly associated with auditory and speech processing areas.  During
 intact story listening, third-order correlations reflected integration
 with visual areas, and fourth-order correlations reflected integration
 with areas associated with high-level cognition and cognitive control,
@@ -1056,10 +1057,10 @@ analyses to create maps (and decode the top associated Neurosynth
 terms) for up to fifteenth-order correlations (Figs. S1, S2, S3, and
 S4).  Of note, examining fifteenth-order correlations between 700
 nodes using conventional methods would have required storing roughly
-$\frac{700^{2 \times 15}}{2} \approx 1.13 \times 10^{85}$ floating point
-numbers-- assuming single-precision (32 bits each), this would require
-roughly 32 times as many bits as there are molecules in the known
-universe!  Although these fifteenth-order correlations do appear
+$\frac{700^{2 \times 15}}{2} \approx 1.13 \times 10^{85}$ floating
+point numbers-- assuming single-precision (32 bits each), this would
+require roughly 32 times as many bits as there are molecules in the
+known universe!  Although these fifteenth-order correlations do appear
 (visually) to have some well-formed structure, we provide this latter
 example primarily as a demonstration of the efficiency and scalability
 of our approach.
@@ -1087,10 +1088,10 @@ processing (Fig.\ref{fig:discussion}).
   \centering
   \includegraphics[width=0.6\textwidth]{figs/discussion}
   \caption{\textbf{Proposed high-order network dynamics underlying
-      high-level cognition.}
-    Higher orders of network interactions support higher-level aspects
-    of cognitive processing.  When tasks evoke richer, deeper, and/or
-    higher-level processing, this is reflected in higher-order network
+      high-level cognition during story listening.}  Higher orders of
+    network interactions support higher-level aspects of cognitive
+    processing.  When tasks evoke richer, deeper, and/or higher-level
+    processing, this is reflected in higher-order network
     interactions.}
   \label{fig:discussion}
 \end{figure}
@@ -1101,7 +1102,7 @@ myriad empirical studies and reviews~\citep[e.g.,][]{DemeEtal19,
   Turk13, LuriEtal18, FongEtal19, ParkEtal18b, PretEtal17,
   RoyEtal19, LiegEtal19, ZouEtal19, ChanGlov10, GonzEtal19}.  Our
 study extends this line of work by finding cognitively relevant
-higher-order network dynamics that reflect ongoing cognition.  Our
+\textit{higher-order} network dynamics that reflect ongoing cognition.  Our
 findings complement other work that uses graph theory and topology to
 characterize how brain networks reconfigure during
 cognition~\citep[e.g.,][]{BassEtal06, ZhenEtal19, McInJirs19,
@@ -1126,12 +1127,12 @@ Another potential limitation of our approach relates to recent work
 suggesting that the brain undergoes rapid state changes, for example
 across event boundaries~\citep[e.g.,][]{BaldEtal17}.
 \cite{ShapEtal19} used hidden semi-Markov models to estimate
-state-specific network dynamics.  Our general approach might be
-extended by considering putative state transitions. For example,
-rather than weighting all timepoints using a similar kernel
-(Eqn.~\ref{eqn:timecorr}), the kernel function could adapt on a
-timepoint-by-timepoint basis such that only timepoints determined to
-be in the same ``state'' were given non-zero weight.
+state-specific network dynamics~\citep[also see][]{VidaEtal18}.  Our
+general approach might be extended by considering putative state
+transitions. For example, rather than weighting all timepoints using a
+similar kernel (Eqn.~\ref{eqn:timecorr}), the kernel function could
+adapt on a timepoint-by-timepoint basis such that only timepoints
+determined to be in the same ``state'' were given non-zero weight.
 
 Identifying higher-order network dynamics associated with high-level
 cognition required several important methods advances.  First, we used
@@ -1153,8 +1154,10 @@ identifying which results were robust to specific parameter choices.
 The complex hierarchy of dynamic interactions that underlie our
 thoughts is perhaps the greatest mystery in modern science.  Methods
 for characterizing the dynamics of high-order correlations in neural
-data provides a window into the neural basis of cognition.
-\textbf{Need a good closing sentence.}
+data provides a window into the neural basis of cognition.  By showing
+that high-level cognition is reflected in high-order network dynamics
+we have elucidated the next step on the path towards understanding the
+neural basis of cognition.
 
 
 \section*{Acknowledgements}
