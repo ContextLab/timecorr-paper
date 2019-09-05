@@ -1,11 +1,13 @@
 
 import supereeg as se
 import os
-from visbrain.objects import BrainObj, SceneObj, SourceObj
+from visbrain.objects import BrainObj, SceneObj, SourceObj, ColorbarObj
 
 cmap = 'autumn_r'
 
 neurosynth_dir ='../figs/neurosynth_data'
+
+fig_dir = '../figs'
 
 bo_dir = os.path.join(neurosynth_dir, 'bos')
 
@@ -84,7 +86,7 @@ for c in conditions:
 
     sc = SceneObj(bgcolor='white', size=(1000, 1000))
 
-    CBAR_STATE = dict(cbtxtsz=12, clim=[0, 6], txtsz=10., width=.1, cbtxtsh=3.,
+    CBAR_STATE = dict(cbtxtsz=12, clim=[0, 15], txtsz=10., width=.1, cbtxtsh=3.,
                       rect=(-.3, -2., 1., 4.))
     KW = dict(title_size=14., zoom=1)
 
@@ -139,4 +141,7 @@ for c in conditions:
     b_obj_proj_right.project_sources(s_obj_all, clim=(0, 16), cmap=cmap)
     sc.add_to_subplot(b_obj_proj_right, row=0, col=3, rotate='right', use_this_cam=True)
 
-    sc.screenshot(os.path.join(n_f_dir, f'{c}_15.png'), transparent=True)
+    # cb_proj = ColorbarObj(b_obj_proj_right, cblabel='Order', **CBAR_STATE)
+    # sc.add_to_subplot(cb_proj, row=0, col=4, width_max=200)
+
+    sc.screenshot(os.path.join(fig_dir, f'{c}_15.png'), transparent=True)
