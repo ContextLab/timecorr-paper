@@ -266,12 +266,12 @@ $\mathbf{X}(\cdot, j)$ using~\citep{Pear01}:
                                                               j)
                                                               -
                                                               \bar{\mathbf{X}}(\cdot, j)\right)}{\sqrt{\sum_{t=1}^T
-                                                              \sigma^2_{\mathbf{X}(\cdot, i)}
+                                                              \sigma^2_{\mathbf{X}(\cdot, i)} 
                                                               \sigma^2_{\mathbf{X}(\cdot, j)}}},~\mathrm{where}\\\label{eqn:corr}
   \bar{\mathbf{X}}(\cdot, k) &= \frac{1}{T}\sum_{t=1}^T
                        \mathbf{X}(t, k),~\mathrm{and}\\
   \sigma^2_{\mathbf{X}(\cdot, k)} &= \frac{1}{T}\sum_{t=1}^T \left( \mathbf{X}(t, k) -
-                            \bar{\mathbf{X}}(\cdot, k) \right)^2
+                            \bar{\mathbf{X}}(\cdot, k) \right)^2 
 \end{align}
 We can generalize this formula to compute time-varying correlations by
 incorporating a \textit{kernel function} that takes a time $t$ as
@@ -557,7 +557,7 @@ $\mathbf{\Sigma}_m$:
   were drawn from a multivariate Gaussian distribution with the same
   covariance matrix, and the 10 datasets each used a different
   covariance matrix.
-
+  
   \paragraph*{Random.}  We generated a second set of 10 synthetic
   datasets whose observations at each timepoint were drawn from a
   Gaussian distribution with a new randomly constructed (using
@@ -567,7 +567,7 @@ $\mathbf{\Sigma}_m$:
   provided a test of reconstruction accuracy in the absence of any
   meaningful underlying temporal structure in the dynamic correlations
   underlying the data.
-
+  
   \paragraph*{Ramping.}  We generated a third set of 10 synthetic
   datasets whose underlying correlations changed gradually over time.
   For each dataset, we constructed two \textit{anchor} correlation
@@ -585,7 +585,7 @@ The gradually changing correlations underlying these datasets allow us
 to evaluate the recovery of dynamic correlations when each timepoint's
 correlation matrix is unique (as in the random datasets), but where
 the correlation dynamics are structured.
-
+  
 \paragraph*{Event.} We generated a fourth set of 10 synthetic datasets
 whose underlying correlation matrices exhibited prolonged intervals of
 stability, interspersed with abrupt changes.  For each dataset, we
@@ -1162,14 +1162,14 @@ neural basis of cognition.
 
 \section*{Acknowledgements}
 We acknowledge discussions with Luke Chang, Hany Farid, Paxton
-Fitzpatrick, Andrew Heusser, Eshin Jolly, Qiang Liu, Matthijs van der
-Meer, Judith Mildner, Gina Notaro, Stephen Satterthwaite, Emily
-Whitaker, Weizhen Xie, and Kirsten Ziman. Our work was supported in
-part by NSF EPSCoR Award Number 1632738 to J.R.M. and by a sub-award
-of DARPA RAM Cooperative Agreement N66001-14-2-4-032 to J.R.M.  The
-content is solely the responsibility of the authors and does not
-necessarily represent the official views of our supporting
-organizations.
+Fitzpatrick, Andrew Heusser, Eshin Jolly, Aaron Lee, Qiang Liu,
+Matthijs van der Meer, Judith Mildner, Gina Notaro, Stephen
+Satterthwaite, Emily Whitaker, Weizhen Xie, and Kirsten Ziman. Our
+work was supported in part by NSF EPSCoR Award Number 1632738 to
+J.R.M. and by a sub-award of DARPA RAM Cooperative Agreement
+N66001-14-2-4-032 to J.R.M.  The content is solely the responsibility
+of the authors and does not necessarily represent the official views
+of our supporting organizations.
 
 \section*{Author contributions}
 Concept: J.R.M.  Implementation: T.H.C., L.L.W.O., and
@@ -1179,4 +1179,5 @@ J.R.M.  Analyses: L.L.W.O and J.R.M.
 \bibliography{CDL-bibliography/memlab}
 
 \end{document}
+
 
