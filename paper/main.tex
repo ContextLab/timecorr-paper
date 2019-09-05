@@ -79,7 +79,8 @@ activity patterns versus patterns of dynamic correlations between
 neural activity patterns~\citep[e.g.,][]{MannEtal18, FongEtal19}.  An
 emerging theme in this literature is that cognition is mediated by
 complex dynamic interactions between brain
-structures~\citep{SporHone06, BassEtal06, Turk13, DemeEtal19}.
+structures~\citep{SporHone06, BassEtal06, Turk13, DemeEtal19,
+  SoloEtal19, LuriEtal18, PretEtal17, ZouEtal19, MackEtal17}.
 
 
 \begin{figure}[tp]
@@ -110,9 +111,11 @@ Studies of the neural code to date have primarily focused on
 univariate or multivariate neural patterns~\citep[for review
 see][]{NormEtal06}, or (more recently) on patterns of dynamic
 first-order correlations~\citep[i.e., interactions between pairs of
-brain structures;][]{MannEtal18, FongEtal19}.  We wondered what the
+brain structures;][]{MannEtal18, FongEtal19, LuriEtal18, PretEtal17,
+  ZouEtal19, DemeEtal19}.  We wondered what the
 future of this line of work might hold.  For example, is the neural
-code mediated by higher-order interactions between brain structures?
+code mediated by higher-order interactions between brain
+structures~\citep[e.g., see][]{ReimEtal17}?
 Second-order correlations reflect \textit{homologous} patterns of
 correlation.  In other words, if the changing patterns of correlations
 between two regions, $A$ and $B$, are similar to those between two
@@ -160,11 +163,14 @@ that projects the resulting dynamic correlations into a
 low-dimensional space.  We explored two dimensionality reduction
 approaches: principle components analysis~\citep[PCA;][]{Pear01},
 which preserves an approximately invertable transformation back to the
-original data; and a second non-invertible algorithm that explored
-patterns in eigenvector centrality~\citep{Land95}.  This latter
-approach characterizes correlations between each feature dimension's
-relative \textit{position} in the network in favor of the specific
-activity histories of different features.
+original data~\citep[e.g., this follows related approaches taken
+by][]{McInJirs19, TokeSomm19, GonzEtal19}; and a second non-invertible
+algorithm that explored patterns in eigenvector
+centrality~\citep{Land95}.  This latter approach characterizes
+correlations between each feature dimension's relative
+\textit{position} in the network in favor of the specific activity
+histories of different features~\citep[also see][]{BetzEtal19,
+  SizeEtal18, ReimEtal17}.
 
 We validated our approach using synthetic data where the underlying
 correlations were known.  We then applied our framework to a
@@ -267,7 +273,8 @@ We can generalize this formula to compute time-varying correlations by
 incorporating a \textit{kernel function} that takes a time $t$ as
 input, and returns how much the observed data at each timepoint
 $\tau \in \left[ -\infty, \infty \right]$ contributes to the estimated instantaneous
-correlation at time $t$ (Fig.~\ref{fig:kernels}).
+correlation at time $t$~\citep[Fig.~\ref{fig:kernels}; also see][for a
+similar approach]{AlleEtal12b}.
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{figs/kernels}
@@ -503,7 +510,8 @@ approach (Fig.~\ref{fig:methods}).
 \subsection*{Data}
 We examined two types of data: synthetic data and human functional
 neuroimaging data.  We constructed and leveraged the synthetic data to
-evaluate our general approach.  Specifically, we tested how well
+evaluate our general approach~\citep[for a related approach,
+see][]{ThomEtal18}.  Specifically, we tested how well
 Equation~\ref{eqn:timecorr} could be used to recover known dynamic
 correlations using different choices of kernel ($\kappa$;
 Fig.~\ref{fig:kernels}), for each of several synthetic datasets that
@@ -1048,16 +1056,16 @@ of our approach.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Discussion}
 We tested the hypothesis that high-level cognition is supported by
-high-order brain network dynamics.  We examined high-order network
-dynamics in functional neuroimaging data collected during a story
-listening experiment.  When participants listened to an auditory
-recording of the story, participants exhibited similar high-order
-brain network dynamics.  By contrast, when participants instead
-listened to temporally scrambled recordings of the story, only
-lower-order brain network dynamics were similar across participants.
-Our results indicate that higher orders of network interactions
-support higher-level aspects of cognitive processing
-(Fig.\ref{fig:discussion}).
+high-order brain network dynamics~\citep[e.g., see][]{SoloEtal19,
+  ReimEtal17}.  We examined high-order network dynamics in functional
+neuroimaging data collected during a story listening experiment.  When
+participants listened to an auditory recording of the story,
+participants exhibited similar high-order brain network dynamics.  By
+contrast, when participants instead listened to temporally scrambled
+recordings of the story, only lower-order brain network dynamics were
+similar across participants.  Our results indicate that higher orders
+of network interactions support higher-level aspects of cognitive
+processing (Fig.\ref{fig:discussion}).
 
 \begin{figure}[tp]
   \centering
@@ -1070,6 +1078,44 @@ support higher-level aspects of cognitive processing
     interactions.}
   \label{fig:discussion}
 \end{figure}
+
+The notion that cognition is reflected in (and possibly mediated by)
+patterns of network dynamics has been suggested by or proposed in
+myriad empirical studies and reviews~\citep[e.g., ][]{DemeEtal19,
+  Turk13, LuriEtal18, FongEtal19, ParkEtal18b, PretEtal17,
+  RoyEtal19, LiegEtal19, ZouEtal19, ChanGlov10, GonzEtal19}.  Our
+study extends this line of work by finding cognitively relevant
+higher-order network dynamics that reflect ongoing cognition.  Our
+findings complement other work that uses graph theory and topology to
+characterize how brain networks reconifigure during
+cognition~\citep[e.g., ][]{BassEtal06, ZhenEtal19, McInJirs19,
+  TokeSomm19, SizeEtal18, ReimEtal17, BetzEtal19}.
+
+An open question not addressed by our study pertains to how different
+structures integrate incoming information with different time
+constants.  For example, one line of work suggests that the cortical
+surface comprises a structured map such that nearby brain structures
+process incoming information at similar timescales.  Low-level sensory
+areas integrate information relatively quickly, whereas higher-level
+regions integrate information relatively slowly~\citep{BaldEtal17,
+  HassEtal08, HassEtal15, HoneEtal12a, LernEtal11, LernEtal14}.  Other
+related work in human and mouse brains indicates that the temporal
+response profile of a given brain structure may relate to how strongly
+connected that structure is with other brain
+areas~\citep{FallEtal19}.  Further study is needed to understand the
+role of temporal integration at different scales of network
+interaction, and across different anatomical structures.
+
+Another potential limitation of our approach relates to recent work
+suggesting that the brain undergoes rapid state changes, for example
+across event boundaries~\citep[e.g., ][]{BaldEtal17}.
+\cite{ShapEtal19} used hidden semi-Markov models to estimate
+state-specific network dynamics.  Our general approach might be
+extended by considering putative state transitions. For example,
+rather than weighting all timepoints using a similar kernel
+(Eqn.~\ref{eqn:timecorr}), the kernel function could adapt on a
+timepoint-by-timepoint basis such that only timepoints determined to
+be in the same ``state'' were given non-zero weight.
 
 Identifying higher-order network dynamics associated with high-level
 cognition required several important methods advances.  First, we used
@@ -1087,97 +1133,12 @@ analysis framework for identifying robust decoding results by carrying
 out our analyses using a range of parameter values and then
 identifying which results were robust to specific parameter choices.
 
-Relevant literature:
-\begin{itemize}
-\item \cite{SoloEtal19}: more complex concepts involve more complex network
-dynamics
-
-\item \cite{DemeEtal19}: human consciousness is supported by dynamic
-complex patterns of brain signal coordination.  studied the brains of
-healthy vs minimally conscious patients; conscious patients displayed
-richer and more structured patterns of network interactions
-
-\item \cite{MackEtal17}: richer task structure is supported by more complex (higher
-rank) brain patterns in the prefrontal cortex
-
-\item \cite{LuriEtal18}: review of time-varying connectivity
-
-\item \cite{FongEtal19}: higher variability in dynamic functional connectivity
-predicts worse attention.  also, dymamic functional connectivity
-improves attention predictions over static functional connectivity.
-
-\item \cite{ParkEtal18b}: dynamic causal modelling: compute causal interaction
-dynamics in multivariate timeseries data.  important to consider
-causation in interpreting the direction of information flow reflected
-in the patterns we identified through our analyses.
-
-\item \cite{PretEtal17}: another review of time varying connectivity
-
-\item \cite{RoyEtal19}: memories are distributed across functionally connected
-brain areas
-
-\item \cite{FallEtal19}: the timescale of spontaneous resting state
-  fMRI increases with structural connectivity strength (in mouse and
-  human brains)
-
-\item \cite{LiegEtal19}: dynamic resting state functional connectivity best captures
-task-based phenotypes (processing speed, fluid intelligence), whereas
-static and dynamic functional connectivity equally capture
-self-reported measures like loneliness and life satisfaction.  suggest
-that different timescales of connectivity dynamics reflect different
-aspects of behavior.
-
-\item \cite{ZhenEtal19}: characterize brain connectectomes at different geometric
-scales
-
-\item \cite{McInJirs19}: neural processes reflect system interactions that occur on
-relatively low-dimensional manifolds, thereby constraining possible
-functional configurations.  (motivation for dimensionality reduction
-approach?)
-
-\item \cite{TokeSomm19}: another approach to reducing dimensionality of network
-interactions, using spectral clustering
-
-\item \cite{ZouEtal19}: another review of complex network dynamics in timeseries
-data
-
-\item \cite{ShapEtal19}: state-based analyses of network dynamics using hidden
-semi-Markov models.  could be a useful direction for extended our
-work; for example, we could define kernel functions to only integrate
-within an ``event.''  This could potentially improve resolution of
-event-specific network dynamics.
-
-\item \cite{ColeEtal19}: potential artifacts or spurious insights that affect
-standard functional connectivity analyses (not sure this applies)
-
-\item \cite{ThomEtal18}: simulations for benchmarking time-varying connectivity
-methods (should we use this? seems useful! could potentially replace
-synthetic data section)
-
-\item \cite{ChanGlov10}: early citation arguing that dynamic
-  functional connectivity might contain valuable signal that is
-  different from static functional connectivity.
-
-\item \cite{SizeEtal18}: there are common patterns of connectivity
-  (graph measures) across people; potential citation to motivate
-  eigenvector centrality approach
-
-\item \cite{ReimEtal17}: they propose that the brain processes stimuli
-  by forming increasingly complex functional cliques and cavities;
-  good motivation for our general approach
-
-\item \cite{GonzEtal19}: dynamic functional connectivity during rest
-  is influenced by spontaneous cognitive-task-like processes.  they
-  also use low-dimensional embeddings to visualize how dynamic functional
-  connectivity during rest can reveal periods of externally imposed tasks
-
-\item \cite{BetzEtal19}: during movie watching, the brain's
-  connectivity profile dynamically reconfigures.  when ISFC is high,
-  this corresponds to times when network modularity is low and
-  connectivity between cognitive systems is high.
-
-\end{itemize}
-
+\subsection*{Concluding remarks}
+The complex hierarchy of dynamic interactions that underlie our
+thoughts is perhaps the greatest mystery in modern science.  Methods
+for characterizing the dynamics of high-order correlations in neural
+data provides a window into the neural basis of cognition.
+\textbf{Need a good closing sentence.}
 
 
 \section*{Acknowledgements}
