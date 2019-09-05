@@ -1,0 +1,123 @@
+\title{Nature Neuroscience Submission Letter}
+%
+% See http://texblog.org/2013/11/11/latexs-alternative-letter-class-newlfm/
+% and http://www.ctan.org/tex-archive/macros/latex/contrib/newlfm
+% for more information.
+%
+\documentclass[11pt,stdletter,orderfromtodate,sigleft]{newlfm}
+\usepackage{blindtext, xfrac, animate, hyperref, pxfonts}
+
+  \setlength{\voffset}{0in}
+
+\newlfmP{dateskipbefore=0pt}
+\newlfmP{sigsize=20pt}
+\newlfmP{sigskipbefore=10pt}
+ 
+\newlfmP{Headlinewd=0pt,Footlinewd=0pt}
+ 
+\namefrom{Jeremy R. Manning, Ph.D.}
+\addrfrom{
+	Dartmouth College\\
+    Department of Psychological \& Brain Sciences\\
+    HB 6207 Moore Hall\\
+	Hanover, NH  03755}
+ 
+\addrto{}
+\dateset{\today}
+ 
+\greetto{To the editors of \textit{Nature Neuroscience}:}
+ 
+\closeline{Sincerely,}
+
+\begin{document}
+\begin{newlfm}
+  We have enclosed our manuscript entitled \textit{High-level
+    cognition during story listening is reflected in high-order
+    dynamic correlations in neural activity patterns}, which we wish
+  to submit for publication as a Brief Communication in \textit{Nature
+    Neuroscience}.
+
+  Our manuscript reports on a series of analyses carried out on
+  neuroimaging data collected by Uri Hasson's group (Simony et al,
+  2016) as participants listened to either an auditory story or a
+  temporally scrambled version of the story.  We applied to this
+  dataset a new computational framework for estimating high-order
+  dynamic correlations that reflect ongoing cognitive processing.
+
+  Prior work has indicated that dynamic functional (first-order)
+  correlations---i.e., pairwise correlations between brain structures
+  that change from moment to moment---change according to ongoing
+  cognitive processes.  Our computational framework also enabled us to
+  examine higher-order dynamic correlations.  For example,
+  second-order correlations reflect \textit{homologous} patterns of
+  correlation.  In other words, if the changing patterns of
+  correlations between two regions, $A$ and $B$, are similar to those
+  between two other regions, $C$ and $D$, this would be reflected in
+  the second-order correlations between ($A$--$B$) and ($C$--$D$).  In
+  this way, second-order correlations identify similarities and
+  differences between subgraphs of the brain's connectome.
+  Analogously, third-order correlations reflect homologies between
+  second-order correlations-- i.e., homologous patterns of homologous
+  interactions between brain regions.  More generally, higher-order
+  correlations reflect homologies between patterns of lower-order
+  correlations.  We can then ask: which ``orders'' of interaction are
+  most reflective of high-level cognitive processes?
+
+  When participants listened to an intact recording of the story, they
+  exhibited similar (across-participants) high-order brain network
+  dynamics.  These across-participant similarities are a reflection of
+  the extent to which neural patterns are stimulus-driven, since the
+  shared experimental stimulus was the only constant shared across
+  participants.  By contrast, when participants instead listened to
+  temporally scrambled recordings of the story, only lower-order brain
+  network dynamics were similar across participants.  Further, the
+  brain areas that mediate high-order correlations are associated with
+  higher-level cognitive processes (cross-modality sensory
+  integration, cognitive control, etc.), whereas low-order
+  correlations and non-correlational activity dynamics most involve
+  brain areas associated with lower-level cognitive processing
+  (auditory processing, speech processing areas).  Our results
+  indicate that higher orders of network interactions support
+  higher-level aspects of cognitive processing
+
+  In addition to the theoretical advances we report, identifying
+  higher-order network dynamics associated with high-level cognition
+  also required several important methods advances.  First, we used
+  kernel-based dynamic correlations to extended the notion of (static)
+  inter-subject functional connectivity (Simony et al., 2016) to a
+  dynamic measure of inter-subject functional connectivity that does
+  not rely on temporal sliding windows, and that may be computed at
+  individual timepoints.  This allowed us to precisely characterize
+  stimulus-evoked network dynamics that were similar across
+  individuals.  Second, we developed a computational framework for
+  efficiently and scalably estimating high-order dynamic correlations.
+  Our approach uses dimensionality reduction algorithms and graph
+  measures to obtain low-dimensional embeddings of patterns of network
+  dynamics.  Third, we developed an analysis framework for identifying
+  robust decoding results by carrying out our analyses using a range
+  of parameter values and then identifying which results were robust
+  to specific parameter choices.
+
+  We have published and documented all of the data and analysis code
+  used to generate the figures in our manuscript (link:
+  \href{https://github.com/ContextLab/timecorr-paper}{github.com/ContextLab/timecorr-paper}),
+  along with a concurrent release of a Python toolbox for carrying out
+  analogous analyses on new datasets (link:
+  \href{http://timecorr.readthedocs.io}{timecorr.readthedocs.io}).
+
+  We have suggested the following scientists as expert reviewers:
+  Richard Betzel (EMAIL), Danielle Bassett (EMAIL), Emily Finn
+  (EMAIL), Olaf Sporns (EMAIL), and Christopher Honey (EMAIL).
+
+  We note that we have included the complete methods section in the
+  main text to facilitate peer review.  If deemed potentially suitable
+  for publication, we will update our manuscript by moving the current
+  methods section into our supporting document, and by adding a
+  methods summary conforming to the Brief Communications format.
+  Thank you for considering our manuscript for publication in Nature
+  Neuroscience.
+
+\end{newlfm}
+\end{document}
+
+
