@@ -13,11 +13,11 @@
 \usepackage{soul}
 \linenumbers
 
-\newcommand{\ttests}{S1}
-\newcommand{\intact}{S2}
-\newcommand{\para}{S3}
-\newcommand{\word}{S4}
-\newcommand{\rest}{S5}
+%\newcommand{\ttests}{S1}
+\newcommand{\intact}{S1}
+\newcommand{\para}{S2}
+\newcommand{\word}{S3}
+\newcommand{\rest}{S4}
 
 \title{High-level cognition during story listening is reflected in
   high-order dynamic correlations in neural activity patterns}
@@ -905,6 +905,49 @@ means of testing our hypothesis that different levels of cognitive
 processing and engagement are supported by different orders of brain
 activity dynamics.
 
+\begin{figure}[tp]
+  \centering
+  \includegraphics[width=\textwidth]{figs/decode_level}
+  \caption{\textbf{Across-participant decoding accuracy varies with
+      correlation order and cognitive engagement.}
+    \textbf{a.~Decoding accuracy as a function of order: PCA.}
+    \textit{Order} ($x$-axis) refers to the maximum order of dynamic
+    correlations that were available to the classifiers (see
+    \textit{Feature weighting and testing}).  The reported
+    across-participant decoding accuracies are averaged over all
+    kernel shapes and widths (see \textit{Identifying robust decoding
+      results}).  The $y$-values are displayed relative to chance
+    accuracy (intact: $\frac{1}{300}$; paragraph: $\frac{1}{272}$;
+    word: $\frac{1}{300}$; rest: $\frac{1}{400}$).  The error bars
+    denote 95\% confidence intervals across cross-validation folds
+    (i.e., random assignments of participants to the training and test
+    sets).  The colors denote the experimental condition.  Arrows
+    denote sets of features that yielded reliably higher (upwards
+    facing) or lower (downward facing) decoding accuracy than the mean
+    of all other features (via a two-tailed test, thresholded at
+    $p < 0.05$).  Figure~\ref{fig:ttests} displays additional comparisons between
+    the decoding accuracies achieved using different sets of neural
+    features.  The circled values represent the maximum decoding
+    accuracy within each experimental condition.
+    \textbf{b.~Normalized decoding accuracy as a function of order:
+      PCA.}  This panel displays the same results as Panel a, but here
+    each curve has been normalized to have a maximum value of 1 and
+    and a minimum value of 0 (including the upper and lower bounds of
+    the respective 95\% confidence intervals).  Panels a and b used
+    PCA to project each high-dimensional pattern of dynamic
+    correlations onto a lower-dimensional space.  \textbf{c.~Decoding
+      accuracy as a function of order: eigenvector centrality.} This
+    panel is in the same format as Panel a, but here eigenvector
+    centrality has been used to project the high-dimensional patterns
+    of dynamic correlations onto a lower-dimensional space.
+    \textbf{d.~Normalized decoding accuracy as a function of order:
+      eigenvector centrality.} This panel is in the same format as
+    Panel b, but here eigenvector centrality has been used to project
+    the high-dimensional patterns of dynamic correlations onto a
+    lower-dimensional space.}
+  \label{fig:decoding}
+\end{figure}
+
 In brief, we computed timeseries of dynamic high-order correlations
 that were similar across participants in each of two randomly assigned
 groups: a training group and a test group.  We then trained
@@ -936,52 +979,38 @@ characterized correlations in dynamics of each feature's eigenvector
 centrality, but did not preserve the underlying activity dynamics
 (Fig.~\ref{fig:decoding}c,d).
 
+
+
 \begin{figure}[tp]
-  \centering
-  \includegraphics[width=\textwidth]{figs/decode_level}
-  \caption{\textbf{Across-participant decoding accuracy varies with
-      correlation order and cognitive engagement.}
-    \textbf{a.~Decoding accuracy as a function of order: PCA.}
-    \textit{Order} ($x$-axis) refers to the maximum order of dynamic
-    correlations that were available to the classifiers (see
-    \textit{Feature weighting and testing}).  The reported
-    across-participant decoding accuracies are averaged over all
-    kernel shapes and widths (see \textit{Identifying robust decoding
-      results}).  The $y$-values are displayed relative to chance
-    accuracy (intact: $\frac{1}{300}$; paragraph: $\frac{1}{272}$;
-    word: $\frac{1}{300}$; rest: $\frac{1}{400}$).  The error bars
-    denote 95\% confidence intervals across cross-validation folds
-    (i.e., random assignments of participants to the training and test
-    sets).  The colors denote the experimental condition.  Arrows
-    denote sets of features that yielded reliably higher (upwards
-    facing) or lower (downward facing) decoding accuracy than the mean
-    of all other features (via a two-tailed test, thresholded at
-    $p < 0.05$).  Figure~\ttests displays additional comparisons between
-    the decoding accuracies achieved using different sets of neural
-    features.  The circled values represent the maximum decoding
-    accuracy within each experimental condition.
-    \textbf{b.~Normalized decoding accuracy as a function of order:
-      PCA.}  This panel displays the same results as Panel a, but here
-    each curve has been normalized to have a maximum value of 1 and
-    and a minimum value of 0 (including the upper and lower bounds of
-    the respective 95\% confidence intervals).  Panels a and b used
-    PCA to project each high-dimensional pattern of dynamic
-    correlations onto a lower-dimensional space.  \textbf{c.~Decoding
-      accuracy as a function of order: eigenvector centrality.} This
-    panel is in the same format as Panel a, but here eigenvector
-    centrality has been used to project the high-dimensional patterns
-    of dynamic correlations onto a lower-dimensional space.
-    \textbf{d.~Normalized decoding accuracy as a function of order:
-      eigenvector centrality.} This panel is in the same format as
-    Panel b, but here eigenvector centrality has been used to project
-    the high-dimensional patterns of dynamic correlations onto a
-    lower-dimensional space.}
-  \label{fig:decoding}
+\centering
+\includegraphics[width=1\textwidth]{figs/stats_heatmaps}
+\caption{\textbf{Statistical summary of decoding accuracies for
+    different neural features.}  Each column displays decoding
+  results for one experimental condition (intact, paragraph, word, and
+  rest).  We considered dynamic activity patterns (order 0) and
+  dynamic correlations at different orders (order $> 0$).  We used
+  two-tailed $t$-tests to compare the
+  distributions of decoding accuracies obtained using each pair of
+  features.  The distributions for each feature reflect the set of
+  average decoding accuracies (across all kernel parameters), obtained
+  for each random assignment of training and test groups.
+  In the upper triangles of each map, warmer colors (positive $t$-values) indicate that the
+  neural feature indicated in the given row yielded higher accuracy than the
+  feature indicated in the given column.  Cooler colors (negative
+  $t$-values) indicate that
+  the feature in the given row yielded lower decoding accuracy than
+  the feature in the given column.  The lower triangles of each map
+  denote the corresponding $p$-values for the $t$-tests.  The diagonal
+  entries display the relative average optimized weight given to each type of feature, in
+  a decoder that included all feature types (see \textit{Feature
+    weighting and testing}).}
+\label{fig:ttests}
 \end{figure}
 
 Both sets of temporal decoding analyses yielded qualitatively similar
 results for the auditory (non-rest) conditions of the experiment
-(Fig.~\ref{fig:decoding}: pink, yellow, and teal lines).  The highest
+(Fig.~\ref{fig:decoding}: pink, yellow, and teal lines;
+Fig.~\ref{fig:ttests}: three leftmost columns).  The highest
 decoding accuracy for participants who listened to the intact
 (unscrambled) story was achieved using high-order dynamic correlations
 (PCA: second-order; eigenvector-centrality: fourth-order).  Scrambled
@@ -989,7 +1018,8 @@ versions of the story were best decoded by lower-order correlations
 (PCA/paragraph: first-order; PCA/word: order zero; eigenvector
 centrality/paragraph: order zero; eigenvector centrality/word: order
 zero).  The two sets of analyses yielded different decoding results on
-resting state data (Fig.~\ref{fig:decoding}: purple lines).  We note
+resting state data (Fig.~\ref{fig:decoding}: purple lines;
+Fig.~\ref{fig:ttests}: rightmost column).  We note
 that while the resting state times could be decoded reliably, the
 accuracies were only very slightly above chance.  We speculate that
 the decoders might have picked up on attentional drift, boredom, or

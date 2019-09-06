@@ -49,32 +49,22 @@
     different neural features.}  Each heatmap displays decoding
   results for one experimental condition (intact, paragraph, word, and
   rest).  We considered dynamic activity patterns (order 0) and
-  dynamic correlations at different orders (order $> 0$).  We used two-tailed $t$-tests to compare the
+  dynamic correlations at different orders (order $> 0$).  We used
+  two-tailed $t$-tests to compare the
   distributions of decoding accuracies obtained using each pair of
   features.  The distributions for each feature reflect the set of
-  decoding accuracies obtained 
-
+  average decoding accuracies (across all kernel parameters), obtained
+  for each random assignment of training and test groups.
   In the upper triangles of each map, warmer colors (positive $t$-values) indicate that the
   neural feature indicated in the given row yielded higher accuracy than the
   feature indicated in the given column.  Cooler colors (negative
   $t$-values) indicate that
   the feature in the given row yielded lower decoding accuracy than
-  the feature in the given column.
-
-
-  The upper triangles of each heatmap report the $t$-values
-  from a 
-
-
-
-  \textbf{Heatmaps conveying statistical results comparing decoding
-    accuracy for each order.}  For each condition (intact, paragraph
-  scrambled, word scrambled, and rest) and for each reduction
-  technique (PCA and eigenvector centrality), we compared the
-  distribution of decoding accuracy for each order. The upper triangle
-  of each heatmap conveys the results of t-tests, and the lower
-  triangle conveys corresponding p-values.  The diagonal is the
-  results of the optimization of the phi parameter. }
+  the feature in the given column.  The lower triangles of each map
+  denote the corresponding $p$-values for the $t$-tests.  The diagonal
+  entries display the relative average optimized weight given to each type of feature, in
+  a decoder that included all feature types (see \textbf{Feature
+    weighting and testing}).}
 \label{fig:stats_heatmaps}
 \end{figure}
 
