@@ -26,6 +26,8 @@
 
 \bibliographystyle{apa}
 
+\newcommand{\neurosynth}{7}
+
 \begin{document}
 \maketitle
 
@@ -42,85 +44,55 @@
 
 
 
-\begin{figure}[tp]
-\centering
-\includegraphics[width=1\textwidth]{figs/stats_heatmaps}
-\caption{\textbf{Statistical summary of decoding accuracies for
-    different neural features.}  Each heatmap displays decoding
-  results for one experimental condition (intact, paragraph, word, and
-  rest).  We considered dynamic activity patterns (order 0) and
-  dynamic correlations at different orders (order $> 0$).  We used
-  two-tailed $t$-tests to compare the
-  distributions of decoding accuracies obtained using each pair of
-  features.  The distributions for each feature reflect the set of
-  average decoding accuracies (across all kernel parameters), obtained
-  for each random assignment of training and test groups.
-  In the upper triangles of each map, warmer colors (positive $t$-values) indicate that the
-  neural feature indicated in the given row yielded higher accuracy than the
-  feature indicated in the given column.  Cooler colors (negative
-  $t$-values) indicate that
-  the feature in the given row yielded lower decoding accuracy than
-  the feature in the given column.  The lower triangles of each map
-  denote the corresponding $p$-values for the $t$-tests.  The diagonal
-  entries display the relative average optimized weight given to each type of feature, in
-  a decoder that included all feature types (see \textbf{Feature
-    weighting and testing}).}
-\label{fig:stats_heatmaps}
-\end{figure}
-
 \begin{figure}[p!]
 \centering
 \includegraphics[width=0.75\textwidth]{figs/supp_15_intact}
-\caption{\textbf{Top 10 terms associated with the endpoints of the
-      strongest correlations for the intact experimental condition.}  Each color corresponds to orders 1-15 of
-    inter-subject functional correlations. The inflated brain plots
-    display the locations of the endpoints of the 10 strongest
-    (absolute value) correlations at each order, projected onto the
-    cortical surface~\citep{CombEtal19}.  The lists of terms on the
-    right display the top 10 Neurosynth terms~\citep{RubiEtal17}
-    decoded from the corresponding brain maps for each order for the intact condition.}
+\caption{\textbf{Top terms associated with the endpoints of the
+    strongest correlations for the \textit{intact} experimental
+    condition.}  Each color corresponds to one order of inter-subject
+functional correlations. The inflated brain plots display the
+locations of the endpoints of the 10 strongest (absolute value)
+correlations at each order, projected onto the cortical
+surface~\citep{CombEtal19}.  The lists of terms display
+the top 10 Neurosynth terms~\citep{RubiEtal17} decoded from the
+corresponding brain maps for each order.  (Also see Fig.~\neurosynth,
+top row, in the main text.)}
 \label{fig:intact}
 \end{figure}
 
 \begin{figure}[p!]
 \centering
 \includegraphics[width=0.75\textwidth]{figs/supp_15_paragraph}
-\caption{\textbf{Top 10 terms associated with the endpoints of the
-      strongest correlations for the paragraph scrambled condition.}  Each color corresponds to orders 1-15 of
-    inter-subject functional correlations for the paragraph scrambled condition. The inflated brain plots
-    display the locations of the endpoints of the 10 strongest
-    (absolute value) correlations at each order, projected onto the
-    cortical surface~\citep{CombEtal19}.  The lists of terms on the
-    right display the top 10 Neurosynth terms~\citep{RubiEtal17}
-    decoded from the corresponding brain maps for each order.}
+\caption{\textbf{Top terms associated with the endpoints of the
+    strongest correlations for the \textit{paragraph} experimental
+    condition.}  This figure is in the same format as
+  Figure~\ref{fig:intact}, but displays results for the
+  paragraph-scrambled story listening condition.  (Also see Fig.~\neurosynth,
+second row, in the main text.)}
 \label{fig:paragraph}
 \end{figure}
 
 \begin{figure}[p!]
 \centering
 \includegraphics[width=0.75\textwidth]{figs/supp_15_word}
-\caption{\textbf{Top 10 terms associated with the endpoints of the
-      strongest correlations for the word scrambled condition.}  Each color corresponds to orders 1-15 of
-    inter-subject functional correlations for the word scrambled condition. The inflated brain plots
-    display the locations of the endpoints of the 10 strongest
-    (absolute value) correlations at each order, projected onto the
-    cortical surface~\citep{CombEtal19}.  The lists of terms on the
-    right display the top 10 Neurosynth terms~\citep{RubiEtal17}
-    decoded from the corresponding brain maps for each order.}
+\caption{\textbf{Top terms associated with the endpoints of the
+    strongest correlations for the \textit{word} experimental
+    condition.}  This figure is in the same format as
+  Figure~\ref{fig:intact}, but displays results for the
+  word-scrambled story listening condition.  (Also see Fig.~\neurosynth,
+third row, in the main text.)}
 \label{fig:word}
 \end{figure}
 
 \begin{figure}[p!]
 \centering
 \includegraphics[width=0.75\textwidth]{figs/supp_15_rest}
-\caption{\textbf{Top 10 terms associated with the endpoints of the
-      strongest correlations for the rest condition.}  Each color corresponds to orders 1-15 of
-    inter-subject functional correlations for the rest condition. The inflated brain plots
-    display the locations of the endpoints of the 10 strongest
-    (absolute value) correlations at each order, projected onto the
-    cortical surface~\citep{CombEtal19}.  The lists of terms on the
-    right display the top 10 Neurosynth terms~\citep{RubiEtal17}
-    decoded from the corresponding brain maps for each order.}
+\caption{\textbf{Top terms associated with the endpoints of the
+    strongest correlations for the \textit{rest} experimental
+    condition.}  This figure is in the same format as
+  Figure~\ref{fig:intact}, but displays results for the
+  resting state condition.  (Also see Fig.~\neurosynth,
+bottom row, in the main text.)}
 \label{fig:rest}
 \end{figure}
 
