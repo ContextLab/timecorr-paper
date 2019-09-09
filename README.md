@@ -5,7 +5,7 @@ This repository contains data and code used to produce the paper [_High-level co
 ```
 root
 └── code : all code used in the paper
-    ├── notebooks : jupyter notebooks for paper analyses
+    ├── notebooks : jupyter notebooks for paper analyses and instructions for downloading the data
     └── scripts : python scripts used to run analyses on a computing cluster
     └── figs : pdf and png copies of figures
 └── data : all data used in the paper
