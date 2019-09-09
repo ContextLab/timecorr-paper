@@ -8,9 +8,7 @@ root
     ├── notebooks : jupyter notebooks for paper analyses and instructions for downloading the data
     └── scripts : python scripts used to run analyses on a computing cluster
     └── figs : pdf and png copies of figures
-└── data : all data used in the paper
-    └── results : all processed data
-        └── directories : for indvidual analyses
+└── data : create this folder by extracting the following zip archive into your clone of this repository's folder: [link](https://drive.google.com/file/d/1CZYe8eyAkZFuLqfwwlKoeijgkjdW6vFs/view?usp=sharing)
 └── paper : all files to generate paper
     └── figs : pdf copies of each figure
 ```
