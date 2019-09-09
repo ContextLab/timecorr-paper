@@ -81,12 +81,12 @@ might comprise the neural code.  For example, prior work has used
 region of interest analyses to estimate the anatomical locations of
 specific neural representations~\citep[e.g.,][]{EtzeEtal09}, or to
 compare the relative contributions to the neural code of multivariate
-activity patterns versus patterns of dynamic correlations between
-neural activity patterns~\citep[e.g.,][]{MannEtal18, FongEtal19}.  An
-emerging theme in this literature is that cognition is mediated by
-dynamic interactions between brain structures~\citep{SporHone06,
-  BassEtal06, Turk13, DemeEtal19, SoloEtal19, LuriEtal18, PretEtal17,
-  ZouEtal19, MackEtal17}.
+activity patterns versus dynamic correlations between neural activity
+patterns~\citep[e.g.,][]{MannEtal18, FongEtal19}.  An emerging theme
+in this literature is that cognition is mediated by dynamic
+interactions between brain structures~\citep{SporHone06, BassEtal06,
+  Turk13, DemeEtal19, SoloEtal19, LuriEtal18, PretEtal17, ZouEtal19,
+  MackEtal17}.
 
 
 \begin{figure}[tp]
@@ -107,9 +107,10 @@ dynamic interactions between brain structures~\citep{SporHone06,
     with complex neural patterns, it can be useful to characterize the
     patterns using summary measures.  Dimensionality reduction
     algorithms project the patterns onto lower-dimensional spaces
-    whose dimensions reflect weighted combinations of the dimensions
-    in the original space.  Graph measures characterize each unit's
-    participation in its associated network.}
+    whose dimensions reflect weighted combinations or non-linear
+    transformations of the dimensions in the original space.  Graph
+    measures characterize each unit's participation in its associated
+    network.}
   \label{fig:patterns}
 \end{figure}
 
@@ -235,8 +236,7 @@ corresponding datasets, may be found at
 In addition, we have released a Python toolbox for computing dynamic
 high-order correlations in timeseries data; our toolbox may be found
 at
-\href{https://timecorr.readthedocs.io/}{timecorr.readthedocs.io}. \textbf{JRM
-  NOTE: CHECK LINK}
+\href{https://timecorr.readthedocs.io/}{timecorr.readthedocs.io}.
 
 \begin{figure}
   \centering
@@ -272,7 +272,7 @@ $\mathbf{X}(\cdot, j)$ using~\citep{Pear01}:
                                                               -
                                                               \bar{\mathbf{X}}(\cdot, j)\right)}{\sqrt{\sum_{t=1}^T
                                                               \sigma^2_{\mathbf{X}(\cdot, i)} 
-                                                              \sigma^2_{\mathbf{X}(\cdot, j)}}},~\mathrm{where}\\\label{eqn:corr}
+                                                              \sigma^2_{\mathbf{X}(\cdot, j)}}},~\mathrm{where}\label{eqn:corr}\\
   \bar{\mathbf{X}}(\cdot, k) &= \frac{1}{T}\sum_{t=1}^T
                                \mathbf{X}(t, k),~\mathrm{and}\\
   \sigma^2_{\mathbf{X}(\cdot, k)} &= \frac{1}{T}\sum_{t=1}^T \left( \mathbf{X}(t, k) -
@@ -339,7 +339,7 @@ Here
 $\mathrm{timecorr}_{\kappa_t}(\mathbf{X}(\cdot, i), \mathbf{X}(\cdot,
 j))$ reflects the correlation at time $t$ between columns $i$ and $j$
 of $\mathbf{X}$, estimated using the kernel $\kappa_t$.  We evaluate
-Equation~\ref{eqn:timecorr} in turn each pair of columns in
+Equation~\ref{eqn:timecorr} in turn for each pair of columns in
 $\mathbf{X}$ and for kernels centered on each timepoint in the
 timeseries, respectively, to obtain a $T$ by $K$ by $K$ timeseries of
 dynamic correlations, $\mathbf{Y}$.  For convenience, we then reshape
@@ -362,12 +362,12 @@ observation matrices ($n = 0$) or reduced correlation matrices
 in the multi-participant dataset at a given timepoint $t$ using:
 \begin{align}
 \bar{\mathbf{C}}(t) = M\left(R\left(\frac{1}{2P} \sum_{p=1}^P
-  Z\left(\mathbf{Y}_{n+1}^p(t)\right)^\mathrm{T} + Z\left(\mathbf{Y}_{n+1}^p(t)\right)\right)\right),\label{eqn:disfc}
+  Z\left(\mathbf{Y}_{n+1}^p(t)\right)^\top + Z\left(\mathbf{Y}_{n+1}^p(t)\right)\right)\right),\label{eqn:disfc}
 \end{align}
 where $M$ extracts and vectorizes the upper triangle and diagonal of a symmetric
 matrix, $Z$ is the Fisher $z$-transformation~\citep{Zar10}:
 \begin{align}
-Z(r) = \frac{\log(1+r) - \log(1-r)}{2}
+Z(r) = \frac{\log(1+r) - \log(1-r)}{2},
 \end{align}
 $R$ is the inverse of $Z$:
 \begin{align}
@@ -378,8 +378,8 @@ and $\mathbf{Y}_{n+1}^p(t)$ denotes the correlation matrix at timepoint $t$
 column of the average $\mathbf{X}_n$ from all \textit{other}
 participants, $\bar{\mathbf{X}}_n^{ \backslash p}$:
 \begin{align}
-  \bar{\mathbf{X}}_n^{ \backslash p} = R\left(\frac{1}{P-1}\sum_{q \in
-  \backslash p} Z\left( \mathbf{X}_n^q \right) \right),
+  \bar{\mathbf{X}}_n^{ \backslash p} = \frac{1}{P-1}\sum_{q \in
+  \backslash p} \mathbf{X}_n^q,
 \end{align}
 where $\backslash p$ denotes the set of all participants other than
 participant $p$. In this way, the $T$ by $\left( \frac{K^2 - K}{2} + K \right)$ DISFC
@@ -390,12 +390,12 @@ approach developed by \cite{SimoEtal16}.
   correlations}
 
 Given a $T$ by $\left( \frac{K^2 - K}{2} + K \right)$ matrix of
-dynamic correlations, $\mathbf{Y}_n$, we propose two general
-approaches to computing a $T$ by $K$ low-dimensional representation of
-those correlations, $\mathbf{X}_n$.  The first approach uses
-dimensionality reduction algorithms to project $\mathbf{Y}_n$ onto a
-$K$-dimensional space.  The second approach uses graph measures to
-characterize the relative positions of each feature
+$n^\mathrm{th}$-order dynamic correlations, $\mathbf{Y}_n$, we propose
+two general approaches to computing a $T$ by $K$ low-dimensional
+representation of those correlations, $\mathbf{X}_n$.  The first
+approach uses dimensionality reduction algorithms to project
+$\mathbf{Y}_n$ onto a $K$-dimensional space.  The second approach uses
+graph measures to characterize the relative positions of each feature
 ($k \in \left[1, ..., K \right]$) in the network defined by the
 correlation matrix at each timepoint.
 
@@ -432,14 +432,14 @@ reduction, the resulting $\mathbf{X}_n$ has lower and lower fidelity
 (with respect to what the ``true'' $\mathbf{Y}_n$ might have looked
 like without using dimensionality reduction to maintain scalability).
 In other words, computing $\mathbf{X}_n$ is a lossy operation.
-Second, whereas each columns of $\mathbf{Y}_n$ may be mapped
+Second, whereas each column of $\mathbf{Y}_n$ may be mapped
 directly onto specific pairs of columns of $\mathbf{X}_{n-1}$, the
 columns of $\mathbf{X}_n$ reflect weighted combinations and/or
 nonlinear transformations of the columns of $\mathbf{Y}_n$.  Many
 dimensionality reduction algorithms are invertible (or approximately
 invertible).  However, attempting to map a given $\mathbf{X}_n$ back
 onto the original feature space of $\mathbf{X}_0$ will usually require
-$\mathcal{O}(TK^{2n})$ space and therefore quickly becomes intractable
+$\mathcal{O}(TK^{2n})$ space and therefore becomes intractable
 as $n$ or $K$ grow large.
 
 \subsubsection*{Graph measure approaches to computing
@@ -462,7 +462,7 @@ network.
 In general, graph measures take as input a matrix of
 interactions (e.g., using the above notation, a $K$ by $K$
 correlation matrix or binarized correlation matrix reconstituted from
-a single timepoint's row of $\mathbf{Y}$) and return as output a set
+a single timepoint's row of $\mathbf{Y}$), and return as output a set
 of $K$ measures describing how each node (feature) sits within that
 correlation matrix with respect to the rest of the population.  Widely
 used measures include betweenness centrality~\citep[the proportion of
@@ -471,20 +471,20 @@ involves the given node in question; e.g.,][]{Newm05, OpsaEtal10,
   Bart04, GeisEtal08, Free77}; diversity and
 dissimilarity~\citep[characterizations of how differently connected a
 given node is from others in the population; e.g.,][]{Rao82, Lin09,
-  RicoSzei06}; Eigenvector centrality and pagerank
+  RicoSzei06}; eigenvector centrality and pagerank
 centrality~\citep[measures of how influential a given node is within
 the broader network; e.g.,][]{Newm08, Bona07, LohmEtal10,
   HaluEtal13}; transfer entropy and flow coefficients~\citep[a measure
 of how much information is flowing from a given node to other nodes in
 the network; e.g.,][]{HoneEtal07, Schr00}; $k$-coreness
 centrality~\citep[a measure of the connectivity of a node within its
-local sub-graph; e.g.,][]{AlvaEtal05, ChriFowl10}; within-module
+local subgraph; e.g.,][]{AlvaEtal05, ChriFowl10}; within-module
 degree~\citep[a measure of how many connections a node has to its
 close neighbors in the network; e.g.,][]{RubiSpor10}; participation
 coefficient~\citep[a measure of the diversity of a node's connections
-to different sub-graphs in the network; e.g.,][]{RubiSpor10}; and
-sub-graph centrality~\citep[a measure of a node's participation in all
-of the network's sub-graphs; e.g.,][]{EstrRodr05}; among others.
+to different subgraphs in the network; e.g.,][]{RubiSpor10}; and
+subgraph centrality~\citep[a measure of a node's participation in all
+of the network's subgraphs; e.g.,][]{EstrRodr05}; among others.
 
 For a given graph measure,
 $\eta: \mathbb{R}^{K \times K} \rightarrow \mathbb{R}^K$, we can use
@@ -576,7 +576,7 @@ $\mathbf{\Sigma}_m$:
   
   \paragraph*{Ramping.}  We generated a third set of 10 synthetic
   datasets whose underlying correlations changed gradually over time.
-  For each dataset, we constructed two \textit{anchor} correlation
+  For each dataset, we constructed two \textit{anchor} covariance
   matrices using Equation~\ref{eqn:randcorr},
   $\mathbf{\Sigma}_{\mathrm{start}}$ and
   $\mathbf{\Sigma}_{\mathrm{end}}$.  For each of the 300 timepoints in
@@ -608,7 +608,7 @@ authors have made publicly available at
 \href{http://arks.princeton.edu/ark:/88435/dsp015d86p269k}{arks.princeton.edu/ark:/88435/dsp015d86p269k}.  The dataset
 comprises neuroimaging data collected as participants listened
 to an audio recording of a story (intact condition; 36 participants),
-listened to time scrambled recordings of the same story (17
+listened to temporally scrambled recordings of the same story (17
 participants in the paragraph-scrambled condition listened to the
 paragraphs in a randomized order and 36 in the word-scrambled
 condition listened to the words in a randomized order), or lay resting
@@ -646,7 +646,7 @@ used an across-participant temporal decoding test developed by
 \cite{MannEtal18} to assess the degree to which different neural
 patterns reflected ongoing stimulus-driven cognitive processing across
 people.  The approach entails using a subset of the data to train a
-classifier to decode stimulus timepoints (i.e., moment in the story
+classifier to decode stimulus timepoints (i.e., moments in the story
 participants listened to) from neural patterns.  We use decoding
 (forward inference) accuracy on held-out data, from held-out
 participants, as a proxy for the extent to which the inputted neural
@@ -734,7 +734,8 @@ After estimating an optimal set of weights, we computed a new set of
 $n + 1$ $\mathbf{\Lambda}$ matrices correlating the DISFC patterns
 from $\mathcal{G}_{\mathrm{train}}$ and $\mathcal{G}_{\mathrm{test}}$
 at each timepoint.  We use the resulting decoding accuracy of
-$\mathcal{G}_{\mathrm{test}}$ timepoints to estimate how informative
+$\mathcal{G}_{\mathrm{test}}$ timepoints (using the weights in
+$\phi_{0, 1, ..., n}$ to average the $\Lambda$ matrices) to estimate how informative
 the set of neural features containing up to $n^\mathrm{th}$ order
 correlations were.
 
@@ -766,8 +767,8 @@ a function of which neural features were considered.
 
 To identify decoding results that were robust to specific classifier
 parameter choices, we repeated our decoding analyses after
-substituting in each of a variety of kernel shapes and widths for
-Equation~\ref{eqn:timecorr}.  We examined Gaussian
+substituting into Equation~\ref{eqn:timecorr} each of a variety of
+kernel shapes and widths.  We examined Gaussian
 (Fig.~\ref{fig:kernels}c), Laplace (Fig.~\ref{fig:kernels}d), and
 Mexican Hat (Fig.~\ref{fig:kernels}e) kernels, each with widths of 5,
 10, 20, and 50 samples.  We then report the average decoding
@@ -848,7 +849,7 @@ different synthetic datasets in a kernel-dependent way.
     each new timepoint.  \textbf{c. Ramping correlations.}  These
     datasets are generated by smoothly varying the underlying
     correlations between the randomly drawn correlation matrices at
-    first and last timepoints.  The left panel displays the
+    the first and last timepoints.  The left panel displays the
     correlations between the recovered dynamic correlations and the
     underlying ground truth correlations.  The middle panel compares
     the recovered correlations with the \textit{first} timepoint's
@@ -897,7 +898,7 @@ participants in this condition experienced the scrambled paragraphs in
 the same order.  The \textit{word}-scrambled experimental condition
 had participants listen to a temporally scrambled version of the story
 where the words in the story occurred in a random order.  All
-participants in the word conditions experienced the scrambled words in
+participants in the word condition experienced the scrambled words in
 the same order.  Finally, in a \textit{rest} experimental condition,
 participants lay in the scanner with no overt stimulus, with their
 eyes open (blinking as needed).  This dataset provided a convenient
@@ -925,21 +926,21 @@ activity dynamics.
     denote sets of features that yielded reliably higher (upwards
     facing) or lower (downward facing) decoding accuracy than the mean
     of all other features (via a two-tailed test, thresholded at
-    $p < 0.05$).  Figure~\ref{fig:ttests} displays additional comparisons between
-    the decoding accuracies achieved using different sets of neural
-    features.  The circled values represent the maximum decoding
-    accuracy within each experimental condition.
+    $p < 0.05$).  Figure~\ref{fig:ttests} displays additional
+    comparisons between the decoding accuracies achieved using
+    different sets of neural features.  The circled values represent
+    the maximum decoding accuracy within each experimental condition.
     \textbf{b.~Normalized decoding accuracy as a function of order:
       PCA.}  This panel displays the same results as Panel a, but here
-    each curve has been normalized to have a maximum value of 1 and
-    and a minimum value of 0 (including the upper and lower bounds of
-    the respective 95\% confidence intervals).  Panels a and b used
-    PCA to project each high-dimensional pattern of dynamic
-    correlations onto a lower-dimensional space.  \textbf{c.~Decoding
-      accuracy as a function of order: eigenvector centrality.} This
-    panel is in the same format as Panel a, but here eigenvector
-    centrality has been used to project the high-dimensional patterns
-    of dynamic correlations onto a lower-dimensional space.
+    each curve has been normalized to have a maximum value of 1 and a
+    minimum value of 0 (including the upper and lower bounds of the
+    respective 95\% confidence intervals).  Panels a and b used PCA to
+    project each high-dimensional pattern of dynamic correlations onto
+    a lower-dimensional space.  \textbf{c.~Decoding accuracy as a
+      function of order: eigenvector centrality.} This panel is in the
+    same format as Panel a, but here eigenvector centrality has been
+    used to project the high-dimensional patterns of dynamic
+    correlations onto a lower-dimensional space.
     \textbf{d.~Normalized decoding accuracy as a function of order:
       eigenvector centrality.} This panel is in the same format as
     Panel b, but here eigenvector centrality has been used to project
@@ -959,13 +960,13 @@ $n^\mathrm{th}$-order dynamic correlations (see \textit{Feature
 $n \in \left\{ 0, 1, 2, ..., 10 \right\}$.  Our examinations of
 synthetic data suggested that none of the kernels we examined were
 ``universal'' in the sense of optimally recovering underlying
-correlations regardless of the structure of those correlations.  We
-found a similar pattern in the (real) fMRI data, whereby different
-kernels yielded different decoding accuracies, but no single kernel
-emerged as the clear ``best.''  In our analyses of neural data, we
-therefore averaged our decoding results over a variety of kernel
-shapes and widths in order to identify results that were robust to
-specific kernel parameters (see \textit{Identifying robust
+correlations regardless of the temporal structure of those
+correlations.  We found a similar pattern in the (real) fMRI data,
+whereby different kernels yielded different decoding accuracies, but
+no single kernel emerged as the clear ``best.''  In our analyses of
+neural data, we therefore averaged our decoding results over a variety
+of kernel shapes and widths in order to identify results that were
+robust to specific kernel parameters (see \textit{Identifying robust
   decoding results}).
 
 Our approach to estimating dynamic high-order correlations entails
@@ -1009,7 +1010,7 @@ centrality, but did not preserve the underlying activity dynamics
 
 Both sets of temporal decoding analyses yielded qualitatively similar
 results for the auditory (non-rest) conditions of the experiment
-(Fig.~\ref{fig:decoding}: pink, yellow, and teal lines;
+(Fig.~\ref{fig:decoding}: pink, green, and teal lines;
 Fig.~\ref{fig:ttests}: three leftmost columns).  The highest
 decoding accuracy for participants who listened to the intact
 (unscrambled) story was achieved using high-order dynamic correlations
@@ -1055,8 +1056,8 @@ different brain areas occupy in their associated networks
     decoded from the corresponding brain maps for each order.  Each
     row displays data from a different experimental condition.
     Additional maps and their corresponding Neurosynth terms may be
-    found in the \textit{Supplementary materials} (intact: Figure~\intact;
-    paragraph: Figure~\para; word: Figure~\word; rest: Figure~\rest).}
+    found in the \textit{Supplementary materials} (intact: Fig.~\intact;
+    paragraph: Fig.~\para; word: Fig.~\word; rest: Fig.~\rest).}
   \label{fig:neurosynth}
 \end{figure}
 
@@ -1172,7 +1173,7 @@ similar kernel (Eqn.~\ref{eqn:timecorr}), the kernel function could
 adapt on a timepoint-by-timepoint basis such that only timepoints
 determined to be in the same ``state'' were given non-zero weight.
 
-Identifying higher-order network dynamics associated with high-level
+Identifying high-order network dynamics associated with high-level
 cognition required several important methods advances.  First, we used
 kernel-based dynamic correlations to extended the notion of (static)
 inter-subject functional connectivity~\citep{SimoEtal16} to a dynamic
