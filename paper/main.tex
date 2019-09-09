@@ -92,7 +92,7 @@ interactions between brain structures~\citep{SporHone06, BassEtal06,
 \begin{figure}[tp]
   \centering
   \includegraphics[width=\textwidth]{figs/patterns}
-  \caption{\textbf{Neural patterns.  a. A space of neural analyses}
+  \caption{\textbf{Neural patterns.  a. A space of neural features.}
     Within-brain analyses are carried out within a single brain,
     whereas across-brain analyses compare neural patterns across two
     or more individuals' brains.  Univariate analyses characterize the
@@ -240,7 +240,7 @@ at
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.4\textwidth]{figs/methods_fig}
+  \includegraphics[width=0.5\textwidth]{figs/methods_fig}
   \caption{\textbf{Estimating dynamic high-order correlations.}  Given
     a $T$ by $K$ matrix of multivariate timeseries data,
     $\mathbf{X}_n$ (where $n \in \mathbb{N}, n \geq 0$), we use
@@ -789,9 +789,9 @@ dynamic high-order correlations) measured at two RBF nodes (see
 \textit{Hierarchical Topographic Factor Analysis}).  Therefore, the 10
 strongest correlations involved up to 20 RBF nodes.  Each RBF defines
 a spatial function whose activations range from 0 to 1.  We
-thresholded each RBF at 0.999 to construct a map of spherical
-components that denoted the endpoints of the 10 strongest
-correlations.  We then carried out a meta analysis using
+constructed a map of RBF components that denoted the endpoints of the
+10 strongest correlations (we set each RBF to have a maximum value of
+1).  We then carried out a meta analysis using
 Neurosynth~\citep{RubiEtal17} to identify the 10 terms most commonly
 associated with the given map.  This resulted in a set of 10 terms
 associated with the average dynamic correlation patterns at each
@@ -1050,14 +1050,15 @@ different brain areas occupy in their associated networks
       strongest correlations.}  Each color corresponds to one order of
     inter-subject functional correlations. The inflated brain plots
     display the locations of the endpoints of the 10 strongest
-    (absolute value) correlations at each order, projected onto the
-    cortical surface~\citep{CombEtal19}.  The lists of terms on the
-    right display the top five Neurosynth terms~\citep{RubiEtal17}
-    decoded from the corresponding brain maps for each order.  Each
-    row displays data from a different experimental condition.
-    Additional maps and their corresponding Neurosynth terms may be
-    found in the \textit{Supplementary materials} (intact: Fig.~\intact;
-    paragraph: Fig.~\para; word: Fig.~\word; rest: Fig.~\rest).}
+    (absolute value) correlations at each order, thresholded at 0.999,
+    and projected onto the cortical surface~\citep{CombEtal19}.  The
+    lists of terms on the right display the top five Neurosynth
+    terms~\citep{RubiEtal17} decoded from the corresponding brain maps
+    for each order.  Each row displays data from a different
+    experimental condition.  Additional maps and their corresponding
+    Neurosynth terms may be found in the \textit{Supplementary
+      materials} (intact: Fig.~\intact; paragraph: Fig.~\para; word:
+    Fig.~\word; rest: Fig.~\rest).}
   \label{fig:neurosynth}
 \end{figure}
 
