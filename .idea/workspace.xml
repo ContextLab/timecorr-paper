@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="417b68b5-4afb-4c94-9087-b4cb6c1ea5b8" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/notebooks/decode_levels.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/decode_levels.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/notebooks/neurosynth_analysis.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/neurosynth_analysis.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/notebooks/visbrain_plots.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/visbrain_plots.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/paper/PlotLevelUp" beforeDir="false" afterPath="$PROJECT_DIR$/paper/PlotLevelUp" afterDir="false" />
     </list>
@@ -42,10 +40,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="pieman_cluster_order_up.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="pieman_cluster_order_up.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_order_up.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
+            <state relative-caret-position="1231">
               <caret line="94" column="41" selection-start-line="94" selection-start-column="41" selection-end-line="94" selection-end-column="41" />
               <folding>
                 <element signature="e#1#22#0" expanded="true" />
@@ -92,8 +90,8 @@
       <file leaf-file-name="dockerfile" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dockerfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
+            <state relative-caret-position="152">
+              <caret line="8" column="32" lean-forward="true" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -128,7 +126,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
@@ -258,6 +256,12 @@
               <item name="timecorr-paper" type="b2602c69:ProjectViewProjectNode" />
               <item name="timecorr-paper" type="462c0819:PsiDirectoryNode" />
               <item name="code" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="timecorr-paper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="timecorr-paper" type="462c0819:PsiDirectoryNode" />
+              <item name="code" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="timecorr-paper" type="b2602c69:ProjectViewProjectNode" />
@@ -448,6 +452,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="108" y="36" width="1472" height="1005" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5013587" side_tool="true" weight="0.3934611" />
@@ -456,8 +461,8 @@
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32919955" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4970874" visible="true" weight="0.2540761" />
-      <window_info active="true" anchor="bottom" id="Docker" order="7" visible="true" weight="0.32919955" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4970874" visible="true" weight="0.2540761" />
+      <window_info anchor="bottom" id="Docker" order="7" visible="true" weight="0.32919955" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32919955" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -835,16 +840,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_order_up.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="94" column="41" selection-start-line="94" selection-start-column="41" selection-end-line="94" selection-end-column="41" />
-          <folding>
-            <element signature="e#1#22#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/code/scripts/plot_15.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -864,8 +859,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dockerfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
+        <state relative-caret-position="152">
+          <caret line="8" column="32" lean-forward="true" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -876,6 +871,16 @@
             <caret line="39" selection-start-line="39" selection-end-line="39" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_order_up.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1231">
+          <caret line="94" column="41" selection-start-line="94" selection-start-column="41" selection-end-line="94" selection-end-column="41" />
+          <folding>
+            <element signature="e#1#22#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

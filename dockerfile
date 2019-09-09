@@ -1,5 +1,5 @@
 # Specified OS or runtime
-FROM debian:latest
+FROM ubuntu:latest
 
 MAINTAINER Contextual Dynamics Lab <contextualdynamics@gmail.com>
 
@@ -41,7 +41,6 @@ nose \
 sphinx \
 numpy \
 visbrain \
-scipy==1.1.0 \
 pandas \
 matplotlib \
 numba \
@@ -59,6 +58,8 @@ hypertools \
 supereeg
 
 RUN conda install scikit-learn
+
+RUN pip install scipy==1.1.0
 
 # add some useful directories as mirrors of directors in the same location on your computer
 ADD data /data
