@@ -1,12 +1,12 @@
 # Do higher order correlation contribute to cognition?
 
-This repository contains data and code used to produce the paper "[_High-level cognition during story listening is reflected in high-order dynamic correlations in neural activity patterns_](webstie to come)" by Lucy L.W. Owen, Thomas H. Chang, and Jeremy R. Manning. The repository is organized as follows:
+This repository contains data and code used to produce the paper [_High-level cognition during story listening is reflected in high-order dynamic correlations in neural activity patterns_](www.context-lab.com) by Lucy L.W. Owen, Thomas H. Chang, and Jeremy R. Manning. The repository is organized as follows:
 
 ```
 root
 └── code : all code used in the paper
     ├── notebooks : jupyter notebooks for paper analyses
-    └── scripts : python scripts used to perform brain searchlight analyses on a cluster
+    └── scripts : python scripts used to run analyses on a computing cluster
     └── figs : pdf and png copies of figures
 └── data : all data used in the paper
     └── results : all processed data
