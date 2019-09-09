@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="417b68b5-4afb-4c94-9087-b4cb6c1ea5b8" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/notebooks/decode_levels.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/decode_levels.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/notebooks/neurosynth_analysis.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code/notebooks/neurosynth_analysis.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/paper/PlotLevelUp" beforeDir="false" afterPath="$PROJECT_DIR$/paper/PlotLevelUp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -89,8 +92,8 @@
       <file leaf-file-name="dockerfile" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dockerfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="478">
-              <caret line="46" column="47" lean-forward="true" selection-start-line="46" selection-start-column="47" selection-end-line="46" selection-end-column="47" />
+            <state relative-caret-position="279">
+              <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
             </state>
           </provider>
         </entry>
@@ -111,7 +114,7 @@
         <entry file="file://$PROJECT_DIR$/paper/main.tex">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="273">
-              <caret line="787" column="31" selection-start-line="787" selection-start-column="28" selection-end-line="787" selection-end-column="31" />
+              <caret line="787" column="31" selection-start-line="787" selection-start-column="31" selection-end-line="787" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -129,8 +132,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="689">
-                <caret line="38" column="132" selection-start-line="38" selection-start-column="132" selection-end-line="38" selection-end-column="132" />
+              <first_editor relative-caret-position="416">
+                <caret line="39" selection-start-line="39" selection-end-line="39" />
               </first_editor>
               <second_editor />
             </state>
@@ -219,6 +222,7 @@
         <option value="$PROJECT_DIR$/paper/nature neuroscience submission/cover_letter.tex" />
         <option value="$PROJECT_DIR$/code/dockerfile" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/dockerfile" />
       </list>
     </option>
   </component>
@@ -231,9 +235,9 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="30" />
-    <option name="y" value="67" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="108" />
+    <option name="y" value="36" />
     <option name="width" value="1472" />
     <option name="height" value="1005" />
   </component>
@@ -443,8 +447,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="30" y="67" width="1472" height="1005" extended-state="1" />
-    <editor active="true" />
+    <frame x="108" y="36" width="1472" height="1005" extended-state="0" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5013587" side_tool="true" weight="0.3934611" />
@@ -453,8 +456,8 @@
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32919955" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4970874" visible="true" weight="0.2540761" />
-      <window_info anchor="bottom" id="Docker" order="7" weight="0.32919955" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4970874" visible="true" weight="0.2540761" />
+      <window_info active="true" anchor="bottom" id="Docker" order="7" visible="true" weight="0.32919955" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32919955" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -855,22 +858,22 @@
     <entry file="file://$PROJECT_DIR$/paper/main.tex">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
-          <caret line="787" column="31" selection-start-line="787" selection-start-column="28" selection-end-line="787" selection-end-column="31" />
+          <caret line="787" column="31" selection-start-line="787" selection-start-column="31" selection-end-line="787" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dockerfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="46" column="47" lean-forward="true" selection-start-line="46" selection-start-column="47" selection-end-line="46" selection-end-column="47" />
+        <state relative-caret-position="279">
+          <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="689">
-            <caret line="38" column="132" selection-start-line="38" selection-start-column="132" selection-end-line="38" selection-end-column="132" />
+          <first_editor relative-caret-position="416">
+            <caret line="39" selection-start-line="39" selection-end-line="39" />
           </first_editor>
           <second_editor />
         </state>
