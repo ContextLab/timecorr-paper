@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="417b68b5-4afb-4c94-9087-b4cb6c1ea5b8" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/timecorr-paper.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/timecorr-paper.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/paper/PlotLevelUp" beforeDir="false" afterPath="$PROJECT_DIR$/paper/PlotLevelUp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,7 +26,7 @@
     <SUITE FILE_PATH="coverage/timecorr_paper$pieman_pca_analysis.coverage" NAME="pieman_pca_analysis Coverage Results" MODIFIED="1553602168093" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code/scripts" />
     <SUITE FILE_PATH="coverage/timecorr_paper$pieman_pca_chunk.coverage" NAME="pieman_pca_chunk Coverage Results" MODIFIED="1553133049458" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code/scripts" />
     <SUITE FILE_PATH="coverage/timecorr_paper$pieman_cluster_level_analysis.coverage" NAME="pieman_cluster_level_analysis Coverage Results" MODIFIED="1558639729183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code/scripts" />
-    <SUITE FILE_PATH="coverage/timecorr_paper$plot_15.coverage" NAME="plot_15 Coverage Results" MODIFIED="1568041412286" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code/scripts" />
+    <SUITE FILE_PATH="coverage/timecorr_paper$plot_15.coverage" NAME="plot_15 Coverage Results" MODIFIED="1568043997061" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code/scripts" />
     <SUITE FILE_PATH="coverage/timecorr_paper$animate_largest.coverage" NAME="animate_largest Coverage Results" MODIFIED="1567114374521" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code/scripts" />
     <SUITE FILE_PATH="coverage/timecorr_paper$pieman_pca_chunked.coverage" NAME="pieman_pca_chunked Coverage Results" MODIFIED="1549836402590" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code/scripts" />
     <SUITE FILE_PATH="coverage/timecorr_paper$pieman_cluster_param_search.coverage" NAME="pieman_cluster_param_search Coverage Results" MODIFIED="1550779758286" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code/scripts" />
@@ -44,7 +42,7 @@
       <file leaf-file-name="pieman_cluster_order_up.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_order_up.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1717">
+            <state relative-caret-position="2679">
               <caret line="141" column="16" selection-start-line="141" selection-start-column="16" selection-end-line="141" selection-end-column="16" />
               <folding>
                 <element signature="e#1#22#0" expanded="true" />
@@ -74,7 +72,7 @@
       <file leaf-file-name="pieman_cluster_level_analysis.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_level_analysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1705">
+            <state relative-caret-position="-1671">
               <caret line="3" column="28" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
             </state>
           </provider>
@@ -221,11 +219,11 @@
         <option value="$PROJECT_DIR$/paper/nature neuroscience submission/cover_letter.tex" />
         <option value="$PROJECT_DIR$/code/dockerfile" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/dockerfile" />
         <option value="$PROJECT_DIR$/code/scripts/pieman_cluster_order_up.py" />
         <option value="$PROJECT_DIR$/code/scripts/pieman_cluster_submit_order_up.py" />
         <option value="$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_analysis.py" />
         <option value="$PROJECT_DIR$/code/scripts/pieman_cluster_submit_param_search.py" />
+        <option value="$PROJECT_DIR$/dockerfile" />
       </list>
     </option>
   </component>
@@ -818,13 +816,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dockerfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="32" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -869,16 +860,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="32" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_level_analysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1705">
+        <state relative-caret-position="-1671">
           <caret line="3" column="28" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_order_up.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1717">
+        <state relative-caret-position="2679">
           <caret line="141" column="16" selection-start-line="141" selection-start-column="16" selection-end-line="141" selection-end-column="16" />
           <folding>
             <element signature="e#1#22#0" expanded="true" />
