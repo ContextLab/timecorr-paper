@@ -53,7 +53,7 @@ RUN pip install --upgrade --ignore-installed \
 seaborn \
 git+git://github.com/FIU-Neuro/brainconn.git \
 neurosynth \
-# timecorr \
+timecorr \
 hypertools \
 supereeg
 
