@@ -1,5 +1,5 @@
 # Specified OS or runtime
-FROM ubuntu:18.04
+FROM ubuntu:latest
 
 MAINTAINER Contextual Dynamics Lab <contextualdynamics@gmail.com>
 
@@ -7,6 +7,8 @@ MAINTAINER Contextual Dynamics Lab <contextualdynamics@gmail.com>
 RUN apt-get update && \
     apt-get install libgl1-mesa-glx -y
 RUN apt-get install -y eatmydata
+RUN apt-get install --reinstall libxcb-xinerama
+
 
 # install basic packages
 RUN eatmydata apt-get install -y wget bzip2 ca-certificates \
@@ -14,6 +16,7 @@ RUN eatmydata apt-get install -y wget bzip2 ca-certificates \
     swig \
     mpich \
     pkg-config \
+    libfontconfig1-dev \
     gcc \
     wget \
     curl \
@@ -38,7 +41,7 @@ RUN pip install --upgrade \
 nose \
 sphinx \
 numpy \
-scipy \
+visbrain \
 pandas \
 matplotlib \
 numba \
@@ -49,30 +52,21 @@ pykalman
 # that were)
 RUN pip install --upgrade --ignore-installed \
 seaborn \
+git+git://github.com/FIU-Neuro/brainconn.git \
+neurosynth \
+# timecorr \
 hypertools \
-supereeg \
-visbrain
-
-RUN bash -c "pip install git+https://github.com/FIU-Neuro/brainconn.git"
+supereeg
 
 RUN conda install scikit-learn
-RUN conda config --add channels ostrokach
-RUN conda config --add channels defaults
-RUN conda config --add channels conda-forge
-RUN conda install -c ostrokach-forge graph-tool
-RUN conda clean --all -y
+
+RUN pip install scipy==1.1.0
 
 # add some useful directories as mirrors of directors in the same location on your computer
 ADD data /data
-ADD notebooks /notebooks
+ADD code /code
+ADD paper /paper
 
 # Finally, expose a port from within the docker so we can use it to run
 # jupyter notebooks
 EXPOSE 9999
-
-RUN echo 'alias jp="jupyter notebook --port=9999 --no-browser --ip=0.0.0.0 --allow-root"' >> /root/.bashrc
-RUN echo 'alias jl="jupyter lab --port=9999 --no-browser --ip=0.0.0.0 --allow-root"' >> /root/.bashrc
-RUN mkdir -p /root/.jupyter && echo "c.NotebookApp.token = u''" >> /root/.jupyter/jupyter_notebook_config.py && echo "c.NotebookApp.notebook_dir = '/timecorr/docs/tutorial'" >> /root/.jupyter/jupyter_notebook_config.py
-
-# What should we run when the container is launched
-ENTRYPOINT ["/bin/bash"]

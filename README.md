@@ -30,7 +30,7 @@ We also include a Dockerfile to reproduce our computational environment. Instruc
     - The command below will create a new container that will map your computer's `Desktop` to `/mnt` within the container, so that location is shared between your host OS and the container. Feel free to change `Desktop` to whatever folder you prefer to share instead, but make sure to provide the full path. The command will also share port `9999` with your host computer so any jupyter notebooks launched from *within* the container will be accessible at `localhost:9999` in your web browser
     - `docker run -it -p 9999:9999 --name Timecorr_paper -v ~/Desktop:/mnt timecorr_paper `
     - You should now see the `root@` prefix in your terminal, if so you've successfully created a container and are running a shell from *inside*!
-5. To launch any of the notebooks: `jupyter lab --port=9999 --no-browser --ip=0.0.0.0 --allow-root`
+5. To launch any of the notebooks: `jupyter notebook --port=9999 --no-browser --ip=0.0.0.0 --allow-root`
 
 ## Using the container after setup
 1. You can always fire up the container by typing the following into a terminal

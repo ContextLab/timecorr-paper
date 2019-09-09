@@ -37,7 +37,7 @@ cfuns =  [str('isfc')]
 rfuns =  [str('eigenvector_centrality')]
 
 # options for widths: integer
-widths = [str(10)]
+widths = [str(50)]
 
 # options for weight functions: laplace, gaussian, mexican hat, delta
 weights = ['laplace']

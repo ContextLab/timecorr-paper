@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="417b68b5-4afb-4c94-9087-b4cb6c1ea5b8" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/timecorr-paper.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/timecorr-paper.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/paper/PlotLevelUp" beforeDir="false" afterPath="$PROJECT_DIR$/paper/PlotLevelUp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,6 +28,7 @@
     <SUITE FILE_PATH="coverage/timecorr_paper$pieman_pca_analysis.coverage" NAME="pieman_pca_analysis Coverage Results" MODIFIED="1553602168093" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code/scripts" />
     <SUITE FILE_PATH="coverage/timecorr_paper$pieman_pca_chunk.coverage" NAME="pieman_pca_chunk Coverage Results" MODIFIED="1553133049458" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code/scripts" />
     <SUITE FILE_PATH="coverage/timecorr_paper$pieman_cluster_level_analysis.coverage" NAME="pieman_cluster_level_analysis Coverage Results" MODIFIED="1558639729183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code/scripts" />
+    <SUITE FILE_PATH="coverage/timecorr_paper$plot_15.coverage" NAME="plot_15 Coverage Results" MODIFIED="1568041412286" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code/scripts" />
     <SUITE FILE_PATH="coverage/timecorr_paper$animate_largest.coverage" NAME="animate_largest Coverage Results" MODIFIED="1567114374521" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code/scripts" />
     <SUITE FILE_PATH="coverage/timecorr_paper$pieman_pca_chunked.coverage" NAME="pieman_pca_chunked Coverage Results" MODIFIED="1549836402590" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code/scripts" />
     <SUITE FILE_PATH="coverage/timecorr_paper$pieman_cluster_param_search.coverage" NAME="pieman_cluster_param_search Coverage Results" MODIFIED="1550779758286" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code/scripts" />
@@ -42,8 +44,8 @@
       <file leaf-file-name="pieman_cluster_order_up.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_order_up.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="94" column="41" selection-start-line="94" selection-start-column="41" selection-end-line="94" selection-end-column="41" />
+            <state relative-caret-position="1717">
+              <caret line="141" column="16" selection-start-line="141" selection-start-column="16" selection-end-line="141" selection-end-column="16" />
               <folding>
                 <element signature="e#1#22#0" expanded="true" />
               </folding>
@@ -51,19 +53,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="plot_15.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="plot_15.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/scripts/plot_15.py">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="57">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
+            </state>
+          </provider>
         </entry>
       </file>
-      <file leaf-file-name="animate_largest.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/scripts/animate_largest.py">
+      <file leaf-file-name="pieman_cluster_param_search.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_param_search.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="58" selection-start-line="58" selection-end-line="58" />
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-804">
+              <caret line="39" selection-start-line="39" selection-end-line="39" selection-end-column="88" />
             </state>
           </provider>
         </entry>
@@ -71,17 +74,29 @@
       <file leaf-file-name="pieman_cluster_level_analysis.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_level_analysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1413">
+            <state relative-caret-position="-1705">
               <caret line="3" column="28" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="plot_largest_abs.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/scripts/plot_largest_abs.py">
+      <file leaf-file-name="pieman_cluster_submit_level_analysis.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_analysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="639">
-              <caret line="73" column="55" selection-start-line="73" selection-start-column="55" selection-end-line="73" selection-end-column="55" />
+            <state relative-caret-position="271">
+              <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
+              <folding>
+                <element signature="e#51#76#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pieman_cluster_submit_param_search.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_submit_param_search.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="676">
+              <caret line="46" selection-start-line="46" selection-end-line="46" />
             </state>
           </provider>
         </entry>
@@ -89,8 +104,8 @@
       <file leaf-file-name="dockerfile" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dockerfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="478">
-              <caret line="46" column="47" lean-forward="true" selection-start-line="46" selection-start-column="47" selection-end-line="46" selection-end-column="47" />
+            <state relative-caret-position="152">
+              <caret line="8" column="32" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -98,8 +113,8 @@
       <file leaf-file-name="pieman_cluster_submit_order_up.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_submit_order_up.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="639">
-              <caret line="160" column="15" selection-start-line="160" selection-start-column="15" selection-end-line="160" selection-end-column="15" />
+            <state relative-caret-position="489">
+              <caret line="47" column="39" selection-start-line="47" selection-start-column="39" selection-end-line="47" selection-end-column="39" />
               <folding>
                 <element signature="e#51#76#0" expanded="true" />
               </folding>
@@ -111,26 +126,17 @@
         <entry file="file://$PROJECT_DIR$/paper/main.tex">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="273">
-              <caret line="787" column="31" selection-start-line="787" selection-start-column="28" selection-end-line="787" selection-end-column="31" />
+              <caret line="787" column="31" selection-start-line="787" selection-start-column="31" selection-end-line="787" selection-end-column="31" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cover_letter.tex" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/paper/nature neuroscience submission/cover_letter.tex">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="741">
-              <caret line="122" selection-start-line="122" selection-end-line="122" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="689">
-                <caret line="38" column="132" selection-start-line="38" selection-start-column="132" selection-end-line="38" selection-end-column="132" />
+              <first_editor relative-caret-position="416">
+                <caret line="39" selection-start-line="39" selection-end-line="39" />
               </first_editor>
               <second_editor />
             </state>
@@ -185,7 +191,6 @@
         <option value="$PROJECT_DIR$/code/scripts/pieman_pca_chunked.py" />
         <option value="$PROJECT_DIR$/code/scripts/plot.py" />
         <option value="$PROJECT_DIR$/code/notebooks/level_analyses.ipynb" />
-        <option value="$PROJECT_DIR$/code/scripts/pieman_cluster_submit_param_search.py" />
         <option value="$PROJECT_DIR$/paper/PlotLevelUp/plot_method_fig/timecorr_example.py" />
         <option value="$PROJECT_DIR$/code/scripts/figs/pieman_pca_analysis.py" />
         <option value="$PROJECT_DIR$/code/scripts/pieman_pca_analysis_submit.py" />
@@ -198,12 +203,9 @@
         <option value="$PROJECT_DIR$/code/scripts/corrmats_calc.py" />
         <option value="$PROJECT_DIR$/code/scripts/pieman_pca_analysis.py" />
         <option value="$PROJECT_DIR$/code/scripts/run_job.sh" />
-        <option value="$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_analysis.py" />
         <option value="$PROJECT_DIR$/code/scripts/config.py" />
         <option value="$PROJECT_DIR$/code/scripts/pieman_cluster_level_chunked.py" />
         <option value="$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_chunked.py" />
-        <option value="$PROJECT_DIR$/code/scripts/pieman_cluster_order_up.py" />
-        <option value="$PROJECT_DIR$/code/scripts/pieman_cluster_submit_order_up.py" />
         <option value="$PROJECT_DIR$/code/figs/stats/README.md" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/code/scripts/plot_smallest.py" />
@@ -219,6 +221,11 @@
         <option value="$PROJECT_DIR$/paper/nature neuroscience submission/cover_letter.tex" />
         <option value="$PROJECT_DIR$/code/dockerfile" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/dockerfile" />
+        <option value="$PROJECT_DIR$/code/scripts/pieman_cluster_order_up.py" />
+        <option value="$PROJECT_DIR$/code/scripts/pieman_cluster_submit_order_up.py" />
+        <option value="$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_analysis.py" />
+        <option value="$PROJECT_DIR$/code/scripts/pieman_cluster_submit_param_search.py" />
       </list>
     </option>
   </component>
@@ -231,9 +238,9 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="30" />
-    <option name="y" value="67" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="108" />
+    <option name="y" value="36" />
     <option name="width" value="1472" />
     <option name="height" value="1005" />
   </component>
@@ -254,6 +261,12 @@
               <item name="timecorr-paper" type="b2602c69:ProjectViewProjectNode" />
               <item name="timecorr-paper" type="462c0819:PsiDirectoryNode" />
               <item name="code" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="timecorr-paper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="timecorr-paper" type="462c0819:PsiDirectoryNode" />
+              <item name="code" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="timecorr-paper" type="b2602c69:ProjectViewProjectNode" />
@@ -296,7 +309,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.animate_largest">
+  <component name="RunManager" selected="Python.plot_15">
     <configuration name="animate_largest" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="timecorr-paper" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -335,7 +348,7 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="pieman_cluster_order_up" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="plot_15" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="timecorr-paper" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -348,26 +361,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/code/scripts/pieman_cluster_order_up.py" />
-      <option name="PARAMETERS" value="paragraph 16 isfc eigenvector_centrality 3 laplace" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="pieman_cluster_submit_order_up" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="timecorr-paper" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/code/scripts" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/code/scripts/pieman_cluster_submit_order_up.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/code/scripts/plot_15.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -411,21 +405,36 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
+    <configuration name="Docker Image" type="docker-deploy" factoryName="docker-image" temporary="true" server-name="Docker">
+      <deployment type="docker-image">
+        <settings>
+          <option name="JSONFilePath" value="" />
+          <option name="command" value="" />
+          <option name="commandLineOptions" value="" />
+          <option name="containerName" value="Timecorr_paper" />
+          <option name="entrypoint" value="" />
+          <option name="imageTag" value="timecorr_paper:latest" />
+          <option name="startBrowserSettings">
+            <browser url="http://127.0.0.1" />
+          </option>
+        </settings>
+      </deployment>
+    </configuration>
     <list>
       <item itemvalue="Python.pieman_cluster_level_analysis" />
-      <item itemvalue="Python.pieman_cluster_submit_order_up" />
-      <item itemvalue="Python.pieman_cluster_order_up" />
       <item itemvalue="Python.plot_largest" />
       <item itemvalue="Python.plot_largest_abs" />
       <item itemvalue="Python.animate_largest" />
+      <item itemvalue="Python.plot_15" />
+      <item itemvalue="Docker.Docker Image" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.plot_15" />
+        <item itemvalue="Docker.Docker Image" />
         <item itemvalue="Python.animate_largest" />
         <item itemvalue="Python.plot_largest_abs" />
         <item itemvalue="Python.plot_largest" />
-        <item itemvalue="Python.pieman_cluster_submit_order_up" />
-        <item itemvalue="Python.pieman_cluster_order_up" />
       </list>
     </recent_temporary>
   </component>
@@ -443,8 +452,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="30" y="67" width="1472" height="1005" extended-state="1" />
-    <editor active="true" />
+    <frame x="108" y="36" width="1472" height="1005" extended-state="0" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5013587" side_tool="true" weight="0.3934611" />
@@ -453,14 +461,14 @@
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32919955" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4970874" visible="true" weight="0.2540761" />
-      <window_info anchor="bottom" id="Docker" order="7" weight="0.32919955" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4970874" visible="true" weight="0.2540761" />
+      <window_info anchor="bottom" id="Docker" order="7" weight="0.2908681" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32919955" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" sideWeight="0.50291264" side_tool="true" weight="0.25845072" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4986413" weight="0.3934611" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.4986413" visible="true" weight="0.3934611" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -506,22 +514,22 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_analysis.py</url>
-          <line>60</line>
+          <line>59</line>
           <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_analysis.py</url>
-          <line>48</line>
+          <line>47</line>
           <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/code/scripts/pieman_cluster_submit_param_search.py</url>
-          <line>52</line>
+          <line>51</line>
           <option name="timeStamp" value="46" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/code/scripts/pieman_cluster_submit_param_search.py</url>
-          <line>58</line>
+          <line>57</line>
           <option name="timeStamp" value="47" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -574,6 +582,11 @@
           <line>55</line>
           <option name="timeStamp" value="136" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/code/scripts/plot_15.py</url>
+          <line>3</line>
+          <option name="timeStamp" value="137" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -582,7 +595,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="137" />
+      <option name="time" value="138" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -602,13 +615,6 @@
     <entry file="file://$PROJECT_DIR$/code/scripts/figs/pieman_pca_analysis.py" />
     <entry file="file://$PROJECT_DIR$/code/scripts/pieman_pca_chunk.py" />
     <entry file="file://$PROJECT_DIR$/code/scripts/pieman_pca_chunk_submit.py" />
-    <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_submit_param_search.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="798">
-          <caret line="48" selection-start-line="48" selection-end-line="48" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/lib/python3.6/site-packages/numpy/lib/twodim_base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3534">
@@ -649,13 +655,6 @@
     <entry file="file://$PROJECT_DIR$/../seizure-tracking/code/scripts/make_bos/edf2bos.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_param_search.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="39" selection-start-line="39" selection-end-line="39" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../timecorr/timecorr/simulate.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
@@ -691,16 +690,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="646">
           <caret line="34" selection-start-line="34" selection-end-line="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_analysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="e#51#76#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -798,13 +787,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_level_analysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1413">
-          <caret line="3" column="28" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_level_chunked.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="563">
@@ -822,29 +804,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_submit_order_up.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="639">
-          <caret line="160" column="15" selection-start-line="160" selection-start-column="15" selection-end-line="160" selection-end-column="15" />
-          <folding>
-            <element signature="e#51#76#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_order_up.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="94" column="41" selection-start-line="94" selection-start-column="41" selection-end-line="94" selection-end-column="41" />
-          <folding>
-            <element signature="e#1#22#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/scripts/plot_15.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/code/scripts/plot_largest_abs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="639">
@@ -855,24 +814,82 @@
     <entry file="file://$PROJECT_DIR$/paper/main.tex">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
-          <caret line="787" column="31" selection-start-line="787" selection-start-column="28" selection-end-line="787" selection-end-column="31" />
+          <caret line="787" column="31" selection-start-line="787" selection-start-column="31" selection-end-line="787" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dockerfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="46" column="47" lean-forward="true" selection-start-line="46" selection-start-column="47" selection-end-line="46" selection-end-column="47" />
+        <state relative-caret-position="152">
+          <caret line="8" column="32" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="689">
-            <caret line="38" column="132" selection-start-line="38" selection-start-column="132" selection-end-line="38" selection-end-column="132" />
+          <first_editor relative-caret-position="416">
+            <caret line="39" selection-start-line="39" selection-end-line="39" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_submit_order_up.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="489">
+          <caret line="47" column="39" selection-start-line="47" selection-start-column="39" selection-end-line="47" selection-end-column="39" />
+          <folding>
+            <element signature="e#51#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_submit_level_analysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
+          <folding>
+            <element signature="e#51#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_submit_param_search.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="676">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_param_search.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-804">
+          <caret line="39" selection-start-line="39" selection-end-line="39" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_level_analysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1705">
+          <caret line="3" column="28" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/scripts/pieman_cluster_order_up.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1717">
+          <caret line="141" column="16" selection-start-line="141" selection-start-column="16" selection-end-line="141" selection-end-column="16" />
+          <folding>
+            <element signature="e#1#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/scripts/plot_15.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>

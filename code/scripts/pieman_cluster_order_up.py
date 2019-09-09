@@ -1,6 +1,6 @@
 
 import timecorr as tc
-from timecorr.helpers import isfc, corrmean_combine, reduce
+from timecorr.helpers import isfc, corrmean_combine, reduce, vec2mat
 from scipy.io import loadmat
 import numpy as np
 import sys
@@ -118,3 +118,25 @@ for lev in levels:
 
         print('data_r: ' + str(data_r[0][0]))
     del data
+
+
+data_dir = '/dartfs/rc/lab/D/DBIC/CDL/f002s72/timecorr_paper/pieman/results'
+corrs_dir = os.path.join(data_dir, 'laplace_50_orderedup_corrs')
+
+levels = np.arange(0,16,1)
+conditions = ['intact', 'paragraph', 'rest', 'word']
+
+for l in levels:
+    for c in conditions:
+        con = os.path.join(corrs_dir, f'lev_{l}'+ f'_{c}'+ '.npy')
+        try:
+            corrs = np.load(con)
+            mat_corrs = tc.helpers.vec2mat(corrs)
+            next_corrdir = os.path.join(data_dir, 'mean_corrs', f'level_{l}')
+            if not os.path.exists(next_corrdir):
+                os.makedirs(next_corrdir)
+            mean_corrs = mat_corrs.mean(axis=2)
+            np.save(os.path.join(next_corrdir, f'{c}.npy'), mean_corrs)
+        except:
+            print('issue loading: ' + con)
+            pass
