@@ -1,7 +1,6 @@
 # Do higher order correlation contribute to cognition?
 
-This repository contains data and code used to produce the paper "[_High-level cognition is supported by at least second order
-  dynamic correlations in neural activity patterns_](webstie to come)" by Lucy L.W. Owen, Thomas H. Chang, and Jeremy R. Manning. The repository is organized as follows:
+This repository contains data and code used to produce the paper "[_High-level cognition during story listening is reflected in high-order dynamic correlations in neural activity patterns_](webstie to come)" by Lucy L.W. Owen, Thomas H. Chang, and Jeremy R. Manning. The repository is organized as follows:
 
 ```
 root
