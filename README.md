@@ -1,6 +1,8 @@
 # What is the neural code?
 
-This repository contains data and code used to produce the paper [_High-level cognition during story listening is reflected in high-order dynamic correlations in neural activity patterns_](www.context-lab.com) by Lucy L.W. Owen, Thomas H. Chang, and Jeremy R. Manning. The repository is organized as follows:
+This repository contains data and code used to produce the paper [_High-level cognition during story listening is reflected in high-order dynamic correlations in neural activity patterns_](www.context-lab.com) by Lucy L.W. Owen, Thomas H. Chang, and Jeremy R. Manning.  You may also be interested in our [timecorr](https://timecorr.readthedocs.io/en/latest/) Python toolbox for calculating high-order dynamic correlations in timeseries data; the methods implemented in our timecorr toolbox feature prominently in our paper.
+
+This repository is organized as follows:
 
 ```
 root
