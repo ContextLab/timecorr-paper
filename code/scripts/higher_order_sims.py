@@ -10,8 +10,8 @@ from matplotlib import pyplot as plt
 cond= sys.argv[1]
 r= sys.argv[2]
 
-F = 50 #number of features
-T = 300 #number of timepoints
+F = 5 #number of features
+T = 30 #number of timepoints
 K = 2 #order
 
 fname = cond + '_' + str(F) + '_' + str(T) + '_' + str(K)
