@@ -1,6 +1,6 @@
 
 import timecorr as tc
-from timecorr.helpers import isfc, corrmean_combine, reduce, vec2mat
+from timecorr.helpers import isfc, reduce, vec2mat
 from scipy.io import loadmat
 import numpy as np
 import sys
@@ -30,7 +30,7 @@ raw_fun = raw_parameter['weights']
 raw_params = raw_parameter['params']
 
 
-result_name = 'corrs_ordered_up'
+result_name = 'corrs_ordered_up_for_PCA'
 
 corrsdir = os.path.join(config['resultsdir'], result_name, cfun + '_' + rfun + '_' + smooth + '_' + str(width))
 
@@ -68,9 +68,8 @@ conds.extend([cond] * len(next_data))
 all_data = np.array(data)
 conds = np.array(conds)
 
-combine = corrmean_combine
 
-levels = range(3)
+levels = range(int(level))
 
 print(levels)
 
@@ -95,11 +94,11 @@ for lev in levels:
         print('data: ' + str(data[0][0]))
         print(str(lev) + '_smooth data calculated')
 
-        corr = tc.helpers.z2r(np.mean(tc.helpers.r2z(np.stack(data, axis=2)), axis=2))
+        #corr = tc.helpers.z2r(np.mean(tc.helpers.r2z(np.stack(data, axis=2)), axis=2))
 
         print(str(lev) + '_corrs calculated')
 
-        np.save(os.path.join(corrsdir, 'lev_' + str(lev) + '_' + cond + '.npy'), corr)
+        np.save(os.path.join(corrsdir, 'lev_' + str(lev) + '_' + cond + '.npy'), data)
 
         data = np.asarray(tc.timecorr([x for x in lev_data], cfun=isfc, rfun=None,
                                       weights_function=raw_fun, weights_params=raw_params))
@@ -119,24 +118,25 @@ for lev in levels:
         print('data_r: ' + str(data_r[0][0]))
     del data
 
+### to combine across patients:
 
-data_dir = '/dartfs/rc/lab/D/DBIC/CDL/f002s72/timecorr_paper/pieman/results'
-corrs_dir = os.path.join(data_dir, 'laplace_50_orderedup_corrs')
-
-levels = np.arange(0,16,1)
-conditions = ['intact', 'paragraph', 'rest', 'word']
-
-for l in levels:
-    for c in conditions:
-        con = os.path.join(corrs_dir, f'lev_{l}'+ f'_{c}'+ '.npy')
-        try:
-            corrs = np.load(con)
-            mat_corrs = tc.helpers.vec2mat(corrs)
-            next_corrdir = os.path.join(data_dir, 'mean_corrs', f'level_{l}')
-            if not os.path.exists(next_corrdir):
-                os.makedirs(next_corrdir)
-            mean_corrs = mat_corrs.mean(axis=2)
-            np.save(os.path.join(next_corrdir, f'{c}.npy'), mean_corrs)
-        except:
-            print('issue loading: ' + con)
-            pass
+# data_dir = '/dartfs/rc/lab/D/DBIC/CDL/f002s72/timecorr_paper/pieman/results'
+# corrs_dir = os.path.join(data_dir, 'laplace_50_orderedup_corrs')
+#
+# levels = np.arange(0,16,1)
+# conditions = ['intact', 'paragraph', 'rest', 'word']
+#
+# for l in levels:
+#     for c in conditions:
+#         con = os.path.join(corrs_dir, f'lev_{l}'+ f'_{c}'+ '.npy')
+#         try:
+#             corrs = np.load(con)
+#             mat_corrs = tc.helpers.vec2mat(corrs)
+#             next_corrdir = os.path.join(data_dir, 'mean_corrs', f'level_{l}')
+#             if not os.path.exists(next_corrdir):
+#                 os.makedirs(next_corrdir)
+#             mean_corrs = mat_corrs.mean(axis=2)
+#             np.save(os.path.join(next_corrdir, f'{c}.npy'), mean_corrs)
+#         except:
+#             print('issue loading: ' + con)
+#             pass

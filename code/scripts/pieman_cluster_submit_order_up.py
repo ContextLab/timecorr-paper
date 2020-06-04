@@ -24,7 +24,7 @@ cond_type = ['intact', 'paragraph', 'word', 'rest']
 #cond_type = ['paragraph']
 
 # options for levels: integer
-levels = str('16')
+levels = str('4')
 
 # options for reps: integer
 reps =  str('1')
@@ -34,7 +34,7 @@ cfuns =  [str('isfc')]
 
 # options for reps: rfuns
 #rfuns =  [str('eigenvector_centrality'), str('pagerank_centrality'), str('strength')]
-rfuns =  [str('eigenvector_centrality')]
+rfuns =  [str('eigenvector_centrality'), str('PCA')]
 
 # options for widths: integer
 widths = [str(50)]
@@ -43,13 +43,19 @@ widths = [str(50)]
 weights = ['laplace']
 
 
+param_grid = [(c, r, wi, we) for c in cfuns for r in rfuns for wi in widths for we in weights]
+
+
+
 job_commands = list(np.array([list(map(lambda x: x[0]+" "+str(x[1])+" "+levels+
-                                                 " "+cfuns[0]+" "+rfuns[0]+" "+widths[0]+" "+weights[0],
-                                       zip([job_script]*len(cond_type), cond_type)))]).flat)
+                                                 " "+e[0]+" "+e[1]+" "+e[2]+" "+e[3],
+                                       zip([job_script]*len(cond_type), cond_type)))
+                              for i, e in enumerate(param_grid)]).flat)
 
 # job_names should specify the file name of each script (as a list, of the same length as job_commands)
-job_names = list(np.array([list(map(lambda x: os.path.basename(os.path.splitext(x)[0])+'_'+levels+'_'+cfuns[0]
-                                              +'_'+rfuns[0]+'_'+widths[0]+'_'+weights[0]+'.sh', cond_type))]).flat)
+job_names = list(np.array([list(map(lambda x: os.path.basename(os.path.splitext(x)[0])+'_'+levels+'_'
+                                              +e[0]+'_'+e[1]+'_'+e[2]+'_'+e[3]+'.sh', cond_type))
+                           for i, e in enumerate(param_grid)]).flat)
 
 
 

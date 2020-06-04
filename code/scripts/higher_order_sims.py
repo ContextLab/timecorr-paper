@@ -10,7 +10,7 @@ from matplotlib import pyplot as plt
 cond= sys.argv[1]
 r= sys.argv[2]
 
-F = 5 #number of features
+F = 4 #number of features
 T = 30 #number of timepoints
 K = 2 #order
 
