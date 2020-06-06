@@ -4,6 +4,9 @@ from timecorr.helpers import isfc, reduce, vec2mat
 from scipy.io import loadmat
 from sklearn.decomposition import PCA, IncrementalPCA
 import numpy as np
+import scipy.stats
+import pandas as pd
+import seaborn as sns
 import sys
 import os
 from config import config
@@ -35,50 +38,40 @@ result_name = 'corrs_ordered_up_for_PCA'
 
 corrsdir = os.path.join(config['resultsdir'], result_name, cfun + '_' + rfun + '_' + smooth + '_' + str(width))
 
+pcadir = os.path.join(config['resultsdir'], result_name, 'corrs_results')
+
+try:
+    if not os.path.exists(pcadir):
+        os.makedirs(pcadir)
+except OSError as err:
+   print(err)
+
 levels = np.arange(0,4,1)
 conditions = ['intact', 'paragraph', 'rest', 'word']
 
 for l in levels:
-    for c in conditions:
-        con = os.path.join(corrsdir, f'lev_{l}'+ f'_{c}'+ '.npy')
-        try:
-            corrs = np.load(con)
-            for s in np.arange(corrs.shape[0]):
-                mat_corrs = tc.helpers.vec2mat(corrs[s])
-                x = mat_corrs
-                split = np.cumsum([len(xi) for xi in x])[:-1]
-                pca = IncrementalPCA(n_components=np.shape(x)[2])
-                x_r = np.vsplit(pca.fit_transform(np.vstack(x)), split)
+    con = os.path.join(corrsdir, f'lev_{l}'+ f'_{cond}'+ '.npy')
+    save_file = os.path.join(pcadir, f'rfun_{rfun}' + f'lev_{l}'+ f'_{cond}')
+    print(save_file)
+    corrs = np.load(con)
+    stacked = np.vstack(corrs)
+    split = np.cumsum([len(xi) for xi in corrs])[:-1]
+    pca = IncrementalPCA(n_components=np.shape(stacked)[1])
+    x_r = np.vsplit(pca.fit_transform(np.vstack(stacked)), split)
+    r = []
+    k_samps = np.unique(np.geomspace(3, corrs.shape[2], num=1000, dtype=int))
+    corrs_all = pd.DataFrame(index=k_samps, columns=np.arange(corrs.shape[0]))
+    for s in np.arange(corrs.shape[0]):
+        rs = []
+        S = x_r[s]
+        s_true = np.corrcoef(S)
+        v_true = s_true[np.triu_indices_from(s_true)]
+        #for k in np.arange(3, corrs.shape[2], 1):
+        for e, k in enumerate(k_samps):
+            s_reduced = np.corrcoef(S[:, :k])
+            v_reduced = s_reduced[np.triu_indices_from(s_reduced)]
+            corrs_all.iloc[e, s] = scipy.stats.pearsonr(v_true, v_reduced)[0]
 
-            #next_corrdir = os.path.join(data_dir, 'mean_corrs', f'level_{l}')
-            # if not os.path.exists(next_corrdir):
-            #     os.makedirs(next_corrdir)
-            # mean_corrs = mat_corrs.mean(axis=2)
-            # np.save(os.path.join(next_corrdir, f'{c}.npy'), mean_corrs)
-        except:
-            print('issue loading: ' + con)
-            pass
 
+    corrs_all.to_csv(save_file + '.csv')
 
-### to combine across patients:
-
-# data_dir = '/dartfs/rc/lab/D/DBIC/CDL/f002s72/timecorr_paper/pieman/results'
-# corrs_dir = os.path.join(data_dir, 'laplace_50_orderedup_corrs')
-#
-# levels = np.arange(0,4,1)
-# conditions = ['intact', 'paragraph', 'rest', 'word']
-#
-# for l in levels:
-#     for c in conditions:
-#         con = os.path.join(corrs_dir, f'lev_{l}'+ f'_{c}'+ '.npy')
-#         try:
-#             corrs = np.load(con)
-#             mat_corrs = tc.helpers.vec2mat(corrs)
-#             next_corrdir = os.path.join(data_dir, 'mean_corrs', f'level_{l}')
-#             if not os.path.exists(next_corrdir):
-#                 os.makedirs(next_corrdir)
-#             mean_corrs = mat_corrs.mean(axis=2)
-#             np.save(os.path.join(next_corrdir, f'{c}.npy'), mean_corrs)
-#         except:
-#             print('issue loading: ' + con)
-#             pass

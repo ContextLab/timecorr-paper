@@ -48,6 +48,8 @@ else:
     pieman_name = 'pieman_data.mat'
 
 pieman_data = loadmat(os.path.join(config['datadir'], pieman_name))
+pieman_conds = ['intact', 'paragraph', 'word', 'rest']
+
 
 data = []
 conds = []
