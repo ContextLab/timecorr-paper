@@ -49,29 +49,62 @@ except OSError as err:
 levels = np.arange(0,4,1)
 conditions = ['intact', 'paragraph', 'rest', 'word']
 
-for l in levels:
-    con = os.path.join(corrsdir, f'lev_{l}'+ f'_{cond}'+ '.npy')
-    save_file = os.path.join(pcadir, f'rfun_{rfun}' + f'lev_{l}'+ f'_{cond}')
+#for l in levels:
+for l in [1]:
+    #con = os.path.join(corrsdir, f'lev_{l}'+ f'_{cond}'+ '.npy')
+    con = os.path.join(corrsdir, f'd_{l}' + f'_r_{cond}' + '.npy')
+    save_file = os.path.join(pcadir, f'{rfun}'+ f'_lev_{l}'+ f'_{cond}')
     print(save_file)
-    corrs = np.load(con)
-    stacked = np.vstack(corrs)
-    split = np.cumsum([len(xi) for xi in corrs])[:-1]
-    pca = IncrementalPCA(n_components=np.shape(stacked)[1])
-    x_r = np.vsplit(pca.fit_transform(np.vstack(stacked)), split)
-    r = []
-    k_samps = np.unique(np.geomspace(3, corrs.shape[2], num=1000, dtype=int))
-    corrs_all = pd.DataFrame(index=k_samps, columns=np.arange(corrs.shape[0]))
-    for s in np.arange(corrs.shape[0]):
-        rs = []
-        S = x_r[s]
-        s_true = np.corrcoef(S)
-        v_true = s_true[np.triu_indices_from(s_true)]
-        #for k in np.arange(3, corrs.shape[2], 1):
-        for e, k in enumerate(k_samps):
-            s_reduced = np.corrcoef(S[:, :k])
-            v_reduced = s_reduced[np.triu_indices_from(s_reduced)]
-            corrs_all.iloc[e, s] = scipy.stats.pearsonr(v_true, v_reduced)[0]
+    if not os.path.exists(save_file + '.csv'):
+        corrs = np.load(con)
+        stacked = np.vstack(corrs)
+        split = np.cumsum([len(xi) for xi in corrs])[:-1]
+        pca = IncrementalPCA(n_components=np.shape(stacked)[1])
+        x_r = np.vsplit(pca.fit_transform(np.vstack(stacked)), split)
+        #k_samps = np.unique(np.geomspace(3, corrs.shape[2], num=700, dtype=int))
+        k_samps = np.arange(3, 700)
+        corrs_all = pd.DataFrame(index=k_samps, columns=np.arange(corrs.shape[0]))
+        for s in np.arange(corrs.shape[0]):
+            rs = []
+            S = x_r[s]
+            s_true = np.corrcoef(S)
+            v_true = s_true[np.triu_indices_from(s_true)]
+            #for k in np.arange(3, corrs.shape[2], 1):
+            for e, k in enumerate(k_samps):
+                s_reduced = np.corrcoef(S[:, :k])
+                v_reduced = s_reduced[np.triu_indices_from(s_reduced)]
+                corrs_all.iloc[e, s] = scipy.stats.pearsonr(v_true, v_reduced)[0]
 
 
-    corrs_all.to_csv(save_file + '.csv')
+        corrs_all.to_csv(save_file + '.csv')
 
+#
+# for l in levels:
+#     con = os.path.join(corrsdir, f'lev_{l}'+ f'_{cond}'+ '.npy')
+#     save_file = os.path.join(pcadir, f'{rfun}' + f'_lev_{l}'+ f'_{cond}')
+#     print(save_file)
+#     if not os.path.exists(save_file + '.csv'):
+#         corrs = np.load(con)
+#         corr_shapes = corrs.shape
+#         corrs = np.vstack(corrs)
+#         split = np.cumsum([len(xi) for xi in corrs])[:-1]
+#         pca = IncrementalPCA(n_components=np.shape(corrs)[1])
+#         x_r = np.vsplit(pca.fit_transform(corrs), split)
+#         k_samps = np.unique(np.geomspace(3, corr_shapes[2], num=400, dtype=int))
+#         corrs_all = pd.DataFrame(index=k_samps, columns=np.arange(corr_shapes[0]))
+#         for s in np.arange(corr_shapes[0]):
+#             rs = []
+#             S = x_r[s]
+#             s_true = np.corrcoef(S)
+#             v_true = s_true[np.triu_indices_from(s_true)]
+#             #for k in np.arange(3, corrs.shape[2], 1):
+#             for e, k in enumerate(k_samps):
+#                 s_reduced = np.corrcoef(S[:, :k])
+#                 v_reduced = s_reduced[np.triu_indices_from(s_reduced)]
+#                 try:
+#                     corrs_all.iloc[e, s] = scipy.stats.pearsonr(v_true, v_reduced)[0]
+#                 except:
+#                     print('error for' + str(s) + '_' + str(k))
+#
+#         corrs_all.to_csv(save_file + '.csv')
+#
