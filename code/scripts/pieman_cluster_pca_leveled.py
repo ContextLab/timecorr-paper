@@ -56,7 +56,20 @@ for l in [1]:
     save_file = os.path.join(pcadir, f'{rfun}'+ f'_lev_{l}'+ f'_{cond}')
     print(save_file)
     if not os.path.exists(save_file + '.csv'):
+
+        # x = list(data[conds == c])
+        # split = np.cumsum([len(xi) for xi in x])[:-1]
+        #
+        # pca = IncrementalPCA(n_components=np.shape(x)[2])
+        # x_r = np.vsplit(pca.fit_transform(np.vstack(x)), split)
+
         corrs = np.load(con)
+        x = list(corrs)
+
+        split = np.cumsum([len(xi) for xi in x])[:-1]
+
+        pca = IncrementalPCA(n_components=np.shape(x)[2])
+        x_r = np.vsplit(pca.fit_transform(np.vstack(x)), split)
         stacked = np.vstack(corrs)
         split = np.cumsum([len(xi) for xi in corrs])[:-1]
         pca = IncrementalPCA(n_components=np.shape(stacked)[1])
