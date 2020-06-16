@@ -42,7 +42,7 @@
   High-order dynamic correlations in neural activity patterns reflect
   different subgraphs of the brain's connectome that display
   homologous lower-level dynamic correlations.  We tested the
-  hypothesis that high-level cognition is supported by high-order
+  hypothesis that high-level cognition is reflected in high-order
   dynamic correlations in brain activity patterns.  We developed an
   approach to estimating high-order dynamic correlations in timeseries
   data, and we applied the approach to neuroimaging data collected as
@@ -57,8 +57,8 @@
   data from scrambled versions of the story or during the resting
   state scan yielded the best performance when they were trained using
   first-order dynamic correlations or non-correlational activity patterns.  We
-  suggest that as our thoughts become more complex, they are supported
-  by higher-order patterns of dynamic network interactions throughout
+  suggest that as our thoughts become more complex, they are reflected
+  in higher-order patterns of dynamic network interactions throughout
   the brain.
 \end{abstract}
 
@@ -855,7 +855,7 @@ order.
 
 
 \section*{Results}
-We sought to understand whether high-level cognition is supported by
+We sought to understand whether high-level cognition is reflected in
 dynamic patterns of high-order correlations.  To that end, we
 developed a computational framework for estimating the dynamics of
 stimulus-driven high-order correlations in multivariate timeseries
@@ -999,13 +999,13 @@ the same order.  Finally, in a \textit{rest} experimental condition,
 participants lay in the scanner with no overt stimulus, with their
 eyes open (blinking as needed).  This dataset provided a convenient
 means of testing our hypothesis that different levels of cognitive
-processing and engagement are supported by different orders of brain
+processing and engagement are reflected in different orders of brain
 activity dynamics.
 
 \begin{figure}[tp]
   \centering
   \includegraphics[width=\textwidth]{figs/decode_level}
-  \caption{\textbf{Across-participant decoding accuracy varies with
+  \caption{\textbf{Across-participant timepoint decoding accuracy varies with
       correlation order and cognitive engagement.}
     \textbf{a.~Decoding accuracy as a function of order: PCA.}
     \textit{Order} ($x$-axis) refers to the maximum order of dynamic
@@ -1026,18 +1026,18 @@ activity dynamics.
     comparisons between the decoding accuracies achieved using
     different sets of neural features.  The circled values represent
     the maximum decoding accuracy within each experimental condition.
-    \textbf{b.~Normalized decoding accuracy as a function of order:
+    \textbf{b.~Normalized timepoint decoding accuracy as a function of order:
       PCA.}  This panel displays the same results as Panel a, but here
     each curve has been normalized to have a maximum value of 1 and a
     minimum value of 0 (including the upper and lower bounds of the
     respective 95\% confidence intervals).  Panels a and b used PCA to
     project each high-dimensional pattern of dynamic correlations onto
-    a lower-dimensional space.  \textbf{c.~Decoding accuracy as a
+    a lower-dimensional space.  \textbf{c.~Timepoint decoding accuracy as a
       function of order: eigenvector centrality.} This panel is in the
     same format as Panel a, but here eigenvector centrality has been
     used to project the high-dimensional patterns of dynamic
     correlations onto a lower-dimensional space.
-    \textbf{d.~Normalized decoding accuracy as a function of order:
+    \textbf{d.~Normalized timepoint decoding accuracy as a function of order:
       eigenvector centrality.} This panel is in the same format as
     Panel b, but here eigenvector centrality has been used to project
     the high-dimensional patterns of dynamic correlations onto a
@@ -1144,7 +1144,12 @@ different brain areas occupy in their associated networks
   \includegraphics[width=\textwidth]{figs/most_abs}
   \caption{\textbf{Top terms associated with the endpoints of the
       strongest correlations.}  Each color corresponds to one order of
-    inter-subject functional correlations. The inflated brain plots
+    inter-subject functional correlations.  To calculate the dynamic
+    correlations, eigenvector centrality has been used to project
+    the high-dimensional patterns of dynamic correlations onto a
+    lower-dimensional space at each previous order, which allows us
+    the map the brain regions at each order by retaining the
+    features of the original space. The inflated brain plots
     display the locations of the endpoints of the 10 strongest
     (absolute value) correlations at each order, thresholded at 0.999,
     and projected onto the cortical surface~\citep{CombEtal19}.  The
@@ -1208,7 +1213,7 @@ of our approach.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Discussion}
-We tested the hypothesis that high-level cognition is supported by
+We tested the hypothesis that high-level cognition is reflected in
 high-order brain network dynamics~\citep[e.g., see][]{SoloEtal19,
   ReimEtal17}.  We examined high-order network dynamics in functional
 neuroimaging data collected during a story listening experiment.  When
@@ -1226,7 +1231,7 @@ processing (Fig.~\ref{fig:discussion}).
   \caption{\textbf{Proposed high-order network dynamics underlying
       high-level cognition during story listening.}  Schematic depicts
     higher orders of
-    network interactions support higher-level aspects of cognitive
+    network interactions supporting higher-level aspects of cognitive
     processing.  When tasks evoke richer, deeper, and/or higher-level
     processing, this is reflected in higher-order network
     interactions.}
