@@ -741,6 +741,50 @@ dynamic correlations) were informative to the temporal decoders.
 Using the notation above, these features correspond to $\mathbf{X}_0$,
 $\mathbf{X}_1$, $\mathbf{X}_2$, $\mathbf{X}_3$, and so on.
 
+\begin{figure}[tp]
+  \centering
+  \includegraphics[width=\textwidth]{figs/timecorr_pipeline}
+  \caption{\textbf{Across-participant timepoint decoding accuracy varies with
+      correlation order and cognitive engagement.}
+    \textbf{a.~Decoding accuracy as a function of order: PCA.}
+    \textit{Order} ($x$-axis) refers to the maximum order of dynamic
+    correlations that were available to the classifiers (see
+    \textit{Feature weighting and testing}).  The reported
+    across-participant decoding accuracies are averaged over all
+    kernel shapes and widths (see \textit{Identifying robust decoding
+      results}).  The $y$-values are displayed relative to chance
+    accuracy (intact: $\frac{1}{300}$; paragraph: $\frac{1}{272}$;
+    word: $\frac{1}{300}$; rest: $\frac{1}{400}$).  The error ribbons
+    denote 95\% confidence intervals across cross-validation folds
+    (i.e., random assignments of participants to the training and test
+    sets).  The colors denote the experimental condition.  Arrows
+    denote sets of features that yielded reliably higher (upwards
+    facing) or lower (downward facing) decoding accuracy than the mean
+    of all other features (via a two-tailed test, thresholded at
+    $p < 0.05$).  Figure~\ref{fig:ttests} displays additional
+    comparisons between the decoding accuracies achieved using
+    different sets of neural features.  The circled values represent
+    the maximum decoding accuracy within each experimental condition.
+    \textbf{b.~Normalized timepoint decoding accuracy as a function of order:
+      PCA.}  This panel displays the same results as Panel a, but here
+    each curve has been normalized to have a maximum value of 1 and a
+    minimum value of 0 (including the upper and lower bounds of the
+    respective 95\% confidence intervals).  Panels a and b used PCA to
+    project each high-dimensional pattern of dynamic correlations onto
+    a lower-dimensional space.  \textbf{c.~Timepoint decoding accuracy as a
+      function of order: eigenvector centrality.} This panel is in the
+    same format as Panel a, but here eigenvector centrality has been
+    used to project the high-dimensional patterns of dynamic
+    correlations onto a lower-dimensional space.
+    \textbf{d.~Normalized timepoint decoding accuracy as a function of order:
+      eigenvector centrality.} This panel is in the same format as
+    Panel b, but here eigenvector centrality has been used to project
+    the high-dimensional patterns of dynamic correlations onto a
+    lower-dimensional space.}
+  \label{fig:pipeline}
+\end{figure}
+
+
 One challenge to fairly evaluating high-order correlations is that if
 the kernel used in Equation~\ref{eqn:timecorr} is wider than a single
 timepoint, each repeated application of the equation will result in
