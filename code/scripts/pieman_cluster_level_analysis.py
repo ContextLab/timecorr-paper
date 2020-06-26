@@ -1,6 +1,6 @@
 
 import timecorr as tc
-from timecorr.helpers import isfc, wisfc, mean_combine, corrmean_combine
+from timecorr.helpers import isfc, wisfc, autofc, mean_combine, corrmean_combine
 from scipy.io import loadmat
 import numpy as np
 import sys
