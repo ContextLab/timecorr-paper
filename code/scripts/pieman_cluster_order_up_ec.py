@@ -72,9 +72,9 @@ print(levels)
 
 for lev in levels:
 
-    if os.path.exists(os.path.join(corrsdir, 'd_' + str(lev) + '_' + cond + '.npy')):
-        data = np.load(os.path.join(corrsdir, 'd_' + str(lev) + '_' + cond + '.npy'))
-        subprocess.run(['rm', os.path.join(corrsdir, 'd_' + str(lev) + '_' + cond + '.npy')])
+    if os.path.exists(os.path.join(corrsdir, 'd_' + str(lev + 1) + '_' + cond + '.npy')):
+        data = np.load(os.path.join(corrsdir, 'd_' + str(lev + 1) + '_' + cond + '.npy'))
+        subprocess.run(['rm', os.path.join(corrsdir, 'd_' + str(lev + 1) + '_' + cond + '.npy')])
 
         print(str(lev) + '_data loaded')
     else:
@@ -91,17 +91,17 @@ for lev in levels:
         data = np.asarray(tc.timecorr([x for x in lev_data], cfun=p_cfun, rfun=None,
                                       weights_function=raw_fun, weights_params=raw_params))
 
-        print(str(lev) + '_raw data calculated')
+        print(str(lev + 1) + '_raw data calculated')
 
-        np.save(os.path.join(corrsdir, 'd_' + str(lev) + '_' + cond + '.npy'), data)
+        np.save(os.path.join(corrsdir, 'd_' + str(lev + 1) + '_' + cond + '.npy'), data)
 
-    if os.path.exists(os.path.join(corrsdir, 'd_' + str(lev) + '_r_' + cond + '.npy')):
-        data_r = np.load(os.path.join(corrsdir, 'd_' + str(lev) + '_r_' + cond + '.npy'))
-        print(str(lev) + '_reduced data loaded')
+    if os.path.exists(os.path.join(corrsdir, 'd_' + str(lev + 1) + '_r_' + cond + '.npy')):
+        data_r = np.load(os.path.join(corrsdir, 'd_' + str(lev + 1) + '_r_' + cond + '.npy'))
+        print(str(lev + 1) + '_reduced data loaded')
     else:
         data_r = np.asarray(reduce([x for x in data], rfun=rfun))
-        print(str(lev) + '_reduced data calculated')
-        np.save(os.path.join(corrsdir, 'd_' + str(lev) + '_r_' + cond + '.npy'), data_r)
-        subprocess.run(['rm', os.path.join(corrsdir, 'd_' + str(lev) + '_' + cond + '.npy')])
+        print(str(lev + 1) + '_reduced data calculated')
+        np.save(os.path.join(corrsdir, 'd_' + str(lev + 1) + '_r_' + cond + '.npy'), data_r)
+        subprocess.run(['rm', os.path.join(corrsdir, 'd_' + str(lev + 1) + '_' + cond + '.npy')])
         print('data_r: ' + str(data_r[0][0]))
     del data

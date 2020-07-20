@@ -33,7 +33,7 @@ reps =  str('10')
 cfuns =  [str('isfc')]
 
 # options for reps: rfuns
-rfuns =  [str('PCA')]
+rfuns =  [str('eigenvector_centrality'), str('PCA')]
 
 # options for widths: integer
 widths = [str(5), str(10), str(20), str(50)]
