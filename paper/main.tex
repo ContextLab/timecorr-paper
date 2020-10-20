@@ -605,55 +605,60 @@ was drawn from a Gaussian with the same covariance matrix.  These
 datasets were intended to simulate a system that undergoes occasional
 abrupt state changes.
 
-\subsubsection*{Simulated higher-order correlations}
-We simulated first and second order correlations reflecting the 4 qualitatively different patterns
-of synthetic dynamic correlations.
- We repeated the processes 10 times for each order and for each of the 4 dynamic pattern (Constant, Random, Ramping, and
-Event) explored in \textit{Synthetic data}.  First,
- we generated a timeseries of correlations which comprised 50 features (dimensions)
-that varied over 300 timepoints using 1 of the 4 \textit{Synthetic data} dynamic
-patterns. To calculate the next increasing order of corrrelations, ${ Y_{n+1,t}}$, we
-multiplied the vectorized correlation matrix by its transpose, for
-each timepoint:
+\subsubsection*{Synthetic data: simulating dynamic high-order
+  correlations}
 
+We developed an iterative procedure for constructing timeseries data
+that exhibits known dynamic high-order correlations.  The procedure
+builds on our approach to generating dynamic first-order correlations.
+Essentially, once we generate a timeseries with known first-order
+correlations, we can use the known first-order correlations as a
+template to generate a new timeseries of second-order correlations.
+In turn, we can generate a timeseries of third-order correlations from
+the second-order correlations, and so on.  In general, we can generate
+order $n$ correlations given a timeseries of order $n - 1$ correlations,
+for any $n > 1$.  Finally, given the order $n$ timeseries, we can
+reverse the preceding process to generate an order $n - 1$ timeseries, an
+order $n - 2$ order timeseries, and so on, until we obtain an order 0
+timeseries of simulated data that reflects the chosen high-order dynamics.
+
+The central mathematical operations in our procedure are two
+functions, $\mathrm{vec}(\cdot)$ and $\mathrm{mat}(\cdot)$.  The
+$\mathrm{vec}(\cdot)$ function takes as input a $K \times K$ symmetric
+matrix and returns as output a
+$\left(\frac{K^2 - K}{2} + K\right)$-dimensional column vector
+containing the entries in the upper triangle and diagonal.  The
+$\mathrm{mat}(\cdot)$ function inverts $\mathrm{vec}(\cdot)$ by taking
+as input a $\left(\frac{K^2 - K}{2} + K\right)$-dimensional column
+vector and returning a $K \times K$ symmetric matrix as output.  We
+can then generate an order $n$ correlation matrix (for one timepoint, $t$) from an order
+$n - 1$ template (from the same timepoint) as follows:
 \begin{align}
-Y_{n=1,t} = vec(\mathbf{\Sigma}_{t})\cdot
-  vec(\mathbf{\Sigma}_{t})^\top \\
-  Y_{n+1,t} = vec(Y_{n,t}) \cdot vec(Y_{n,t})^\top\label{eqn:veccorr}
-  \end{align}
-
-  We repeated this processes for the number of desired orders (N) to
-  generate a timeseries of $\mathbf{N^{th}}$ correlation matrices.  Then, observations were drawn at each timepoint from a  ${ Y_{N-1,t}}$-mean multivariate Gaussian distribution with a
- covariance matrix defined as ${ Y_{N+1,t}}$ and the resultant vector
- was reshaped to the matrix the size of ${ Y_{N-1,t}}$:
- \begin{align}
-   { \hat{Y}_{N-1,t}} \sim vec(\mathcal{N}({ Y_{n,t}}, { Y_{N,t}}))^{-1}
-   \end{align}
- This process was then repeated for all decreasing orders, in which
- observations werre drawn at each timepoint from a  ${ Y_{n,t}}$-mean
- multivariate Gaussian distribution, but the covariance matrix is
- defined at the previously estimated reshaped matrix $\hat{Y}_{n,t}$:
- \begin{align}
-   { \hat{Y}_{n,t}} \sim vec(\mathcal{N}({ Y_{n,t}}, {\hat{ Y}_{n+1,t}}))^{-1}
- \end{align}
-We repeat this process until $n = 1$, then we drew observations at each timepoint
-from a zero-mean multivariate Gaussian distribution with a
-covariance matrix defined for each timepoint as described below:
-
-\begin{align}
- s_t \sim \mathcal{N}(\mathbf{0},  \hat{Y}_{n=1,t})
+  \mathbf{\Sigma_{n}}(t) &= \mathrm{mat}(\mathrm{vec}(\mathbf{\Sigma_{n-1}}(t)) \otimes \mathrm{vec}(\mathbf{\Sigma_{n-1}}(t))^\top).\label{eqn:veccorr}
 \end{align}
 
-For our specific analyses the resulting synthetic timeseries comprised
-50 features and 300 timepoints. We then used this synthetic data to test how well Equation~\ref{eqn:timecorr}
-could recover the simulated first and second order correlations.  To mitigate temporal blur in
-estimating each timeseries of dynamic correlations, we used a Dirac $\delta$ function
-kernel (which places all of its mass over a single timepoint)
-Fig.~\ref{fig:kernels}b) to compute each lower-order correlation and then used a
-Laplace kernel with a width of 20 to compute  $\mathbf{ X_{n,t}}$, applying
-temporal blur at just the last step.  Then, for each timepoint, we
-correlated the simulated correlation matix, ${ Y_{n,t}}$ with the
-Equation~\ref{eqn:timecorr} estimated correrlation matric, $\mathbf{ X_{n,t}}$.
+Given a timeseries of order $n$ correlation matrices, we can draw an
+order $n-1$ correlation matrix for each timpoint $t$ using
+\begin{align}
+ \mathbf{\sigma_{n-1}}(t) &\sim \mathcal{N}\left(\mathbf{0}, \mathbf{\Sigma_n}(t)
+                   \right)\label{eqn:highorder-gen1}\\
+  \mathbf{\Sigma_{n-1}}(t) &= \mathrm{mat}(\mathbf{\sigma_{n-1}}(t)).\label{eqn:highorder-gen2}
+  \end{align}
+  We can then use repeated applications of
+  Equations~\ref{eqn:highorder-gen1} and~\ref{eqn:highorder-gen2} in
+  order to obtain a synthetic dataset.
+
+ When the template first-order correlations are constructed to exhibit different
+ temporal profiles (e.g., using the constant, random, ramping, and
+ event procedures described above), the resulting high-order
+ correlations and synthetic data will exhibit the same category of
+ temporal profile.
+
+ Following our approach to generating synthetic data exhibiting known
+ first-order correlations, we constructed a total of 40 additional multivariate timeseries,
+collectively reflecting a total of 4 qualitatively different patterns
+of dynamic correlations (i.e., 10 datasets reflecting each type of
+dynamic pattern: constant, random, ramping, and event).
 
  
 \subsubsection*{Functional neuroimaging data collected during story
