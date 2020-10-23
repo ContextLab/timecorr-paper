@@ -119,8 +119,8 @@ univariate or multivariate neural patterns~\citep[for review
 see][]{NormEtal06}, or (more recently) on patterns of dynamic
 first-order correlations~\citep[i.e., interactions between pairs of
 brain structures;][]{MannEtal18, FongEtal19, LuriEtal18, PretEtal17,
-  ZouEtal19, DemeEtal19}.  We wondered what the future of this line of
-work might hold.  For example, is the neural code mediated by
+  ZouEtal19, DemeEtal19}.  What might the future of this line of work
+hold?  For example, is the neural code implemented through
 higher-order interactions between brain structures~\citep[e.g.,
 see][]{ReimEtal17}?  Second-order correlations reflect
 \textit{homologous} patterns of correlation.  In other words, if the
@@ -199,707 +199,6 @@ together, our results indicate that high-level cognition is supported
 by high-order dynamic patterns of communication between brain
 structures.
 
-\section*{Methods}
-Our general approach to efficiently estimating high-order dynamic
-correlations comprises four general steps (Fig.~\ref{fig:methods}).
-First, we derive a kernel-based approach to computing dynamic pairwise
-correlations in a $T$ (timepoints) by $K$ (features) multivariate
-timeseries, $\mathbf{X}_0$.  This yields a $T$ by $\mathcal{O}(K^2)$
-matrix of dynamic correlations, $\mathbf{Y}_1$, where each row
-comprises the upper triangle and diagonal of the correlation matrix at a single
-timepoint, reshaped into a row vector (this reshaped vector is
-$\left( \frac{K^2 - K}{2} + K \right)$-dimensional).  Second, we apply a dimensionality
-reduction step to project the matrix of dynamic correlations back onto
-a $K$-dimensional space.  This yields a $T$ by $K$ matrix,
-$\mathbf{X}_1$, that reflects an approximation of the dynamic
-correlations reflected in the original data.  Third, we use repeated
-applications of the kernel-based dynamic correlation step to
-$\mathbf{X}_n$ and the dimensionality reduction step to the resulting
-$\mathbf{Y}_{n+1}$ to estimate high-order dynamic correlations.  Each
-application of these steps to a $T$ by $K$ time series $\mathbf{X}_n$
-yields a $T$ by $K$ matrix, $\mathbf{X}_{n+1}$, that reflects the
-dynamic correlations between the columns of $\mathbf{X}_n$.  In this
-way, we refer to $n$ as the \textit{order} of the timeseries, where
-$\mathbf{X}_0$ (order 0) denotes the original data and $\mathbf{X}_n$
-denotes (approximated) $n^\mathrm{th}$-order dynamic correlations
-between the columns of $\mathbf{X}_0$.  Finally, we use a
-cross-validation--based decoding approach to evaluate how well
-information contained in a given order (or weighted mixture of orders)
-may be used to decode relevant cognitive states.  If including a given
-$\mathbf{X}_n$ in the feature set yields higher classification
-accuracy on held-out data, we interpret this as evidence that the
-given cognitive states are reflected in patterns of
-$n^\mathrm{th}$-order correlations.  All of the code used to produce
-the figures and results in this manuscript, along with links to the
-corresponding datasets, may be found at
-\href{https://github.com/ContextLab/timecorr-paper}{github.com/ContextLab/timecorr-paper}.
-In addition, we have released a Python toolbox for computing dynamic
-high-order correlations in timeseries data; our toolbox may be found
-at
-\href{https://timecorr.readthedocs.io/}{timecorr.readthedocs.io}.
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.5\textwidth]{figs/methods_fig}
-  \caption{\textbf{Estimating dynamic high-order correlations.}  Given
-    a $T$ by $K$ matrix of multivariate timeseries data,
-    $\mathbf{X}_n$ (where $n \in \mathbb{N}, n \geq 0$), we use
-    Equation~\ref{eqn:timecorr} to compute a timeseries of
-    $K$ by $K$ correlation matrices, $\mathbf{Y}_{n+1}$.  We then
-    approximate $\mathbf{Y}_{n+1}$ with the $T$ by $K$ matrix
-    $\mathbf{X}_{n+1}$.  This process may be repeated to scalably estimate
-    iteratively higher-order correlations in the data.  Note that the
-    transposes of $\mathbf{X}_n$ and $\mathbf{X}_{n+1}$ are displayed
-    in the figure for compactness.
-  \label{fig:methods}}
-\end{figure}
-
-
-\subsection*{Kernel-based approach for computing dynamic correlations}
-Given a $T$ by $K$ matrix of observations, $\mathbf{X}$, we can compute the (static)
-Pearson's correlation between any pair of columns, $\mathbf{X}(\cdot, i)$ and
-$\mathbf{X}(\cdot, j)$ using~\citep{Pear01}:
-\begin{align}
-  \mathrm{corr}(\mathbf{X}(\cdot, i), \mathbf{X}(\cdot, j)) &=
-                                                              \frac{\sum_{t=1}^T
-                                                              \left(\mathbf{X}(t,
-                                                              i)
-                                                              -
-                                                              \bar{\mathbf{X}}(\cdot,
-                                                              i)\right)
-                                                              \left(\mathbf{X}(t,
-                                                              j)
-                                                              -
-                                                              \bar{\mathbf{X}}(\cdot, j)\right)}{\sqrt{\sum_{t=1}^T
-                                                              \sigma^2_{\mathbf{X}(\cdot, i)} 
-                                                              \sigma^2_{\mathbf{X}(\cdot, j)}}},~\mathrm{where}\label{eqn:corr}\\
-  \bar{\mathbf{X}}(\cdot, k) &= \frac{1}{T}\sum_{t=1}^T
-                               \mathbf{X}(t, k),~\mathrm{and}\\
-  \sigma^2_{\mathbf{X}(\cdot, k)} &= \frac{1}{T}\sum_{t=1}^T \left( \mathbf{X}(t, k) -
-                                    \bar{\mathbf{X}}(\cdot, k) \right)^2 
-\end{align}
-We can generalize this formula to compute time-varying correlations by
-incorporating a \textit{kernel function} that takes a time $t$ as
-input, and returns how much the observed data at each timepoint
-$\tau \in \left[ -\infty, \infty \right]$ contributes to the estimated instantaneous
-correlation at time $t$~\citep[Fig.~\ref{fig:kernels}; also see][for a
-similar approach]{AlleEtal12b}.
-\begin{figure}
-  \centering
-  \includegraphics[width=\textwidth]{figs/kernels}
-  \caption{\textbf{Examples of kernel functions.} Each panel displays
-    per-timepoint weights for a kernel centered at $t = 50$, evaluated
-    at 100 timepoints ($\tau \in \left[1, ..., 100\right]$).
-    \textbf{a. Uniform kernel.} The weights are timepoint-invariant;
-    observations at all timepoints are weighted equally, and do not
-    change as a function of $\tau$.  This is a special case kernel
-    function that reduces dynamic correlations to static correlations.
-    \textbf{b. Dirac $\delta$ kernel.} Only the observation at
-    timepoint $t$ is given a non-zero weight (of 1).
-    \textbf{c. Gaussian kernels.} Each kernel's weights fall off in
-    time according to a Gaussian probability density function centered
-    on time $t$.  Weights derived using several different example
-    width parameters ($\sigma^2$) are displayed.  \textbf{d. Laplace
-      kernels.}  Each kernel's weights fall off in time according to a
-    Laplace probability density function centered on time $t$.
-    Weights derived using several different example width parameters
-    ($b$) are displayed.  \textbf{e. Mexican hat (Ricker wavelet)
-      kernels.}  Each kernel's weights fall off in time according to a
-    Ricker wavelet centered on time $t$.  This function highlights the
-    \textit{contrasts} between local versus surrounding activity
-    patterns in estimating dynamic correlations. Weights derived using
-    several different example width parameters ($\sigma$) are
-    displayed.}
-  \label{fig:kernels}
-\end{figure}
-
-Given a kernel function $\kappa_t(\cdot)$ for timepoint $t$,
-evaluated at timepoints $\tau \in \left[ 1, ..., T \right]$, we
-can update the static correlation formula in Equation~\ref{eqn:corr}
-to estimate the \textit{instantaneous correlation} at timepoint $t$:
-\begin{align}
-  \mathrm{timecorr}_{\kappa_t}\left(\mathbf{X}(\cdot, i), \mathbf{X}(\cdot, j)\right) &= \frac{\sum_{\tau=1}^T \left( \mathbf{X}(\tau, i) -
-                                       \widetilde{\mathbf{X}}_{\kappa_t}(\cdot,
-                                                                                        i) \right)
-                                 \left( \mathbf{X}(\tau, j) -
-                                        \widetilde{\mathbf{X}}_{\kappa_t}(\cdot,
-                                                                                        j)\right)}
-              {\sqrt{\sum_{\tau=1}^T
-                                              \widetilde{\sigma}_{\kappa_t}^2(\mathbf{X}(\cdot,
-                                                                                        i))
-                                              \widetilde{\sigma}_{\kappa_t}^2(\mathbf{X}(\cdot, j))}},~\mathrm{where}\label{eqn:timecorr}\\
-  \widetilde{\mathbf{X}}_{\kappa_t}(\cdot, k) &= \sum_{\tau=1}^T
-                       \kappa_t(\tau)\mathbf{X}(\tau, k),\\
-  \widetilde{\sigma}_{\kappa_t}^2(\mathbf{X}(\cdot, k)) &= \sum_{\tau=1}^T
-                                                  \left(
-                                                  \mathbf{X}(\tau, k) -
-                            \widetilde{\mathbf{X}}_{\kappa_t}(\cdot, k) \right)^2.
-\end{align}
-Here
-$\mathrm{timecorr}_{\kappa_t}(\mathbf{X}(\cdot, i), \mathbf{X}(\cdot,
-j))$ reflects the correlation at time $t$ between columns $i$ and $j$
-of $\mathbf{X}$, estimated using the kernel $\kappa_t$.  We evaluate
-Equation~\ref{eqn:timecorr} in turn for each pair of columns in
-$\mathbf{X}$ and for kernels centered on each timepoint in the
-timeseries, respectively, to obtain a $T$ by $K$ by $K$ timeseries of
-dynamic correlations, $\mathbf{Y}$.  For convenience, we then reshape
-the upper triangles and diagonals of each timepoint's correlation matrix into a row
-vector to obtain an equivalent $T$ by $\left( \frac{K^2 - K}{2} + K \right)$ matrix.
-
-\subsubsection*{Dynamic inter-subject functional connectivity (DISFC)}
-Equation~\ref{eqn:timecorr} provides a means of taking a single
-observation matrix, $\mathbf{X}_n$ and estimating the dynamic
-correlations from moment to moment, $\mathbf{Y}_{n+1}$.  Suppose that
-one has access to a set of multiple observation matrices that reflect
-the same phenomenon.  For example, one might collect neuroimaging data
-from several experimental participants, as each participant performs
-the same task (or sequence of tasks).  Let $\mathbf{X}_n^1$,
-$\mathbf{X}_n^2$, ..., $\mathbf{X}_n^P$ reflect the $T$ by $K$
-observation matrices ($n = 0$) or reduced correlation matrices
-($n > 0$) for each of $P$ participants in an experiment.  We can use
-\textit{inter-subject functional connectivity}~\citep[ISFC;
-][]{SimoEtal16} to compute the stimulus-driven correlations reflected
-in the multi-participant dataset at a given timepoint $t$ using:
-\begin{align}
-\bar{\mathbf{C}}(t) = M\left(R\left(\frac{1}{2P} \sum_{p=1}^P
-  Z\left(\mathbf{Y}_{n+1}^p(t)\right)^\top + Z\left(\mathbf{Y}_{n+1}^p(t)\right)\right)\right),\label{eqn:disfc}
-\end{align}
-where $M$ extracts and vectorizes the upper triangle and diagonal of a symmetric
-matrix, $Z$ is the Fisher $z$-transformation~\citep{Zar10}:
-\begin{align}
-Z(r) = \frac{\log(1+r) - \log(1-r)}{2},
-\end{align}
-$R$ is the inverse of $Z$:
-\begin{align}
-R(z) = \frac{\exp(2z - 1)}{\exp(2z + 1)},
-\end{align}
-and $\mathbf{Y}_{n+1}^p(t)$ denotes the correlation matrix at timepoint $t$
-(Eqn.~\ref{eqn:timecorr}) between each column of $\mathbf{X}_n^p$ and each
-column of the average $\mathbf{X}_n$ from all \textit{other}
-participants, $\bar{\mathbf{X}}_n^{ \backslash p}$:
-\begin{align}
-  \bar{\mathbf{X}}_n^{ \backslash p} = \frac{1}{P-1}\sum_{q \in
-  \backslash p} \mathbf{X}_n^q,
-\end{align}
-where $\backslash p$ denotes the set of all participants other than
-participant $p$. In this way, the $T$ by $\left( \frac{K^2 - K}{2} + K \right)$ DISFC
-matrix $\bar{\mathbf{C}}$ provides a time-varying extension of the ISFC
-approach developed by \cite{SimoEtal16}.
-
-\subsection*{Low-dimensional representations of dynamic
-  correlations}
-
-Given a $T$ by $\left( \frac{K^2 - K}{2} + K \right)$ matrix of
-$n^\mathrm{th}$-order dynamic correlations, $\mathbf{Y}_n$, we propose
-two general approaches to computing a $T$ by $K$ low-dimensional
-representation of those correlations, $\mathbf{X}_n$.  The first
-approach uses dimensionality reduction algorithms to project
-$\mathbf{Y}_n$ onto a $K$-dimensional space.  The second approach uses
-graph measures to characterize the relative positions of each feature
-($k \in \left[1, ..., K \right]$) in the network defined by the
-correlation matrix at each timepoint.
-
-\subsubsection*{Dimensionality reduction-based approaches to computing
-  $\mathbf{X}_n$}
-
-The modern toolkit of dimensionality reduction algorithms include
-Principal Components Analysis~\citep[PCA;][]{Pear01}, Probabilistic
-PCA~\citep[PPCA;][]{TippBish99}, Exploratory Factor
-Analysis~\citep[EFA;][]{Spea04}, Independent Components
-Analysis~\citep[ICA;][]{JuttHera91, ComoEtal91}, $t$-Stochastic
-Neighbor Embedding~\citep[$t$-SNE;][]{MaatHint08}, Uniform Manifold
-Approximation and Projection~\citep[UMAP;][]{McInEtal18}, non-negative
-matrix factorization~\citep[NMF;][]{LeeSeun99}, Topographic Factor
-Analysis~\cite[TFA;][]{MannEtal14b}, Hierarchical Topographic Factor
-analysis~\cite[HTFA;][]{MannEtal18}, Topographic Latent Source
-Analysis~\cite[TLSA;][]{GersEtal11}, dictionary
-learning~\citep{MairEtal09a, MairEtal09b}, and deep
-auto-encoders~\citep{HintSala06}, among others.  While complete
-characterizations of each of these algorithms is beyond the scope of
-the present manuscript, the general intuition driving these approaches
-is to compute the $T$ by $K$ matrix, $\mathbf{X}$, that is closest to
-the original $T$ by $J$ matrix, $\mathbf{Y}$, where (typically)
-$K \ll J$.  The different approaches place different constraints on
-what properties $\mathbf{X}$ must satisfy and which aspects of the
-data are compared (and how) in order to optimize how well
-$\mathbf{X}$ approximates $\mathbf{Y}$.
-
-Applying dimensionality reduction algorithms to $\mathbf{Y}$ yields an
-$\mathbf{X}$ whose columns reflect weighted combinations (or nonlinear
-transformations) of the original columns of $\mathbf{Y}$.  This has
-two main consequences.  First, with each repeated dimensionality
-reduction, the resulting $\mathbf{X}_n$ has lower and lower fidelity
-(with respect to what the ``true'' $\mathbf{Y}_n$ might have looked
-like without using dimensionality reduction to maintain scalability).
-In other words, computing $\mathbf{X}_n$ is a lossy operation.
-Second, whereas each column of $\mathbf{Y}_n$ may be mapped
-directly onto specific pairs of columns of $\mathbf{X}_{n-1}$, the
-columns of $\mathbf{X}_n$ reflect weighted combinations and/or
-nonlinear transformations of the columns of $\mathbf{Y}_n$.  Many
-dimensionality reduction algorithms are invertible (or approximately
-invertible).  However, attempting to map a given $\mathbf{X}_n$ back
-onto the original feature space of $\mathbf{X}_0$ will usually require
-$\mathcal{O}(TK^{2n})$ space and therefore becomes intractable
-as $n$ or $K$ grow large.
-
-\subsubsection*{Graph measure approaches to computing
-  $\mathbf{X}_n$}
-The above dimensionality reduction approaches to approximating a given
-$\mathbf{Y}_n$ with a lower-dimensional $\mathbf{X}_n$ preserve a
-(potentially recombined and transformed) mapping back to the original
-data in $\mathbf{X}_0$.  We also explore graph measures that instead
-characterize each feature's relative \textit{position} in the broader
-network of interactions and connections.  To illustrate the
-distinction between the two general approaches we explore, suppose a
-network comprises nodes $A$, $B$, and $C$.  If $A$ and $B$ exhibit
-uncorrelated activity patterns, the functional connection
-(correlation) between them will be (by definition) close to 0.
-However, if $A$ and $B$ each interact with $C$ in similar ways, we
-might attempt to capture those similarities using a measure that
-reflects how $A$ and $B$ interact with \textit{other} members of the
-network.
-
-In general, graph measures take as input a matrix of
-interactions (e.g., using the above notation, a $K$ by $K$
-correlation matrix or binarized correlation matrix reconstituted from
-a single timepoint's row of $\mathbf{Y}$), and return as output a set
-of $K$ measures describing how each node (feature) sits within that
-correlation matrix with respect to the rest of the population.  Widely
-used measures include betweenness centrality~\citep[the proportion of
-shortest paths between each pair of nodes in the population that
-involves the given node in question; e.g.,][]{Newm05, OpsaEtal10,
-  Bart04, GeisEtal08, Free77}; diversity and
-dissimilarity~\citep[characterizations of how differently connected a
-given node is from others in the population; e.g.,][]{Rao82, Lin09,
-  RicoSzei06}; eigenvector centrality and pagerank
-centrality~\citep[measures of how influential a given node is within
-the broader network; e.g.,][]{Newm08, Bona07, LohmEtal10,
-  HaluEtal13}; transfer entropy and flow coefficients~\citep[a measure
-of how much information is flowing from a given node to other nodes in
-the network; e.g.,][]{HoneEtal07, Schr00}; $k$-coreness
-centrality~\citep[a measure of the connectivity of a node within its
-local subgraph; e.g.,][]{AlvaEtal05, ChriFowl10}; within-module
-degree~\citep[a measure of how many connections a node has to its
-close neighbors in the network; e.g.,][]{RubiSpor10}; participation
-coefficient~\citep[a measure of the diversity of a node's connections
-to different subgraphs in the network; e.g.,][]{RubiSpor10}; and
-subgraph centrality~\citep[a measure of a node's participation in all
-of the network's subgraphs; e.g.,][]{EstrRodr05}; among others.
-
-For a given graph measure,
-$\eta: \mathbb{R}^{K \times K} \rightarrow \mathbb{R}^K$, we can use
-$\eta$ to tranform each row of $\mathbf{Y}_n$ in a way that
-characterizes the corresponding graph properties of each
-column.  This results in a new $T$ by $K$ matrix, $\mathbf{X}_n$, that
-reflects how the features reflected in the columns of $\mathbf{X}_{n-1}$
-participate in the network during each timepoint (row).
-
-
-\subsection*{Dynamic higher-order correlations}
-
-Because $\mathbf{X}_n$ has the same shape as the original data
-$\mathbf{X}_0$, approximating $\mathbf{Y}_n$ with a lower-dimensional
-$\mathbf{X}_n$ enables us to estimate high-order dynamic correlations
-in a scalable way.  Given a $T$ by $K$ input matrix, the output of
-Equation~\ref{eqn:timecorr} requires $\mathcal{O}(TK^2)$ space to
-store.  Repeated applications of Equation~\ref{eqn:timecorr} (i.e.,
-computing dynamic correlations between the columns of the outputted
-dynamic correlation matrix) each require exponentially more space; in
-general the $n^\mathrm{th}$-order dynamic correlations of a $T$ by $K$
-timeseries occupies $\mathcal{O}(TK^{2n})$ space.  However, when we
-approximate or summarize the output of Equation~\ref{eqn:timecorr} with a $T$ by
-$K$ matrix (as described above), it becomes feasible to compute even
-very high-order correlations in high-dimensional data.  Specifically,
-approximating the $n^\mathrm{th}$-order dynamic correlations of a $T$
-by $K$ timeseries requires only $\mathcal{O}(TK^2)$ additional space--
-the same as would be required to compute first-order dynamic
-correlations. In other words, the space required to store $n+1$
-multivariate timeseries reflecting up to $n^\mathrm{th}$ order
-correlations in the original data scales linearly with $n$ using our
-approach (Fig.~\ref{fig:methods}).
-
-\subsection*{Data}
-We examined two types of data: synthetic data and human functional
-neuroimaging data.  We constructed and leveraged the synthetic data to
-evaluate our general approach~\citep[for a related validation
-approach see][]{ThomEtal18}.  Specifically, we tested how well
-Equation~\ref{eqn:timecorr} could be used to recover known dynamic
-correlations using different choices of kernel ($\kappa$;
-Fig.~\ref{fig:kernels}), for each of several synthetic datasets that
-exhibited different temporal properties. We also used this synthetic
-data to simulate higher-order correlations and tested how well Equation~\ref{eqn:timecorr}
-could recover these correlations using the best kernel from the
-previous synthetic data analysis.  We applied our approach to a
-functional neuroimaging dataset to test the hypothesis that ongoing
-cognitive processing is reflected in high-order dynamic correlations.
-We used an across-participant classification test to estimate whether
-dynamic correlations of different orders contain information about
-which timepoint in a story participants were listening to.
-
-\subsubsection*{Synthetic data}
-We constructed a total of 40 different multivariate timeseries,
-collectively reflecting a total of 4 qualitatively different patterns
-of dynamic correlations (i.e., 10 datasets reflecting each type of
-dynamic pattern).  Each timeseries comprised 50 features (dimensions)
-that varied over 300 timepoints.  The observations at each timepoint
-were drawn from a zero-mean multivariate Gaussian distribution with a
-covariance matrix defined for each timepoint as described below.  We
-drew the observations at each timepoint independently from the draws
-at all other timepoints; in other words, for each observation
-$s_t \sim \mathcal{N}\left(\mathbf{0}, \mathbf{\Sigma}_t\right)$ at
-timepoint $t$, $p(s_t) = p(s_t | s_{\backslash t})$.
-
-\paragraph*{Constant.}  We generated data with stable underlying
-correlations to evaluate how Equation~\ref{eqn:timecorr} characterized
-correlation ``dynamics'' when the ground truth correlations were
-static.  We constructed 10 multivariate timeseries whose observations
-were each drawn from a single (stable) Gaussian distribution.  For
-each dataset (indexed by $m$), we constructed a random covariance matrix,
-$\mathbf{\Sigma}_m$:
-\begin{align}
-  \mathbf{C}(i, j) &\sim \mathcal{N}(0, 1)\\
-  \mathbf{\Sigma}_m &= \mathbf{C}
-                                          \mathbf{C}^\top~\mathrm{, where}\label{eqn:randcorr}
-  \end{align}
-  $i, j \in \left[1, 2, ..., 50 \right]$.  In other words, all of the
-  observations (for each of the 300 timepoints) within each dataset
-  were drawn from a multivariate Gaussian distribution with the same
-  covariance matrix, and the 10 datasets each used a different
-  covariance matrix.
-  
-  \paragraph*{Random.}  We generated a second set of 10 synthetic
-  datasets whose observations at each timepoint were drawn from a
-  Gaussian distribution with a new randomly constructed (using
-  Eqn.~\ref{eqn:randcorr}) covariance matrix.  Because each
-  timepoint's covariance matrix was drawn independently from the
-  covariance matrices for all other timepoints, these datasets
-  provided a test of reconstruction accuracy in the absence of any
-  meaningful underlying temporal structure in the dynamic correlations
-  underlying the data.
-  
-  \paragraph*{Ramping.}  We generated a third set of 10 synthetic
-  datasets whose underlying correlations changed gradually over time.
-  For each dataset, we constructed two \textit{anchor} covariance
-  matrices using Equation~\ref{eqn:randcorr},
-  $\mathbf{\Sigma}_{\mathrm{start}}$ and
-  $\mathbf{\Sigma}_{\mathrm{end}}$.  For each of the 300 timepoints in
-  each dataset, we drew the observations from a multivariate Gaussian
-  distribution whose covariance matrix at each timepoint $t \in
-  \left[0, ..., 299\right]$ was given by
-  \begin{align}
-    \mathbf{\Sigma}_t = \left( 1 - \frac{t}{299} \right)
-    \mathbf{\Sigma}_{\mathrm{start}} + \frac{t}{299}\mathbf{\Sigma}_{\mathrm{end}}.
-  \end{align}
-The gradually changing correlations underlying these datasets allow us
-to evaluate the recovery of dynamic correlations when each timepoint's
-correlation matrix is unique (as in the random datasets), but where
-the correlation dynamics are structured and exhibit first-order
-autocorrelations (as in the constant datasets).
-  
-\paragraph*{Event.} We generated a fourth set of 10 synthetic datasets
-whose underlying correlation matrices exhibited prolonged intervals of
-stability, interspersed with abrupt changes.  For each dataset, we
-used Equation~\ref{eqn:randcorr} to generate 5 random covariance
-matrices.  We constructed a timeseries where each set of 60 consecutive samples
-was drawn from a Gaussian with the same covariance matrix.  These
-datasets were intended to simulate a system that undergoes occasional
-abrupt state changes.
-
-\subsubsection*{Synthetic data: simulating dynamic high-order
-  correlations}
-
-We developed an iterative procedure for constructing timeseries data
-that exhibits known dynamic high-order correlations.  The procedure
-builds on our approach to generating dynamic first-order correlations.
-Essentially, once we generate a timeseries with known first-order
-correlations, we can use the known first-order correlations as a
-template to generate a new timeseries of second-order correlations.
-In turn, we can generate a timeseries of third-order correlations from
-the second-order correlations, and so on.  In general, we can generate
-order $n$ correlations given a timeseries of order $n - 1$ correlations,
-for any $n > 1$.  Finally, given the order $n$ timeseries, we can
-reverse the preceding process to generate an order $n - 1$ timeseries, an
-order $n - 2$ order timeseries, and so on, until we obtain an order 0
-timeseries of simulated data that reflects the chosen high-order dynamics.
-
-The central mathematical operations in our procedure are two
-functions, $\mathrm{vec}(\cdot)$ and $\mathrm{mat}(\cdot)$.  The
-$\mathrm{vec}(\cdot)$ function takes as input a $K \times K$ symmetric
-matrix and returns as output a
-$\left(\frac{K^2 - K}{2} + K\right)$-dimensional column vector
-containing the entries in the upper triangle and diagonal.  The
-$\mathrm{mat}(\cdot)$ function inverts $\mathrm{vec}(\cdot)$ by taking
-as input a $\left(\frac{K^2 - K}{2} + K\right)$-dimensional column
-vector and returning a $K \times K$ symmetric matrix as output.  We
-can then generate an order $n$ correlation matrix (for one timepoint, $t$) from an order
-$n - 1$ template (from the same timepoint) as follows:
-\begin{align}
-  \mathbf{\Sigma_{n}}(t) &= \mathrm{mat}(\mathrm{vec}(\mathbf{\Sigma_{n-1}}(t)) \otimes \mathrm{vec}(\mathbf{\Sigma_{n-1}}(t))^\top).\label{eqn:veccorr}
-\end{align}
-
-Given a timeseries of order $n$ correlation matrices, we can draw an
-order $n-1$ correlation matrix for each timpoint $t$ using
-\begin{align}
- \mathbf{\sigma_{n-1}}(t) &\sim \mathcal{N}\left(\mathbf{0}, \mathbf{\Sigma_n}(t)
-                   \right)\label{eqn:highorder-gen1}\\
-  \mathbf{\Sigma_{n-1}}(t) &= \mathrm{mat}(\mathbf{\sigma_{n-1}}(t)).\label{eqn:highorder-gen2}
-  \end{align}
-  We can then use repeated applications of
-  Equations~\ref{eqn:highorder-gen1} and~\ref{eqn:highorder-gen2} in
-  order to obtain a synthetic dataset.
-
- When the template first-order correlations are constructed to exhibit different
- temporal profiles (e.g., using the constant, random, ramping, and
- event procedures described above), the resulting high-order
- correlations and synthetic data will exhibit the same category of
- temporal profile.
-
- Following our approach to generating synthetic data exhibiting known
- first-order correlations, we constructed a total of 40 additional multivariate timeseries,
-collectively reflecting a total of 4 qualitatively different patterns
-of dynamic correlations (i.e., 10 datasets reflecting each type of
-dynamic pattern: constant, random, ramping, and event).
-
- 
-\subsubsection*{Functional neuroimaging data collected during story
-  listening}
-We examined an fMRI dataset collected by \cite{SimoEtal16} that the
-authors have made publicly available at
-\href{http://arks.princeton.edu/ark:/88435/dsp015d86p269k}{arks.princeton.edu/ark:/88435/dsp015d86p269k}.  The dataset
-comprises neuroimaging data collected as participants listened
-to an audio recording of a story (intact condition; 36 participants),
-listened to temporally scrambled recordings of the same story (17
-participants in the paragraph-scrambled condition listened to the
-paragraphs in a randomized order and 36 in the word-scrambled
-condition listened to the words in a randomized order), or lay resting
-with their eyes open in the scanner (rest condition; 36
-participants).  Full neuroimaging details may be found in the original
-paper for which the data were collected~\citep{SimoEtal16}.
-
-\paragraph{Hierarchical topographic factor analysis (HTFA).}
-Following our prior related work, we used HTFA~\citep{MannEtal18} to
-derive a compact representation of the neuroimaging data.  In brief,
-this approach approximates the timeseries of voxel activations (44,415
-voxels) using a much smaller number of radial basis function (RBF)
-nodes~\citep[in this case, 700 nodes, as determined by an optimization
-procedure described by][]{MannEtal18}.  This provides a convenient
-representation for examining full-brain network dynamics.  All of the
-analyses we carried out on the neuroimaging dataset were performed in
-this lower-dimensional space.  In other words, each participant's data
-matrix, $\mathbf{X}_0$, was a number-of-timepoints by 700 matrix of
-HTFA-derived factor weights (where the row and column labels were
-matched across participants).  Code for carrying out HTFA on fMRI data
-may be found as part of the BrainIAK toolbox~\citep{brainiak}, which
-may be downloaded at \href{https://brainiak.org/}{brainiak.org}.
-
-\subsection*{Temporal decoding}
-We sought to identify neural patterns that reflected participants'
-ongoing cognitive processing of incoming stimulus information.  As
-reviewed by \cite{SimoEtal16}, one way of homing in on these
-stimulus-driven neural patterns is to compare activity patterns across
-individuals (e.g., using ISFC analyses).  In particular, neural
-patterns will be similar across individuals to the extent that the
-neural patterns under consideration are stimulus-driven, and to the
-extent that the corresponding cognitive representations are reflected
-in similar spatial patterns across people.  Following this logic, we
-used an across-participant temporal decoding test developed by
-\cite{MannEtal18} to assess the degree to which different neural
-patterns reflected ongoing stimulus-driven cognitive processing across
-people.  The approach entails using a subset of the data to train a
-classifier to decode stimulus timepoints (i.e., moments in the story
-participants listened to) from neural patterns.  We use decoding
-(forward inference) accuracy on held-out data, from held-out
-participants, as a proxy for the extent to which the inputted neural
-patterns reflected stimulus-driven cognitive processing in a similar
-way across individuals.
-
-\subsubsection*{Forward inference and decoding accuracy}
-We used an across-participant correlation-based classifier to decode
-which stimulus timepoint matched each timepoint's neural pattern.  We
-first divided the participants into two groups: a template group,
-$\mathcal{G}_{\mathrm{template}}$, and a to-be-decoded group,
-$\mathcal{G}_{\mathrm{decode}}$.  We used Equation~\ref{eqn:disfc} to
-compute a DISFC matrix for each group
-($\bar{\textbf{C}}_{\mathrm{template}}$ and
-$\bar{\textbf{C}}_{\mathrm{decode}}$, respectively).  We then
-correlated the rows of $\bar{\textbf{C}}_{\mathrm{template}}$ and
-$\bar{\textbf{C}}_{\mathrm{decode}}$ to form a number-of-timepoints by
-number-of-timepoints decoding matrix, $\mathbf{\Lambda}$.  In this
-way, the rows of $\mathbf{\Lambda}$ reflected timepoints from the
-template group, while the columns reflected timepoints from the
-to-be-decoded group.  We used $\mathbf{\Lambda}$ to assign temporal
-labels to each row $\bar{\textbf{C}}_{\mathrm{decode}}$ using the row
-of $\bar{\textbf{C}}_{\mathrm{template}}$ with which it was most
-highly correlated.  We then repeated this decoding procedure, but
-using $\mathcal{G}_{\mathrm{decode}}$ as the template group and
-$\mathcal{G}_{\mathrm{template}}$ as the to-be-decoded group.  Given
-the true timepoint labels (for each group), we defined the
-\textit{decoding accuracy} as the average proportion of correctly
-decoded timepoints, across both groups.  We defined the
-\textit{relative decoding accuracy} as the difference between the
-decoding accuracy and chance accuracy (i.e., $\frac{1}{T}$).
-
-\subsubsection*{Feature weighting and testing}
-We sought to examine which types of neural features (i.e.,
-activations, first-order dynamic correlations, and higher-order
-dynamic correlations) were informative to the temporal decoders.
-Using the notation above, these features correspond to $\mathbf{X}_0$,
-$\mathbf{X}_1$, $\mathbf{X}_2$, $\mathbf{X}_3$, and so on.
-
-\begin{figure}[tp]
-  \centering
-  \includegraphics[width=0.7\textwidth]{figs/timecorr_pipeline}
-  \caption{\textbf{Across-participant timepoint decoding accuracy varies with
-      correlation order and cognitive engagement.}
-    \textbf{a.~Decoding accuracy as a function of order: PCA.}
-    \textit{Order} ($x$-axis) refers to the maximum order of dynamic
-    correlations that were available to the classifiers (see
-    \textit{Feature weighting and testing}).  The reported
-    across-participant decoding accuracies are averaged over all
-    kernel shapes and widths (see \textit{Identifying robust decoding
-      results}).  The $y$-values are displayed relative to chance
-    accuracy (intact: $\frac{1}{300}$; paragraph: $\frac{1}{272}$;
-    word: $\frac{1}{300}$; rest: $\frac{1}{400}$).  The error ribbons
-    denote 95\% confidence intervals across cross-validation folds
-    (i.e., random assignments of participants to the training and test
-    sets).  The colors denote the experimental condition.  Arrows
-    denote sets of features that yielded reliably higher (upwards
-    facing) or lower (downward facing) decoding accuracy than the mean
-    of all other features (via a two-tailed test, thresholded at
-    $p < 0.05$).  Figure~\ref{fig:ttests} displays additional
-    comparisons between the decoding accuracies achieved using
-    different sets of neural features.  The circled values represent
-    the maximum decoding accuracy within each experimental condition.
-    \textbf{b.~Normalized timepoint decoding accuracy as a function of order:
-      PCA.}  This panel displays the same results as Panel a, but here
-    each curve has been normalized to have a maximum value of 1 and a
-    minimum value of 0 (including the upper and lower bounds of the
-    respective 95\% confidence intervals).  Panels a and b used PCA to
-    project each high-dimensional pattern of dynamic correlations onto
-    a lower-dimensional space.  \textbf{c.~Timepoint decoding accuracy as a
-      function of order: eigenvector centrality.} This panel is in the
-    same format as Panel a, but here eigenvector centrality has been
-    used to project the high-dimensional patterns of dynamic
-    correlations onto a lower-dimensional space.
-    \textbf{d.~Normalized timepoint decoding accuracy as a function of order:
-      eigenvector centrality.} This panel is in the same format as
-    Panel b, but here eigenvector centrality has been used to project
-    the high-dimensional patterns of dynamic correlations onto a
-    lower-dimensional space.}
-  \label{fig:pipeline}
-\end{figure}
-
-
-One challenge to fairly evaluating high-order correlations is that if
-the kernel used in Equation~\ref{eqn:timecorr} is wider than a single
-timepoint, each repeated application of the equation will result in
-further temporal blur.  Because our primary assessment metric is
-temporal decoding accuracy, this unfairly biases against detecting
-meaningful signal in higher-order correlations (relative to
-lower-order correlations).  We attempted to mitigate temporal blur in
-estimating each $\mathbf{X}_n$ by using a Dirac $\delta$ function
-kernel (which places all of its mass over a single timepoint;
-Fig.~\ref{fig:kernels}b) to compute each lower-order correlation
-($\mathbf{X}_1, \mathbf{X}_2, ..., \mathbf{X}_{n-1}$).  We then used a
-new (potentially wider, as described below) kernel to compute
-$\mathbf{X}_{n}$ from $\mathbf{X}_{n-1}$.  In this way, temporal
-blurring was applied only in the last step of computing
-$\mathbf{X}_n$.  We note that, because each $\mathbf{X}_n$ is a
-low-dimensional representation of the corresponding $\mathbf{Y}_n$,
-the higher-order correlations we estimated reflect true correlations
-in the data with lower-fidelity than estimates of lower-order
-correlations.  Therefore, even after correcting for temporal blurring,
-our approach is still biased against finding meaningful signal in
-higher-order correlations.
-
-After computing each
-$\mathbf{X}_1, \mathbf{X}_2, ..., \mathbf{X}_{n-1}$ for each
-participant, we divided participants into two equally sized groups
-($\pm 1$ for odd numbers of participants):
-$\mathcal{G}_{\mathrm{train}}$ and $\mathcal{G}_{\mathrm{test}}$.  We
-then further subdivided $\mathcal{G}_{\mathrm{train}}$ into
-$\mathcal{G}_{\mathrm{train}_1}$ and $\mathcal{G}_{\mathrm{train}_2}$.
-We then computed $\mathbf{\Lambda}$ (temporal correlation) matrices
-for each type of neural feature, using
-$\mathcal{G}_{\mathrm{train}_1}$ and $\mathcal{G}_{\mathrm{train}_2}$.
-This resulted in $n+1$ $\mathbf{\Lambda}$ matrices (one for the
-original timeseries of neural activations, and one for each of $n$
-orders of dynamic correlations).  Our objective was to find a set of
-weights for each of these $\mathbf{\Lambda}$ matrices such that the
-weighted average of the $n+1$ matrices yielded the highest decoding
-accuracy.  We used quasi-Newton gradient ascent~\citep{NoceWrig06},
-using decoding accuracy (for $\mathcal{G}_{\mathrm{train}_1}$ and
-$\mathcal{G}_{\mathrm{train}_2}$) as the objective function to be
-maximized, to find an optimal set of training data-derived weights,
-$\phi_{0, 1, ..., n}$, where $\sum_{i=0}^n \phi_i = 1$ and where
-$\phi_i \geq 0 \forall i \in \left[0, 1, ..., n\right]$.
-
-After estimating an optimal set of weights, we computed a new set of
-$n + 1$ $\mathbf{\Lambda}$ matrices correlating the DISFC patterns
-from $\mathcal{G}_{\mathrm{train}}$ and $\mathcal{G}_{\mathrm{test}}$
-at each timepoint.  We use the resulting decoding accuracy of
-$\mathcal{G}_{\mathrm{test}}$ timepoints (using the weights in
-$\phi_{0, 1, ..., n}$ to average the $\Lambda$ matrices) to estimate how informative
-the set of neural features containing up to $n^\mathrm{th}$ order
-correlations were.
-
-We used a permutation-based procedure to form stable estimates of
-decoding accuracy for each set of neural features.  In particular, we
-computed the decoding accuracy for each of 10 random group assignments of
-$\mathcal{G}_{\mathrm{train}}$ and $\mathcal{G}_{\mathrm{test}}$.  We
-report the mean accuracy (along with 95\% confidence intervals) for each set
-of neural features.
-
-
-\subsubsection*{Identifying robust decoding results}
-The temporal decoding procedure we use to estimate which neural
-features support ongoing cognitive processing is governed by several
-parameters. In particular, Equation~\ref{eqn:timecorr} requires
-defining a kernel function, which can take on different shapes and
-widths.  For a fixed set of neural features, each of these parameters
-can yield different decoding accuracies.  Further, the best decoding
-accuracy for a given timepoint may be reliably achieved by one set of
-parameters, whereas the best decoding accuracy for another timepoint
-might be reliably achieved by a different set of parameters, and the
-best decoding accuracy across \textit{all} timepoints might be
-reliably achieved by still another different set of parameters.
-Rather than attempting to maximize decoding accuracy, we sought to
-discover the trends in the data that were robust to classifier
-parameters choices.  Specifically, we sought to characterize how
-decoding accuracy varied (under different experimental conditions) as
-a function of which neural features were considered.
-
-To identify decoding results that were robust to specific classifier
-parameter choices, we repeated our decoding analyses after
-substituting into Equation~\ref{eqn:timecorr} each of a variety of
-kernel shapes and widths.  We examined Gaussian
-(Fig.~\ref{fig:kernels}c), Laplace (Fig.~\ref{fig:kernels}d), and
-Mexican Hat (Fig.~\ref{fig:kernels}e) kernels, each with widths of 5,
-10, 20, and 50 samples.  We then report the average decoding
-accuracies across all of these parameter choices.  This enabled us to
-(partially) factor out performance characteristics that were
-parameter-dependent, within the set of parameters we examined.
-
-
-\subsubsection*{Reverse inference}
-The dynamic patterns we examined comprise high-dimensional correlation
-patterns at each timepoint.  To help interpret the resulting patterns
-in the context of other studies, we created summary maps by computing
-the across-timepoint average pairwise correlations at each order of
-analysis (first order, second order, etc.).  We selected the 10
-strongest (absolute value) correlations at each order.  Each
-correlation is between the dynamic activity patterns (or patterns of
-dynamic high-order correlations) measured at two RBF nodes (see
-\textit{Hierarchical Topographic Factor Analysis}).  Therefore, the 10
-strongest correlations involved up to 20 RBF nodes.  Each RBF defines
-a spatial function whose activations range from 0 to 1.  We
-constructed a map of RBF components that denoted the endpoints of the
-10 strongest correlations (we set each RBF to have a maximum value of
-1).  We then carried out a meta analysis using
-Neurosynth~\citep{RubiEtal17} to identify the 10 terms most commonly
-associated with the given map.  This resulted in a set of 10 terms
-associated with the average dynamic correlation patterns at each
-order.
 
 
 
@@ -911,7 +210,9 @@ stimulus-driven high-order correlations in multivariate timeseries
 data (see \textit{Dynamic inter-subject functional connectivity
   (DISFC)} and \textit{Dynamic higher-order correlations}).  We
 evaluated the efficacy of this framework at recovering known patterns
-in several synthetic datasets (see \textit{Synthetic data}).  We then
+in several synthetic datasets (see \textit{Synthetic data: simulating
+  dynamic first-order correlations} and \textit{Synthetic data:
+  simulating dynamic higher-order correlations}).  We then
 applied the framework to a public fMRI dataset collected as
 participants listened to an auditorally presented story, listened to a
 temporally scrambled version of the story, or underwent a resting
@@ -920,8 +221,10 @@ state scan (see \textit{Functional neuroimaging data collected during
 classifiers trained on different sets of neural features to estimate
 which types of features reflected ongoing cognitive processing.
 
-\subsection*{Recovering known dynamic correlations from synthetic data}
-We generated synthetic datasets that differed in how the underlying
+\subsection*{Recovering known dynamic correlations from synthetic
+  data}
+\subsubsection*{Recovering dynamic first-order correlations}
+We generated synthetic datasets that differed in how the underlying first-order
 correlations changed over time.  For each dataset, we applied
 Equation~\ref{eqn:timecorr} with a variety of kernel shapes and
 widths.  We assessed how well the true underlying correlations at each
@@ -935,10 +238,10 @@ different synthetic datasets in a kernel-dependent way.
 \begin{figure}[tp]
   \centering
   \includegraphics[width=\textwidth]{figs/synthetic_data}
-  \caption{\textbf{Recovering known dynamic correlations from
-      synthetic data.}  Each panel displays the average correlations
-    between the vectorized upper triangles of the recovered
-    correlation matrix at each timepoint and either the true
+  \caption{\textbf{Recovering known dynamic first-order correlations
+      from synthetic data.}  Each panel displays the average
+    correlations between the vectorized upper triangles of the
+    recovered correlation matrix at each timepoint and either the true
     underlying correlation at each timepoint or a reference
     correlation matrix.  (The averages are taken across 10 different
     randomly generated synthetic datasets of the given category.)
@@ -946,23 +249,24 @@ different synthetic datasets in a kernel-dependent way.
     datasets). Different colors denote different kernel shapes, and
     the shading within each color family denotes the kernel width
     parameter.  For a complete description of each synthetic dataset,
-    see \textit{Synthetic data}.  \textbf{a. Constant correlations.}
-    These datasets have a stable (unchanging) underlying correlation
-    matrix.  \textbf{b. Random correlations.}  These datasets are
-    generated using a new independently drawn correlation matrix at
-    each new timepoint.  \textbf{c. Ramping correlations.}  These
-    datasets are generated by smoothly varying the underlying
-    correlations between the randomly drawn correlation matrices at
-    the first and last timepoints.  The left panel displays the
-    correlations between the recovered dynamic correlations and the
-    underlying ground truth correlations.  The middle panel compares
-    the recovered correlations with the \textit{first} timepoint's
-    correlation matrix.  The right panel compares the recovered
-    correlations with the \textit{last} timepoint's correlation
-    matrix.  \textbf{d. Event-based correlations.}  These datasets are
-    each generated using five randomly drawn correlation matrices that
-    each remain stable for a fifth of the total timecourse.  The left
-    panel displays the correlations between the recovered dynamic
+    see \textit{Synthetic data: simulating dynamic first-order
+      correlations}.  \textbf{a. Constant correlations.}  These
+    datasets have a stable (unchanging) underlying correlation matrix.
+    \textbf{b. Random correlations.}  These datasets are generated
+    using a new independently drawn correlation matrix at each new
+    timepoint.  \textbf{c. Ramping correlations.}  These datasets are
+    generated by smoothly varying the underlying correlations between
+    the randomly drawn correlation matrices at the first and last
+    timepoints.  The left panel displays the correlations between the
+    recovered dynamic correlations and the underlying ground truth
+    correlations.  The middle panel compares the recovered
+    correlations with the \textit{first} timepoint's correlation
+    matrix.  The right panel compares the recovered correlations with
+    the \textit{last} timepoint's correlation matrix.
+    \textbf{d. Event-based correlations.}  These datasets are each
+    generated using five randomly drawn correlation matrices that each
+    remain stable for a fifth of the total timecourse.  The left panel
+    displays the correlations between the recovered dynamic
     correlations and the underlying ground truth correlations.  The
     right panels compare the recovered correlations with the
     correlation matrices unique to each event.}
@@ -985,29 +289,46 @@ timepoint, averaging data over time dilutes the available signal.
 Following a similar pattern, holding kernel shape fixed, narrower
 kernel parameters better recovered randomly varying correlations.
 
-\subsection*{Recovering known higher-order dynamic correlations from synthetic data}
-We generated a synthetic timeseries from simulated first and second order dynamic correlation
-matrices that differed in how the underlying
-correlations changed over time.  For each dataset, we applied
-Equation~\ref{eqn:timecorr} with a Laplace kernel with a width of 20.
-We assessed how well the recovered correlations matched simulated
-first and second order correlations. 
-(Fig.~\ref{fig:higher_order_sims}).  For every dataset we tested,
-our approach recovered the correlation dynamics we embedded into the
-data.  However, the quality of these recoveries varied across
-different synthetic datasets.
+\subsubsection*{Recovering dynamic higher-order correlations}
+Following our approach to evaluating our ability to recover known
+dynamic first-order correlations from synthetic data, we generated an
+analogous second set of synthetic datasets that we designed to exhibit
+known dynamic first-order \textit{and} second-order correlations (see
+\textit{Synthetic data: simulating dynamic higher-order
+  correlations}).  We generated a total of 40 datasets that varied in
+how the first-order and second-order correlations changed over time.
+We then repeatedly applied Equation~\ref{eqn:timecorr} using the
+overall best-performing kernel from our first-order tests (a Laplace
+kernel with a width of 20; Fig.~\ref{fig:synthetic}) to assess how
+closely the recovered dynamic correlations matched the dynamic
+correlations we had embedded into the datasets.
+
+Overall, we found that we could reliably recover both first-order and
+second-order correlations from the synthetic data
+(Fig.~\ref{fig:higher_order_sims}).  When the correlations were stable
+for longer intervals, or changed gradually (constant, ramping, and
+event datasets), recovery performance was relatively high, and we were
+better able to recover dynamic first-order correlations than
+second-order correlations.  We expected that this would happen, given
+that errors in our estimation procedure at lower orders necessarily
+propagate to higher orders (since lower-order correlations are used to
+estimate higher-order correlations).  Interestingly, we also found
+that when the correlations were particularly \textit{un}stable (random
+datasets), we better recovered second-order correlations.
 
 \begin{figure}[tp]
   \centering
   \includegraphics[width=\textwidth]{figs/higher_order_sims}
-  \caption{\textbf{Recovery of simulated first and second order dynamic correlations.}  Each panel displays the average correlations
+  \caption{\textbf{Recovery of simulated first-order and second-order dynamic correlations.}  Each panel displays the average correlations
     between the vectorized upper triangles of the recovered
     correlation matrix and the simulated correlation matrix at each
     timepoint and for each synthetic dataset.  (The averages are taken across 10 different
     randomly generated synthetic datasets of the given category.)
     Error ribbons denote 95\% confidence intervals (taken across
     datasets).  For a complete description of each synthetic dataset,
-    see \textit{Synthetic data}.  \textbf{a. Constant correlations.}
+    see \textit{Synthetic data: simulating dynamic higher-order
+      correlations}.  All results in this figure used a Laplace kernel
+    (width~$=20$).  \textbf{a. Constant correlations.}
     These first and second order dynamic correlation were
     simulated from datasets have a stable (unchanging) underlying correlation
     matrix.  \textbf{b. Random correlations.}  These first and second order dynamic correlation were
@@ -1025,6 +346,14 @@ different synthetic datasets.
     each remain stable for a fifth of the total timecourse.  }
   \label{fig:higher_order_sims}
 \end{figure}
+
+Taken together, our explorations using synthetic data indicated that
+we are able to partially, but not perfectly, recover ground truth
+dynamic first-order and second-order correlations.  This suggests that
+our modeling approach provides a meaningful (if noisy) estimate of
+high-order correlations.  We next turned to analyses of human fMRI data
+to examine whether the recovered dynamics might reflect the dynamics
+of human cognition during a naturalistic story-listening task.
 
 \subsection*{Cognitively relevant dynamic high-order correlations in
   fMRI data}
@@ -1101,7 +430,7 @@ classifiers on the training group's data to match each sample from the
 test group with a stimulus timepoint.  Each classifier comprised a
 weighted blend of neural patterns that reflected up to
 $n^\mathrm{th}$-order dynamic correlations (see \textit{Feature
-  weighting and testing}).  We repeated this process for
+  weighting and testing}, Fig.~\ref{fig:pipeline}).  We repeated this process for
 $n \in \left\{ 0, 1, 2, ..., 10 \right\}$.  Our examinations of
 synthetic data suggested that none of the kernels we examined were
 ``universal'' in the sense of optimally recovering underlying
@@ -1115,8 +444,10 @@ robust to specific kernel parameters (see \textit{Identifying robust
   decoding results}).
 
 Our approach to estimating dynamic high-order correlations entails
-mapping the high-dimensional feature space of correlations (a $T$ by
-$\mathcal{O}(K^2)$ matrix) onto a lower-dimensional $T$ by $K$ matrix.
+mapping the high-dimensional feature space of correlations
+(represented by a $T$ by
+$\mathcal{O}(K^2)$ matrix) onto a lower-dimensional feature space
+(represented by a $T$ by $K$ matrix).
 We carried out two sets of analyses that differed in how this mapping
 was computed.  The first set of analyses used PCA to find a
 low-dimensional embedding of the original dynamic correlation matrices
@@ -1306,14 +637,16 @@ surface comprises a structured map such that nearby brain structures
 process incoming information at similar timescales.  Low-level sensory
 areas integrate information relatively quickly, whereas higher-level
 regions integrate information relatively slowly~\citep{BaldEtal17,
-  HassEtal08, HassEtal15, HoneEtal12a, LernEtal11, LernEtal14, ChieHone19}.  Other
+  HassEtal08, HassEtal15, HoneEtal12a, LernEtal11, LernEtal14,
+  ChieHone19}.  A similar hierarchy appears to play a role in
+predicting future events~\citep{LeeEtal20}.  Other
 related work in human and mouse brains indicates that the temporal
 response profile of a given brain structure may relate to how strongly
 connected that structure is with other brain
 areas~\citep{FallEtal19}.  Further study is needed to understand the
 role of temporal integration at different scales of network
 interaction, and across different anatomical structures. Importantly,
-our analyses do no speak to the physiological basis of higher-order
+our analyses do not speak to the physiological basis of higher-order
 dynamics, and could reflect nonlinearities, chaotic patterns,
 non-stationarities, or multistability, etc. However, our decoding analyses do indicate
 that higher-order dynamics are
@@ -1356,6 +689,697 @@ data provide a window into the neural basis of cognition.  By showing
 that high-level cognition is reflected in high-order network dynamics,
 we have elucidated the next step on the path towards understanding the
 neural basis of cognition.
+
+
+
+\section*{Methods}
+Our general approach to efficiently estimating high-order dynamic
+correlations comprises four general steps (Fig.~\ref{fig:methods}).
+First, we derive a kernel-based approach to computing dynamic pairwise
+correlations in a $T$ (timepoints) by $K$ (features) multivariate
+timeseries, $\mathbf{X}_0$.  This yields a $T$ by $\mathcal{O}(K^2)$
+matrix of dynamic correlations, $\mathbf{Y}_1$, where each row
+comprises the upper triangle and diagonal of the correlation matrix at a single
+timepoint, reshaped into a row vector (this reshaped vector is
+$\left( \frac{K^2 - K}{2} + K \right)$-dimensional).  Second, we apply a dimensionality
+reduction step to project the matrix of dynamic correlations back onto
+a $K$-dimensional space.  This yields a $T$ by $K$ matrix,
+$\mathbf{X}_1$, that reflects an approximation of the dynamic
+correlations reflected in the original data.  Third, we use repeated
+applications of the kernel-based dynamic correlation step to
+$\mathbf{X}_n$ and the dimensionality reduction step to the resulting
+$\mathbf{Y}_{n+1}$ to estimate high-order dynamic correlations.  Each
+application of these steps to a $T$ by $K$ time series $\mathbf{X}_n$
+yields a $T$ by $K$ matrix, $\mathbf{X}_{n+1}$, that reflects the
+dynamic correlations between the columns of $\mathbf{X}_n$.  In this
+way, we refer to $n$ as the \textit{order} of the timeseries, where
+$\mathbf{X}_0$ (order 0) denotes the original data and $\mathbf{X}_n$
+denotes (approximated) $n^\mathrm{th}$-order dynamic correlations
+between the columns of $\mathbf{X}_0$.  Finally, we use a
+cross-validation--based decoding approach to evaluate how well
+information contained in a given order (or weighted mixture of orders)
+may be used to decode relevant cognitive states.  If including a given
+$\mathbf{X}_n$ in the feature set yields higher classification
+accuracy on held-out data, we interpret this as evidence that the
+given cognitive states are reflected in patterns of
+$n^\mathrm{th}$-order correlations.
+
+All of the code used to produce
+the figures and results in this manuscript, along with links to the
+corresponding datasets, may be found at
+\href{https://github.com/ContextLab/timecorr-paper}{github.com/ContextLab/timecorr-paper}.
+In addition, we have released a Python toolbox for computing dynamic
+high-order correlations in timeseries data; our toolbox may be found
+at
+\href{https://timecorr.readthedocs.io/}{timecorr.readthedocs.io}.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\textwidth]{figs/methods_fig}
+  \caption{\textbf{Estimating dynamic high-order correlations.}  Given
+    a $T$ by $K$ matrix of multivariate timeseries data,
+    $\mathbf{X}_n$ (where $n \in \mathbb{N}, n \geq 0$), we use
+    Equation~\ref{eqn:timecorr} to compute a timeseries of
+    $K$ by $K$ correlation matrices, $\mathbf{Y}_{n+1}$.  We then
+    approximate $\mathbf{Y}_{n+1}$ with the $T$ by $K$ matrix
+    $\mathbf{X}_{n+1}$.  This process may be repeated to scalably estimate
+    iteratively higher-order correlations in the data.  Note that the
+    transposes of $\mathbf{X}_n$ and $\mathbf{X}_{n+1}$ are displayed
+    in the figure for compactness.
+  \label{fig:methods}}
+\end{figure}
+
+
+\subsection*{Kernel-based approach for computing dynamic correlations}
+Given a $T$ by $K$ matrix of observations, $\mathbf{X}$, we can compute the (static)
+Pearson's correlation between any pair of columns, $\mathbf{X}(\cdot, i)$ and
+$\mathbf{X}(\cdot, j)$ using~\citep{Pear01}:
+\begin{align}
+  \mathrm{corr}(\mathbf{X}(\cdot, i), \mathbf{X}(\cdot, j)) &=
+                                                              \frac{\sum_{t=1}^T
+                                                              \left(\mathbf{X}(t,
+                                                              i)
+                                                              -
+                                                              \bar{\mathbf{X}}(\cdot,
+                                                              i)\right)
+                                                              \left(\mathbf{X}(t,
+                                                              j)
+                                                              -
+                                                              \bar{\mathbf{X}}(\cdot, j)\right)}{\sqrt{\sum_{t=1}^T
+                                                              \sigma^2_{\mathbf{X}(\cdot, i)} 
+                                                              \sigma^2_{\mathbf{X}(\cdot, j)}}},~\mathrm{where}\label{eqn:corr}\\
+  \bar{\mathbf{X}}(\cdot, k) &= \frac{1}{T}\sum_{t=1}^T
+                               \mathbf{X}(t, k),~\mathrm{and}\\
+  \sigma^2_{\mathbf{X}(\cdot, k)} &= \frac{1}{T}\sum_{t=1}^T \left( \mathbf{X}(t, k) -
+                                    \bar{\mathbf{X}}(\cdot, k) \right)^2 
+\end{align}
+We can generalize this formula to compute time-varying correlations by
+incorporating a \textit{kernel function} that takes a time $t$ as
+input, and returns how much the observed data at each timepoint
+$\tau \in \left[ -\infty, \infty \right]$ contributes to the estimated instantaneous
+correlation at time $t$~\citep[Fig.~\ref{fig:kernels}; also see][for a
+similar approach]{AlleEtal12b}.
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{figs/kernels}
+  \caption{\textbf{Examples of kernel functions.} Each panel displays
+    per-timepoint weights for a kernel centered at $t = 50$, evaluated
+    at 100 timepoints ($\tau \in \left[1, ..., 100\right]$).
+    \textbf{a. Uniform kernel.} The weights are timepoint-invariant;
+    observations at all timepoints are weighted equally, and do not
+    change as a function of $\tau$.  This is a special case kernel
+    function that reduces dynamic correlations to static correlations.
+    \textbf{b. Dirac $\delta$ kernel.} Only the observation at
+    timepoint $t$ is given a non-zero weight (of 1).
+    \textbf{c. Gaussian kernels.} Each kernel's weights fall off in
+    time according to a Gaussian probability density function centered
+    on time $t$.  Weights derived using several different example
+    width parameters ($\sigma^2$) are displayed.  \textbf{d. Laplace
+      kernels.}  Each kernel's weights fall off in time according to a
+    Laplace probability density function centered on time $t$.
+    Weights derived using several different example width parameters
+    ($b$) are displayed.  \textbf{e. Mexican hat (Ricker wavelet)
+      kernels.}  Each kernel's weights fall off in time according to a
+    Ricker wavelet centered on time $t$.  This function highlights the
+    \textit{contrasts} between local versus surrounding activity
+    patterns in estimating dynamic correlations. Weights derived using
+    several different example width parameters ($\sigma$) are
+    displayed.}
+  \label{fig:kernels}
+\end{figure}
+
+Given a kernel function $\kappa_t(\cdot)$ for timepoint $t$,
+evaluated at timepoints $\tau \in \left[ 1, ..., T \right]$, we
+can update the static correlation formula in Equation~\ref{eqn:corr}
+to estimate the \textit{instantaneous correlation} at timepoint $t$:
+\begin{align}
+  \mathrm{timecorr}_{\kappa_t}\left(\mathbf{X}(\cdot, i), \mathbf{X}(\cdot, j)\right) &= \frac{\sum_{\tau=1}^T \left( \mathbf{X}(\tau, i) -
+                                       \widetilde{\mathbf{X}}_{\kappa_t}(\cdot,
+                                                                                        i) \right)
+                                 \left( \mathbf{X}(\tau, j) -
+                                        \widetilde{\mathbf{X}}_{\kappa_t}(\cdot,
+                                                                                        j)\right)}
+              {\sqrt{\sum_{\tau=1}^T
+                                              \widetilde{\sigma}_{\kappa_t}^2(\mathbf{X}(\cdot,
+                                                                                        i))
+                                              \widetilde{\sigma}_{\kappa_t}^2(\mathbf{X}(\cdot, j))}},~\mathrm{where}\label{eqn:timecorr}\\
+  \widetilde{\mathbf{X}}_{\kappa_t}(\cdot, k) &= \sum_{\tau=1}^T
+                       \kappa_t(\tau)\mathbf{X}(\tau, k),\\
+  \widetilde{\sigma}_{\kappa_t}^2(\mathbf{X}(\cdot, k)) &= \sum_{\tau=1}^T
+                                                  \left(
+                                                  \mathbf{X}(\tau, k) -
+                            \widetilde{\mathbf{X}}_{\kappa_t}(\cdot, k) \right)^2.
+\end{align}
+Here
+$\mathrm{timecorr}_{\kappa_t}(\mathbf{X}(\cdot, i), \mathbf{X}(\cdot,
+j))$ reflects the correlation at time $t$ between columns $i$ and $j$
+of $\mathbf{X}$, estimated using the kernel $\kappa_t$.  We evaluate
+Equation~\ref{eqn:timecorr} in turn for each pair of columns in
+$\mathbf{X}$ and for kernels centered on each timepoint in the
+timeseries, respectively, to obtain a $T$ by $K$ by $K$ timeseries of
+dynamic correlations, $\mathbf{Y}$.  For convenience, we then reshape
+the upper triangles and diagonals of each timepoint's symmetric correlation matrix into a row
+vector to obtain an equivalent $T$ by $\left( \frac{K^2 - K}{2} + K \right)$ matrix.
+
+\subsubsection*{Dynamic inter-subject functional connectivity (DISFC)}
+Equation~\ref{eqn:timecorr} provides a means of taking a single
+observation matrix, $\mathbf{X}_n$ and estimating the dynamic
+correlations from moment to moment, $\mathbf{Y}_{n+1}$.  Suppose that
+one has access to a set of multiple observation matrices that reflect
+the same phenomenon.  For example, one might collect neuroimaging data
+from several experimental participants, as each participant performs
+the same task (or sequence of tasks).  Let $\mathbf{X}_n^1$,
+$\mathbf{X}_n^2$, ..., $\mathbf{X}_n^P$ reflect the $T$ by $K$
+observation matrices ($n = 0$) or reduced correlation matrices
+($n > 0$) for each of $P$ participants in an experiment.  We can use
+\textit{inter-subject functional connectivity}~\citep[ISFC;
+][]{SimoEtal16, SimoChan20} to compute the stimulus-driven correlations reflected
+in the multi-participant dataset at a given timepoint $t$ using:
+\begin{align}
+\bar{\mathbf{C}}(t) = M\left(R\left(\frac{1}{2P} \sum_{p=1}^P
+  Z\left(\mathbf{Y}_{n+1}^p(t)\right)^\top + Z\left(\mathbf{Y}_{n+1}^p(t)\right)\right)\right),\label{eqn:disfc}
+\end{align}
+where $M$ extracts and vectorizes the upper triangle and diagonal of a symmetric
+matrix, $Z$ is the Fisher $z$-transformation~\citep{Zar10}:
+\begin{align}
+Z(r) = \frac{\log(1+r) - \log(1-r)}{2},
+\end{align}
+$R$ is the inverse of $Z$:
+\begin{align}
+R(z) = \frac{\exp(2z - 1)}{\exp(2z + 1)},
+\end{align}
+and $\mathbf{Y}_{n+1}^p(t)$ denotes the correlation matrix at timepoint $t$
+(Eqn.~\ref{eqn:timecorr}) between each column of $\mathbf{X}_n^p$ and each
+column of the average $\mathbf{X}_n$ from all \textit{other}
+participants, $\bar{\mathbf{X}}_n^{ \backslash p}$:
+\begin{align}
+  \bar{\mathbf{X}}_n^{ \backslash p} = \frac{1}{P-1}\sum_{q \in
+  \backslash p} \mathbf{X}_n^q,
+\end{align}
+where $\backslash p$ denotes the set of all participants other than
+participant $p$. In this way, the $T$ by $\left( \frac{K^2 - K}{2} + K \right)$ DISFC
+matrix $\bar{\mathbf{C}}$ provides a time-varying extension of the ISFC
+approach developed by \cite{SimoEtal16}.
+
+\subsection*{Low-dimensional representations of dynamic
+  correlations}
+
+Given a $T$ by $\left( \frac{K^2 - K}{2} + K \right)$ matrix of
+$n^\mathrm{th}$-order dynamic correlations, $\mathbf{Y}_n$, we propose
+two general approaches to computing a $T$ by $K$ low-dimensional
+representation of those correlations, $\mathbf{X}_n$.  The first
+approach uses dimensionality reduction algorithms to project
+$\mathbf{Y}_n$ onto a $K$-dimensional space.  The second approach uses
+graph measures to characterize the relative positions of each feature
+($k \in \left[1, ..., K \right]$) in the network defined by the
+correlation matrix at each timepoint.
+
+\subsubsection*{Dimensionality reduction-based approaches to computing
+  $\mathbf{X}_n$}
+
+The modern toolkit of dimensionality reduction algorithms include
+Principal Components Analysis~\citep[PCA;][]{Pear01}, Probabilistic
+PCA~\citep[PPCA;][]{TippBish99}, Exploratory Factor
+Analysis~\citep[EFA;][]{Spea04}, Independent Components
+Analysis~\citep[ICA;][]{JuttHera91, ComoEtal91}, $t$-Stochastic
+Neighbor Embedding~\citep[$t$-SNE;][]{MaatHint08}, Uniform Manifold
+Approximation and Projection~\citep[UMAP;][]{McInEtal18}, non-negative
+matrix factorization~\citep[NMF;][]{LeeSeun99}, Topographic Factor
+Analysis~\cite[TFA;][]{MannEtal14b}, Hierarchical Topographic Factor
+analysis~\cite[HTFA;][]{MannEtal18}, Topographic Latent Source
+Analysis~\cite[TLSA;][]{GersEtal11}, dictionary
+learning~\citep{MairEtal09a, MairEtal09b}, and deep
+auto-encoders~\citep{HintSala06}, among others.  While complete
+characterizations of each of these algorithms is beyond the scope of
+the present manuscript, the general intuition driving these approaches
+is to compute the $T$ by $K$ matrix, $\mathbf{X}$, that is closest to
+the original $T$ by $J$ matrix, $\mathbf{Y}$, where (typically)
+$K \ll J$.  The different approaches place different constraints on
+what properties $\mathbf{X}$ must satisfy and which aspects of the
+data are compared (and how) in order to optimize how well
+$\mathbf{X}$ approximates $\mathbf{Y}$.
+
+Applying dimensionality reduction algorithms to $\mathbf{Y}$ yields an
+$\mathbf{X}$ whose columns reflect weighted combinations (or nonlinear
+transformations) of the original columns of $\mathbf{Y}$.  This has
+two main consequences.  First, with each repeated dimensionality
+reduction, the resulting $\mathbf{X}_n$ has lower and lower fidelity
+(with respect to what the ``true'' $\mathbf{Y}_n$ might have looked
+like without using dimensionality reduction to maintain tractability).
+In other words, computing $\mathbf{X}_n$ is a lossy operation.
+Second, whereas each column of $\mathbf{Y}_n$ may be mapped
+directly onto specific pairs of columns of $\mathbf{X}_{n-1}$, the
+columns of $\mathbf{X}_n$ reflect weighted combinations and/or
+nonlinear transformations of the columns of $\mathbf{Y}_n$.  Many
+dimensionality reduction algorithms are invertible (or approximately
+invertible).  However, attempting to map a given $\mathbf{X}_n$ back
+onto the original feature space of $\mathbf{X}_0$ will usually require
+$\mathcal{O}(TK^{2n})$ space and therefore becomes intractable
+as $n$ or $K$ grow large.
+
+\subsubsection*{Graph measure approaches to computing
+  $\mathbf{X}_n$}
+The above dimensionality reduction approaches to approximating a given
+$\mathbf{Y}_n$ with a lower-dimensional $\mathbf{X}_n$ preserve a
+(potentially recombined and transformed) mapping back to the original
+data in $\mathbf{X}_0$.  We also explore graph measures that instead
+characterize each feature's relative \textit{position} in the broader
+network of interactions and connections.  To illustrate the
+distinction between the two general approaches we explore, suppose a
+network comprises nodes $A$ and $B$, along with several other nodes.  If $A$ and $B$ exhibit
+uncorrelated activity patterns, then by definition the functional connection
+(correlation) between them will be close to 0.
+However, if $A$ and $B$ each interact with \textit{other} nodes in similar ways, we
+might attempt to capture those similarities between $A$'s and $B$'s
+interactions with those other members of the network.
+
+In general, graph measures take as input a matrix of
+interactions (e.g., using the above notation, a $K$ by $K$
+correlation matrix or binarized correlation matrix reconstituted from
+a single timepoint's row of $\mathbf{Y}$), and return as output a set
+of $K$ measures describing how each node (feature) sits within that
+correlation matrix with respect to the rest of the population.  Widely
+used measures include betweenness centrality~\citep[the proportion of
+shortest paths between each pair of nodes in the population that
+involves the given node in question; e.g.,][]{Newm05, OpsaEtal10,
+  Bart04, GeisEtal08, Free77}; diversity and
+dissimilarity~\citep[characterizations of how differently connected a
+given node is from others in the population; e.g.,][]{Rao82, Lin09,
+  RicoSzei06}; eigenvector centrality and pagerank
+centrality~\citep[measures of how influential a given node is within
+the broader network; e.g.,][]{Newm08, Bona07, LohmEtal10,
+  HaluEtal13}; transfer entropy and flow coefficients~\citep[a measure
+of how much information is flowing from a given node to other nodes in
+the network; e.g.,][]{HoneEtal07, Schr00}; $k$-coreness
+centrality~\citep[a measure of the connectivity of a node within its
+local subgraph; e.g.,][]{AlvaEtal05, ChriFowl10}; within-module
+degree~\citep[a measure of how many connections a node has to its
+close neighbors in the network; e.g.,][]{RubiSpor10}; participation
+coefficient~\citep[a measure of the diversity of a node's connections
+to different subgraphs in the network; e.g.,][]{RubiSpor10}; and
+subgraph centrality~\citep[a measure of a node's participation in all
+of the network's subgraphs; e.g.,][]{EstrRodr05}; among others.
+
+For a given graph measure,
+$\eta: \mathbb{R}^{K \times K} \rightarrow \mathbb{R}^K$, we can use
+$\eta$ to tranform each row of $\mathbf{Y}_n$ in a way that
+characterizes the corresponding graph properties of each
+column.  This results in a new $T$ by $K$ matrix, $\mathbf{X}_n$, that
+reflects how the features reflected in the columns of $\mathbf{X}_{n-1}$
+participate in the network during each timepoint (row).
+
+
+\subsection*{Dynamic higher-order correlations}
+
+Because $\mathbf{X}_n$ has the same shape as the original data
+$\mathbf{X}_0$, approximating $\mathbf{Y}_n$ with a lower-dimensional
+$\mathbf{X}_n$ enables us to estimate high-order dynamic correlations
+in a scalable way.  Given a $T$ by $K$ input matrix, the output of
+Equation~\ref{eqn:timecorr} requires $\mathcal{O}(TK^2)$ space to
+store.  Repeated applications of Equation~\ref{eqn:timecorr} (i.e.,
+computing dynamic correlations between the columns of the outputted
+dynamic correlation matrix) each require exponentially more space; in
+general the $n^\mathrm{th}$-order dynamic correlations of a $T$ by $K$
+timeseries occupies $\mathcal{O}(TK^{2^n})$ space.  However, when we
+approximate or summarize the output of Equation~\ref{eqn:timecorr} with a $T$ by
+$K$ matrix (as described above), it becomes feasible to compute even
+very high-order correlations in high-dimensional data.  Specifically,
+approximating the $n^\mathrm{th}$-order dynamic correlations of a $T$
+by $K$ timeseries requires only $\mathcal{O}(TK^2)$ additional space--
+the same as would be required to compute first-order dynamic
+correlations. In other words, the space required to store $n+1$
+multivariate timeseries reflecting up to $n^\mathrm{th}$ order
+correlations in the original data scales linearly with $n$ using our
+approach (Fig.~\ref{fig:methods}).
+
+\subsection*{Data}
+We examined two types of data: synthetic data and human functional
+neuroimaging data.  We constructed and leveraged the synthetic data to
+evaluate our general approach~\citep[for a related validation approach
+see][]{ThomEtal18}.  Specifically, we tested how well
+Equation~\ref{eqn:timecorr} could be used to recover known dynamic
+correlations using different choices of kernel ($\kappa$;
+Fig.~\ref{fig:kernels}), for each of several synthetic datasets that
+exhibited different temporal properties. We also simulated
+higher-order correlations and tested how well
+Equation~\ref{eqn:timecorr} could recover these correlations using the
+best kernel from the previous synthetic data analyses.  We then applied our
+approach to a functional neuroimaging dataset to test the hypothesis
+that ongoing cognitive processing is reflected in high-order dynamic
+correlations.  We used an across-participant classification test to
+estimate whether dynamic correlations of different orders contain
+information about which timepoint in a story participants were
+listening to.
+
+\subsubsection*{Synthetic data: simulating dynamic first-order correlations}
+We constructed a total of 40 different multivariate timeseries,
+collectively reflecting a total of 4 qualitatively different patterns
+of dynamic first-order correlations (i.e., 10 datasets reflecting each type of
+dynamic pattern).  Each timeseries comprised 50 features (dimensions)
+that varied over 300 timepoints.  The observations at each timepoint
+were drawn from a zero-mean multivariate Gaussian distribution with a
+covariance matrix defined for each timepoint as described below.  We
+drew the observations at each timepoint independently from the draws
+at all other timepoints; in other words, for each observation
+$s_t \sim \mathcal{N}\left(\mathbf{0}, \mathbf{\Sigma}_t\right)$ at
+timepoint $t$, $p(s_t) = p(s_t | s_{\backslash t})$.
+
+\paragraph*{Constant.}  We generated data with stable underlying
+correlations to evaluate how Equation~\ref{eqn:timecorr} characterized
+correlation ``dynamics'' when the ground truth correlations were
+static.  We constructed 10 multivariate timeseries whose observations
+were each drawn from a single (stable) Gaussian distribution.  For
+each dataset (indexed by $m$), we constructed a random covariance matrix,
+$\mathbf{\Sigma}_m$:
+\begin{align}
+   \mathbf{\Sigma}_m &= \mathbf{C}
+                                          \mathbf{C}^\top\mathrm{,~where}\label{eqn:randcorr}\\
+  \mathbf{C}(i, j) &\sim \mathcal{N}(0, 1)\mathrm{,~and~where}
+  \end{align}
+  $i, j \in \left[1, 2, ..., 50 \right]$.  In other words, all of the
+  observations (for each of the 300 timepoints) within each dataset
+  were drawn from a multivariate Gaussian distribution with the same
+  covariance matrix, and the 10 datasets each used a different
+  covariance matrix.
+  
+  \paragraph*{Random.}  We generated a second set of 10 synthetic
+  datasets whose observations at each timepoint were drawn from a
+  Gaussian distribution with a new randomly constructed (using
+  Eqn.~\ref{eqn:randcorr}) covariance matrix.  Because each
+  timepoint's covariance matrix was drawn independently from the
+  covariance matrices for all other timepoints, these datasets
+  provided a test of reconstruction accuracy in the absence of any
+  meaningful underlying temporal structure in the dynamic correlations
+  underlying the data.
+  
+  \paragraph*{Ramping.}  We generated a third set of 10 synthetic
+  datasets whose underlying correlations changed gradually over time.
+  For each dataset, we constructed two \textit{anchor} covariance
+  matrices using Equation~\ref{eqn:randcorr},
+  $\mathbf{\Sigma}_{\mathrm{start}}$ and
+  $\mathbf{\Sigma}_{\mathrm{end}}$.  For each of the 300 timepoints in
+  each dataset, we drew the observations from a multivariate Gaussian
+  distribution whose covariance matrix at each timepoint $t \in
+  \left[0, ..., 299\right]$ was given by
+  \begin{align}
+    \mathbf{\Sigma}_t = \left( 1 - \frac{t}{299} \right)
+    \mathbf{\Sigma}_{\mathrm{start}} + \frac{t}{299}\mathbf{\Sigma}_{\mathrm{end}}.
+  \end{align}
+The gradually changing correlations underlying these datasets allow us
+to evaluate the recovery of dynamic correlations when each timepoint's
+correlation matrix is unique (as in the random datasets), but where
+the correlation dynamics are structured and exhibit first-order
+autocorrelations (as in the constant datasets).
+  
+\paragraph*{Event.} We generated a fourth set of 10 synthetic datasets
+whose underlying correlation matrices exhibited prolonged intervals of
+stability, interspersed with abrupt changes.  For each dataset, we
+used Equation~\ref{eqn:randcorr} to generate 5 random covariance
+matrices.  We constructed a timeseries where each set of 60 consecutive samples
+was drawn from a Gaussian with the same covariance matrix.  These
+datasets were intended to simulate a system that exhibits periods of
+stability punctuated by occasional abrupt state changes.
+
+\subsubsection*{Synthetic data: simulating dynamic high-order
+  correlations}
+
+We developed an iterative procedure for constructing timeseries data
+that exhibits known dynamic high-order correlations.  The procedure
+builds on our approach to generating dynamic first-order correlations.
+Essentially, once we generate a timeseries with known first-order
+correlations, we can use the known first-order correlations as a
+template to generate a new timeseries of second-order correlations.
+In turn, we can generate a timeseries of third-order correlations from
+the second-order correlations, and so on.  In general, we can generate
+order $n$ correlations given a timeseries of order $n - 1$ correlations,
+for any $n > 1$.  Finally, given the order $n$ timeseries, we can
+reverse the preceding process to generate an order $n - 1$ timeseries, an
+order $n - 2$ order timeseries, and so on, until we obtain an order 0
+timeseries of simulated data that reflects the chosen high-order dynamics.
+
+The central mathematical operations in our procedure are two
+functions, $\mathrm{vec}(\cdot)$ and $\mathrm{mat}(\cdot)$.  The
+$\mathrm{vec}(\cdot)$ function takes as input a $K \times K$ symmetric
+matrix and returns as output a
+$\left(\frac{K^2 - K}{2} + K\right)$-dimensional column vector
+containing the entries in the upper triangle and diagonal.  The
+$\mathrm{mat}(\cdot)$ function inverts $\mathrm{vec}(\cdot)$ by taking
+as input a $\left(\frac{K^2 - K}{2} + K\right)$-dimensional column
+vector and returning a $K \times K$ symmetric matrix as output.  We
+can then generate an order $n$ correlation matrix (for one timepoint, $t$) from an order
+$n - 1$ template (from the same timepoint) as follows:
+\begin{align}
+  \mathbf{\Sigma_{n}}(t) &= \mathrm{mat}(\mathrm{vec}(\mathbf{\Sigma_{n-1}}(t)) \otimes \mathrm{vec}(\mathbf{\Sigma_{n-1}}(t))^\top).\label{eqn:veccorr}
+\end{align}
+
+Given a timeseries of order $n$ correlation matrices, we can draw an
+order $n-1$ correlation matrix for each timpoint $t$ using
+\begin{align}
+ \mathbf{\sigma_{n-1}}(t) &\sim \mathcal{N}\left(\mathbf{0}, \mathbf{\Sigma_n}(t)
+                   \right)\label{eqn:highorder-gen1}\\
+  \mathbf{\Sigma_{n-1}}(t) &= \mathrm{mat}(\mathbf{\sigma_{n-1}}(t)).\label{eqn:highorder-gen2}
+  \end{align}
+  We can then use repeated applications of
+  Equations~\ref{eqn:highorder-gen1} and~\ref{eqn:highorder-gen2} in
+  order to obtain a synthetic dataset.
+
+ When the template first-order correlations are constructed to exhibit different
+ temporal profiles (e.g., using the constant, random, ramping, and
+ event procedures described above), the resulting high-order
+ correlations and synthetic data will exhibit the same category of
+ temporal profile.
+
+ Following our approach to generating synthetic data exhibiting known
+ first-order correlations, we constructed a total of 40 additional multivariate timeseries,
+collectively reflecting a total of 4 qualitatively different patterns
+of dynamic correlations (i.e., 10 datasets reflecting each type of
+dynamic pattern: constant, random, ramping, and event).
+
+ 
+\subsubsection*{Functional neuroimaging data collected during story
+  listening}
+We examined an fMRI dataset collected by \cite{SimoEtal16} that the
+authors have made publicly available at
+\href{http://arks.princeton.edu/ark:/88435/dsp015d86p269k}{arks.princeton.edu/ark:/88435/dsp015d86p269k}.  The dataset
+comprises neuroimaging data collected as participants listened
+to an audio recording of a story (intact condition; 36 participants),
+listened to temporally scrambled recordings of the same story (17
+participants in the paragraph-scrambled condition listened to the
+paragraphs in a randomized order and 36 in the word-scrambled
+condition listened to the words in a randomized order), or lay resting
+with their eyes open in the scanner (rest condition; 36
+participants).  Full neuroimaging details may be found in the original
+paper for which the data were collected~\citep{SimoEtal16}.
+
+\paragraph{Hierarchical topographic factor analysis (HTFA).}
+Following our prior related work, we used HTFA~\citep{MannEtal18} to
+derive a compact representation of the neuroimaging data.  In brief,
+this approach approximates the timeseries of voxel activations (44,415
+voxels) using a much smaller number of radial basis function (RBF)
+nodes~\citep[in this case, 700 nodes, as determined by an optimization
+procedure described by][]{MannEtal18}.  This provides a convenient
+representation for examining full-brain network dynamics.  All of the
+analyses we carried out on the neuroimaging dataset were performed in
+this lower-dimensional space.  In other words, each participant's data
+matrix, $\mathbf{X}_0$, was a number-of-timepoints by 700 matrix of
+HTFA-derived factor weights (where the row and column labels were
+matched across participants).  Code for carrying out HTFA on fMRI data
+may be found as part of the BrainIAK toolbox~\citep{brainiak}, which
+may be downloaded at \href{https://brainiak.org/}{brainiak.org}.
+
+\subsection*{Temporal decoding}
+We sought to identify neural patterns that reflected participants'
+ongoing cognitive processing of incoming stimulus information.  As
+reviewed by \cite{SimoEtal16}, one way of homing in on these
+stimulus-driven neural patterns is to compare activity patterns across
+individuals (e.g., using ISFC analyses).  In particular, neural
+patterns will be similar across individuals to the extent that the
+neural patterns under consideration are stimulus-driven, and to the
+extent that the corresponding cognitive representations are reflected
+in similar spatial patterns across people~\citep[also see][]{SimoChan20}.  Following this logic, we
+used an across-participant temporal decoding test developed by
+\cite{MannEtal18} to assess the degree to which different neural
+patterns reflected ongoing stimulus-driven cognitive processing across
+people (Fig.~\ref{fig:pipeline}).  The approach entails using a subset of the data to train a
+classifier to decode stimulus timepoints (i.e., moments in the story
+participants listened to) from neural patterns.  We use decoding
+(forward inference) accuracy on held-out data, from held-out
+participants, as a proxy for the extent to which the inputted neural
+patterns reflected stimulus-driven cognitive processing in a similar
+way across individuals.
+
+\subsubsection*{Forward inference and decoding accuracy}
+We used an across-participant correlation-based classifier to decode
+which stimulus timepoint matched each timepoint's neural pattern(Fig.~\ref{fig:pipeline}.  We
+first divided the participants into two groups: a template group,
+$\mathcal{G}_{\mathrm{template}}$ (i.e., training data), and a to-be-decoded group,
+$\mathcal{G}_{\mathrm{decode}}$ (i.e., test data).  We used Equation~\ref{eqn:disfc} to
+compute a DISFC matrix for each group
+($\bar{\textbf{C}}_{\mathrm{template}}$ and
+$\bar{\textbf{C}}_{\mathrm{decode}}$, respectively).  We then
+correlated the rows of $\bar{\textbf{C}}_{\mathrm{template}}$ and
+$\bar{\textbf{C}}_{\mathrm{decode}}$ to form a number-of-timepoints by
+number-of-timepoints decoding matrix, $\mathbf{\Lambda}$.  In this
+way, the rows of $\mathbf{\Lambda}$ reflected timepoints from the
+template group, while the columns reflected timepoints from the
+to-be-decoded group.  We used $\mathbf{\Lambda}$ to assign temporal
+labels to each row $\bar{\textbf{C}}_{\mathrm{decode}}$ using the row
+of $\bar{\textbf{C}}_{\mathrm{template}}$ with which it was most
+highly correlated.  We then repeated this decoding procedure, but
+using $\mathcal{G}_{\mathrm{decode}}$ as the template group and
+$\mathcal{G}_{\mathrm{template}}$ as the to-be-decoded group.  Given
+the true timepoint labels (for each group), we defined the
+\textit{decoding accuracy} as the average proportion of correctly
+decoded timepoints, across both groups.  We defined the
+\textit{relative decoding accuracy} as the difference between the
+decoding accuracy and chance accuracy (i.e., $\frac{1}{T}$).
+
+\subsubsection*{Feature weighting and testing}
+We sought to examine which types of neural features (i.e.,
+activations, first-order dynamic correlations, and higher-order
+dynamic correlations) were informative to the temporal decoders.
+Using the notation above, these features correspond to $\mathbf{X}_0$,
+$\mathbf{X}_1$, $\mathbf{X}_2$, $\mathbf{X}_3$, and so on.
+
+\begin{figure}[tp]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figs/timecorr_pipeline}
+  \caption{\textbf{Decoding analysis pipeline.  a. Computing dynamic
+      correlations from timeseries data.}  Given a timeseries of
+    observations as a $T \times K$ matrix (or a set of $S$ such
+    matrics), we use Equation~\ref{eqn:timecorr} to compute each
+    participant's DISFC (relative to other participants in the
+    training or test sub-group, as appropriate). We repeat this
+    process twice-- once using the analysis kernel (shown here as a
+    Gaussian in the upper row of the panel), and once using a $\delta$
+    function kernel (lower row of the panel).    \textbf{b. Projecting
+      dynamic correlations into a lower-dimensional space.}  We
+    project the training and test data into $K$-dimensional spaces to
+    create compact representations of dynamic correlations at the
+    given order (estimated using the analysis kernel).
+    \textbf{c. Kernel trick.} We project the dynamic correlations
+    computed using a $\delta$ function kernel into a common
+    $K$-dimensional space.  These low-dimensional embeddings are fed
+    back through the analysis pipeline in order to compute features at
+    the next-highest order.  \textbf{d. Decoding analysis.} We split
+    the training data into two equal groups, and optimize the feature
+    weights (i.e., dynamic correlations at each order) to maximize
+    decoding accuracy.  We then apply the trained classifer to the
+    (held-out) test data.
+  \label{fig:pipeline}}
+\end{figure}
+
+
+One challenge to fairly evaluating high-order correlations is that if
+the kernel used in Equation~\ref{eqn:timecorr} is wider than a single
+timepoint, each repeated application of the equation will result in
+further temporal blur.  Because our primary assessment metric is
+temporal decoding accuracy, this unfairly biases against detecting
+meaningful signal in higher-order correlations (relative to
+lower-order correlations).  We attempted to mitigate temporal blur in
+estimating each $\mathbf{X}_n$ by using a Dirac $\delta$ function
+kernel (which places all of its mass over a single timepoint;
+Fig.~\ref{fig:kernels}b, \ref{fig:pipeline}a) to compute each lower-order correlation
+($\mathbf{X}_1, \mathbf{X}_2, ..., \mathbf{X}_{n-1}$).  We then used a
+new (potentially wider, as described below) kernel to compute
+$\mathbf{X}_{n}$ from $\mathbf{X}_{n-1}$.  In this way, temporal
+blurring was applied only in the last step of computing
+$\mathbf{X}_n$.  We note that, because each $\mathbf{X}_n$ is a
+low-dimensional representation of the corresponding $\mathbf{Y}_n$,
+the higher-order correlations we estimated reflect true correlations
+in the data with lower-fidelity than estimates of lower-order
+correlations.  Therefore, even after correcting for temporal blurring,
+our approach is still biased against finding meaningful signal in
+higher-order correlations.
+
+After computing each
+$\mathbf{X}_1, \mathbf{X}_2, ..., \mathbf{X}_{n-1}$ for each
+participant, we divided participants into two equally sized groups
+($\pm 1$ for odd numbers of participants):
+$\mathcal{G}_{\mathrm{train}}$ and $\mathcal{G}_{\mathrm{test}}$.  We
+then further subdivided $\mathcal{G}_{\mathrm{train}}$ into
+$\mathcal{G}_{\mathrm{train}_1}$ and $\mathcal{G}_{\mathrm{train}_2}$.
+We then computed $\mathbf{\Lambda}$ (temporal correlation) matrices
+for each type of neural feature, using
+$\mathcal{G}_{\mathrm{train}_1}$ and $\mathcal{G}_{\mathrm{train}_2}$.
+This resulted in $n+1$ $\mathbf{\Lambda}$ matrices (one for the
+original timeseries of neural activations, and one for each of $n$
+orders of dynamic correlations).  Our objective was to find a set of
+weights for each of these $\mathbf{\Lambda}$ matrices such that the
+weighted average of the $n+1$ matrices yielded the highest decoding
+accuracy.  We used quasi-Newton gradient ascent~\citep{NoceWrig06},
+using decoding accuracy (for $\mathcal{G}_{\mathrm{train}_1}$ and
+$\mathcal{G}_{\mathrm{train}_2}$) as the objective function to be
+maximized, to find an optimal set of training data-derived weights,
+$\phi_{0, 1, ..., n}$, where $\sum_{i=0}^n \phi_i = 1$ and where
+$\phi_i \geq 0 \forall i \in \left[0, 1, ..., n\right]$.
+
+After estimating an optimal set of weights, we computed a new set of
+$n + 1$ $\mathbf{\Lambda}$ matrices correlating the DISFC patterns
+from $\mathcal{G}_{\mathrm{train}}$ and $\mathcal{G}_{\mathrm{test}}$
+at each timepoint.  We use the resulting decoding accuracy of
+$\mathcal{G}_{\mathrm{test}}$ timepoints (using the weights in
+$\phi_{0, 1, ..., n}$ to average the $\Lambda$ matrices) to estimate how informative
+the set of neural features containing up to $n^\mathrm{th}$ order
+correlations were.
+
+We used a permutation-based procedure to form stable estimates of
+decoding accuracy for each set of neural features.  In particular, we
+computed the decoding accuracy for each of 10 random group assignments of
+$\mathcal{G}_{\mathrm{train}}$ and $\mathcal{G}_{\mathrm{test}}$.  We
+report the mean accuracy (along with 95\% confidence intervals) for each set
+of neural features.
+
+
+\subsubsection*{Identifying robust decoding results}
+The temporal decoding procedure we use to estimate which neural
+features support ongoing cognitive processing is governed by several
+parameters. In particular, Equation~\ref{eqn:timecorr} requires
+defining a kernel function, which can take on different shapes and
+widths.  For a fixed set of neural features, each of these parameters
+can yield different decoding accuracies.  Further, the best decoding
+accuracy for a given timepoint may be reliably achieved by one set of
+parameters, whereas the best decoding accuracy for another timepoint
+might be reliably achieved by a different set of parameters, and the
+best decoding accuracy across \textit{all} timepoints might be
+reliably achieved by still another different set of parameters.
+Rather than attempting to maximize decoding accuracy, we sought to
+discover the trends in the data that were robust to classifier
+parameters choices.  Specifically, we sought to characterize how
+decoding accuracy varied (under different experimental conditions) as
+a function of which neural features were considered.
+
+To identify decoding results that were robust to specific classifier
+parameter choices, we repeated our decoding analyses after
+substituting into Equation~\ref{eqn:timecorr} each of a variety of
+kernel shapes and widths.  We examined Gaussian
+(Fig.~\ref{fig:kernels}c), Laplace (Fig.~\ref{fig:kernels}d), and
+Mexican Hat (Fig.~\ref{fig:kernels}e) kernels, each with widths of 5,
+10, 20, and 50 samples.  We then report the average decoding
+accuracies across all of these parameter choices.  This enabled us to
+(partially) factor out performance characteristics that were
+parameter-dependent, within the set of parameters we examined.
+
+
+\subsubsection*{Reverse inference}
+The dynamic patterns we examined comprise high-dimensional correlation
+patterns at each timepoint.  To help interpret the resulting patterns
+in the context of other studies, we created summary maps by computing
+the across-timepoint average pairwise correlations at each order of
+analysis (first order, second order, etc.).  We selected the 10
+strongest (absolute value) correlations at each order.  Each
+correlation is between the dynamic activity patterns (or patterns of
+dynamic high-order correlations) measured at two RBF nodes (see
+\textit{Hierarchical Topographic Factor Analysis}).  Therefore, the 10
+strongest correlations involved up to 20 RBF nodes.  Each RBF defines
+a spatial function whose activations range from 0 to 1.  We
+constructed a map of RBF components that denoted the endpoints of the
+10 strongest correlations (we set each RBF to have a maximum value of
+1).  We then carried out a meta analysis using
+Neurosynth~\citep{RubiEtal17} to identify the 10 terms most commonly
+associated with the given map.  This resulted in a set of 10 terms
+associated with the average dynamic correlation patterns at each
+order.
 
 
 \section*{Acknowledgements}
