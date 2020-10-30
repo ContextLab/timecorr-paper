@@ -136,6 +136,16 @@ higher-order correlations reflect homologies between patterns of
 lower-order correlations.  We can then ask: which ``orders'' of
 interaction are most reflective of high-level cognitive processes?
 
+One reason one might expect to see homologous networks in a dataset is
+related to the notion that network dynamics reflect ongoing neural
+computations or cognitive processing~\citep[e.g.,][]{BeatEtal16}.  If
+the nodes in two brain networks are interacting (within each network)
+in similar ways then, according to our characterization of network
+dynamics, we refer to the similarities between those patterns of
+interaction as higher-order correlations.  When higher-order
+correlations are themselves changing over time, we can also attempt to
+capture and characterize those high-order dynamics.
+
 Another central question pertains to the extent to which the neural
 code is carried by activity patterns that directly reflect ongoing
 cognition~\citep[e.g., following][]{HaxbEtal01, NormEtal06}, versus
@@ -180,24 +190,38 @@ see][]{BetzEtal19, SizeEtal18, ReimEtal17}.
 We validated our approach using synthetic data where the underlying
 correlations were known.  We then applied our framework to a
 neuroimaging dataset collected as participants listened to either an
-audio recording of a ten-minute story, listened to a temporally scrambled
-version of the story, or underwent a resting state
-scan~\citep{SimoEtal16}.  We used a subset of the data to train
+audio recording of a ten-minute story, listened to a temporally
+scrambled version of the story, or underwent a resting state
+scan~\citep{SimoEtal16}.  Temporal scrambling has been used in a
+growing number of studies, largely by Uri Hasson's group, to identify
+brain regions that are sensitive to higher-order and longer-timescale
+information (e.g., cross-sensory integration, rich narrative meaning,
+complex situations, etc.) versus regions that are primarily sensitive
+to low-order (e.g., sensory) information.  For example,
+\cite{HassEtal08} argues that when brain areas are sensitive to fine
+versus coarse temporal scrambling, this indicates that they are
+``higher order'' in the sense that they process contextual information
+pertaining to further-away timescales.  By contrast, low-level
+regions, such as primary sensory cortices, do not meaningfully change
+their responses (after correcting for presentation order) even when
+the stimulus is scrambled at fine timescales.
+
+We used a subset of the story listening and rest data to train
 across-participant classifiers to decode listening times using a blend
 of neural features (comprising neural activity patterns, as well as
 different orders of dynamic correlations between those patterns that
 were inferred using our computational framework).  We found that both
 the PCA-based and eigenvector centrality-based approaches yielded
-neural patterns that could be used to decode accurately (i.e., well above
-chance).  Both approaches also yielded the best decoding accuracy for
-data collected during (intact) story listening when high-order (PCA:
-second-order; eigenvector centrality: fourth-order) dynamic
-correlation patterns were included as features.  When we trained
-classifiers on the scrambled stories or resting state data, only
-lower-order dynamic patterns were informative to the decoders.  Taken
-together, our results indicate that high-level cognition is supported
-by high-order dynamic patterns of communication between brain
-structures.
+neural patterns that could be used to decode accurately (i.e., well
+above chance).  Both approaches also yielded the best decoding
+accuracy for data collected during (intact) story listening when
+high-order (PCA: second-order; eigenvector centrality: fourth-order)
+dynamic correlation patterns were included as features.  When we
+trained classifiers on the scrambled stories or resting state data,
+only lower-order dynamic patterns were informative to the decoders.
+Taken together, our results indicate that high-level cognition is
+supported by high-order dynamic patterns of communication between
+brain structures.
 
 
 
