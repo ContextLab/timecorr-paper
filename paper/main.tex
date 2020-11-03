@@ -46,20 +46,19 @@
   dynamic correlations in brain activity patterns.  We developed an
   approach to estimating high-order dynamic correlations in timeseries
   data, and we applied the approach to neuroimaging data collected as
-  human participants either listened to a ten-minute story, listened
-  to a temporally scrambled version of the story, or underwent a
-  resting state scan.  We trained across-participant pattern
-  classifiers to decode (in held-out data) when in the session each
-  neural activity snapshot was collected.  We found that classifiers
-  trained to decode from high-order dynamic correlations yielded the
-  best performance on data collected as participants listened to the
-  (unscrambled) story.  By contrast, classifiers trained to decode
-  data from scrambled versions of the story or during the resting
-  state scan yielded the best performance when they were trained using
-  first-order dynamic correlations or non-correlational activity patterns.  We
-  suggest that as our thoughts become more complex, they are reflected
-  in higher-order patterns of dynamic network interactions throughout
-  the brain.
+  human participants either listened to a ten-minute story or listened
+  to a temporally scrambled version of the story.  We trained
+  across-participant pattern classifiers to decode (in held-out data)
+  when in the session each neural activity snapshot was collected.  We
+  found that classifiers trained to decode from high-order dynamic
+  correlations yielded the best performance on data collected as
+  participants listened to the (unscrambled) story.  By contrast,
+  classifiers trained to decode data from scrambled versions of the
+  story yielded the best performance when they were trained using
+  first-order dynamic correlations or non-correlational activity
+  patterns.  We suggest that as our thoughts become more complex, they
+  are reflected in higher-order patterns of dynamic network
+  interactions throughout the brain.
 \end{abstract}
 
 \doublespacing
@@ -218,7 +217,7 @@ accuracy for data collected during (intact) story listening when
 high-order (PCA: second-order; eigenvector centrality: fourth-order)
 dynamic correlation patterns were included as features.  When we
 trained classifiers on the scrambled stories or resting state data,
-only lower-order dynamic patterns were informative to the decoders.
+only (relatively) lower-order dynamic patterns were informative to the decoders.
 Taken together, our results indicate that high-level cognition is
 supported by high-order dynamic patterns of communication between
 brain structures.
