@@ -206,21 +206,21 @@ their responses (after correcting for presentation order) even when
 the stimulus is scrambled at fine timescales.
 
 We used a subset of the story listening and rest data to train
-across-participant classifiers to decode listening times using a blend
-of neural features (comprising neural activity patterns, as well as
-different orders of dynamic correlations between those patterns that
-were inferred using our computational framework).  We found that both
-the PCA-based and eigenvector centrality-based approaches yielded
-neural patterns that could be used to decode accurately (i.e., well
-above chance).  Both approaches also yielded the best decoding
-accuracy for data collected during (intact) story listening when
-high-order (PCA: second-order; eigenvector centrality: fourth-order)
-dynamic correlation patterns were included as features.  When we
-trained classifiers on the scrambled stories or resting state data,
-only (relatively) lower-order dynamic patterns were informative to the decoders.
-Taken together, our results indicate that high-level cognition is
-supported by high-order dynamic patterns of communication between
-brain structures.
+across-participant classifiers to decode listening times (of groups of
+participants) using a blend of neural features (comprising neural
+activity patterns, as well as different orders of dynamic correlations
+between those patterns that were inferred using our computational
+framework).  We found that both the PCA-based and eigenvector
+centrality-based approaches yielded neural patterns that could be used
+to decode accurately (i.e., well above chance).  Both approaches also
+yielded the best decoding accuracy for data collected during (intact)
+story listening when high-order (PCA: second-order; eigenvector
+centrality: fourth-order) dynamic correlation patterns were included
+as features.  When we trained classifiers on the scrambled stories or
+resting state data, only (relatively) lower-order dynamic patterns
+were informative to the decoders.  Taken together, our results
+indicate that high-level cognition is supported by high-order dynamic
+patterns of communication between brain structures.
 
 
 
@@ -645,7 +645,7 @@ The notion that cognition is reflected in (and possibly mediated by)
 patterns of first-order network dynamics has been suggested by or
 proposed in myriad empirical studies and
 reviews~\citep[e.g.,][]{DemeEtal19, Turk13, LuriEtal18, FongEtal19,
-  ParkEtal18b, PretEtal17, RoyEtal19, LiegEtal19, ZouEtal19,
+  ParkEtal18b, PretEtal17, MannEtal18, RoyEtal19, LiegEtal19, ZouEtal19,
   ChanGlov10, GonzEtal19}.  Our study extends this line of work by
 finding cognitively relevant \textit{higher-order} network dynamics
 that reflect ongoing cognition.  Our findings complement other work
@@ -693,25 +693,24 @@ cognition required several important methods advances.  First, we used
 kernel-based dynamic correlations to extended the notion of (static)
 inter-subject functional connectivity~\citep{SimoEtal16} to a dynamic
 measure of inter-subject functional connectivity (DISFC) that does not
-rely on sliding windows, and that may be computed at individual
-timepoints.  This allowed us to precisely characterize stimulus-evoked
-network dynamics that were similar across individuals.  Second, we
-developed a computational framework for efficiently and scalably estimating
-high-order dynamic correlations.  Our approach uses dimensionality
-reduction algorithms and graph measures to obtain low-dimensional
-embeddings of patterns of network dynamics.  Third, we developed an
-analysis framework for identifying robust decoding results by carrying
-out our analyses using a range of parameter values and then
-identifying which results were robust to specific parameter choices.
+rely on sliding windows~\citep[e.g., as in][]{MannEtal18}, and that
+may be computed at individual timepoints.  This allowed us to
+precisely characterize stimulus-evoked network dynamics that were
+similar across individuals.  Second, we developed a computational
+framework for efficiently and scalably estimating high-order dynamic
+correlations.  Our approach uses dimensionality reduction algorithms
+and graph measures to obtain low-dimensional embeddings of patterns of
+network dynamics.  Third, we developed an analysis framework for
+identifying robust decoding results by carrying out our analyses using
+a range of parameter values and then identifying which results were
+robust to specific parameter choices.
 
 \subsection*{Concluding remarks}
-The complex hierarchy of dynamic interactions that underlie our
-thoughts is perhaps the greatest mystery in modern science.  Methods
-for characterizing the dynamics of high-order correlations in neural
-data provide a window into the neural basis of cognition.  By showing
-that high-level cognition is reflected in high-order network dynamics,
-we have elucidated the next step on the path towards understanding the
-neural basis of cognition.
+Methods for characterizing the dynamics of high-order correlations in
+neural data provide a window into the neural basis of cognition.  By
+showing that high-level cognition is reflected in high-order network
+dynamics, we have elucidated the next step on the path towards
+understanding the neural basis of cognition.
 
 
 
