@@ -40,7 +40,7 @@
   Our thoughts arise from coordinated patterns of interactions between
   brain structures that change with our ongoing experiences.
   High-order dynamic correlations in neural activity patterns reflect
-  different subgraphs of the brain's connectome that display
+  different subgraphs of the brain's functional connectome that display
   homologous lower-level dynamic correlations.  We tested the
   hypothesis that high-level cognition is reflected in high-order
   dynamic correlations in brain activity patterns.  We developed an
@@ -76,14 +76,14 @@ representations~\citep[e.g.,][]{HaxbEtal01, NormEtal06, TongPrat12,
 features (Fig.~\ref{fig:patterns}a) can also help to elucidate which
 specific aspects of neural activity patterns are informative about
 cognition-- and, by extension, which types of neural activity patterns
-might comprise the neural code.  For example, prior work has used
+might compose the neural code.  For example, prior work has used
 region of interest analyses to estimate the anatomical locations of
 specific neural representations~\citep[e.g.,][]{EtzeEtal09}, or to
 compare the relative contributions to the neural code of multivariate
 activity patterns versus dynamic correlations between neural activity
 patterns~\citep[e.g.,][]{MannEtal18, FongEtal19}.  An emerging theme
 in this literature is that cognition is mediated by dynamic
-interactions between brain structures~\citep{SporHone06, BassEtal06,
+interactions between brain structures~\citep{Gros88, Fris00, SporHone06, BassEtal06,
   Turk13, DemeEtal19, SoloEtal19, LuriEtal18, PretEtal17, ZouEtal19,
   MackEtal17}.
 
@@ -237,7 +237,7 @@ in several synthetic datasets (see \textit{Synthetic data: simulating
   dynamic first-order correlations} and \textit{Synthetic data:
   simulating dynamic higher-order correlations}).  We then
 applied the framework to a public fMRI dataset collected as
-participants listened to an auditorally presented story, listened to a
+participants listened to an auditorily presented story, listened to a
 temporally scrambled version of the story, or underwent a resting
 state scan (see \textit{Functional neuroimaging data collected during
   story listening}).  We used the relative decoding accuracies of
@@ -292,7 +292,8 @@ different synthetic datasets in a kernel-dependent way.
     displays the correlations between the recovered dynamic
     correlations and the underlying ground truth correlations.  The
     right panels compare the recovered correlations with the
-    correlation matrices unique to each event.}
+    correlation matrices unique to each event.  The vertical lines
+    denote event boundaries.}
   \label{fig:synthetic}
 \end{figure}
 
@@ -363,10 +364,11 @@ datasets), we better recovered second-order correlations.
     correlations between the randomly drawn correlation matrices at
     the first and last timepoints and displays the
     correlations between the recovered dynamic correlations and the
-  simualted correlation first and second order correlation matrices.   \textbf{d. Event-based correlations.}  These first and second order dynamic correlation were
+  simulated correlation first and second order correlation matrices.   \textbf{d. Event-based correlations.}  These first and second order dynamic correlation were
     simulated from datasets are
     each generated using five randomly drawn correlation matrices that
-    each remain stable for a fifth of the total timecourse.  }
+    each remain stable for a fifth of the total timecourse.  The
+    vertical lines denote event boundaries.}
   \label{fig:higher_order_sims}
 \end{figure}
 
@@ -1155,7 +1157,7 @@ $n - 1$ template (from the same timepoint) as follows:
 \end{align}
 
 Given a timeseries of order $n$ correlation matrices, we can draw an
-order $n-1$ correlation matrix for each timpoint $t$ using
+order $n-1$ correlation matrix for each timepoint $t$ using
 \begin{align}
  \mathbf{\sigma_{n-1}}(t) &\sim \mathcal{N}\left(\mathbf{0}, \mathbf{\Sigma_n}(t)
                    \right)\label{eqn:highorder-gen1}\\
@@ -1269,7 +1271,7 @@ $\mathbf{X}_1$, $\mathbf{X}_2$, $\mathbf{X}_3$, and so on.
   \caption{\textbf{Decoding analysis pipeline.  a. Computing dynamic
       correlations from timeseries data.}  Given a timeseries of
     observations as a $T \times K$ matrix (or a set of $S$ such
-    matrics), we use Equation~\ref{eqn:timecorr} to compute each
+    matrices), we use Equation~\ref{eqn:timecorr} to compute each
     participant's DISFC (relative to other participants in the
     training or test sub-group, as appropriate). We repeat this
     process twice-- once using the analysis kernel (shown here as a
@@ -1286,7 +1288,7 @@ $\mathbf{X}_1$, $\mathbf{X}_2$, $\mathbf{X}_3$, and so on.
     the next-highest order.  \textbf{d. Decoding analysis.} We split
     the training data into two equal groups, and optimize the feature
     weights (i.e., dynamic correlations at each order) to maximize
-    decoding accuracy.  We then apply the trained classifer to the
+    decoding accuracy.  We then apply the trained classifier to the
     (held-out) test data.
   \label{fig:pipeline}}
 \end{figure}
