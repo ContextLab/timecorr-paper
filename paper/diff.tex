@@ -1,7 +1,7 @@
 \documentclass[english]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex    Fri Nov 13 16:02:29 2020
-%DIF ADD main.tex   Fri Nov 13 17:16:49 2020
+%DIF DEL old.tex    Fri Nov 20 13:32:41 2020
+%DIF ADD main.tex   Mon Nov 16 16:37:25 2020
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{hyperref}
@@ -319,31 +319,31 @@ patterns of communication between brain structures.
 
 
 
-\DIFaddbegin \section*{\DIFadd{Results}}
-\DIFadd{We sought to understand whether high-level cognition is reflected in
-dynamic patterns of high-order correlations.  To that end, we
+\section*{Results}
+We sought to understand whether high-level cognition is \DIFdelbegin \DIFdel{supported by
+}\DIFdelend \DIFaddbegin \DIFadd{reflected in
+}\DIFaddend dynamic patterns of high-order correlations.  To that end, we
 developed a computational framework for estimating the dynamics of
 stimulus-driven high-order correlations in multivariate timeseries
-data (see }\textit{\DIFadd{Dynamic inter-subject functional connectivity
-  (DISFC)}} \DIFadd{and }\textit{\DIFadd{Dynamic higher-order correlations}}\DIFadd{).  We
+data (see \textit{Dynamic inter-subject functional connectivity
+  (DISFC)} and \textit{Dynamic higher-order correlations}).  We
 evaluated the efficacy of this framework at recovering known patterns
-in several synthetic datasets (see }\textit{\DIFadd{Synthetic data: simulating
-  dynamic first-order correlations}} \DIFadd{and }\textit{\DIFadd{Synthetic data:
-  simulating dynamic higher-order correlations}}\DIFadd{).  We then
+in several synthetic datasets (see \textit{Synthetic data\DIFaddbegin \DIFadd{: simulating
+  dynamic first-order correlations}\DIFaddend } \DIFaddbegin \DIFadd{and }\textit{\DIFadd{Synthetic data:
+  simulating dynamic higher-order correlations}}\DIFaddend ).  We then
 applied the framework to a public fMRI dataset collected as
-participants listened to an auditorily presented story, listened to a
+participants listened to an \DIFdelbegin \DIFdel{auditorally }\DIFdelend \DIFaddbegin \DIFadd{auditorily }\DIFaddend presented story, listened to a
 temporally scrambled version of the story, or underwent a resting
-state scan (see }\textit{\DIFadd{Functional neuroimaging data collected during
-  story listening}}\DIFadd{).  We used the relative decoding accuracies of
+state scan (see \textit{Functional neuroimaging data collected during
+  story listening}).  We used the relative decoding accuracies of
 classifiers trained on different sets of neural features to estimate
 which types of features reflected ongoing cognitive processing.
-}
 
-\subsection*{\DIFadd{Recovering known dynamic correlations from synthetic
-  data}}
-\subsubsection*{\DIFadd{Recovering dynamic first-order correlations}}
-\DIFadd{We generated synthetic datasets that differed in how the underlying first-order
-correlations changed over time.  For each dataset, we applied
+\subsection*{Recovering known dynamic correlations from synthetic
+  data}
+\DIFaddbegin \subsubsection*{\DIFadd{Recovering dynamic first-order correlations}}
+\DIFaddend We generated synthetic datasets that differed in how the underlying \DIFaddbegin \DIFadd{first-order
+}\DIFaddend correlations changed over time.  For each dataset, we applied
 Equation~\ref{eqn:timecorr} with a variety of kernel shapes and
 widths.  We assessed how well the true underlying correlations at each
 timepoint matched the recovered correlations
@@ -351,14 +351,15 @@ timepoint matched the recovered correlations
 our approach recovered the correlation dynamics we embedded into the
 data.  However, the quality of these recoveries varied across
 different synthetic datasets in a kernel-dependent way.
-}
 
 
 \begin{figure}[tp]
   \centering
   \includegraphics[width=\textwidth]{figs/synthetic_data}
-  \caption{\textbf{\DIFaddFL{Recovering known dynamic first-order correlations
-      from synthetic data.}}  \DIFaddFL{Each panel displays the average
+  \caption{\DIFdelbeginFL \textbf{\DIFdelFL{Recovering known dynamic correlations from
+      synthetic data.}}  %DIFAUXCMD
+\DIFdelendFL \DIFaddbeginFL \textbf{\DIFaddFL{Recovering known dynamic first-order correlations
+      from synthetic data.}}  \DIFaddendFL Each panel displays the average
     correlations between the vectorized upper triangles of the
     recovered correlation matrix at each timepoint and either the true
     underlying correlation at each timepoint or a reference
@@ -368,50 +369,49 @@ different synthetic datasets in a kernel-dependent way.
     datasets). Different colors denote different kernel shapes, and
     the shading within each color family denotes the kernel width
     parameter.  For a complete description of each synthetic dataset,
-    see }\textit{\DIFaddFL{Synthetic data: simulating dynamic first-order
-      correlations}}\DIFaddFL{.  }\textbf{\DIFaddFL{a. Constant correlations.}}  \DIFaddFL{These
+    see \DIFdelbeginFL \textit{\DIFdelFL{Synthetic data}}%DIFAUXCMD
+\DIFdelendFL \DIFaddbeginFL \textit{\DIFaddFL{Synthetic data: simulating dynamic first-order
+      correlations}}\DIFaddendFL .  \textbf{a. Constant correlations.}  These
     datasets have a stable (unchanging) underlying correlation matrix.
-    }\textbf{\DIFaddFL{b. Random correlations.}}  \DIFaddFL{These datasets are generated
+    \textbf{b. Random correlations.}  These datasets are generated
     using a new independently drawn correlation matrix at each new
-    timepoint.  }\textbf{\DIFaddFL{c. Ramping correlations.}}  \DIFaddFL{These datasets are
+    timepoint.  \textbf{c. Ramping correlations.}  These datasets are
     generated by smoothly varying the underlying correlations between
     the randomly drawn correlation matrices at the first and last
     timepoints.  The left panel displays the correlations between the
     recovered dynamic correlations and the underlying ground truth
     correlations.  The middle panel compares the recovered
-    correlations with the }\textit{\DIFaddFL{first}} \DIFaddFL{timepoint's correlation
+    correlations with the \textit{first} timepoint's correlation
     matrix.  The right panel compares the recovered correlations with
-    the }\textit{\DIFaddFL{last}} \DIFaddFL{timepoint's correlation matrix.
-    }\textbf{\DIFaddFL{d. Event-based correlations.}}  \DIFaddFL{These datasets are each
+    the \textit{last} timepoint's correlation matrix.
+    \textbf{d. Event-based correlations.}  These datasets are each
     generated using five randomly drawn correlation matrices that each
     remain stable for a fifth of the total timecourse.  The left panel
     displays the correlations between the recovered dynamic
     correlations and the underlying ground truth correlations.  The
     right panels compare the recovered correlations with the
-    correlation matrices unique to each event.  The vertical lines
-    denote event boundaries.}}
+    correlation matrices unique to each event.  \DIFaddbeginFL \DIFaddFL{The vertical lines
+    denote event boundaries.}\DIFaddendFL }
   \label{fig:synthetic}
 \end{figure}
 
-\DIFadd{In general, wide monotonic kernel shapes (Laplace, Gaussian), and
+In general, wide monotonic kernel shapes (Laplace, Gaussian), and
 wider kernels (within a shape), performed best when the correlations
 varied gradually from moment-to-moment (Figs.~\ref{fig:synthetic}a, c,
 and d).  In the extreme, as the rate of change in correlations
 approaches 0 (Fig.~\ref{fig:synthetic}a), an infinitely wide kernel
 would exactly recover the Pearson's correlation (e.g., compare
 Eqns.~\ref{eqn:corr} and \ref{eqn:timecorr}).
-}
 
-\DIFadd{When the correlation dynamics were unstructured in time
+When the correlation dynamics were unstructured in time
 (Fig.~\ref{fig:synthetic}b), a Dirac $\delta$ kernel (infinitely
 narrow) performed best.  This is because, when every timepoint's
 correlations are independent of the correlations at every other
 timepoint, averaging data over time dilutes the available signal.
 Following a similar pattern, holding kernel shape fixed, narrower
 kernel parameters better recovered randomly varying correlations.
-}
 
-\subsubsection*{\DIFadd{Recovering dynamic higher-order correlations}}
+\DIFaddbegin \subsubsection*{\DIFadd{Recovering dynamic higher-order correlations}}
 \DIFadd{Following our approach to evaluating our ability to recover known
 dynamic first-order correlations from synthetic data, we generated an
 analogous second set of synthetic datasets that we designed to exhibit
@@ -445,29 +445,26 @@ datasets), we better recovered second-order correlations.
   \includegraphics[width=\textwidth]{figs/higher_order_sims}
   \caption{\textbf{\DIFaddFL{Recovery of simulated first-order and second-order dynamic correlations.}}  \DIFaddFL{Each panel displays the average correlations
     between the vectorized upper triangles of the recovered
-    correlation matrix and the simulated correlation matrix at each
+    first-order and second-order correlation matrices and the true
+    (simulated) first-order and second order correlation matrices at each
     timepoint and for each synthetic dataset.  (The averages are taken across 10 different
     randomly generated synthetic datasets of the given category.)
     Error ribbons denote 95\% confidence intervals (taken across
     datasets).  For a complete description of each synthetic dataset,
     see }\textit{\DIFaddFL{Synthetic data: simulating dynamic higher-order
-      correlations}}\DIFaddFL{.  All results in this figure used a Laplace kernel
-    (width~$=20$).  }\textbf{\DIFaddFL{a. Constant correlations.}}
-    \DIFaddFL{These first and second order dynamic correlation were
-    simulated from datasets have a stable (unchanging) underlying correlation
-    matrix.  }\textbf{\DIFaddFL{b. Random correlations.}}  \DIFaddFL{These first and second order dynamic correlation were
-    simulated from datasets are
-    generated using a new independently drawn correlation matrix at
-    each new timepoint.  }\textbf{\DIFaddFL{c. Ramping correlations.}}  \DIFaddFL{These first and second order dynamic correlation were
-    simulated from
-    datasets are generated by smoothly varying the underlying
-    correlations between the randomly drawn correlation matrices at
-    the first and last timepoints and displays the
-    correlations between the recovered dynamic correlations and the
-  simulated correlation first and second order correlation matrices.   }\textbf{\DIFaddFL{d. Event-based correlations.}}  \DIFaddFL{These first and second order dynamic correlation were
-    simulated from datasets are
-    each generated using five randomly drawn correlation matrices that
-    each remain stable for a fifth of the total timecourse.  The
+      correlations}}\DIFaddFL{.  All estimates represented in this figure were
+    computed using a Laplace kernel
+    (width~$=20$).  }\textbf{\DIFaddFL{a. Constant correlations.}}  \DIFaddFL{These datasets
+    have stable (unchanging) underlying second-order correlation
+    matrices.  }\textbf{\DIFaddFL{b. Random correlations.}} \DIFaddFL{These datasets are
+    generated using a new independently drawn second-order correlation
+    matrix at each timepoint.  }\textbf{\DIFaddFL{c. Ramping correlations.}}
+    \DIFaddFL{These datasets are generated by smoothly varying the underlying
+    second-order correlations between the randomly drawn correlation
+    matrices at the first and last timepoints.  }\textbf{\DIFaddFL{d. Event-based
+      correlations.}}  \DIFaddFL{These datasets are each generated using five
+    randomly drawn second-order correlation matrices that each remain
+    stable for a fifth of the total timecourse.  The
     vertical lines denote event boundaries.}}
   \label{fig:higher_order_sims}
 \end{figure}
@@ -481,44 +478,46 @@ to examine whether the recovered dynamics might reflect the dynamics
 of human cognition during a naturalistic story-listening task.
 }
 
-\subsection*{\DIFadd{Cognitively relevant dynamic high-order correlations in
-  fMRI data}}
-\DIFadd{We used across-participant temporal decoders to identify cognitively
-relevant neural patterns in fMRI data (see }\textit{\DIFadd{Forward inference
-  and decoding accuracy}}\DIFadd{).  The dataset we examined~}\citep[collected
-by][]{SimoEtal16} \DIFadd{comprised four experimental conditions that exposed
+\DIFaddend \subsection*{Cognitively relevant dynamic high-order correlations in
+  fMRI data}
+We used across-participant temporal decoders to identify cognitively
+relevant neural patterns in fMRI data (see \textit{Forward inference
+  and decoding accuracy}).  The dataset we examined~\citep[collected
+by][]{SimoEtal16} comprised four experimental conditions that exposed
 participants to stimuli that varied systematically in how cognitively
-engaging they were.  The }\textit{\DIFadd{intact}} \DIFadd{experimental condition had
+engaging they were.  The \textit{intact} experimental condition had
 participants listen to an audio recording of a 10-minute story.  The
-}\textit{\DIFadd{paragraph}}\DIFadd{-scrambled experimental condition had participants
+\textit{paragraph}-scrambled experimental condition had participants
 listen to a temporally scrambled version of the story, where the
 paragraphs occurred out of order (but where the same total set of
 paragraphs were presented over the full listening interval).  All
 participants in this condition experienced the scrambled paragraphs in
-the same order.  The }\textit{\DIFadd{word}}\DIFadd{-scrambled experimental condition
+the same order.  The \textit{word}-scrambled experimental condition
 had participants listen to a temporally scrambled version of the story
 where the words in the story occurred in a random order.  All
 participants in the word condition experienced the scrambled words in
-the same order.  Finally, in a }\textit{\DIFadd{rest}} \DIFadd{experimental condition,
+the same order.  Finally, in a \textit{rest} experimental condition,
 participants lay in the scanner with no overt stimulus, with their
 eyes open (blinking as needed).  This dataset provided a convenient
 means of testing our hypothesis that different levels of cognitive
-processing and engagement are reflected in different orders of brain
+processing and engagement are \DIFdelbegin \DIFdel{supported by }\DIFdelend \DIFaddbegin \DIFadd{reflected in }\DIFaddend different orders of brain
 activity dynamics.
-}
 
 \begin{figure}[tp]
   \centering
   \includegraphics[width=\textwidth]{figs/decode_level}
-  \caption{\textbf{\DIFaddFL{Across-participant timepoint decoding accuracy varies with
+  \caption{\DIFdelbeginFL \textbf{\DIFdelFL{Across-participant decoding accuracy varies with
       correlation order and cognitive engagement.}}
-    \textbf{\DIFaddFL{a.~Decoding accuracy as a function of order: PCA.}}
-    \textit{\DIFaddFL{Order}} \DIFaddFL{($x$-axis) refers to the maximum order of dynamic
+    %DIFAUXCMD
+\DIFdelendFL \DIFaddbeginFL \textbf{\DIFaddFL{Across-participant timepoint decoding accuracy varies with
+      correlation order and cognitive engagement.}}
+    \DIFaddendFL \textbf{a.~Decoding accuracy as a function of order: PCA.}
+    \textit{Order} ($x$-axis) refers to the maximum order of dynamic
     correlations that were available to the classifiers (see
-    }\textit{\DIFaddFL{Feature weighting and testing}}\DIFaddFL{).  The reported
+    \textit{Feature weighting and testing}).  The reported
     across-participant decoding accuracies are averaged over all
-    kernel shapes and widths (see }\textit{\DIFaddFL{Identifying robust decoding
-      results}}\DIFaddFL{).  The $y$-values are displayed relative to chance
+    kernel shapes and widths (see \textit{Identifying robust decoding
+      results}).  The $y$-values are displayed relative to chance
     accuracy (intact: $\frac{1}{300}$; paragraph: $\frac{1}{272}$;
     word: $\frac{1}{300}$; rest: $\frac{1}{400}$).  The error ribbons
     denote 95\% confidence intervals across cross-validation folds
@@ -531,33 +530,39 @@ activity dynamics.
     comparisons between the decoding accuracies achieved using
     different sets of neural features.  The circled values represent
     the maximum decoding accuracy within each experimental condition.
-    }\textbf{\DIFaddFL{b.~Normalized timepoint decoding accuracy as a function of order:
-      PCA.}}  \DIFaddFL{This panel displays the same results as Panel a, but here
+    \DIFdelbeginFL \textbf{\DIFdelFL{b.~Normalized decoding accuracy as a function of order:
+      PCA.}}  %DIFAUXCMD
+\DIFdelendFL \DIFaddbeginFL \textbf{\DIFaddFL{b.~Normalized timepoint decoding accuracy as a function of order:
+      PCA.}}  \DIFaddendFL This panel displays the same results as Panel a, but here
     each curve has been normalized to have a maximum value of 1 and a
     minimum value of 0 (including the upper and lower bounds of the
     respective 95\% confidence intervals).  Panels a and b used PCA to
     project each high-dimensional pattern of dynamic correlations onto
-    a lower-dimensional space.  }\textbf{\DIFaddFL{c.~Timepoint decoding accuracy as a
-      function of order: eigenvector centrality.}} \DIFaddFL{This panel is in the
+    a lower-dimensional space.  \DIFdelbeginFL \textbf{\DIFdelFL{c.~Decoding accuracy as a
+      function of order: eigenvector centrality.}} %DIFAUXCMD
+\DIFdelendFL \DIFaddbeginFL \textbf{\DIFaddFL{c.~Timepoint decoding accuracy as a
+      function of order: eigenvector centrality.}} \DIFaddendFL This panel is in the
     same format as Panel a, but here eigenvector centrality has been
     used to project the high-dimensional patterns of dynamic
     correlations onto a lower-dimensional space.
-    }\textbf{\DIFaddFL{d.~Normalized timepoint decoding accuracy as a function of order:
-      eigenvector centrality.}} \DIFaddFL{This panel is in the same format as
+    \DIFdelbeginFL \textbf{\DIFdelFL{d.~Normalized decoding accuracy as a function of order:
+      eigenvector centrality.}} %DIFAUXCMD
+\DIFdelendFL \DIFaddbeginFL \textbf{\DIFaddFL{d.~Normalized timepoint decoding accuracy as a function of order:
+      eigenvector centrality.}} \DIFaddendFL This panel is in the same format as
     Panel b, but here eigenvector centrality has been used to project
     the high-dimensional patterns of dynamic correlations onto a
-    lower-dimensional space.}}
+    lower-dimensional space.}
   \label{fig:decoding}
 \end{figure}
 
-\DIFadd{In brief, we computed timeseries of dynamic high-order correlations
+In brief, we computed timeseries of dynamic high-order correlations
 that were similar across participants in each of two randomly assigned
 groups: a training group and a test group.  We then trained
 classifiers on the training group's data to match each sample from the
 test group with a stimulus timepoint.  Each classifier comprised a
 weighted blend of neural patterns that reflected up to
-$n^\mathrm{th}$-order dynamic correlations (see }\textit{\DIFadd{Feature
-  weighting and testing}}\DIFadd{, Fig.~\ref{fig:pipeline}).  We repeated this process for
+$n^\mathrm{th}$-order dynamic correlations (see \textit{Feature
+  weighting and testing}\DIFaddbegin \DIFadd{, Fig.~\ref{fig:pipeline}}\DIFaddend ).  We repeated this process for
 $n \in \left\{ 0, 1, 2, ..., 10 \right\}$.  Our examinations of
 synthetic data suggested that none of the kernels we examined were
 ``universal'' in the sense of optimally recovering underlying
@@ -567,15 +572,14 @@ whereby different kernels yielded different decoding accuracies, but
 no single kernel emerged as the clear ``best.''  In our analyses of
 neural data, we therefore averaged our decoding results over a variety
 of kernel shapes and widths in order to identify results that were
-robust to specific kernel parameters (see }\textit{\DIFadd{Identifying robust
-  decoding results}}\DIFadd{).
-}
+robust to specific kernel parameters (see \textit{Identifying robust
+  decoding results}).
 
-\DIFadd{Our approach to estimating dynamic high-order correlations entails
+Our approach to estimating dynamic high-order correlations entails
 mapping the high-dimensional feature space of correlations
-(represented by a $T$ by
-$\mathcal{O}(K^2)$ matrix) onto a lower-dimensional feature space
-(represented by a $T$ by $K$ matrix).
+(\DIFaddbegin \DIFadd{represented by }\DIFaddend a $T$ by
+$\mathcal{O}(K^2)$ matrix) onto a lower-dimensional \DIFaddbegin \DIFadd{feature space
+(represented by a }\DIFaddend $T$ by $K$ matrix\DIFaddbegin \DIFadd{)}\DIFaddend .
 We carried out two sets of analyses that differed in how this mapping
 was computed.  The first set of analyses used PCA to find a
 low-dimensional embedding of the original dynamic correlation matrices
@@ -583,15 +587,14 @@ low-dimensional embedding of the original dynamic correlation matrices
 characterized correlations in dynamics of each feature's eigenvector
 centrality, but did not preserve the underlying activity dynamics
 (Fig.~\ref{fig:decoding}c,d).
-}
 
 
 
 \begin{figure}[tp]
 \centering
 \includegraphics[width=1\textwidth]{figs/stats_heatmaps}
-\caption{\textbf{\DIFaddFL{Statistical summary of decoding accuracies for
-    different neural features.}}  \DIFaddFL{Each column of matrices displays decoding
+\caption{\textbf{Statistical summary of decoding accuracies for
+    different neural features.}  Each column \DIFaddbeginFL \DIFaddFL{of matrices }\DIFaddendFL displays decoding
   results for one experimental condition (intact, paragraph, word, and
   rest).  We considered dynamic activity patterns (order 0) and
   dynamic correlations at different orders (order $> 0$).  We used
@@ -600,7 +603,7 @@ centrality, but did not preserve the underlying activity dynamics
   features.  The distributions for each feature reflect the set of
   average decoding accuracies (across all kernel parameters), obtained
   for each random assignment of training and test groups.
-  In the upper triangles of each matrix, warmer colors (positive $t$-values) indicate that the
+  In the upper triangles of each \DIFdelbeginFL \DIFdelFL{map}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{matrix}\DIFaddendFL , warmer colors (positive $t$-values) indicate that the
   neural feature indicated in the given row yielded higher accuracy than the
   feature indicated in the given column.  Cooler colors (negative
   $t$-values) indicate that
@@ -608,12 +611,12 @@ centrality, but did not preserve the underlying activity dynamics
   the feature in the given column.  The lower triangles of each map
   denote the corresponding $p$-values for the $t$-tests.  The diagonal
   entries display the relative average optimized weight given to each type of feature, in
-  a decoder that included all feature types (see }\textit{\DIFaddFL{Feature
-    weighting and testing}}\DIFaddFL{).}}
+  a decoder that included all feature types (see \textit{Feature
+    weighting and testing}).}
 \label{fig:ttests}
 \end{figure}
 
-\DIFadd{Both sets of temporal decoding analyses yielded qualitatively similar
+Both sets of temporal decoding analyses yielded qualitatively similar
 results for the auditory (non-rest) conditions of the experiment
 (Fig.~\ref{fig:decoding}: pink, green, and teal lines;
 Fig.~\ref{fig:ttests}: three leftmost columns).  The highest
@@ -647,33 +650,32 @@ associated both with the underlying activity patterns (characterized
 using PCA) and also with the changing relative positions that
 different brain areas occupy in their associated networks
 (characterized using eigenvector centrality).
-}
 
 \begin{figure}[tp]
   \centering
   \includegraphics[width=\textwidth]{figs/most_abs}
-  \caption{\textbf{\DIFaddFL{Top terms associated with the endpoints of the
-      strongest correlations.}}  \DIFaddFL{Each color corresponds to one order of
-    inter-subject functional correlations.  To calculate the dynamic
+  \caption{\textbf{Top terms associated with the endpoints of the
+      strongest correlations.}  Each color corresponds to one order of
+    inter-subject functional correlations.  \DIFaddbeginFL \DIFaddFL{To calculate the dynamic
     correlations, eigenvector centrality has been used to project
     the high-dimensional patterns of dynamic correlations onto a
     lower-dimensional space at each previous order, which allows us
     the map the brain regions at each order by retaining the
-    features of the original space. The inflated brain plots
+    features of the original space. }\DIFaddendFL The inflated brain plots
     display the locations of the endpoints of the 10 strongest
     (absolute value) correlations at each order, thresholded at 0.999,
-    and projected onto the cortical surface~}\citep{CombEtal19}\DIFaddFL{.  The
+    and projected onto the cortical surface~\citep{CombEtal19}.  The
     lists of terms on the right display the top five Neurosynth
-    terms~}\citep{RubiEtal17} \DIFaddFL{decoded from the corresponding brain maps
+    terms~\citep{RubiEtal17} decoded from the corresponding brain maps
     for each order.  Each row displays data from a different
     experimental condition.  Additional maps and their corresponding
-    Neurosynth terms may be found in the }\textit{\DIFaddFL{Supplementary
-      materials}} \DIFaddFL{(intact: Fig.~\intact; paragraph: Fig.~\para; word:
-    Fig.~\word; rest: Fig.~\rest).}}
+    Neurosynth terms may be found in the \textit{Supplementary
+      materials} (intact: Fig.~\intact; paragraph: Fig.~\para; word:
+    Fig.~\word; rest: Fig.~\rest).}
   \label{fig:neurosynth}
 \end{figure}
 
-\DIFadd{Having established that patterns of high-order correlations are
+Having established that patterns of high-order correlations are
 informative to decoders, we next wondered which specific networks of
 brain regions contributed most to these patterns.  As a representative
 example, we selected the kernel parameters that yielded decoding
@@ -682,13 +684,12 @@ kernel parameters we examined.  Using Figure~\ref{fig:decoding}c as a
 template, the best-matching kernel was a Laplace kernel with a width
 of 50 (Fig.~\ref{fig:kernels}d).  We used this kernel to compute a
 single $K$ by $K$ $n^\mathrm{th}$-order DISFC matrix for each
-experimental condition.  We then used Neurosynth~}\citep{RubiEtal17} \DIFadd{to
+experimental condition.  We then used Neurosynth~\citep{RubiEtal17} to
 compute the terms most highly associated with the most strongly
 correlated pairs of regions in each of these matrices
-(Fig.~\ref{fig:neurosynth}; see }\textit{\DIFadd{Reverse inference}}\DIFadd{).
-}
+(Fig.~\ref{fig:neurosynth}; see \textit{Reverse inference}).
 
-\DIFadd{For all of the story listening conditions (intact, paragraph, and
+For all of the story listening conditions (intact, paragraph, and
 word), we found that first- and second-order correlations were most
 strongly associated with auditory and speech processing areas.  During
 intact story listening, third-order correlations reflected integration
@@ -716,18 +717,18 @@ known universe!  Although these fifteenth-order correlations do appear
 (visually) to have some well-formed structure, we provide this latter
 example primarily as a demonstration of the efficiency and scalability
 of our approach.
-}
 
 
 
 
 
 
-%DIF > %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{\DIFadd{Discussion}}
-\DIFadd{We tested the hypothesis that high-level cognition is reflected in
-high-order brain network dynamics~}\citep[e.g., see][]{SoloEtal19,
-  ReimEtal17}\DIFadd{.  We examined high-order network dynamics in functional
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Discussion}
+We tested the hypothesis that high-level cognition is \DIFdelbegin \DIFdel{supported by
+}\DIFdelend \DIFaddbegin \DIFadd{reflected in
+}\DIFaddend high-order brain network dynamics~\citep[e.g., see][]{SoloEtal19,
+  ReimEtal17}.  We examined high-order network dynamics in functional
 neuroimaging data collected during a story listening experiment.  When
 participants listened to an auditory recording of the story,
 participants exhibited similar high-order brain network dynamics.  By
@@ -736,50 +737,51 @@ recordings of the story, only lower-order brain network dynamics were
 similar across participants.  Our results indicate that higher orders
 of network interactions support higher-level aspects of cognitive
 processing (Fig.~\ref{fig:discussion}).
-}
 
 \begin{figure}[tp]
   \centering
   \includegraphics[width=0.6\textwidth]{figs/discussion}
-  \caption{\textbf{\DIFaddFL{Proposed high-order network dynamics underlying
-      high-level cognition during story listening.}}  \DIFaddFL{Schematic depicts
-    higher orders of
-    network interactions supporting higher-level aspects of cognitive
+  \caption{\textbf{Proposed high-order network dynamics underlying
+      high-level cognition during story listening.}  \DIFdelbeginFL \DIFdelFL{Higher }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Schematic depicts
+    higher }\DIFaddendFL orders of
+    network interactions \DIFdelbeginFL \DIFdelFL{support }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{supporting }\DIFaddendFL higher-level aspects of cognitive
     processing.  When tasks evoke richer, deeper, and/or higher-level
     processing, this is reflected in higher-order network
-    interactions.}}
+    interactions.}
   \label{fig:discussion}
 \end{figure}
 
-\DIFadd{The notion that cognition is reflected in (and possibly mediated by)
+The notion that cognition is reflected in (and possibly mediated by)
 patterns of first-order network dynamics has been suggested by or
 proposed in myriad empirical studies and
-reviews~}\citep[e.g.,][]{DemeEtal19, Turk13, LuriEtal18, FongEtal19,
+reviews~\DIFdelbegin %DIFDELCMD < \citep[e.g.,][]{DemeEtal19, Turk13, LuriEtal18, FongEtal19,
+%DIFDELCMD <   ParkEtal18b, PretEtal17, RoyEtal19, LiegEtal19, ZouEtal19,
+%DIFDELCMD <   ChanGlov10, GonzEtal19}%%%
+\DIFdelend \DIFaddbegin \citep[e.g.,][]{DemeEtal19, Turk13, LuriEtal18, FongEtal19,
   ParkEtal18b, PretEtal17, MannEtal18, RoyEtal19, LiegEtal19, ZouEtal19,
-  ChanGlov10, GonzEtal19}\DIFadd{.  Our study extends this line of work by
-finding cognitively relevant }\textit{\DIFadd{higher-order}} \DIFadd{network dynamics
+  ChanGlov10, GonzEtal19}\DIFaddend .  Our study extends this line of work by
+finding cognitively relevant \textit{higher-order} network dynamics
 that reflect ongoing cognition.  Our findings complement other work
 that uses graph theory and topology to characterize how brain networks
-reconfigure during cognition~}\citep[e.g.,][]{BassEtal06, ZhenEtal19,
-  McInJirs19, TokeSomm19, SizeEtal18, ReimEtal17, BetzEtal19}\DIFadd{.
-}
+reconfigure during cognition~\citep[e.g.,][]{BassEtal06, ZhenEtal19,
+  McInJirs19, TokeSomm19, SizeEtal18, ReimEtal17, BetzEtal19}.
 
-\DIFadd{An open question not addressed by our study pertains to how different
+An open question not addressed by our study pertains to how different
 structures integrate incoming information with different time
 constants.  For example, one line of work suggests that the cortical
 surface comprises a structured map such that nearby brain structures
 process incoming information at similar timescales.  Low-level sensory
 areas integrate information relatively quickly, whereas higher-level
-regions integrate information relatively slowly~}\citep{BaldEtal17,
+regions integrate information relatively slowly~\citep{BaldEtal17,
   HassEtal08, HassEtal15, HoneEtal12a, LernEtal11, LernEtal14,
-  ChieHone19}\DIFadd{.  A similar hierarchy appears to play a role in
-predicting future events~}\citep{LeeEtal20}\DIFadd{.  Other
+  ChieHone19}.  \DIFaddbegin \DIFadd{A similar hierarchy appears to play a role in
+predicting future events~}\citep{LeeEtal20}\DIFadd{.  }\DIFaddend Other
 related work in human and mouse brains indicates that the temporal
 response profile of a given brain structure may relate to how strongly
 connected that structure is with other brain
-areas~}\citep{FallEtal19}\DIFadd{.  Further study is needed to understand the
+areas~\citep{FallEtal19}.  Further study is needed to understand the
 role of temporal integration at different scales of network
-interaction, and across different anatomical structures. Importantly,
+interaction, and across different anatomical structures. \DIFaddbegin \DIFadd{Importantly,
 our analyses do not speak to the physiological basis of higher-order
 dynamics, and could reflect nonlinearities, chaotic patterns,
 non-stationarities, or multistability, etc. However, our decoding analyses do indicate
@@ -787,28 +789,25 @@ that higher-order dynamics are
 consistent across individuals, and therefore unlikely to be driven by
 non-stimulus-driven dynamics which are unlikely to be similar across
 individuals.
-}
+}\DIFaddend 
 
-\DIFadd{Another potential limitation of our approach relates to recent work
+Another potential limitation of our approach relates to recent work
 suggesting that the brain undergoes rapid state changes, for example
-across event boundaries~}\citep[e.g.,][]{BaldEtal17}\DIFadd{.
-\mbox{%DIFAUXCMD
-\cite{ShapEtal19} }\hspace{0pt}%DIFAUXCMD
-used hidden semi-Markov models to estimate
-state-specific network dynamics~}\citep[also see][]{VidaEtal18}\DIFadd{.  Our
+across event boundaries~\citep[e.g.,][]{BaldEtal17}.
+\cite{ShapEtal19} used hidden semi-Markov models to estimate
+state-specific network dynamics~\citep[also see][]{VidaEtal18}.  Our
 general approach might be extended by considering putative state
 transitions. For example, rather than weighting all timepoints using a
 similar kernel (Eqn.~\ref{eqn:timecorr}), the kernel function could
 adapt on a timepoint-by-timepoint basis such that only timepoints
 determined to be in the same ``state'' were given non-zero weight.
-}
 
-\DIFadd{Identifying high-order network dynamics associated with high-level
+Identifying high-order network dynamics associated with high-level
 cognition required several important methods advances.  First, we used
 kernel-based dynamic correlations to extended the notion of (static)
-inter-subject functional connectivity~}\citep{SimoEtal16} \DIFadd{to a dynamic
+inter-subject functional connectivity~\citep{SimoEtal16} to a dynamic
 measure of inter-subject functional connectivity (DISFC) that does not
-rely on sliding windows~}\citep[e.g., as in][]{MannEtal18}\DIFadd{, and that
+rely on sliding windows\DIFaddbegin \DIFadd{~}\citep[e.g., as in][]{MannEtal18}\DIFaddend , and that
 may be computed at individual timepoints.  This allowed us to
 precisely characterize stimulus-evoked network dynamics that were
 similar across individuals.  Second, we developed a computational
@@ -819,19 +818,18 @@ network dynamics.  Third, we developed an analysis framework for
 identifying robust decoding results by carrying out our analyses using
 a range of parameter values and then identifying which results were
 robust to specific parameter choices.
-}
 
-\subsection*{\DIFadd{Concluding remarks}}
-\DIFadd{Methods for characterizing the dynamics of high-order correlations in
+\subsection*{Concluding remarks}
+\DIFdelbegin \DIFdel{The complex hierarchy of dynamic interactions that underlie our
+thoughts is perhaps the greatest mystery in modern science.  }\DIFdelend Methods for characterizing the dynamics of high-order correlations in
 neural data provide a window into the neural basis of cognition.  By
 showing that high-level cognition is reflected in high-order network
 dynamics, we have elucidated the next step on the path towards
 understanding the neural basis of cognition.
-}
 
 
 
-\DIFaddend \section*{Methods}
+\section*{Methods}
 Our general approach to efficiently estimating high-order dynamic
 correlations comprises four general steps (Fig.~\ref{fig:methods}).
 First, we derive a kernel-based approach to computing dynamic pairwise
@@ -1076,7 +1074,7 @@ nonlinear transformations of the columns of $\mathbf{Y}_n$.  Many
 dimensionality reduction algorithms are invertible (or approximately
 invertible).  However, attempting to map a given $\mathbf{X}_n$ back
 onto the original feature space of $\mathbf{X}_0$ will usually require
-$\mathcal{O}(TK^{2n})$ space and therefore becomes intractable
+\DIFdelbegin \DIFdel{$\mathcal{O}(TK^{2n})$ }\DIFdelend \DIFaddbegin \DIFadd{$\mathcal{O}(TK^{2^n})$ }\DIFaddend space and therefore becomes intractable
 as $n$ or $K$ grow large.
 
 \subsubsection*{Graph measure approaches to computing
@@ -1533,509 +1531,7 @@ constructed a map of RBF components that denoted the endpoints of the
 Neurosynth~\citep{RubiEtal17} to identify the 10 terms most commonly
 associated with the given map.  This resulted in a set of 10 terms
 associated with the average dynamic correlation patterns at each
-order\DIFdelbegin \DIFdel{.
-}%DIFDELCMD < 
-
-%DIFDELCMD < %%%
-\section*{\DIFdel{Results}}
-%DIFAUXCMD
-\DIFdel{We sought to understand whether high-level cognition is supported by
-dynamic patterns of high-order correlations.  To that end, we
-developed a computational framework for estimating the dynamics of
-stimulus-driven high-order correlations in multivariate timeseries
-data (see }\textit{\DIFdel{Dynamic inter-subject functional connectivity
-  (DISFC)}} %DIFAUXCMD
-\DIFdel{and }\textit{\DIFdel{Dynamic higher-order correlations}}%DIFAUXCMD
-\DIFdel{).  We
-evaluated the efficacy of this framework at recovering known patterns
-in several synthetic datasets (see }\textit{\DIFdel{Synthetic data}}%DIFAUXCMD
-\DIFdel{).  We then
-applied the framework to a public fMRI dataset collected as
-participants listened to an auditorally presented story, listened to a
-temporally scrambled version of the story, or underwent a resting
-state scan (see }\textit{\DIFdel{Functional neuroimaging data collected during
-  story listening}}%DIFAUXCMD
-\DIFdel{).  We used the relative decoding accuracies of
-classifiers trained on different sets of neural features to estimate
-which types of features reflected ongoing cognitive processing.
-}%DIFDELCMD < 
-
-%DIFDELCMD < %%%
-\subsection*{\DIFdel{Recovering known dynamic correlations from synthetic data}}
-%DIFAUXCMD
-\DIFdel{We generated synthetic datasets that differed in how the underlying
-correlations changed over time.  For each dataset, we applied
-Equation~\ref{eqn:timecorr} with a variety of kernel shapes and
-widths.  We assessed how well the true underlying correlations at each
-timepoint matched the recovered correlations
-(Fig.~\ref{fig:synthetic}).  For every kernel and dataset we tested,
-our approach recovered the correlation dynamics we embedded into the
-data.  However, the quality of these recoveries varied across
-different synthetic datasets in a kernel-dependent way.
-}%DIFDELCMD < 
-
-%DIFDELCMD < \begin{figure}[tp]
-%DIFDELCMD <   \centering
-%DIFDELCMD <   \includegraphics[width=\textwidth]{figs/synthetic_data}
-%DIFDELCMD <   %%%
-%DIFDELCMD < \caption{%
-{%DIFAUXCMD
-\textbf{\DIFdelFL{Recovering known dynamic correlations from
-      synthetic data.}}  %DIFAUXCMD
-\DIFdelFL{Each panel displays the average correlations
-    between the vectorized upper triangles of the recovered
-    correlation matrix at each timepoint and either the true
-    underlying correlation at each timepoint or a reference
-    correlation matrix.  (The averages are taken across 10 different
-    randomly generated synthetic datasets of the given category.)
-    Error ribbons denote 95\% confidence intervals (taken across
-    datasets). Different colors denote different kernel shapes, and
-    the shading within each color family denotes the kernel width
-    parameter.  For a complete description of each synthetic dataset,
-    see }\textit{\DIFdelFL{Synthetic data}}%DIFAUXCMD
-\DIFdelFL{.  }\textbf{\DIFdelFL{a. Constant correlations.}}
-    %DIFAUXCMD
-\DIFdelFL{These datasets have a stable (unchanging) underlying correlation
-    matrix.  }\textbf{\DIFdelFL{b. Random correlations.}}  %DIFAUXCMD
-\DIFdelFL{These datasets are
-    generated using a new independently drawn correlation matrix at
-    each new timepoint.  }\textbf{\DIFdelFL{c. Ramping correlations.}}  %DIFAUXCMD
-\DIFdelFL{These
-    datasets are generated by smoothly varying the underlying
-    correlations between the randomly drawn correlation matrices at
-    the first and last timepoints.  The left panel displays the
-    correlations between the recovered dynamic correlations and the
-    underlying ground truth correlations.  The middle panel compares
-    the recovered correlations with the }\textit{\DIFdelFL{first}} %DIFAUXCMD
-\DIFdelFL{timepoint's
-    correlation matrix.  The right panel compares the recovered
-    correlations with the }\textit{\DIFdelFL{last}} %DIFAUXCMD
-\DIFdelFL{timepoint's correlation
-    matrix.  }\textbf{\DIFdelFL{d. Event-based correlations.}}  %DIFAUXCMD
-\DIFdelFL{These datasets are
-    each generated using five randomly drawn correlation matrices that
-    each remain stable for a fifth of the total timecourse.  The left
-    panel displays the correlations between the recovered dynamic
-    correlations and the underlying ground truth correlations.  The
-    right panels compare the recovered correlations with the
-    correlation matrices unique to each event.}}
-  %DIFAUXCMD
-%DIFDELCMD < \label{fig:synthetic}
-%DIFDELCMD < \end{figure}
-%DIFDELCMD < 
-
-%DIFDELCMD < %%%
-\DIFdel{In general, wide monotonic kernel shapes (Laplace, Gaussian), and
-wider kernels (within a shape), performed best when the correlations
-varied gradually from moment-to-moment (Figs.~\ref{fig:synthetic}a, c,
-and d).  In the extreme, as the rate of change in correlations
-approaches 0 (Fig.~\ref{fig:synthetic}a), an infinitely wide kernel
-would exactly recover the Pearson's correlation (e.g., compare
-Eqns.~\ref{eqn:corr} and \ref{eqn:timecorr}).
-}%DIFDELCMD < 
-
-%DIFDELCMD < %%%
-\DIFdel{When the correlation dynamics were unstructured in time
-(Fig.~\ref{fig:synthetic}b), a Dirac $\delta$ kernel (infinitely
-narrow) performed best.  This is because, when every timepoint's
-correlations are independent of the correlations at every other
-timepoint, averaging data over time dilutes the available signal.
-Following a similar pattern, holding kernel shape fixed, narrower
-kernel parameters better recovered randomly varying correlations.
-}%DIFDELCMD < 
-
-%DIFDELCMD < %%%
-\subsection*{\DIFdel{Cognitively relevant dynamic high-order correlations in
-  fMRI data}}
-%DIFAUXCMD
-\DIFdel{We used across-participant temporal decoders to identify cognitively
-relevant neural patterns in fMRI data (see }\textit{\DIFdel{Forward inference
-  and decoding accuracy}}%DIFAUXCMD
-\DIFdel{).  The dataset we examined~}%DIFDELCMD < \citep[collected
-%DIFDELCMD < by][]{SimoEtal16} %%%
-\DIFdel{comprised four experimental conditions that exposed
-participants to stimuli that varied systematically in how cognitively
-engaging they were.  The }\textit{\DIFdel{intact}} %DIFAUXCMD
-\DIFdel{experimental condition had
-participants listen to an audio recording of a 10-minute story.  The
-}\textit{\DIFdel{paragraph}}%DIFAUXCMD
-\DIFdel{-scrambled experimental condition had participants
-listen to a temporally scrambled version of the story, where the
-paragraphs occurred out of order (but where the same total set of
-paragraphs were presented over the full listening interval).  All
-participants in this condition experienced the scrambled paragraphs in
-the same order.  The }\textit{\DIFdel{word}}%DIFAUXCMD
-\DIFdel{-scrambled experimental condition
-had participants listen to a temporally scrambled version of the story
-where the words in the story occurred in a random order.  All
-participants in the word condition experienced the scrambled words in
-the same order.  Finally, in a }\textit{\DIFdel{rest}} %DIFAUXCMD
-\DIFdel{experimental condition,
-participants lay in the scanner with no overt stimulus, with their
-eyes open (blinking as needed).  This dataset provided a convenient
-means of testing our hypothesis that different levels of cognitive
-processing and engagement are supported by different orders of brain
-activity dynamics.
-}%DIFDELCMD < 
-
-%DIFDELCMD < \begin{figure}[tp]
-%DIFDELCMD <   \centering
-%DIFDELCMD <   \includegraphics[width=\textwidth]{figs/decode_level}
-%DIFDELCMD <   %%%
-%DIFDELCMD < \caption{%
-{%DIFAUXCMD
-\textbf{\DIFdelFL{Across-participant decoding accuracy varies with
-      correlation order and cognitive engagement.}}
-    %DIFAUXCMD
-\textbf{\DIFdelFL{a.~Decoding accuracy as a function of order: PCA.}}
-    %DIFAUXCMD
-\textit{\DIFdelFL{Order}} %DIFAUXCMD
-\DIFdelFL{($x$-axis) refers to the maximum order of dynamic
-    correlations that were available to the classifiers (see
-    }\textit{\DIFdelFL{Feature weighting and testing}}%DIFAUXCMD
-\DIFdelFL{).  The reported
-    across-participant decoding accuracies are averaged over all
-    kernel shapes and widths (see }\textit{\DIFdelFL{Identifying robust decoding
-      results}}%DIFAUXCMD
-\DIFdelFL{).  The $y$-values are displayed relative to chance
-    accuracy (intact: $\frac{1}{300}$; paragraph: $\frac{1}{272}$;
-    word: $\frac{1}{300}$; rest: $\frac{1}{400}$).  The error ribbons
-    denote 95\% confidence intervals across cross-validation folds
-    (i.e., random assignments of participants to the training and test
-    sets).  The colors denote the experimental condition.  Arrows
-    denote sets of features that yielded reliably higher (upwards
-    facing) or lower (downward facing) decoding accuracy than the mean
-    of all other features (via a two-tailed test, thresholded at
-    $p < 0.05$).  Figure~\ref{fig:ttests} displays additional
-    comparisons between the decoding accuracies achieved using
-    different sets of neural features.  The circled values represent
-    the maximum decoding accuracy within each experimental condition.
-    }\textbf{\DIFdelFL{b.~Normalized decoding accuracy as a function of order:
-      PCA.}}  %DIFAUXCMD
-\DIFdelFL{This panel displays the same results as Panel a, but here
-    each curve has been normalized to have a maximum value of 1 and a
-    minimum value of 0 (including the upper and lower bounds of the
-    respective 95\% confidence intervals).  Panels a and b used PCA to
-    project each high-dimensional pattern of dynamic correlations onto
-    a lower-dimensional space.  }\textbf{\DIFdelFL{c.~Decoding accuracy as a
-      function of order: eigenvector centrality.}} %DIFAUXCMD
-\DIFdelFL{This panel is in the
-    same format as Panel a, but here eigenvector centrality has been
-    used to project the high-dimensional patterns of dynamic
-    correlations onto a lower-dimensional space.
-    }\textbf{\DIFdelFL{d.~Normalized decoding accuracy as a function of order:
-      eigenvector centrality.}} %DIFAUXCMD
-\DIFdelFL{This panel is in the same format as
-    Panel b, but here eigenvector centrality has been used to project
-    the high-dimensional patterns of dynamic correlations onto a
-    lower-dimensional space.}}
-  %DIFAUXCMD
-%DIFDELCMD < \label{fig:decoding}
-%DIFDELCMD < \end{figure}
-%DIFDELCMD < 
-
-%DIFDELCMD < %%%
-\DIFdel{In brief, we computed timeseries of dynamic high-order correlations
-that were similar across participants in each of two randomly assigned
-groups: a training group and a test group.  We then trained
-classifiers on the training group's data to match each sample from the
-test group with a stimulus timepoint.  Each classifier comprised a
-weighted blend of neural patterns that reflected up to
-$n^\mathrm{th}$-order dynamic correlations (see }\textit{\DIFdel{Feature
-  weighting and testing}}%DIFAUXCMD
-\DIFdel{).  We repeated this process for
-$n \in \left\{ 0, 1, 2, ..., 10 \right\}$.  Our examinations of
-synthetic data suggested that none of the kernels we examined were
-``universal'' in the sense of optimally recovering underlying
-correlations regardless of the temporal structure of those
-correlations.  We found a similar pattern in the (real) fMRI data,
-whereby different kernels yielded different decoding accuracies, but
-no single kernel emerged as the clear ``best.''  In our analyses of
-neural data, we therefore averaged our decoding results over a variety
-of kernel shapes and widths in order to identify results that were
-robust to specific kernel parameters (see }\textit{\DIFdel{Identifying robust
-  decoding results}}%DIFAUXCMD
-\DIFdel{).
-}%DIFDELCMD < 
-
-%DIFDELCMD < %%%
-\DIFdel{Our approach to estimating dynamic high-order correlations entails
-mapping the high-dimensional feature space of correlations (a $T$ by
-$\mathcal{O}(K^2)$ matrix) onto a lower-dimensional $T$ by $K$ matrix.
-We carried out two sets of analyses that differed in how this mapping
-was computed.  The first set of analyses used PCA to find a
-low-dimensional embedding of the original dynamic correlation matrices
-(Fig.~\ref{fig:decoding}a,b).  The second set of analyses
-characterized correlations in dynamics of each feature's eigenvector
-centrality, but did not preserve the underlying activity dynamics
-(Fig.~\ref{fig:decoding}c,d).
-}%DIFDELCMD < 
-
-%DIFDELCMD < \begin{figure}[tp]
-%DIFDELCMD < \centering
-%DIFDELCMD < \includegraphics[width=1\textwidth]{figs/stats_heatmaps}
-%DIFDELCMD < %%%
-%DIFDELCMD < \caption{%
-{%DIFAUXCMD
-\textbf{\DIFdelFL{Statistical summary of decoding accuracies for
-    different neural features.}}  %DIFAUXCMD
-\DIFdelFL{Each column displays decoding
-  results for one experimental condition (intact, paragraph, word, and
-  rest).  We considered dynamic activity patterns (order 0) and
-  dynamic correlations at different orders (order $> 0$).  We used
-  two-tailed $t$-tests to compare the
-  distributions of decoding accuracies obtained using each pair of
-  features.  The distributions for each feature reflect the set of
-  average decoding accuracies (across all kernel parameters), obtained
-  for each random assignment of training and test groups.
-  In the upper triangles of each map, warmer colors (positive $t$-values) indicate that the
-  neural feature indicated in the given row yielded higher accuracy than the
-  feature indicated in the given column.  Cooler colors (negative
-  $t$-values) indicate that
-  the feature in the given row yielded lower decoding accuracy than
-  the feature in the given column.  The lower triangles of each map
-  denote the corresponding $p$-values for the $t$-tests.  The diagonal
-  entries display the relative average optimized weight given to each type of feature, in
-  a decoder that included all feature types (see }\textit{\DIFdelFL{Feature
-    weighting and testing}}%DIFAUXCMD
-\DIFdelFL{).}}
-%DIFAUXCMD
-%DIFDELCMD < \label{fig:ttests}
-%DIFDELCMD < \end{figure}
-%DIFDELCMD < 
-
-%DIFDELCMD < %%%
-\DIFdel{Both sets of temporal decoding analyses yielded qualitatively similar
-results for the auditory (non-rest) conditions of the experiment
-(Fig.~\ref{fig:decoding}: pink, green, and teal lines;
-Fig.~\ref{fig:ttests}: three leftmost columns).  The highest
-decoding accuracy for participants who listened to the intact
-(unscrambled) story was achieved using high-order dynamic correlations
-(PCA: second-order; eigenvector-centrality: fourth-order).  Scrambled
-versions of the story were best decoded by lower-order correlations
-(PCA/paragraph: first-order; PCA/word: order zero; eigenvector
-centrality/paragraph: order zero; eigenvector centrality/word: order
-zero).  The two sets of analyses yielded different decoding results on
-resting state data (Fig.~\ref{fig:decoding}: purple lines;
-Fig.~\ref{fig:ttests}: rightmost column).  We note
-that while the resting state times could be decoded reliably, the
-accuracies were only very slightly above chance.  We speculate that
-the decoders might have picked up on attentional drift, boredom, or
-tiredness; we hypothesize that these all increased throughout the resting
-state scan.  The decoders might be picking up on aspects of these
-loosely defined cognitive states that are common across individuals.
-The PCA-based approach achieved the highest resting state decoding
-accuracy using order zero features (non-correlational,
-activation-based), whereas the eigenvector centrality-based approach
-achieved the highest resting state decoding accuracy using
-second-order correlations.  Taken together, these analyses indicate
-that high-level cognitive processing (while listening to the intact
-story) is reflected in the dynamics of high-order correlations in
-brain activity, whereas lower-level cognitive processing (while
-listening to scrambled versions of the story that lack rich meaning)
-is reflected in the dynamics of lower-order correlations and
-non-correlational activity dynamics.  Further, these patterns are
-associated both with the underlying activity patterns (characterized
-using PCA) and also with the changing relative positions that
-different brain areas occupy in their associated networks
-(characterized using eigenvector centrality).
-}%DIFDELCMD < 
-
-%DIFDELCMD < \begin{figure}[tp]
-%DIFDELCMD <   \centering
-%DIFDELCMD <   \includegraphics[width=\textwidth]{figs/most_abs}
-%DIFDELCMD <   %%%
-%DIFDELCMD < \caption{%
-{%DIFAUXCMD
-\textbf{\DIFdelFL{Top terms associated with the endpoints of the
-      strongest correlations.}}  %DIFAUXCMD
-\DIFdelFL{Each color corresponds to one order of
-    inter-subject functional correlations. The inflated brain plots
-    display the locations of the endpoints of the 10 strongest
-    (absolute value) correlations at each order, thresholded at 0.999,
-    and projected onto the cortical surface~}%DIFDELCMD < \citep{CombEtal19}%%%
-\DIFdelFL{.  The
-    lists of terms on the right display the top five Neurosynth
-    terms~}%DIFDELCMD < \citep{RubiEtal17} %%%
-\DIFdelFL{decoded from the corresponding brain maps
-    for each order.  Each row displays data from a different
-    experimental condition.  Additional maps and their corresponding
-    Neurosynth terms may be found in the }\textit{\DIFdelFL{Supplementary
-      materials}} %DIFAUXCMD
-\DIFdelFL{(intact: Fig.~\intact; paragraph: Fig.~\para; word:
-    Fig.~\word; rest: Fig.~\rest).}}
-  %DIFAUXCMD
-%DIFDELCMD < \label{fig:neurosynth}
-%DIFDELCMD < \end{figure}
-%DIFDELCMD < 
-
-%DIFDELCMD < %%%
-\DIFdel{Having established that patterns of high-order correlations are
-informative to decoders, we next wondered which specific networks of
-brain regions contributed most to these patterns.  As a representative
-example, we selected the kernel parameters that yielded decoding
-accuracies that best matched the average accuracies across all of the
-kernel parameters we examined.  Using Figure~\ref{fig:decoding}c as a
-template, the best-matching kernel was a Laplace kernel with a width
-of 50 (Fig.~\ref{fig:kernels}d).  We used this kernel to compute a
-single $K$ by $K$ $n^\mathrm{th}$-order DISFC matrix for each
-experimental condition.  We then used Neurosynth~}%DIFDELCMD < \citep{RubiEtal17} %%%
-\DIFdel{to
-compute the terms most highly associated with the most strongly
-correlated pairs of regions in each of these matrices
-(Fig.~\ref{fig:neurosynth}; see }\textit{\DIFdel{Reverse inference}}%DIFAUXCMD
-\DIFdel{).
-}%DIFDELCMD < 
-
-%DIFDELCMD < %%%
-\DIFdel{For all of the story listening conditions (intact, paragraph, and
-word), we found that first- and second-order correlations were most
-strongly associated with auditory and speech processing areas.  During
-intact story listening, third-order correlations reflected integration
-with visual areas, and fourth-order correlations reflected integration
-with areas associated with high-level cognition and cognitive control,
-such as the ventrolateral prefrontal cortex.  However, during
-listening to temporally scrambled stories, these higher-order
-correlations instead involved interactions with additional regions
-associated with speech and semantic processing.  By contrast, we found
-a much different set of patterns in the resting state data.
-First-order resting state correlations were most strongly associated
-with regions involved in counting and numerical understanding.
-Second-order resting state correlations were strongest in visual
-areas; third-order correlations were strongest in task-positive areas;
-and fourth-order correlations were strongest in regions associated
-with autobiographical and episodic memory.  We carried out analogous
-analyses to create maps (and decode the top associated Neurosynth
-terms) for up to fifteenth-order correlations (Figs.~\intact, \para, \word, and
-\rest).  Of note, examining fifteenth-order correlations between 700
-nodes using conventional methods would have required storing roughly
-$\frac{700^{2 \times 15}}{2} \approx 1.13 \times 10^{85}$ floating
-point numbers-- assuming single-precision (32 bits each), this would
-require roughly 32 times as many bits as there are molecules in the
-known universe!  Although these fifteenth-order correlations do appear
-(visually) to have some well-formed structure, we provide this latter
-example primarily as a demonstration of the efficiency and scalability
-of our approach.
-}%DIFDELCMD < 
-
-%DIFDELCMD < %%%
-%DIF < %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{\DIFdel{Discussion}}
-%DIFAUXCMD
-\DIFdel{We tested the hypothesis that high-level cognition is supported by
-high-order brain network dynamics~}%DIFDELCMD < \citep[e.g., see][]{SoloEtal19,
-%DIFDELCMD <   ReimEtal17}%%%
-\DIFdel{.  We examined high-order network dynamics in functional
-neuroimaging data collected during a story listening experiment.  When
-participants listened to an auditory recording of the story,
-participants exhibited similar high-order brain network dynamics.  By
-contrast, when participants instead listened to temporally scrambled
-recordings of the story, only lower-order brain network dynamics were
-similar across participants.  Our results indicate that higher orders
-of network interactions support higher-level aspects of cognitive
-processing (Fig.~\ref{fig:discussion}).
-}%DIFDELCMD < 
-
-%DIFDELCMD < \begin{figure}[tp]
-%DIFDELCMD <   \centering
-%DIFDELCMD <   \includegraphics[width=0.6\textwidth]{figs/discussion}
-%DIFDELCMD <   %%%
-%DIFDELCMD < \caption{%
-{%DIFAUXCMD
-\textbf{\DIFdelFL{Proposed high-order network dynamics underlying
-      high-level cognition during story listening.}}  %DIFAUXCMD
-\DIFdelFL{Higher orders of
-    network interactions support higher-level aspects of cognitive
-    processing.  When tasks evoke richer, deeper, and/or higher-level
-    processing, this is reflected in higher-order network
-    interactions.}}
-  %DIFAUXCMD
-%DIFDELCMD < \label{fig:discussion}
-%DIFDELCMD < \end{figure}
-%DIFDELCMD < 
-
-%DIFDELCMD < %%%
-\DIFdel{The notion that cognition is reflected in (and possibly mediated by)
-patterns of first-order network dynamics has been suggested by or
-proposed in myriad empirical studies and
-reviews~}%DIFDELCMD < \citep[e.g.,][]{DemeEtal19, Turk13, LuriEtal18, FongEtal19,
-%DIFDELCMD <   ParkEtal18b, PretEtal17, RoyEtal19, LiegEtal19, ZouEtal19,
-%DIFDELCMD <   ChanGlov10, GonzEtal19}%%%
-\DIFdel{.  Our study extends this line of work by
-finding cognitively relevant }\textit{\DIFdel{higher-order}} %DIFAUXCMD
-\DIFdel{network dynamics
-that reflect ongoing cognition.  Our findings complement other work
-that uses graph theory and topology to characterize how brain networks
-reconfigure during cognition~}%DIFDELCMD < \citep[e.g.,][]{BassEtal06, ZhenEtal19,
-%DIFDELCMD <   McInJirs19, TokeSomm19, SizeEtal18, ReimEtal17, BetzEtal19}%%%
-\DIFdel{.
-}%DIFDELCMD < 
-
-%DIFDELCMD < %%%
-\DIFdel{An open question not addressed by our study pertains to how different
-structures integrate incoming information with different time
-constants.  For example, one line of work suggests that the cortical
-surface comprises a structured map such that nearby brain structures
-process incoming information at similar timescales.  Low-level sensory
-areas integrate information relatively quickly, whereas higher-level
-regions integrate information relatively slowly~}%DIFDELCMD < \citep{BaldEtal17,
-%DIFDELCMD <   HassEtal08, HassEtal15, HoneEtal12a, LernEtal11, LernEtal14, ChieHone19}%%%
-\DIFdel{.  Other
-related work in human and mouse brains indicates that the temporal
-response profile of a given brain structure may relate to how strongly
-connected that structure is with other brain
-areas~}%DIFDELCMD < \citep{FallEtal19}%%%
-\DIFdel{.  Further study is needed to understand the
-role of temporal integration at different scales of network
-interaction, and across different anatomical structures.
-}%DIFDELCMD < 
-
-%DIFDELCMD < %%%
-\DIFdel{Another potential limitation of our approach relates to recent work
-suggesting that the brain undergoes rapid state changes, for example
-across event boundaries~}%DIFDELCMD < \citep[e.g.,][]{BaldEtal17}%%%
-\DIFdel{.
-\mbox{%DIFAUXCMD
-\cite{ShapEtal19} }\hspace{0pt}%DIFAUXCMD
-used hidden semi-Markov models to estimate
-state-specific network dynamics~}%DIFDELCMD < \citep[also see][]{VidaEtal18}%%%
-\DIFdel{.  Our
-general approach might be extended by considering putative state
-transitions. For example, rather than weighting all timepoints using a
-similar kernel (Eqn.~\ref{eqn:timecorr}), the kernel function could
-adapt on a timepoint-by-timepoint basis such that only timepoints
-determined to be in the same ``state'' were given non-zero weight.
-}%DIFDELCMD < 
-
-%DIFDELCMD < %%%
-\DIFdel{Identifying high-order network dynamics associated with high-level
-cognition required several important methods advances.  First, we used
-kernel-based dynamic correlations to extended the notion of (static)
-inter-subject functional connectivity~}%DIFDELCMD < \citep{SimoEtal16} %%%
-\DIFdel{to a dynamic
-measure of inter-subject functional connectivity (DISFC) that does not
-rely on sliding windows, and that may be computed at individual
-timepoints.  This allowed us to precisely characterize stimulus-evoked
-network dynamics that were similar across individuals.  Second, we
-developed a computational framework for efficiently and scalably estimating
-high-order dynamic correlations.  Our approach uses dimensionality
-reduction algorithms and graph measures to obtain low-dimensional
-embeddings of patterns of network dynamics.  Third, we developed an
-analysis framework for identifying robust decoding results by carrying
-out our analyses using a range of parameter values and then
-identifying which results were robust to specific parameter choices.
-}%DIFDELCMD < 
-
-%DIFDELCMD < %%%
-\subsection*{\DIFdel{Concluding remarks}}
-%DIFAUXCMD
-\DIFdel{The complex hierarchy of dynamic interactions that underlie our
-thoughts is perhaps the greatest mystery in modern science.  Methods
-for characterizing the dynamics of high-order correlations in neural
-data provide a window into the neural basis of cognition.  By showing
-that high-level cognition is reflected in high-order network dynamics,
-we have elucidated the next step on the path towards understanding the
-neural basis of cognition}\DIFdelend .
+order.
 
 
 \section*{Acknowledgements}
