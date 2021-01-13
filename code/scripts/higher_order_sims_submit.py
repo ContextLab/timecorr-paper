@@ -24,26 +24,42 @@ job_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'higher_o
 # options for reps: integer
 reps =  str('10')
 
+cond_type = ['ramping']
+#cond_type = ['paragraph']
+
+
+# options for widths: integer
+times = [str(10), str(50), str(100), str(500)]
+
+# options for widths: integer
+widths = [str(5), str(10), str(20), str(50)]
+
+
+param_grid = [(wi, ts, re) for wi in widths for ts in times for re in range(int(reps))]
+
+
+
+job_commands = list(np.array([list(map(lambda x: x[0]+" "+str(x[1]) +" "+str(e[2]) +" "+e[0]+" "+e[1],
+                                       zip([job_script]*len(cond_type), cond_type)))
+                              for i, e in enumerate(param_grid)]).flat)
+
+# job_names should specify the file name of each script (as a list, of the same length as job_commands)
+job_names = list(np.array([list(map(lambda x: os.path.basename(os.path.splitext(x)[0])+'_'+str(e[2])+'_'
+                                              +e[0]+'_'+e[1]+'_higher_order_sim.sh', cond_type))
+                           for i, e in enumerate(param_grid)]).flat)
+
+
+
+# cond_type = ['random']
 #
-# job_commands = list(np.array([list(map(lambda x: x[0]+" "+str(x[1]),
-#                                        zip([job_script]*1, [r])))
+# job_commands = list(np.array([list(map(lambda x: x[0]+" "+str(x[1])+" "+str(r),
+#                                        zip([job_script]*len(cond_type), cond_type)))
 #                               for r in range(int(reps))]).flat)
 #
 # # job_names should specify the file name of each script (as a list, of the same length as job_commands)
-# job_names = list(np.array([list(map(lambda x: os.path.basename(os.path.splitext(x)[0])+'_higher_order_sim.sh', [str(r)]))
+# job_names = list(np.array([list(map(lambda x: os.path.basename(os.path.splitext(x)[0])+'_'+str(r)+
+#                                               '_higher_order_sim.sh', cond_type))
 #                            for r in range(int(reps))]).flat)
-#
-
-cond_type = ['random']
-
-job_commands = list(np.array([list(map(lambda x: x[0]+" "+str(x[1])+" "+str(r),
-                                       zip([job_script]*len(cond_type), cond_type)))
-                              for r in range(int(reps))]).flat)
-
-# job_names should specify the file name of each script (as a list, of the same length as job_commands)
-job_names = list(np.array([list(map(lambda x: os.path.basename(os.path.splitext(x)[0])+'_'+str(r)+
-                                              '_higher_order_sim.sh', cond_type))
-                           for r in range(int(reps))]).flat)
 
 
 # ====== MODIFY ONLY THE CODE BETWEEN THESE LINES ======

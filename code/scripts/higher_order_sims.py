@@ -8,7 +8,7 @@ import timecorr as tc
 from matplotlib import pyplot as plt
 
 cond= sys.argv[1]
-r= sys.argv[2]
+r = sys.argv[2] #reps
 
 F = 4 #number of features
 T = 30 #number of timepoints
@@ -18,7 +18,7 @@ fname = cond + '_' + str(F) + '_' + str(T) + '_' + str(K)
 
 width = 20
 
-results_dir = os.path.join(config['resultsdir'], 'higher_order_sims', cond)
+results_dir = os.path.join(config['resultsdir'], 'higher_order_sims', cond + '_' + str(T))
 
 try:
     if not os.path.exists(results_dir):
