@@ -10,15 +10,15 @@ from matplotlib import pyplot as plt
 cond= sys.argv[1]
 r = sys.argv[2] #reps
 
-F = 4 #number of features
-T = 30 #number of timepoints
+F = sys.argv[3] #number of features
+T = sys.argv[4] #number of timepoints
 K = 2 #order
 
 fname = cond + '_' + str(F) + '_' + str(T) + '_' + str(K)
 
 width = 20
 
-results_dir = os.path.join(config['resultsdir'], 'higher_order_sims', cond + '_' + str(T))
+results_dir = os.path.join(config['resultsdir'], 'higher_order_sims_search', cond + '_' + str(T)+ '_' + str(K))
 
 try:
     if not os.path.exists(results_dir):
