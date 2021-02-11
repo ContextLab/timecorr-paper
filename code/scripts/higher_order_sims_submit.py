@@ -29,7 +29,9 @@ cond_type = ['ramping']
 
 
 # options for widths: integer
-times = [str(10), str(50), str(100), str(500)]
+#times = [str(10), str(50), str(100), str(500)]
+
+times = [str(10)]
 
 # options for widths: integer
 widths = [str(5), str(10), str(20), str(50)]
