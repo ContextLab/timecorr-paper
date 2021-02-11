@@ -20,14 +20,14 @@ except:
 # each job command should be formatted as a string
 job_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pieman_cluster_level_analysis.py')
 
-cond_type = ['intact', 'word', 'rest']
+cond_type = ['intact', 'paragraph','word', 'rest']
 #cond_type = ['paragraph']
 
 # options for levels: integer
-levels = str('10')
+levels = str('5')
 
 # options for reps: integer
-reps =  str('10')
+reps =  str('3')
 
 # options for reps: cfuns
 cfuns =  [str('isfc')]
@@ -37,7 +37,7 @@ cfuns =  [str('isfc')]
 rfuns = [str('PCA')]
 
 # options for widths: integer
-widths = [str(10)]
+widths = [str(50)]
 
 # options for weight functions: laplace, gaussian, mexican hat, delta
 weights = ['laplace']

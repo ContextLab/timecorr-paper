@@ -37,10 +37,10 @@ cfuns =  [str('isfc')]
 rfuns =  [str('eigenvector_centrality'), str('PCA')]
 
 # options for widths: integer
-widths = [str(50)]
+widths = [str(5), str(10), str(20), str(50)]
 
 # options for weight functions: laplace, gaussian, mexican hat, delta
-weights = ['laplace']
+weights = ['gaussian', 'laplace', 'mexican_hat']
 
 
 param_grid = [(c, r, wi, we) for c in cfuns for r in rfuns for wi in widths for we in weights]

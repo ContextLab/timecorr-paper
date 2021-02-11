@@ -33,13 +33,13 @@ reps =  str('10')
 cfuns =  [str('isfc')]
 
 # options for reps: rfuns
-rfuns =  [str('eigenvector_centrality'), str('PCA')]
+rfuns =  [str('PCA')]
 
 # options for widths: integer
 widths = [str(5), str(10), str(20), str(50)]
 
 # options for weight functions: laplace, gaussian, mexican hat, delta
-weights = ['gaussian', 'laplace','mexican hat']
+weights = ['gaussian', 'laplace','mexican_hat']
 
 
 # options for debug: True or False
