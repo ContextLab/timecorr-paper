@@ -1,6 +1,6 @@
 
 import timecorr as tc
-from timecorr.helpers import isfc, wisfc, mean_combine, corrmean_combine
+from timecorr.helpers import isfc, wisfc, autofc, mean_combine, corrmean_combine
 from scipy.io import loadmat
 import numpy as np
 import sys
@@ -50,7 +50,7 @@ delta = {'name': '$\delta$', 'weights': tc.eye_weights, 'params': tc.eye_params}
 gaussian = {'name': 'Gaussian', 'weights': tc.gaussian_weights, 'params': {'var': width}}
 mexican_hat = {'name': 'Mexican hat', 'weights': tc.mexican_hat_weights, 'params': {'sigma': width}}
 
-factors = 700
+factors = 100
 
 if factors == 100:
     pieman_name = 'pieman_ica100.mat'
@@ -89,28 +89,24 @@ else:
         conds.extend([c]*len(next_data))
     del pieman_data
 
-
-
-data = np.array(data)
-conds = np.array(conds)
-append_iter = pd.DataFrame()
-
-iter_results = tc.helpers.weighted_timepoint_decoder(data[conds == cond], nfolds=2, optimize_levels=list(range(0,int(level)+1)), level=int(level),
-                                    combine=corrmean_combine,
-                                    cfun=eval(cfun),
-                                    rfun=rfun,
-                                    weights_fun=weights_paramter['weights'],
-                                    weights_params=weights_paramter['params'])
-print(iter_results)
-iter_results['iteration'] = int(reps)
-
-
-save_file = os.path.join(results_dir, cond)
-
+save_file = os.path.join(results_dir, cond + '_' + reps)
 
 if not os.path.isfile(save_file + '.csv'):
-      iter_results.to_csv(save_file + '.csv')
-else:
-    append_iter = pd.read_csv(save_file + '.csv', index_col=0)
-    append_iter = append_iter.append(iter_results)
-    append_iter.to_csv(save_file + '.csv')
+
+    data = np.array(data)
+    conds = np.array(conds)
+    append_iter = pd.DataFrame()
+
+    iter_results = tc.helpers.weighted_timepoint_decoder(data[conds == cond], nfolds=2, optimize_levels=list(range(0,int(level)+1)), level=int(level),
+                                        combine=corrmean_combine,
+                                        cfun=eval(cfun),
+                                        rfun=rfun,
+                                        weights_fun=weights_paramter['weights'],
+                                        weights_params=weights_paramter['params'])
+    print(iter_results)
+    iter_results['iteration'] = int(reps)
+
+    iter_results.to_csv(save_file + '.csv')
+
+    save_file = os.path.join(results_dir, cond + '_' + reps)
+

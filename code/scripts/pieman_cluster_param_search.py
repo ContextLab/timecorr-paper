@@ -21,7 +21,7 @@ if len(sys.argv) < 9:
 else:
     debug = eval(sys.argv[8])
 
-result_name = 'level_analysis_optimized'
+result_name = 'level_analysis_optimized_param_search'
 
 if debug:
     results_dir = os.path.join(config['resultsdir'], result_name, cfun + '_' + rfun + '_' + wp + '_' + str(width) + '_debug')
