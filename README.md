@@ -18,7 +18,11 @@ root
 Content of the data folder is provided [here](https://drive.google.com/file/d/1CZYe8eyAkZFuLqfwwlKoeijgkjdW6vFs/view?usp=sharing).
 We also include a Dockerfile to reproduce our computational environment. Instruction for use are below (copied and modified from [MIND](https://github.com/Summer-MIND/mind-tools) repo):
 
-## One time setup
+## Conda env setup
+1. 
+ 
+ 
+## Docker setup
 1. Install Docker on your computer using the appropriate guide below:
     - [OSX](https://docs.docker.com/docker-for-mac/install/#download-docker-for-mac)
     - [Windows](https://docs.docker.com/docker-for-windows/install/)
@@ -37,3 +41,4 @@ We also include a Dockerfile to reproduce our computational environment. Instruc
     - `docker start Timecorr_paper && docker attach Timecorr_paper`
     - When you see the `root@` prefix, letting you know you're inside the container
 2. Close a running container with `ctrl + d` from the same terminal you used to launch the container, or `docker stop Timecorr_paper` from any other terminal
+

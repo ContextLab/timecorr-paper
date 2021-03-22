@@ -30,7 +30,6 @@ dependencies:
     - alabaster==0.7.12
     - babel==2.6.0
     - biopython==1.74
-    - brainconn==0.0.1
     - chardet==3.0.4
     - citeproc-py==0.4.0
     - cycler==0.10.0

@@ -1,71 +1,26 @@
-# Specified OS or runtime
-FROM ubuntu:latest
-
-MAINTAINER Contextual Dynamics Lab <contextualdynamics@gmail.com>
+FROM continuumio/miniconda
 
 
-RUN apt-get update && \
-    apt-get install libgl1-mesa-glx -y
-RUN apt-get install -y eatmydata
+COPY environment.yml .
+RUN \
+   conda env update -n root -f environment.yml \
+&& conda clean -a
 
 
-# install basic packages
-RUN eatmydata apt-get install -y wget bzip2 ca-certificates \
-    git \
-    swig \
-    mpich \
-    pkg-config \
-    libfontconfig1-dev \
-    gcc \
-    wget \
-    curl \
-    vim \
-    nano
 
+# Make sure the environment is activated:
+RUN echo "Make sure hypertools is installed:"
+RUN python -c "import hypertools"
 
-# install Anaconda python distribution
-RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
-    wget --quiet https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.sh -O ~/anaconda.sh && \
-    /bin/bash ~/anaconda.sh -b -p /opt/conda && \
-    rm ~/anaconda.sh
-
-# Setup anaconda path
-ENV PATH /opt/conda/bin:$PATH
-
-
-# Update pip and install various important python packages
-RUN pip install --upgrade pip
-
-RUN pip install --upgrade \
-nose \
-sphinx \
-numpy \
-visbrain \
-pandas \
-matplotlib \
-numba \
-pykalman
-
-# Due to behavior of pip>=10.1, we must use the `--ignore-installed` flag to
-# install packages that were originally distutils installs (or rely on packages
-# that were)
 RUN pip install --upgrade --ignore-installed \
-seaborn \
 git+git://github.com/FIU-Neuro/brainconn.git \
-neurosynth \
-timecorr \
-hypertools \
-supereeg
+git+git://github.com/lucywowen/timecorr-1.git@spot_check
 
-RUN conda install scikit-learn
+# Make sure the environment is activated:
+RUN echo "Make sure timecorr is installed:"
+RUN python -c "import timecorr"
 
-RUN pip install scipy==1.1.0
 
-# add some useful directories as mirrors of directors in the same location on your computer
-ADD data /data
-ADD code /code
-ADD paper /paper
-
-# Finally, expose a port from within the docker so we can use it to run
-# jupyter notebooks
-EXPOSE 9999
+# The code to run when container is started:
+COPY run.py .
+ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "timecorr_env_spotcheck", "python", "run.py"]
