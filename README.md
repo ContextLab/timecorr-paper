@@ -18,7 +18,11 @@ root
 Content of the data folder is provided [here](https://drive.google.com/file/d/1CZYe8eyAkZFuLqfwwlKoeijgkjdW6vFs/view?usp=sharing).
 We also include a Dockerfile to reproduce our computational environment. Instruction for use are below:
 
-## One time setup
+## Conda env setup
+1.
+
+
+## Docker setup
 1. Install Docker on your computer using the appropriate guide below:
     - [OSX](https://docs.docker.com/docker-for-mac/install/#download-docker-for-mac)
     - [Windows](https://docs.docker.com/docker-for-windows/install/)
