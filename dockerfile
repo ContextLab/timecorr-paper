@@ -48,10 +48,6 @@ RUN sed -i 's/^#force_color_prompt=yes/force_color_prompt=yes/' /etc/skel/.bashr
         ipython=7.16.1 \
         ipywidgets=7.5.1 \
         jinja2=2.11.2 \
-        jupyter=1.0.0 \
-        jupyter_client=5.0.1 \
-        jupyter_console=5.1.0 \
-        jupyter_core=4.3.0 \
         libedit=3.1.20181209=hc058e9b_0 \
         libffi=3.2.1=hd88cf55_4 \
         libgcc-ng=8.2.0=hdf63c60_1 \
@@ -75,16 +71,16 @@ RUN sed -i 's/^#force_color_prompt=yes/force_color_prompt=yes/' /etc/skel/.bashr
         setuptools=40.8.0=py36_0 \
         sqlite=3.27.2=h7b6447c_0 \
         terminado=0.9.1 \
-        tini=0.18.0 \
         tk=8.6.8=hbc83047_0 \
         tornado=6.0.4 \
         traitlets=4.3.3 \
         wheel=0.33.1=py36_0 \
-        widgetsnbextension=2.0.0 \
+        widgetsnbextension=3.5.1 \
         xz=5.2.4=h14c3975_4 \
         zlib=1.2.11=h7b6447c_3 \
-    && conda clean -afy \
-    && pip install \
+    && conda clean -tipsy
+
+RUN pip install \
         alabaster==0.7.12 \
         babel==2.6.0 \
         biopython==1.74 \
@@ -160,7 +156,3 @@ RUN sed -i 's/^#force_color_prompt=yes/force_color_prompt=yes/' /etc/skel/.bashr
     && echo "c.FileContentsManager.delete_to_trash = False" >> /root/.jupyter/jupyter_notebook_config.py
 
 WORKDIR $WORKDIR
-
-ENTRYPOINT ["tini", "-g", "--"]
-
-CMD ["jupyter", "notebook"]
