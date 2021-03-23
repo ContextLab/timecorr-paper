@@ -78,9 +78,8 @@ RUN sed -i 's/^#force_color_prompt=yes/force_color_prompt=yes/' /etc/skel/.bashr
         widgetsnbextension=3.5.1 \
         xz=5.2.4=h14c3975_4 \
         zlib=1.2.11=h7b6447c_3 \
-    && conda clean -tipsy
-
-RUN pip install \
+    && conda clean -tipsy \
+    && pip install \
         alabaster==0.7.12 \
         babel==2.6.0 \
         biopython==1.74 \

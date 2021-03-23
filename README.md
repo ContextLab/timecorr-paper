@@ -26,7 +26,7 @@ We also include a Dockerfile to reproduce our computational environment. Instruc
     - [Debian](https://docs.docker.com/engine/installation/linux/docker-ce/debian/)
 2. Launch Docker and adjust the preferences to allocate sufficient resources (e.g. > 4GB RAM)
 3. Build the docker image by opening a terminal in this repo folder and enter `docker build -t timecorr_paper .`  
-4. Use the image to create a new container for the workshop
+4. Use the image to create a new container
     - The command below will create a new container that will map your local copy of the repository to `/mnt` within the container, so that location is shared between your host OS and the container. The command will also share port `9999` with your host computer so any jupyter notebooks launched from *within* the container will be accessible in your web browser.
     - `docker run -it -p 9999:9999 --name Timecorr_paper -v $PWD:/mnt timecorr_paper `
     - You should now see the `root@` prefix in your terminal, if so you've successfully created a container and are running a shell from *inside*!
