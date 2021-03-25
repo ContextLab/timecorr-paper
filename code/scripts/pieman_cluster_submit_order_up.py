@@ -20,8 +20,7 @@ except:
 # each job command should be formatted as a string
 job_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pieman_cluster_order_up.py')
 
-cond_type = ['intact', 'paragraph', 'word', 'rest']
-#cond_type = ['paragraph']
+cond_type = ['all']
 
 # options for levels: integer
 levels = str('4')
@@ -49,7 +48,7 @@ param_grid = [(c, r, wi, we) for c in cfuns for r in rfuns for wi in widths for 
 
 job_commands = list(np.array([list(map(lambda x: x[0]+" "+str(x[1])+" "+levels+
                                                  " "+e[0]+" "+e[1]+" "+e[2]+" "+e[3],
-                                       zip([job_script]*len(cond_type), cond_type)))
+                                       zip([job_script]*1, cond_type)))
                               for i, e in enumerate(param_grid)]).flat)
 
 # job_names should specify the file name of each script (as a list, of the same length as job_commands)
