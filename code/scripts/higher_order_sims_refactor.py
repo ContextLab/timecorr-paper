@@ -5,22 +5,23 @@ import sys
 import os
 from config import config
 import timecorr as tc
-import nltools
 from matplotlib import pyplot as plt
 import seaborn as sns
 
-cond= sys.argv[1]
+sim_function = sys.argv[1]
 r = sys.argv[2] #reps
 
 F = int(sys.argv[3]) #number of features
 T = int(sys.argv[4]) #number of timepoints
 K = 2 #order
+W = int(sys.argv[5])
+wp = sys.argv[6]
 
-fname = cond + '_' + str(F) + '_' + str(T) + '_' + str(K)
+fname = sim_function + '_' + str(F) + '_' + str(T) + '_' + str(W) + '_' + wp
 
-width = 500
 
-results_dir = os.path.join(config['resultsdir'], 'higher_order_sims_search', cond + '_' + str(T)+ '_' + str(F))
+results_dir = os.path.join(config['resultsdir'], 'higher_order_sims_search',
+                           sim_function + '_' + str(T)+ '_' + str(F)+ '_' + str(W))
 
 try:
     if not os.path.exists(results_dir):
@@ -37,8 +38,11 @@ def expanded_vec2mat(v):
   return x
 
 
-laplace = {'name': 'Laplace', 'weights': tc.laplace_weights, 'params': {'scale': width}}
-gaussian = {'name': 'Gaussian', 'weights': tc.gaussian_weights, 'params': {'var': width}}
+laplace = {'name': 'Laplace', 'weights': tc.laplace_weights, 'params': {'scale': W}}
+gaussian = {'name': 'Gaussian', 'weights': tc.gaussian_weights, 'params': {'var': W}}
+mexican_hat = {'name': 'Mexican hat', 'weights': tc.mexican_hat_weights, 'params': {'sigma': W}}
+
+weights_paramter = eval(wp)
 
 eye_params = {}
 
@@ -177,7 +181,7 @@ if not os.path.exists(save_file):
 
     recovery_performance_all = pd.DataFrame()
 
-    templates = generate_templates(order=K, S=1, T=T, K=F, datagen=cond)
+    templates = generate_templates(order=K, S=1, T=T, K=F, datagen=sim_function)
     #templates = generate_templates_refactor(order=K, cov_list=['blocky', 'toeplitz'], S=1, T=T, K=F, datagen=cond)
 
     # t_mat_1 = tc.vec2mat(templates[0])
@@ -193,23 +197,24 @@ if not os.path.exists(save_file):
     recovery_performance = pd.DataFrame(index=np.arange(T), columns=np.arange(1, K+1))
     recovery_performance.index.name = 'time'
     recovery_performance.columns.name = 'order'
-    recovery_performance_adj_temps = pd.DataFrame(index=np.arange(T), columns=np.arange(1, K+1))
-    recovery_performance_adj_temps.index.name = 'time'
-    recovery_performance_adj_temps.columns.name = 'order'
+    # recovery_performance_adj_temps = pd.DataFrame(index=np.arange(T), columns=np.arange(1, K+1))
+    # recovery_performance_adj_temps.index.name = 'time'
+    # recovery_performance_adj_temps.columns.name = 'order'
     next_data = data
     recovered_corrs_raw = []
     recovered_corrs_smooth = []
 
     for k in np.arange(1, K+1):
-      #next_recovered_smooth = tc.timecorr(next_data, weights_function=laplace['weights'], weights_params=laplace['params'])
-      next_recovered_smooth = tc.timecorr(next_data, weights_function=gaussian['weights'],weights_params=gaussian['params'])
+      next_recovered_smooth = tc.timecorr(next_data, weights_function=weights_paramter['weights'],
+                                    weights_params=weights_paramter['params'])
+
       next_recovered_raw = tc.timecorr(next_data, weights_function=eye_weights, weights_params=eye_params)
       recovered_corrs_smooth.append(next_recovered_smooth)
       F_new = get_f(next_recovered_smooth.shape[1])
       for t in np.arange(T):
         recovery_performance.loc[t, k] = np.corrcoef(templates[k-1][t, F_new:], next_recovered_smooth[t, F_new:])[0, 1]
-        recovery_performance_adj_temps.loc[t, k] = np.corrcoef(adjusted_templates[k - 1][t, F_new:], next_recovered_smooth[t, F_new:])[
-            0, 1]
+        # recovery_performance_adj_temps.loc[t, k] = np.corrcoef(adjusted_templates[k - 1][t, F_new:], next_recovered_smooth[t, F_new:])[
+        #     0, 1]
 
 
 
@@ -235,21 +240,21 @@ if not os.path.exists(save_file):
 
       next_data = expanded_vec2mat(next_recovered_raw)
 
-    # recovery_performance.columns = [str(x + 1) for x in np.arange(K)]
-    # recovery_performance['iteration'] = int(r)
-    # recovery_performance_all = recovery_performance_all.append(recovery_performance)
+    recovery_performance.columns = [str(x + 1) for x in np.arange(K)]
+    recovery_performance['iteration'] = int(r)
+    recovery_performance_all = recovery_performance_all.append(recovery_performance)
 
     print(recovery_performance)
     plt.clf()
-    plt.plot(recovery_performance[1])
-    plt.plot(recovery_performance[2])
+    plt.plot(recovery_performance['1'])
+    plt.plot(recovery_performance['2'])
     plt.show()
-    recovery_performance.to_csv(save_file + '.csv')
+    #recovery_performance.to_csv(save_file + '.csv')
 
-# if not os.path.isfile(save_file + '.csv'):
-#     recovery_performance.to_csv(save_file + '.csv')
-# else:
-#     append_iter = pd.read_csv(save_file + '.csv', index_col=0)
-#     append_iter = append_iter.append(recovery_performance)
-#     append_iter.to_csv(save_file + '.csv')
+    if not os.path.isfile(save_file + '.csv'):
+        recovery_performance.to_csv(save_file + '.csv')
+    else:
+        append_iter = pd.read_csv(save_file + '.csv', index_col=0)
+        append_iter = append_iter.append(recovery_performance)
+        append_iter.to_csv(save_file + '.csv')
 
