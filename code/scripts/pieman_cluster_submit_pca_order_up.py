@@ -18,57 +18,44 @@ except:
     os.makedirs(config['resultsdir'])
 
 # each job command should be formatted as a string
-job_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'higher_order_sims_refactor.py')
+job_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pieman_cluster_pca_order_up.py')
 
+cond_type = ['all']
+
+# options for levels: integer
+levels = str('4')
 
 # options for reps: integer
-reps =  str('10')
+reps =  str('1')
 
-cond_type = ['ramping']
-#cond_type = ['paragraph']
+# options for reps: cfuns
+cfuns =  [str('isfc')]
 
-# options for features: integer
-#features = [str(5), str(10), str(20)]
-features = [str(10)]
-
-# options for times: integer
-#times = [str(10), str(50), str(100), str(500)]
-
-times = [str(100)]
+# options for reps: rfuns
+#rfuns =  [str('eigenvector_centrality'), str('pagerank_centrality'), str('strength')]
+rfuns =  [str('eigenvector_centrality'), str('PCA')]
 
 # options for widths: integer
-#widths = [str(5), str(10), str(20), str(50)]
-widths = [str(20)]
+widths = [str(5), str(10), str(20), str(50)]
 
-# options for weight_fun: str
-weight_fun = ['laplace']
-
-
-param_grid = [(fs, ts, wi, wf, re) for fs in features for ts in times for wi in widths for wf in weight_fun for re in range(int(reps))]
+# options for weight functions: laplace, gaussian, mexican hat, delta
+weights = ['laplace']
 
 
+param_grid = [(c, r, wi, we) for c in cfuns for r in rfuns for wi in widths for we in weights]
 
-job_commands = list(np.array([list(map(lambda x: x[0]+" "+str(x[1]) +" "+str(e[4]) +" "+e[0]+" "+e[1]+" "+e[2]+" "+e[3],
-                                       zip([job_script]*len(cond_type), cond_type)))
+
+
+job_commands = list(np.array([list(map(lambda x: x[0]+" "+str(x[1])+" "+levels+
+                                                 " "+e[0]+" "+e[1]+" "+e[2]+" "+e[3],
+                                       zip([job_script]*1, cond_type)))
                               for i, e in enumerate(param_grid)]).flat)
 
 # job_names should specify the file name of each script (as a list, of the same length as job_commands)
-job_names = list(np.array([list(map(lambda x: os.path.basename(os.path.splitext(x)[0])+'_'+str(e[4])+'_'
-                                              +e[0]+'_'+e[1]+'_'+e[2]+'_'+e[3]+'_higher_order_sim.sh', cond_type))
+job_names = list(np.array([list(map(lambda x: os.path.basename(os.path.splitext(x)[0])+'_'+levels+'_'
+                                              +e[0]+'_'+e[1]+'_'+e[2]+'_'+e[3]+'.sh', cond_type))
                            for i, e in enumerate(param_grid)]).flat)
 
-
-
-# cond_type = ['random']
-#
-# job_commands = list(np.array([list(map(lambda x: x[0]+" "+str(x[1])+" "+str(r),
-#                                        zip([job_script]*len(cond_type), cond_type)))
-#                               for r in range(int(reps))]).flat)
-#
-# # job_names should specify the file name of each script (as a list, of the same length as job_commands)
-# job_names = list(np.array([list(map(lambda x: os.path.basename(os.path.splitext(x)[0])+'_'+str(r)+
-#                                               '_higher_order_sim.sh', cond_type))
-#                            for r in range(int(reps))]).flat)
 
 
 # ====== MODIFY ONLY THE CODE BETWEEN THESE LINES ======
