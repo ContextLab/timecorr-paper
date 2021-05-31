@@ -1,3 +1,4 @@
+## this calculates the raw eigenvector cenrality values for each level
 
 import timecorr as tc
 from timecorr.helpers import isfc, reduce, autofc
