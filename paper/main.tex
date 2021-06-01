@@ -342,7 +342,7 @@ procedure at lower orders necessarily propagate to higher orders
 (since lower-order correlations are used to estimate higher-order
 correlations).  Conversely, when the correlations were particularly
 \textit{un}stable (random datasets), we better recovered second-order
-correlations.  This is because noise in our \textit{data generation}
+correlations.  This is because noises in our \textit{data generation}
 procedure propagates from higher orders to lower orders (see
 \textit{Synthetic data: simulating dynamic high-order correlations}).
 
@@ -370,7 +370,13 @@ procedure propagates from higher orders to lower orders (see
     matrices at the first and last timepoints.  \textbf{Event.}  These datasets are each generated using five
     randomly drawn second-order correlation matrices that each remain
     stable for a fifth of the total timecourse.  The
-    vertical lines denote event boundaries.}
+    vertical lines denote event boundaries.  Note that the ``dips''
+    and ``ramps'' at the boundaries of sharp transitions (e.g., the
+    beginning and ends of the ``constant'' and ``ramping'' datasets,
+    and at the event boundaries of the ``event'' datasets) are
+    finite-sample effects that reflect the reduced numbers of samples
+    that may be used to accurately estimate correlations at sharp
+    boundaries.}
   \label{fig:higher_order_sims}
 \end{figure}
 
