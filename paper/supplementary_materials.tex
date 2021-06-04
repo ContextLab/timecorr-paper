@@ -107,6 +107,51 @@
 \label{fig:supp_widths}
 \end{figure}
 
+
+\begin{figure}[p!]
+\centering
+\includegraphics[width=0.95\textwidth]{figs/sim_heatmaps_time}
+  \caption{\textbf{Recovery heatmap of simulated first-order and
+      second-order dynamic correlations across time and widths.}  Each panel displays a
+    heatmap of the average correlations
+    between the vectorized upper triangles of the recovered
+    first-order and second-order correlation matrices and the true
+    (simulated) first-order and second order correlation matrices.
+    The averages are taken across several randomly generated
+    synthetic datasets for each timeseries pattern (constant, random,
+    ramping, and data; see \textit{Synthetic data: simulating dynamic higher-order
+      correlations}).  The $x$-axes of each heatmap denote varying
+    Laplace-shaped kernel widths (see Figs.~\ref{fig:supp_kernels}
+    and~\ref{fig:supp_widths}), and the $y$-axes of each heatmap
+    denote varying durations (in samples) of the synthetic datasets.
+    A total of 10 synthetic datasets were generated for each duration
+    (row) and timeseries pattern (panel).}
+\label{fig:time}
+\end{figure}
+
+
+\begin{figure}[p!]
+\centering
+\includegraphics[width=0.95\textwidth]{figs/sim_heatmaps_features}
+  \caption{\textbf{Recovery heatmap of simulated first-order and
+      second-order dynamic correlations across features and widths.}  Each panel displays a
+    heatmap of the average correlations
+    between the vectorized upper triangles of the recovered
+    first-order and second-order correlation matrices and the true
+    (simulated) first-order and second order correlation matrices.
+    The averages are taken across several randomly generated
+    synthetic datasets for each timeseries pattern (constant, random,
+    ramping, and data; see \textit{Synthetic data: simulating dynamic higher-order
+      correlations}).  The $x$-axes of each heatmap denote varying
+    Laplace-shaped kernel widths (see Figs.~\ref{fig:supp_kernels}
+    and~\ref{fig:supp_widths}), and the $y$-axes of each heatmap
+    denote varying numbers of features ($K$) used in each of the synthetic datasets.
+    A total of 10 synthetic datasets were generated for each number of features
+    (row) and timeseries pattern (panel).}
+\label{fig:features}
+\end{figure}
+
+
 \begin{figure}[p!]
 \centering
 \includegraphics[width=0.75\textwidth]{figs/supp_15_intact}
@@ -189,7 +234,7 @@ bottom row, in the main text.)}
 
 \newpage
 \renewcommand{\refname}{Supplementary references}
-\bibliography{CDL-bibliography/memlab}
+\bibliography{CDL-bibliography/cdl}
 
 
 \end{document}

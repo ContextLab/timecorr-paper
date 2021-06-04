@@ -8,17 +8,17 @@ import os
 from config import config
 
 
-level = sys.argv[1]
-cfun = sys.argv[2]
-rfun = sys.argv[3]
-width = int(sys.argv[4])
+level = sys.argv[2]
+cfun = sys.argv[3]
+rfun = sys.argv[4]
+width = int(sys.argv[5])
 
 laplace = {'name': 'Laplace', 'weights': tc.laplace_weights, 'params': {'scale': width}}
 delta = {'name': '$\delta$', 'weights': tc.eye_weights, 'params': tc.eye_params}
 gaussian = {'name': 'Gaussian', 'weights': tc.gaussian_weights, 'params': {'var': width}}
 mexican_hat = {'name': 'Mexican hat', 'weights': tc.mexican_hat_weights, 'params': {'sigma': width}}
 
-smooth = sys.argv[5]
+smooth = sys.argv[6]
 raw = 'delta'
 
 smooth_parameter = eval(smooth)
