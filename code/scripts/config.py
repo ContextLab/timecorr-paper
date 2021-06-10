@@ -7,7 +7,8 @@ config['template'] = 'run_job.sh'
 
 # ====== MODIFY ONLY THE CODE BETWEEN THESE LINES ======
 if (socket.gethostname() == 'Lucys-MacBook-Pro-3.local') or (socket.gethostname() == 'vertex.kiewit.dartmouth.edu') or \
-        (socket.gethostname() == 'vertex.local')or (socket.gethostname() == 'vpn-two-factor-general-230-141-43.dartmouth.edu'):
+        (socket.gethostname() == 'vertex.local')or (socket.gethostname() == 'vpn-two-factor-general-231-129-248.dartmouth.edu')\
+        or (socket.gethostname() == 'vpn-investment-office-231-130-116.dartmouth.edu'):
     config['datadir'] = '/Users/lucyowen/Desktop/timecorr_env/timecorr_paper/pieman/data'
     config['workingdir'] = '/Users/lucyowen/Desktop/timecorr_env/timecorr_paper/pieman'
     config['startdir'] = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))  # directory to start the job in
