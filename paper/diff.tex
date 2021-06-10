@@ -1,7 +1,7 @@
 \documentclass[english]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL old.tex    Wed Jan 13 12:48:03 2021
-%DIF ADD main.tex   Wed Jun  9 14:20:56 2021
+%DIF ADD main.tex   Thu Jun 10 00:11:03 2021
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{hyperref}
@@ -407,7 +407,7 @@ Eqns.~\ref{eqn:corr} and \ref{eqn:timecorr}).
 When the correlation dynamics were unstructured in time
 (Fig.~\ref{fig:synthetic}b), a Dirac $\delta$ kernel (infinitely
 narrow) performed best.  This is because, when every timepoint's
-correlations are independent of the correlations at every other
+correlations are independent \DIFdelbegin \DIFdel{of }\DIFdelend \DIFaddbegin \DIFadd{from }\DIFaddend the correlations at every other
 timepoint, averaging data over time dilutes the available signal.
 Following a similar pattern, holding kernel shape fixed, narrower
 kernel parameters better recovered randomly varying correlations.
@@ -439,7 +439,7 @@ that }\DIFdelend \DIFaddbegin \DIFadd{This is because }\DIFaddend errors in our 
 correlations).  \DIFdelbegin \DIFdel{Interestingly, we also found
 that }\DIFdelend \DIFaddbegin \DIFadd{Conversely, }\DIFaddend when the correlations were particularly
 \textit{un}stable (random datasets), we better recovered second-order
-correlations.  \DIFaddbegin \DIFadd{This is because noises in our }\textit{\DIFadd{data generation}}
+correlations.  \DIFaddbegin \DIFadd{This is because noise in our }\textit{\DIFadd{data generation}}
 \DIFadd{procedure propagates from higher orders to lower orders (see
 }\textit{\DIFadd{Synthetic data: simulating dynamic high-order correlations}}\DIFadd{).
 }\DIFaddend 
