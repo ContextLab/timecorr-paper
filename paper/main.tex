@@ -1218,8 +1218,11 @@ timeseries.  If the $n$\textsuperscript{th}-order correlation matrix
 at a given timepoint is $m_n$, then we can generate an order $n-1$
 correlation matrix (for $n > 1$) by taking a draw from
 $\mathcal{N}\left(0, m_n\right)$ and reshaping the resulting vector to
-have square dimensions.  Intuitively, the re-shaped matrix will look
-like a noisy version of the template matrix, $m_{n-1}$.  (When
+have square dimensions.  To force the resulting matrix to be
+symmetric, we remove its lower triangle, and replace the lower
+triangle with (a reflected version
+of) its upper triangle.  Intuitively, the resulting re-shaped matrix will look
+like a noisy (but symmetric) version of the template matrix, $m_{n-1}$.  (When
 $n = 1$, no re-shaping is needed; the resulting $K$-dimensional vector
 may be used as the observation at the given timepoint.)  After
 independently drawing each timepoint's order $n-1$ correlation matrix
