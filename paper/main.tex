@@ -465,9 +465,10 @@ activity dynamics.
     the maximum decoding accuracy within each experimental condition.
     \textbf{b.~Normalized timepoint decoding accuracy as a function of order:
       PCA.}  This panel displays the same results as Panel a, but here
-    each curve has been normalized to have a maximum value of 1 and a
-    minimum value of 0 (including the upper and lower bounds of the
-    respective 95\% confidence intervals).  Panels a and b used PCA to
+    each curve has been normalized to be bounded between 0 and 1
+    (inclusive) by subtracting the minimum accuracy
+    (across all folds and orders) and then dividing by the maximum
+    accuracy (again, across all folds and orders).  Panels a and b used PCA to
     project each high-dimensional pattern of dynamic correlations onto
     a lower-dimensional space.  \textbf{c.~Timepoint decoding accuracy as a
       function of order: eigenvector centrality.} This panel is in the
