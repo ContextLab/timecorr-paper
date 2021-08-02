@@ -271,7 +271,7 @@ different synthetic datasets in a kernel-dependent way.
     recovered correlation matrix at each timepoint and either the true
     underlying correlation at each timepoint or a reference
     correlation matrix.  (The averages are taken across 100 different
-    randomly generated synthetic datasets of the given category, each
+    randomly generated synthetic datasets of each given category, each
     with $K = 50$ features and $T = 300$ timepoints.)
     Error ribbons denote 95\% confidence intervals of the mean (taken across
     datasets). Different colors denote different kernel shapes, and
@@ -356,7 +356,7 @@ Synthetic data: simulating dynamic high-order correlations).
     first-order and second-order correlation matrices and the true
     (simulated) first-order and second order correlation matrices at each
     timepoint and for each synthetic dataset.  (The averages are taken across 100 different
-    randomly generated synthetic datasets of the given category, each
+    randomly generated synthetic datasets of each given category, each
     with $K = 10$ features and $T = 300$ timepoints.)
     Error ribbons denote 95\% confidence intervals of the mean (taken across
     datasets).  For a complete description of each synthetic dataset,
@@ -1147,7 +1147,7 @@ $\mathbf{\Sigma}_m$:
   
   \paragraph*{Ramping.}  We generated a third set of 100 synthetic
   datasets whose underlying correlations changed gradually over time.
-  For each dataset, we constructed two``anchor'' covariance
+  For each dataset, we constructed two ``anchor'' covariance
   matrices using Equation~\ref{eqn:randcorr},
   $\mathbf{\Sigma}_{\mathrm{start}}$ and
   $\mathbf{\Sigma}_{\mathrm{end}}$.  For each of the 300 timepoints in
@@ -1484,7 +1484,8 @@ study as well as the source data for this paper are available at \href{https://g
 
 \section*{Code Availability}
 
-All of our analysis code may be downloaded from \href{https://github.com/ContextLab/timecorr-paper/releases/tag/v0.3}{github.com/ContextLab/timecorr-paper/releases/tag/v0.3}.
+All of our analysis code may be downloaded from
+\href{https://github.com/ContextLab/timecorr-paper/releases/tag/v0.3}{github.com/ContextLab/timecorr-paper/releases/tag/v0.3}. We have also published a companion Python toolbox that may be downloaded from \href{https://timecorr.readthedocs.io}{timecorr.readthedocs.io}.
 
 
 \section*{Acknowledgements}
