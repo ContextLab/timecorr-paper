@@ -272,7 +272,7 @@ different synthetic datasets in a kernel-dependent way.
     underlying correlation at each timepoint or a reference
     correlation matrix.  (The averages are taken across 100 different
     randomly generated synthetic datasets of the given category.)
-    Error ribbons denote 95\% confidence intervals (taken across
+    Error ribbons denote 95\% confidence intervals of the mean (taken across
     datasets). Different colors denote different kernel shapes, and
     the shading within each color family denotes the kernel width
     parameter.  For a complete description of each synthetic dataset,
@@ -356,7 +356,7 @@ Synthetic data: simulating dynamic high-order correlations).
     (simulated) first-order and second order correlation matrices at each
     timepoint and for each synthetic dataset.  (The averages are taken across 100 different
     randomly generated synthetic datasets of the given category.)
-    Error ribbons denote 95\% confidence intervals (taken across
+    Error ribbons denote 95\% confidence intervals of the mean (taken across
     datasets).  For a complete description of each synthetic dataset,
     see Synthetic data: simulating dynamic higher-order
       correlations.  All estimates represented in this figure were
@@ -377,7 +377,7 @@ Synthetic data: simulating dynamic high-order correlations).
     and at the event boundaries of the ``event'' datasets) are
     finite-sample effects that reflect the reduced numbers of samples
     that may be used to accurately estimate correlations at sharp
-    boundaries.}
+    boundaries. Source data are provided as a Source Data file.}
   \label{fig:higher_order_sims}
 \end{figure}
 
@@ -452,7 +452,7 @@ activity dynamics.
     word: $\frac{1}{300}$; rest: $\frac{1}{400}$; these chance accuracies
     were subtracted from the observed accuracies to obtain the
     relative accuracies reported on the $y$-axis).  The error ribbons
-    denote 95\% confidence intervals across cross-validation folds
+    denote 95\% confidence intervals of the means across cross-validation folds
     (i.e., random assignments of participants to the training and test
     sets).  The colors denote the experimental condition.  Arrows
     denote sets of features that yielded reliably higher (upward
@@ -466,7 +466,7 @@ activity dynamics.
       PCA.  This panel displays the same results as Panel a, but here
     each curve has been normalized to have a maximum value of 1 and a
     minimum value of 0 (including the upper and lower bounds of the
-    respective 95\% confidence intervals).  Panels a and b used PCA to
+    respective 95\% confidence intervals of the mean).  Panels a and b used PCA to
     project each high-dimensional pattern of dynamic correlations onto
     a lower-dimensional space. c.~Timepoint decoding accuracy as a
       function of order: eigenvector centrality. This panel is in the
@@ -477,7 +477,9 @@ activity dynamics.
       eigenvector centrality. This panel is in the same format as
     Panel b, but here eigenvector centrality has been used to project
     the high-dimensional patterns of dynamic correlations onto a
-    lower-dimensional space. See Figures~\kernelshape~and~\kernelwidth~for decoding results broken down by kernel shape and width, respectively.}
+    lower-dimensional space. See
+    Figures~\kernelshape~and~\kernelwidth~for decoding results broken
+    down by kernel shape and width, respectively. Source data are provided as a Source Data file.}
   \label{fig:decoding}
 \end{figure}
 
@@ -538,7 +540,7 @@ centrality, but did not preserve the underlying activity dynamics
   denote the corresponding $p$-values for the $t$-tests.  The diagonal
   entries display the relative average optimized weight given to each type of feature in
   a decoder that included all feature types (see Feature
-    weighting and testing).}
+    weighting and testing). Source data are provided as a Source Data file.}
 \label{fig:ttests}
 \end{figure}
 
@@ -597,7 +599,7 @@ different brain areas occupy in their associated networks
     experimental condition.  Additional maps and their corresponding
     Neurosynth terms may be found in the Supplementary
       materials (intact: Fig.~\intact; paragraph: Fig.~\para; word:
-    Fig.~\word; rest: Fig.~\rest).}
+    Fig.~\word; rest: Fig.~\rest). Source data are provided as a Source Data file.}
   \label{fig:neurosynth}
 \end{figure}
 
