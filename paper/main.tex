@@ -1147,7 +1147,7 @@ $\mathbf{\Sigma}_m$:
   
   \paragraph*{Ramping.}  We generated a third set of 100 synthetic
   datasets whose underlying correlations changed gradually over time.
-  For each dataset, we constructed two anchor covariance
+  For each dataset, we constructed two``anchor'' covariance
   matrices using Equation~\ref{eqn:randcorr},
   $\mathbf{\Sigma}_{\mathrm{start}}$ and
   $\mathbf{\Sigma}_{\mathrm{end}}$.  For each of the 300 timepoints in
@@ -1220,8 +1220,11 @@ timeseries.  If the $n$\textsuperscript{th}-order correlation matrix
 at a given timepoint is $m_n$, then we can generate an order $n-1$
 correlation matrix (for $n > 1$) by taking a draw from
 $\mathcal{N}\left(0, m_n\right)$ and reshaping the resulting vector to
-have square dimensions.  Intuitively, the re-shaped matrix will look
-like a noisy version of the template matrix, $m_{n-1}$.  (When
+have square dimensions.  To force the resulting matrix to be
+symmetric, we remove its lower triangle, and replace the lower
+triangle with (a reflected version
+of) its upper triangle. Intuitively, the re-shaped matrix will look
+like a noisy (but symmetric) version of the template matrix, $m_{n-1}$.  (When
 $n = 1$, no re-shaping is needed; the resulting $K$-dimensional vector
 may be used as the observation at the given timepoint.)  After
 independently drawing each timepoint's order $n-1$ correlation matrix
@@ -1234,9 +1237,15 @@ correlations, we constructed a total of 400 additional multivariate
 timeseries, collectively reflecting a total of 4 qualitatively
 different patterns of dynamic correlations (i.e., 100 datasets
 reflecting each type of dynamic pattern: constant, random, ramping,
-and event).  Each timeseries comprised 10 features (dimensions)
-that varied over 300 timepoints for first-order correlations, and
-therefore 100 second-order features. 
+and event).   Each timeseries comprised 10 zero-order features (dimensions)
+that varied over 300 timepoints.  After applying our dynamic
+correlation estimation procedure, this yielded a 100-dimensional
+timeseries of first-order
+features that could then be used to estimate dynamic second-order
+correlations.  (We chose to use $K=10$ zero-order features for our
+higher order simulations in order to put the accuracy computations
+displayed in Figs.~\ref{fig:synthetic} and~\ref{fig:higher_order_sims}
+on a roughly even footing.)
 
  
 \subsubsection*{Functional neuroimaging data collected during story
@@ -1252,7 +1261,9 @@ paragraphs in a randomized order and 36 in the word-scrambled
 condition listened to the words in a randomized order), or lay resting
 with their eyes open in the scanner (rest condition; 36
 participants).  Full neuroimaging details may be found in the original
-paper for which the data were collected~\citep{SimoEtal16}. Procedures were approved by the Princeton University Committee on Activities Involving Human Subjects, and by Western Institutional Review Board (Puyallup, WA). All subjects were native English speakers with normal hearing and provided written informed consent.
+paper for which the data were collected~\citep{SimoEtal16}. Procedures
+were approved by the Princeton University Committee on Activities
+Involving Human Subjects, and by the Western Institutional Review Board (Puyallup, WA). All subjects were native English speakers with normal hearing and provided written informed consent.
 
 \paragraph{Hierarchical topographic factor analysis (HTFA).}
 Following our prior related work, we used HTFA~\citep{MannEtal18} to
@@ -1473,7 +1484,7 @@ study as well as the source data for this paper are available at \href{https://g
 
 \section*{Code Availability}
 
-All of our analysis code may be downloaded from\href{https://github.com/ContextLab/timecorr-paper/releases/tag/v0.3}{github.com/ContextLab/timecorr-paper/releases/tag/v0.3}.
+All of our analysis code may be downloaded from \href{https://github.com/ContextLab/timecorr-paper/releases/tag/v0.3}{github.com/ContextLab/timecorr-paper/releases/tag/v0.3}.
 
 
 \section*{Acknowledgements}
