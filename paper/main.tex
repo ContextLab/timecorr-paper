@@ -250,7 +250,7 @@ classifiers trained on different sets of neural features to estimate
 which types of features reflected ongoing cognitive processing.
 
 
-\subsection*{Recovering dynamic first-order correlations}
+\subsection*{Recovering known dynamic first-order correlations}
 We generated synthetic datasets that differed in how the underlying first-order
 correlations changed over time.  For each dataset, we applied
 Equation~\ref{eqn:timecorr} with a variety of kernel shapes and
@@ -271,7 +271,8 @@ different synthetic datasets in a kernel-dependent way.
     recovered correlation matrix at each timepoint and either the true
     underlying correlation at each timepoint or a reference
     correlation matrix.  (The averages are taken across 100 different
-    randomly generated synthetic datasets of the given category.)
+    randomly generated synthetic datasets of the given category, each
+    with $K = 50$ features and $T = 300$ timepoints.)
     Error ribbons denote 95\% confidence intervals of the mean (taken across
     datasets). Different colors denote different kernel shapes, and
     the shading within each color family denotes the kernel width
@@ -317,7 +318,7 @@ timepoint, averaging data over time dilutes the available signal.
 Following a similar pattern, holding kernel shape fixed, narrower
 kernel parameters better recovered randomly varying correlations.
 
-\subsection*{Recovering dynamic higher-order correlations}
+\subsection*{Recovering known dynamic higher-order correlations}
 Following our approach to evaluating our ability to recover known
 dynamic first-order correlations from synthetic data, we generated an
 analogous second set of synthetic datasets that we designed to exhibit
@@ -343,7 +344,7 @@ procedure at lower orders necessarily propagate to higher orders
 (since lower-order correlations are used to estimate higher-order
 correlations).  Conversely, when the correlations were particularly
 unstable (random datasets), we better recovered second-order
-correlations.  This is because noises in our data generation
+correlations.  This is because noise in our data generation
 procedure propagates from higher orders to lower orders (see
 Synthetic data: simulating dynamic high-order correlations).
 
@@ -355,7 +356,8 @@ Synthetic data: simulating dynamic high-order correlations).
     first-order and second-order correlation matrices and the true
     (simulated) first-order and second order correlation matrices at each
     timepoint and for each synthetic dataset.  (The averages are taken across 100 different
-    randomly generated synthetic datasets of the given category.)
+    randomly generated synthetic datasets of the given category, each
+    with $K = 10$ features and $T = 300$ timepoints.)
     Error ribbons denote 95\% confidence intervals of the mean (taken across
     datasets).  For a complete description of each synthetic dataset,
     see Synthetic data: simulating dynamic higher-order
@@ -418,18 +420,18 @@ relevant neural patterns in fMRI data (see Forward inference
   and decoding accuracy).  The dataset we examined~\citep[collected
 by][]{SimoEtal16} comprised four experimental conditions that exposed
 participants to stimuli that varied systematically in how cognitively
-engaging they were.  The intact experimental condition had
+engaging they were.  The intact experimental condition (intact) had
 participants listen to an audio recording of a 10-minute story.  The
-paragraph-scrambled experimental condition had participants
+paragraph-scrambled experimental condition (paragraph) had participants
 listen to a temporally scrambled version of the story, where the
 paragraphs occurred out of order (but where the same total set of
 paragraphs were presented over the full listening interval).  All
 participants in this condition experienced the scrambled paragraphs in
-the same order.  The word-scrambled experimental condition
+the same order.  The word-scrambled experimental condition (word)
 had participants listen to a temporally scrambled version of the story
 where the words in the story occurred in a random order.  All
 participants in the word condition experienced the scrambled words in
-the same order.  Finally, in a rest experimental condition,
+the same order.  Finally, in a rest experimental condition (rest),
 participants lay in the scanner with no overt stimulus, with their
 eyes open (blinking as needed).  This public dataset provided a convenient
 means of testing our hypothesis that different levels of cognitive
@@ -442,7 +444,7 @@ activity dynamics.
   \caption{\textbf{Across-participant timepoint decoding accuracy varies with
        correlation order and cognitive engagement.}
      \textbf{a.~Decoding accuracy as a function of order: PCA.}
-    Order ($x$-axis) refers to the maximum order of dynamic
+   ``Order'' ($x$-axis) refers to the maximum order of dynamic
     correlations that were available to the classifiers (see
     Feature weighting and testing).  The reported
     across-participant decoding accuracies are averaged over all
@@ -717,6 +719,19 @@ multistability, etc. However, our decoding analyses do indicate that
 higher-order dynamics are consistent across individuals, and therefore
 unlikely to reflect non-stimulus-driven dynamics that are unlikely to
 be similar across individuals.
+
+One limitation of our approach relates to how noise propagates in our
+estimation procedure.  Specifically, our procedure for estimating
+high-order dynamic correlations depends on estimates of lower-order
+dynamic correlations.  This means that our measures of which
+higher-order patterns are reliable and stable across experimental
+conditions are partially confounded with the stability of lower-order
+patterns.  Prior work suggests that the stability of what we refer to
+here as first-order dynamics likely varies across the experimental
+conditions we examined~\citep{SimoEtal16}.  Therefore a caveat to our
+claim that richer stimuli evoke more stable higher-order dynamics is
+that our approach assumes that those high-order dynamics reflect
+relations or interactions between lower-order features.
 
 Another potential limitation of our approach relates to recent work
 suggesting that the brain undergoes rapid state changes, for example
@@ -1320,7 +1335,8 @@ $\mathbf{X}_1$, $\mathbf{X}_2$, $\mathbf{X}_3$, and so on.
     training or test sub-group, as appropriate). We repeat this
     process twice-- once using the analysis kernel (shown here as a
     Gaussian in the upper row of the panel), and once using a $\delta$
-    function kernel (lower row of the panel).  \textbf{b. Projecting
+    function kernel (lower row of the panel).
+    \textbf{b. Projecting
        dynamic correlations into a lower-dimensional space.}  We
     project the training and test data into $K$-dimensional spaces to
     create compact representations of dynamic correlations at the
