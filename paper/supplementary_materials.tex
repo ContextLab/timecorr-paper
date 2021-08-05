@@ -1,13 +1,17 @@
-\documentclass{article}
-\usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
-\usepackage[font=small,labelfont=bf]{caption}
-\usepackage{geometry}
-\usepackage{natbib}
-\usepackage{pxfonts}
+\documentclass[english]{article}
 \usepackage{graphicx}
-\usepackage{newfloat}
+\usepackage{amsmath}
+\usepackage{hyperref}
 \usepackage{setspace}
+\usepackage{hyperref}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage[sort&compress, numbers, super]{natbib}
+\usepackage{pxfonts}
+\usepackage[utf8]{inputenc}
+\usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
+\usepackage[left]{lineno}
+\usepackage{soul}
+\linenumbers
 %\doublespacing
 
 \newcommand{\argmax}{\mathop{\mathrm{argmax}}\limits}
@@ -24,7 +28,6 @@
   \textsuperscript{$\dagger$}Address correspondence to
   jeremy.r.manning@dartmouth.edu}
 
-\bibliographystyle{apa}
 
 \newcommand{\neurosynth}{6}
 
@@ -49,7 +52,8 @@
 \includegraphics[width=0.95\textwidth]{figs/decode_levels_kernels}
 \caption{\textbf{Across-participant timepoint decoding accuracy varies with
       correlation order and cognitive engagement across kernels.}
-    \textbf{a.-c.~Timepoint decoding accuracy as a function of order: PCA.} \textit{Order} ($x$-axis) refers to the maximum order of dynamic
+    \textbf{a.-c.~Timepoint decoding accuracy as a function of order:
+      PCA.} \textit{Order} ($x$-axis) refers to the maximum order of dynamic
     correlations that were available to the classifiers (see
     \textit{Feature weighting and testing}).  The reported
     across-participant decoding accuracies for \textbf{a. Gaussian},
@@ -58,13 +62,13 @@
       results}).  The $y$-values are displayed relative to chance
     accuracy (intact: $\frac{1}{300}$; paragraph: $\frac{1}{272}$;
     word: $\frac{1}{300}$; rest: $\frac{1}{400}$).  The error ribbons
-    denote 95\% confidence intervals across cross-validation folds
+    denote 95\% confidence intervals of the mean across cross-validation folds
     (i.e., random assignments of participants to the training and test
     sets).  The colors denote the experimental condition.  Arrows
     denote sets of features that yielded reliably higher (upward
     facing) or lower (downward facing) decoding accuracy than the mean
     of all other features (via a two-tailed $t$-test, thresholded at
-    $p < 0.05$).  The circled values represent
+    $p < 0.05$; exact values are reported in the Source Data file).  The circled values represent
     the maximum decoding accuracy within each experimental
     condition. Panels a.-c. used PCA to
     project each high-dimensional pattern of dynamic correlations onto
@@ -72,7 +76,7 @@
       function of order: eigenvector centrality.} These panels are in the
     same format as Panel a.-c., but here eigenvector centrality has been
     used to project the high-dimensional patterns of dynamic
-    correlations into lower-dimensional spaces.}
+    correlations into lower-dimensional spaces. Source data are provided as a Source Data file.}
 \label{fig:supp_kernels}
 \end{figure}
 
@@ -81,29 +85,30 @@
 \includegraphics[width=0.95\textwidth]{figs/decode_levels_widths}
 \caption{\textbf{Across-participant timepoint decoding accuracy varies with
       correlation order and cognitive engagement across widths.}
-    \textbf{a.-d.~Timepoint decoding accuracy as a function of order: PCA.} \textit{Order} ($x$-axis) refers to the maximum order of dynamic
+    \textbf{a.-d.~Timepoint decoding accuracy as a function of order:
+      PCA.} \textit{Order} ($x$-axis) refers to the maximum order of dynamic
     correlations that were available to the classifiers (see
-    \textit{Feature weighting and testing}).  The reported
+   \textit{Feature weighting and testing}).  The reported
     across-participant decoding accuracies for kernel widths of \textbf{a. 5},
     \textbf{b. 10}, \textbf{c. 20}, and \textbf{d. 50} are averaged over all
     kernel shapes (see \textit{Identifying robust decoding
       results}).  The $y$-values are displayed relative to chance
     accuracy (intact: $\frac{1}{300}$; paragraph: $\frac{1}{272}$;
     word: $\frac{1}{300}$; rest: $\frac{1}{400}$).  The error ribbons
-    denote 95\% confidence intervals across cross-validation folds
+    denote 95\% confidence intervals of the mean across cross-validation folds
     (i.e., random assignments of participants to the training and test
     sets).  The colors denote the experimental condition.  Arrows
     denote sets of features that yielded reliably higher (upward
     facing) or lower (downward facing) decoding accuracy than the mean
     of all other features (via a two-tailed $t$-test, thresholded at
-    $p < 0.05$).  The circled values represent
+    $p < 0.05$; exact values are reported in the Source Data file).  The circled values represent
     the maximum decoding accuracy within each experimental condition.  Panels a.-d. used PCA to
     project each high-dimensional pattern of dynamic correlations onto
     a lower-dimensional space.\textbf{e.-h.~Timepoint decoding accuracy as a
       function of order: eigenvector centrality.} These panels are in the
     same format as Panel a.-d., but here eigenvector centrality has been
     used to project the high-dimensional patterns of dynamic
-    correlations into lower-dimensional spaces.}
+    correlations into lower-dimensional spaces.  Source data are provided as a Source Data file.}
 \label{fig:supp_widths}
 \end{figure}
 
@@ -125,7 +130,7 @@
     and~\ref{fig:supp_widths}), and the $y$-axes of each heatmap
     denote varying durations (in samples) of the synthetic datasets.
     A total of 10 synthetic datasets were generated for each duration
-    (row) and timeseries pattern (panel).}
+    (row) and timeseries pattern (panel).  Source data are provided as a Source Data file.}
 \label{fig:time}
 \end{figure}
 
@@ -147,7 +152,7 @@
     and~\ref{fig:supp_widths}), and the $y$-axes of each heatmap
     denote varying numbers of features ($K$) used in each of the synthetic datasets.
     A total of 10 synthetic datasets were generated for each number of features
-    (row) and timeseries pattern (panel).}
+    (row) and timeseries pattern (panel). Source data are provided as a Source Data file.}
 \label{fig:features}
 \end{figure}
 
@@ -164,7 +169,7 @@ correlations at each order, projected onto the cortical
 surface~\citep{CombEtal19}.  The lists of terms display
 the top 10 Neurosynth terms~\citep{RubiEtal17} decoded from the
 corresponding brain maps for each order.  (Also see Fig.~\neurosynth,
-top row, in the main text.)}
+top row, in the main text.) Source data are provided as a Source Data file.}
 \label{fig:intact}
 \end{figure}
 
@@ -176,7 +181,7 @@ top row, in the main text.)}
     condition.}  This figure is in the same format as
   Figure~\ref{fig:intact}, but displays results for the
   paragraph-scrambled story listening condition.  (Also see Fig.~\neurosynth,
-second row, in the main text.)}
+second row, in the main text.) Source data are provided as a Source Data file.}
 \label{fig:paragraph}
 \end{figure}
 
@@ -188,7 +193,7 @@ second row, in the main text.)}
     condition.}  This figure is in the same format as
   Figure~\ref{fig:intact}, but displays results for the
   word-scrambled story listening condition.  (Also see Fig.~\neurosynth,
-third row, in the main text.)}
+third row, in the main text.) Source data are provided as a Source Data file.}
 \label{fig:word}
 \end{figure}
 
@@ -200,7 +205,7 @@ third row, in the main text.)}
     condition.}  This figure is in the same format as
   Figure~\ref{fig:intact}, but displays results for the
   resting state condition.  (Also see Fig.~\neurosynth,
-bottom row, in the main text.)}
+bottom row, in the main text.) Source data are provided as a Source Data file.}
 \label{fig:rest}
 \end{figure}
 
@@ -222,7 +227,7 @@ bottom row, in the main text.)}
     variance as a function of number of components for Orders 1.-4.: eigenvector centrality.} These panels are in the
     same format as Panel b.-e., but here eigenvector centrality has been
     used to project the high-dimensional patterns of dynamic
-    correlations onto a lower-dimensional space. }
+    correlations onto a lower-dimensional space. Source data are provided as a Source Data file.}
 \label{fig:pca}
 \end{figure}
 
@@ -234,6 +239,7 @@ bottom row, in the main text.)}
 
 \newpage
 \renewcommand{\refname}{Supplementary references}
+\bibliographystyle{naturemag}
 \bibliography{CDL-bibliography/cdl}
 
 

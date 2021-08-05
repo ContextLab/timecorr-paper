@@ -3,14 +3,15 @@
 \usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage{setspace}
-\usepackage{apacite}
 \usepackage{hyperref}
-\usepackage[sort]{natbib}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage[sort&compress, numbers, super]{natbib}
 \usepackage{pxfonts}
 \usepackage[utf8]{inputenc}
 \usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
 \usepackage[left]{lineno}
 \usepackage{soul}
+\usepackage[nofiglist, fighead]{endfloat}
 \linenumbers
 
 \newcommand{\kernelshape}{S1}
@@ -45,17 +46,17 @@
   brain structures that change with our ongoing experiences.
   High-order dynamic correlations in neural activity patterns reflect
   different subgraphs of the brain's functional connectome that display
-  homologous lower-level dynamic correlations.  We tested the
+  homologous lower-level dynamic correlations.  Here we test the
   hypothesis that high-level cognition is reflected in high-order
-  dynamic correlations in brain activity patterns.  We developed an
+  dynamic correlations in brain activity patterns.  We develop an
   approach to estimating high-order dynamic correlations in timeseries
-  data, and we applied the approach to neuroimaging data collected as
-  human participants either listened to a ten-minute story or listened
-  to a temporally scrambled version of the story.  We trained
+  data, and we apply the approach to neuroimaging data collected as
+  human participants either listen to a ten-minute story or listen
+  to a temporally scrambled version of the story.  We train
   across-participant pattern classifiers to decode (in held-out data)
   when in the session each neural activity snapshot was collected.  We
-  found that classifiers trained to decode from high-order dynamic
-  correlations yielded the best performance on data collected as
+  find that classifiers trained to decode from high-order dynamic
+  correlations yield the best performance on data collected as
   participants listened to the (unscrambled) story.  By contrast,
   classifiers trained to decode data from scrambled versions of the
   story yielded the best performance when they were trained using
@@ -69,7 +70,7 @@
 
 \section*{Introduction}
 A central goal in cognitive neuroscience is to elucidate the
-\textit{neural code}: the mapping between (a) mental states or
+neural code: i.e., the mapping between (a) mental states or
 cognitive representations and (b) neural activity patterns. One means
 of testing models of the neural code is to ask how accurately that
 model is able to ``translate'' neural activity patterns into known (or
@@ -95,7 +96,7 @@ interactions between brain structures~\citep{Gros88, Fris00, SporHone06, BassEta
 \begin{figure}[tp]
   \centering
   \includegraphics[width=\textwidth]{figs/patterns}
-  \caption{\textbf{Neural patterns.  a. A space of neural features.}
+  \caption{\textbf{Neural patterns. a. A space of neural features.}
     Within-brain analyses are carried out within a single brain,
     whereas across-brain analyses compare neural patterns across two
     or more individuals' brains.  Univariate analyses characterize the
@@ -106,7 +107,7 @@ interactions between brain structures~\citep{Gros88, Fris00, SporHone06, BassEta
     node-node interactions; order 2 (and higher) patterns relate to
     interactions between homologous networks.  Each of these patterns
     may be static (e.g., averaging over time) or dynamic.
-    \textbf{b. Summarizing neural patterns.}  To efficiently compute
+  \textbf{b. Summarizing neural patterns.} To efficiently compute
     with complex neural patterns, it can be useful to characterize the
     patterns using summary measures.  Dimensionality reduction
     algorithms project the patterns onto lower-dimensional spaces
@@ -126,7 +127,7 @@ brain structures;][]{MannEtal18, FongEtal19, LuriEtal18, PretEtal17,
 hold?  For example, is the neural code implemented through
 higher-order interactions between brain structures~\citep[e.g.,
 see][]{ReimEtal17}?  Second-order correlations reflect
-\textit{homologous} patterns of correlation.  In other words, if the
+homologous patterns of correlation.  In other words, if the
 dynamic patterns of correlations between two regions, $A$ and $B$, are
 similar to those between two other regions, $C$ and $D$, this would be
 reflected in the second-order correlations between ($A$--$B$) and
@@ -186,7 +187,7 @@ follows related approaches taken by][]{McInJirs19, TokeSomm19,
   GonzEtal19}; and a second non-invertible algorithm for computing
 dynamic patterns in eigenvector centrality~\citep{Land95}.  This
 latter approach characterizes correlations between each feature
-dimension's relative \textit{position} in the network (at each moment
+dimension's relative position in the network (at each moment
 in time) in favor of the specific activity histories of different
 features~\citep[also see][]{BetzEtal19, SizeEtal18, ReimEtal17}.
 
@@ -234,23 +235,22 @@ We sought to understand whether high-level cognition is reflected in
 dynamic patterns of high-order correlations.  To that end, we
 developed a computational framework for estimating the dynamics of
 stimulus-driven high-order correlations in multivariate timeseries
-data (see \textit{Dynamic inter-subject functional connectivity
-  (DISFC)} and \textit{Dynamic higher-order correlations}).  We
+data (see Dynamic inter-subject functional connectivity
+  (DISFC) and Dynamic higher-order correlations).  We
 evaluated the efficacy of this framework at recovering known patterns
-in several synthetic datasets (see \textit{Synthetic data: simulating
-  dynamic first-order correlations} and \textit{Synthetic data:
-  simulating dynamic higher-order correlations}).  We then
+in several synthetic datasets (see Synthetic data: simulating
+  dynamic first-order correlations and Synthetic data:
+  simulating dynamic higher-order correlations).  We then
 applied the framework to a public fMRI dataset collected as
 participants listened to an auditorily presented story, listened to a
 temporally scrambled version of the story, or underwent a resting
-state scan (see \textit{Functional neuroimaging data collected during
-  story listening}).  We used the relative decoding accuracies of
+state scan (see Functional neuroimaging data collected during
+  story listening).  We used the relative decoding accuracies of
 classifiers trained on different sets of neural features to estimate
 which types of features reflected ongoing cognitive processing.
 
-\subsection*{Recovering known dynamic correlations from synthetic
-  data}
-\subsubsection*{Recovering dynamic first-order correlations}
+
+\subsection*{Recovering known dynamic first-order correlations}
 We generated synthetic datasets that differed in how the underlying first-order
 correlations changed over time.  For each dataset, we applied
 Equation~\ref{eqn:timecorr} with a variety of kernel shapes and
@@ -266,39 +266,39 @@ different synthetic datasets in a kernel-dependent way.
   \centering
   \includegraphics[width=\textwidth]{figs/synthetic_data}
   \caption{\textbf{Recovering known dynamic first-order correlations
-      from synthetic data.}  Each panel displays the average
+       from synthetic data.} Each panel displays the average
     correlations between the vectorized upper triangles of the
     recovered correlation matrix at each timepoint and either the true
     underlying correlation at each timepoint or a reference
     correlation matrix.  (The averages are taken across 100 different
     randomly generated synthetic datasets of each given category, each
     with $K = 50$ features and $T = 300$ timepoints.)
-    Error ribbons denote 95\% confidence intervals (taken across
+    Error ribbons denote 95\% confidence intervals of the mean (taken across
     datasets). Different colors denote different kernel shapes, and
     the shading within each color family denotes the kernel width
     parameter.  For a complete description of each synthetic dataset,
-    see \textit{Synthetic data: simulating dynamic first-order
-      correlations}.  \textbf{a. Constant correlations.}  These
+    see Synthetic data: simulating dynamic first-order
+      correlations. \textbf{a. Constant correlations.}  These
     datasets have a stable (unchanging) underlying correlation matrix.
-    \textbf{b. Random correlations.}  These datasets are generated
+  \textbf{b. Random correlations.}  These datasets are generated
     using a new independently drawn correlation matrix at each new
-    timepoint.  \textbf{c. Ramping correlations.}  These datasets are
+    timepoint. \textbf{c. Ramping correlations.} These datasets are
     generated by smoothly varying the underlying correlations between
     the randomly drawn correlation matrices at the first and last
     timepoints.  The left panel displays the correlations between the
     recovered dynamic correlations and the underlying ground truth
     correlations.  The middle panel compares the recovered
-    correlations with the \textit{first} timepoint's correlation
+    correlations with the first timepoint's correlation
     matrix.  The right panel compares the recovered correlations with
-    the \textit{last} timepoint's correlation matrix.
-    \textbf{d. Event-based correlations.}  These datasets are each
+    the last timepoint's correlation matrix.
+  \textbf{d. Event-based correlations.} These datasets are each
     generated using five randomly drawn correlation matrices that each
     remain stable for a fifth of the total timecourse.  The left panel
     displays the correlations between the recovered dynamic
     correlations and the underlying ground truth correlations.  The
     right panels compare the recovered correlations with the
     correlation matrices unique to each event.  The vertical lines
-    denote event boundaries.}
+    denote event boundaries. Source data are provided as a Source Data file.}
   \label{fig:synthetic}
 \end{figure}
 
@@ -313,18 +313,19 @@ Eqns.~\ref{eqn:corr} and \ref{eqn:timecorr}).
 When the correlation dynamics were unstructured in time
 (Fig.~\ref{fig:synthetic}b), a Dirac $\delta$ kernel (infinitely
 narrow) performed best.  This is because, when every timepoint's
-correlations are independent from the correlations at every other
+correlations are independent of the correlations at every other
 timepoint, averaging data over time dilutes the available signal.
 Following a similar pattern, holding kernel shape fixed, narrower
 kernel parameters better recovered randomly varying correlations.
 
-\subsubsection*{Recovering dynamic higher-order correlations}
+\subsection*{Recovering known dynamic higher-order correlations}
 Following our approach to evaluating our ability to recover known
 dynamic first-order correlations from synthetic data, we generated an
 analogous second set of synthetic datasets that we designed to exhibit
-known dynamic first-order \textit{and} second-order correlations (see
-\textit{Synthetic data: simulating dynamic higher-order
-  correlations}).  We generated a total of 400 datasets that varied in
+known dynamic first-order and second-order correlations (see
+Synthetic data: simulating dynamic higher-order
+  correlations).  We generated a total of 400 datasets (100 datasets
+for each category) that varied in
 how the first-order and second-order correlations changed over time.
 We then repeatedly applied Equation~\ref{eqn:timecorr} using the
 overall best-performing kernel from our first-order tests (a Laplace
@@ -338,38 +339,38 @@ second-order correlations from the synthetic data
 for longer intervals, or changed gradually (constant, ramping, and
 event datasets), recovery performance was relatively high, and we were
 better able to recover dynamic first-order correlations than
-second-order correlations.  This is because errors in our \textit{estimation}
+second-order correlations.  This is because errors in our estimation
 procedure at lower orders necessarily propagate to higher orders
 (since lower-order correlations are used to estimate higher-order
 correlations).  Conversely, when the correlations were particularly
-\textit{un}stable (random datasets), we better recovered second-order
-correlations.  This is because noise in our \textit{data generation}
+unstable (random datasets), we better recovered second-order
+correlations.  This is because noise in our data generation
 procedure propagates from higher orders to lower orders (see
-\textit{Synthetic data: simulating dynamic high-order correlations}).
+Synthetic data: simulating dynamic high-order correlations).
 
 \begin{figure}[tp]
   \centering
   \includegraphics[width=\textwidth]{figs/higher_order_sims}
-  \caption{\textbf{Recovery of simulated first-order and second-order dynamic correlations.}  Each panel displays the average correlations
+  \caption{\textbf{Recovery of simulated first-order and second-order dynamic correlations.} Each panel displays the average correlations
     between the vectorized upper triangles of the recovered
     first-order and second-order correlation matrices and the true
     (simulated) first-order and second order correlation matrices at each
     timepoint and for each synthetic dataset.  (The averages are taken across 100 different
     randomly generated synthetic datasets of each given category, each
     with $K = 10$ features and $T = 300$ timepoints.)
-    Error ribbons denote 95\% confidence intervals (taken across
+    Error ribbons denote 95\% confidence intervals of the mean (taken across
     datasets).  For a complete description of each synthetic dataset,
-    see \textit{Synthetic data: simulating dynamic higher-order
-      correlations}.  All estimates represented in this figure were
+    see Synthetic data: simulating dynamic higher-order
+      correlations.  All estimates represented in this figure were
     computed using a Laplace kernel
-    (width~$=20$).  \textbf{Constant.}  These datasets
+    (width~$=20$).  \textbf{Constant.} These datasets
     have stable (unchanging) underlying second-order correlation
-    matrices.  \textbf{Random.} These datasets are
+    matrices. \textbf{Random.} These datasets are
     generated using a new independently drawn second-order correlation
-    matrix at each timepoint.  \textbf{Ramping.}
+    matrix at each timepoint. \textbf{Ramping.}
     These datasets are generated by smoothly varying the underlying
     second-order correlations between the randomly drawn correlation
-    matrices at the first and last timepoints.  \textbf{Event.}  These datasets are each generated using five
+    matrices at the first and last timepoints. \textbf{Event.}  These datasets are each generated using five
     randomly drawn second-order correlation matrices that each remain
     stable for a fifth of the total timecourse.  The
     vertical lines denote event boundaries.  Note that the ``dips''
@@ -378,7 +379,7 @@ procedure propagates from higher orders to lower orders (see
     and at the event boundaries of the ``event'' datasets) are
     finite-sample effects that reflect the reduced numbers of samples
     that may be used to accurately estimate correlations at sharp
-    boundaries.}
+    boundaries. Source data are provided as a Source Data file.}
   \label{fig:higher_order_sims}
 \end{figure}
 
@@ -415,22 +416,22 @@ of human cognition during a naturalistic story-listening task.
 \subsection*{Cognitively relevant dynamic high-order correlations in
   fMRI data}
 We used across-participant temporal decoders to identify cognitively
-relevant neural patterns in fMRI data (see \textit{Forward inference
-  and decoding accuracy}).  The dataset we examined~\citep[collected
+relevant neural patterns in fMRI data (see Forward inference
+  and decoding accuracy).  The dataset we examined~\citep[collected
 by][]{SimoEtal16} comprised four experimental conditions that exposed
 participants to stimuli that varied systematically in how cognitively
-engaging they were.  The \textit{intact} experimental condition had
+engaging they were.  The intact experimental condition (intact) had
 participants listen to an audio recording of a 10-minute story.  The
-\textit{paragraph}-scrambled experimental condition had participants
+paragraph-scrambled experimental condition (paragraph) had participants
 listen to a temporally scrambled version of the story, where the
 paragraphs occurred out of order (but where the same total set of
 paragraphs were presented over the full listening interval).  All
 participants in this condition experienced the scrambled paragraphs in
-the same order.  The \textit{word}-scrambled experimental condition
+the same order.  The word-scrambled experimental condition (word)
 had participants listen to a temporally scrambled version of the story
 where the words in the story occurred in a random order.  All
 participants in the word condition experienced the scrambled words in
-the same order.  Finally, in a \textit{rest} experimental condition,
+the same order.  Finally, in a rest experimental condition (rest),
 participants lay in the scanner with no overt stimulus, with their
 eyes open (blinking as needed).  This public dataset provided a convenient
 means of testing our hypothesis that different levels of cognitive
@@ -441,19 +442,19 @@ activity dynamics.
   \centering
   \includegraphics[width=\textwidth]{figs/decode_level}
   \caption{\textbf{Across-participant timepoint decoding accuracy varies with
-      correlation order and cognitive engagement.}
-    \textbf{a.~Decoding accuracy as a function of order: PCA.}
-    \textit{Order} ($x$-axis) refers to the maximum order of dynamic
+       correlation order and cognitive engagement.}
+     \textbf{a.~Decoding accuracy as a function of order: PCA.}
+   ``Order'' ($x$-axis) refers to the maximum order of dynamic
     correlations that were available to the classifiers (see
-    \textit{Feature weighting and testing}).  The reported
+    Feature weighting and testing).  The reported
     across-participant decoding accuracies are averaged over all
-    kernel shapes and widths (see \textit{Identifying robust decoding
-      results}).  The $y$-values are displayed relative to chance
+    kernel shapes and widths (see Identifying robust decoding
+      results).  The $y$-values are displayed relative to chance
     accuracy (intact: $\frac{1}{300}$; paragraph: $\frac{1}{272}$;
     word: $\frac{1}{300}$; rest: $\frac{1}{400}$; these chance accuracies
     were subtracted from the observed accuracies to obtain the
     relative accuracies reported on the $y$-axis).  The error ribbons
-    denote 95\% confidence intervals across cross-validation folds
+    denote 95\% confidence intervals of the means across cross-validation folds
     (i.e., random assignments of participants to the training and test
     sets).  The colors denote the experimental condition.  Arrows
     denote sets of features that yielded reliably higher (upward
@@ -463,23 +464,24 @@ activity dynamics.
     comparisons between the decoding accuracies achieved using
     different sets of neural features.  The circled values represent
     the maximum decoding accuracy within each experimental condition.
-    \textbf{b.~Normalized timepoint decoding accuracy as a function of order:
-      PCA.}  This panel displays the same results as Panel a, but here
-    each curve has been normalized to be bounded between 0 and 1
-    (inclusive) by subtracting the minimum accuracy
-    (across all folds and orders) and then dividing by the maximum
-    accuracy (again, across all folds and orders).  Panels a and b used PCA to
+  \textbf{b.~Normalized timepoint decoding accuracy as a function of order:
+       PCA.}  This panel displays the same results as Panel a, but here
+    each curve has been normalized to have a maximum value of 1 and a
+    minimum value of 0 (including the upper and lower bounds of the
+    respective 95\% confidence intervals of the mean).  Panels a and b used PCA to
     project each high-dimensional pattern of dynamic correlations onto
-    a lower-dimensional space.  \textbf{c.~Timepoint decoding accuracy as a
-      function of order: eigenvector centrality.} This panel is in the
+    a lower-dimensional space. \textbf{c.~Timepoint decoding accuracy as a
+       function of order: eigenvector centrality.} This panel is in the
     same format as Panel a, but here eigenvector centrality has been
     used to project the high-dimensional patterns of dynamic
     correlations onto a lower-dimensional space.
-    \textbf{d.~Normalized timepoint decoding accuracy as a function of order:
-      eigenvector centrality.} This panel is in the same format as
+ \textbf{d.~Normalized timepoint decoding accuracy as a function of order:
+       eigenvector centrality.}  This panel is in the same format as
     Panel b, but here eigenvector centrality has been used to project
     the high-dimensional patterns of dynamic correlations onto a
-    lower-dimensional space. See Figures~\kernelshape~and~\kernelwidth~for decoding results broken down by kernel shape and width, respectively.}
+    lower-dimensional space. See
+    Figures~\kernelshape~and~\kernelwidth~for decoding results broken
+    down by kernel shape and width, respectively. Source data are provided as a Source Data file.}
   \label{fig:decoding}
 \end{figure}
 
@@ -489,8 +491,8 @@ groups: a training group and a test group.  We then trained
 classifiers on the training group's data to match each sample from the
 test group with a stimulus timepoint.  Each classifier comprised a
 weighted blend of neural patterns that reflected up to
-$n^\mathrm{th}$-order dynamic correlations (see \textit{Feature
-  weighting and testing}, Fig.~\ref{fig:pipeline}).  We repeated this process for
+$n^\mathrm{th}$-order dynamic correlations (see Feature
+  weighting and testing, Fig.~\ref{fig:pipeline}).  We repeated this process for
 $n \in \left\{ 0, 1, 2, ..., 10 \right\}$.  Our examinations of
 synthetic data suggested that none of the kernels we examined were
 ``universal'' in the sense of optimally recovering underlying
@@ -500,8 +502,8 @@ whereby different kernels yielded different decoding accuracies, but
 no single kernel emerged as the clear ``best.''  In our analyses of
 neural data, we therefore averaged our decoding results over a variety
 of kernel shapes and widths in order to identify results that were
-robust to specific kernel parameters (see \textit{Identifying robust
-  decoding results}).
+robust to specific kernel parameters (see Identifying robust
+  decoding results).
 
 Our approach to estimating dynamic high-order correlations entails
 mapping the high-dimensional feature space of correlations
@@ -522,7 +524,7 @@ centrality, but did not preserve the underlying activity dynamics
 \centering
 \includegraphics[width=1\textwidth]{figs/stats_heatmaps}
 \caption{\textbf{Statistical summary of decoding accuracies for
-    different neural features.}  Each column of matrices displays decoding
+     different neural features.}  Each column of matrices displays decoding
   results for one experimental condition (intact, paragraph, word, and
   rest).  We considered dynamic activity patterns (order 0) and
   dynamic correlations at different orders (order $> 0$).  We used
@@ -539,8 +541,8 @@ centrality, but did not preserve the underlying activity dynamics
   the feature in the given column.  The lower triangles of each map
   denote the corresponding $p$-values for the $t$-tests.  The diagonal
   entries display the relative average optimized weight given to each type of feature in
-  a decoder that included all feature types (see \textit{Feature
-    weighting and testing}).}
+  a decoder that included all feature types (see Feature
+    weighting and testing). Source data are provided as a Source Data file.}
 \label{fig:ttests}
 \end{figure}
 
@@ -583,7 +585,7 @@ different brain areas occupy in their associated networks
   \centering
   \includegraphics[width=\textwidth]{figs/most_abs}
   \caption{\textbf{Top terms associated with the most strongly
-      correlated nodes at each order.}  Each color corresponds to one order of
+       correlated nodes at each order.}  Each color corresponds to one order of
     inter-subject functional correlations.  To calculate the dynamic
     correlations, eigenvector centrality has been used to project
     the high-dimensional patterns of dynamic correlations onto a
@@ -597,9 +599,9 @@ different brain areas occupy in their associated networks
     terms~\citep{RubiEtal17} decoded from the corresponding brain maps
     for each order.  Each row displays data from a different
     experimental condition.  Additional maps and their corresponding
-    Neurosynth terms may be found in the \textit{Supplementary
-      materials} (intact: Fig.~\intact; paragraph: Fig.~\para; word:
-    Fig.~\word; rest: Fig.~\rest).}
+    Neurosynth terms may be found in the Supplementary
+      materials (intact: Fig.~\intact; paragraph: Fig.~\para; word:
+    Fig.~\word; rest: Fig.~\rest). Source data are provided as a Source Data file.}
   \label{fig:neurosynth}
 \end{figure}
 
@@ -616,7 +618,7 @@ single $K$ by $K$ $n^\mathrm{th}$-order DISFC matrix for each
 experimental condition.  We then used Neurosynth~\citep{RubiEtal17} to
 compute the terms most highly associated with the most strongly
 correlated pairs of regions in each of these matrices
-(Fig.~\ref{fig:neurosynth}; see \textit{Reverse inference}).
+(Fig.~\ref{fig:neurosynth}; see Reverse inference).
 
 For all of the story listening conditions (intact, paragraph, and
 word; top three rows of Fig.~\ref{fig:neurosynth}), we found that
@@ -674,7 +676,7 @@ processing (Fig.~\ref{fig:discussion}).
   \centering
   \includegraphics[width=0.6\textwidth]{figs/discussion}
   \caption{\textbf{Proposed high-order network dynamics underlying
-      high-level cognition during story listening.}  Schematic depicts
+       high-level cognition during story listening.}  Schematic depicts
     higher orders of
     network interactions supporting higher-level aspects of cognitive
     processing.  When tasks evoke richer, deeper, and/or higher-level
@@ -689,7 +691,7 @@ proposed in myriad empirical studies and
 reviews~\citep[e.g.,][]{DemeEtal19, Turk13, LuriEtal18, FongEtal19,
   ParkEtal18b, PretEtal17, MannEtal18, RoyEtal19, LiegEtal19, ZouEtal19,
   ChanGlov10, GonzEtal19, McIn00, BresKels01}.  Our study extends this line of work by
-finding cognitively relevant \textit{higher-order} network dynamics
+finding cognitively relevant higher-order network dynamics
 that reflect ongoing cognition.  Our findings also complement other work
 that uses graph theory and topology to characterize how brain networks
 reconfigure during cognition~\citep[e.g.,][]{BassEtal06, ZhenEtal19,
@@ -783,7 +785,7 @@ $\mathbf{Y}_{n+1}$ to estimate high-order dynamic correlations.  Each
 application of these steps to a $T$ by $K$ time series $\mathbf{X}_n$
 yields a $T$ by $K$ matrix, $\mathbf{X}_{n+1}$, that reflects the
 dynamic correlations between the columns of $\mathbf{X}_n$.  In this
-way, we refer to $n$ as the \textit{order} of the timeseries, where
+way, we refer to $n$ as the order of the timeseries, where
 $\mathbf{X}_0$ (order 0) denotes the original data and $\mathbf{X}_n$
 denotes (approximated) $n^\mathrm{th}$-order dynamic correlations
 between the columns of $\mathbf{X}_0$.  Finally, we use a
@@ -845,7 +847,7 @@ $\mathbf{X}(\cdot, j)$ using~\citep{Pear01}:
                                     \bar{\mathbf{X}}(\cdot, k) \right)^2 
 \end{align}
 We can generalize this formula to compute time-varying correlations by
-incorporating a \textit{kernel function} that takes a time $t$ as
+incorporating a kernel function that takes a time $t$ as
 input, and returns how much the observed data at each timepoint
 $\tau \in \left[ -\infty, \infty \right]$ contributes to the estimated instantaneous
 correlation at time $t$~\citep[Fig.~\ref{fig:kernels}; also see][for a
@@ -856,23 +858,23 @@ similar approach]{AlleEtal12b}.
   \caption{\textbf{Examples of kernel functions.} Each panel displays
     per-timepoint weights for a kernel centered at $t = 50$, evaluated
     at 100 timepoints ($\tau \in \left[1, ..., 100\right]$).
-    \textbf{a. Uniform kernel.} The weights are timepoint-invariant;
+   \textbf{a. Uniform kernel.} The weights are timepoint-invariant;
     observations at all timepoints are weighted equally, and do not
     change as a function of $\tau$.  This is a special case kernel
     function that reduces dynamic correlations to static correlations.
-    \textbf{b. Dirac $\delta$ kernel.} Only the observation at
+   \textbf{b. Dirac $\delta$ kernel.} Only the observation at
     timepoint $t$ is given a non-zero weight (of 1).
-    \textbf{c. Gaussian kernels.} Each kernel's weights fall off in
+   \textbf{c. Gaussian kernels.} Each kernel's weights fall off in
     time according to a Gaussian probability density function centered
     on time $t$.  Weights derived using several different example
     width parameters ($\sigma^2$) are displayed.  \textbf{d. Laplace
-      kernels.}  Each kernel's weights fall off in time according to a
+       kernels.}  Each kernel's weights fall off in time according to a
     Laplace probability density function centered on time $t$.
     Weights derived using several different example width parameters
     ($b$) are displayed.  \textbf{e. Mexican hat (Ricker wavelet)
-      kernels.}  Each kernel's weights fall off in time according to a
+       kernels.}  Each kernel's weights fall off in time according to a
     Ricker wavelet centered on time $t$.  This function highlights the
-    \textit{contrasts} between local versus surrounding activity
+    contrasts between local versus surrounding activity
     patterns in estimating dynamic correlations. Weights derived using
     several different example width parameters ($\sigma$) are
     displayed.}
@@ -882,7 +884,7 @@ similar approach]{AlleEtal12b}.
 Given a kernel function $\kappa_t(\cdot)$ for timepoint $t$,
 evaluated at timepoints $\tau \in \left[ 1, ..., T \right]$, we
 can update the static correlation formula in Equation~\ref{eqn:corr}
-to estimate the \textit{instantaneous correlation} at timepoint $t$:
+to estimate the instantaneous correlation at timepoint $t$:
 \begin{align}
   \mathrm{timecorr}_{\kappa_t}\left(\mathbf{X}(\cdot, i), \mathbf{X}(\cdot, j)\right) &= \frac{\sum_{\tau=1}^T \left( \mathbf{X}(\tau, i) -
                                        \widetilde{\mathbf{X}}_{\kappa_t}(\cdot,
@@ -923,7 +925,7 @@ the same task (or sequence of tasks).  Let $\mathbf{X}_n^1$,
 $\mathbf{X}_n^2$, ..., $\mathbf{X}_n^P$ reflect the $T$ by $K$
 observation matrices ($n = 0$) or reduced correlation matrices
 ($n > 0$) for each of $P$ participants in an experiment.  We can use
-\textit{inter-subject functional connectivity}~\citep[ISFC;
+inter-subject functional connectivity~\citep[ISFC;
 ][]{SimoEtal16, SimoChan20} to compute the stimulus-driven correlations reflected
 in the multi-participant dataset at a given timepoint $t$ using:
 \begin{align}
@@ -941,7 +943,7 @@ R(z) = \frac{\exp(2z - 1)}{\exp(2z + 1)},
 \end{align}
 and $\mathbf{Y}_{n+1}^p(t)$ denotes the correlation matrix at timepoint $t$
 (Eqn.~\ref{eqn:timecorr}) between each column of $\mathbf{X}_n^p$ and each
-column of the average $\mathbf{X}_n$ from all \textit{other}
+column of the average $\mathbf{X}_n$ from all other
 participants, $\bar{\mathbf{X}}_n^{ \backslash p}$:
 \begin{align}
   \bar{\mathbf{X}}_n^{ \backslash p} = \frac{1}{P-1}\sum_{q \in
@@ -1014,13 +1016,13 @@ The above dimensionality reduction approaches to approximating a given
 $\mathbf{Y}_n$ with a lower-dimensional $\mathbf{X}_n$ preserve a
 (potentially recombined and transformed) mapping back to the original
 data in $\mathbf{X}_0$.  We also explore graph measures that instead
-characterize each feature's relative \textit{position} in the broader
+characterize each feature's relative position in the broader
 network of interactions and connections.  To illustrate the
 distinction between the two general approaches we explore, suppose a
 network comprises nodes $A$ and $B$, along with several other nodes.  If $A$ and $B$ exhibit
 uncorrelated activity patterns, then by definition the functional connection
 (correlation) between them will be close to 0.
-However, if $A$ and $B$ each interact with \textit{other} nodes in similar ways, we
+However, if $A$ and $B$ each interact with other nodes in similar ways, we
 might attempt to capture those similarities between $A$'s and $B$'s
 interactions with those other members of the network.
 
@@ -1145,7 +1147,7 @@ $\mathbf{\Sigma}_m$:
   
   \paragraph*{Ramping.}  We generated a third set of 100 synthetic
   datasets whose underlying correlations changed gradually over time.
-  For each dataset, we constructed two \textit{anchor} covariance
+  For each dataset, we constructed two ``anchor'' covariance
   matrices using Equation~\ref{eqn:randcorr},
   $\mathbf{\Sigma}_{\mathrm{start}}$ and
   $\mathbf{\Sigma}_{\mathrm{end}}$.  For each of the 300 timepoints in
@@ -1202,8 +1204,8 @@ $K^4 \times K^4$ matrix $m_3$ whose tiles are scaled copies of $m_2$.
 In general, repeated applications of the Kronecker self-product may be
 used to generate $m_{n+1} = m_n \otimes m_n$ for $n > 1$, where
 $m_{n+1}$ is a $K^{2^n} \times K^{2^n}$ matrix.  After generating a
-first-order timeseries of dynamic correlations (see \textit{Synthetic
-  data: simulating dynamic first-order correlations}), we use this
+first-order timeseries of dynamic correlations (see Synthetic
+  data: simulating dynamic first-order correlations), we use this
 procedure (applied independently at each timepoint) to transform it
 into a timeseries of $n$\textsuperscript{th}-order correlations.  When
 $m_{n+1}$ is generated in this way, the temporal structure of the full
@@ -1221,7 +1223,7 @@ $\mathcal{N}\left(0, m_n\right)$ and reshaping the resulting vector to
 have square dimensions.  To force the resulting matrix to be
 symmetric, we remove its lower triangle, and replace the lower
 triangle with (a reflected version
-of) its upper triangle.  Intuitively, the resulting re-shaped matrix will look
+of) its upper triangle. Intuitively, the re-shaped matrix will look
 like a noisy (but symmetric) version of the template matrix, $m_{n-1}$.  (When
 $n = 1$, no re-shaping is needed; the resulting $K$-dimensional vector
 may be used as the observation at the given timepoint.)  After
@@ -1235,7 +1237,7 @@ correlations, we constructed a total of 400 additional multivariate
 timeseries, collectively reflecting a total of 4 qualitatively
 different patterns of dynamic correlations (i.e., 100 datasets
 reflecting each type of dynamic pattern: constant, random, ramping,
-and event).  Each timeseries comprised 10 zero-order features (dimensions)
+and event).   Each timeseries comprised 10 zero-order features (dimensions)
 that varied over 300 timepoints.  After applying our dynamic
 correlation estimation procedure, this yielded a 100-dimensional
 timeseries of first-order
@@ -1259,7 +1261,9 @@ paragraphs in a randomized order and 36 in the word-scrambled
 condition listened to the words in a randomized order), or lay resting
 with their eyes open in the scanner (rest condition; 36
 participants).  Full neuroimaging details may be found in the original
-paper for which the data were collected~\citep{SimoEtal16}.
+paper for which the data were collected~\citep{SimoEtal16}. Procedures
+were approved by the Princeton University Committee on Activities
+Involving Human Subjects, and by the Western Institutional Review Board (Puyallup, WA). All subjects were native English speakers with normal hearing and provided written informed consent.
 
 \paragraph{Hierarchical topographic factor analysis (HTFA).}
 Following our prior related work, we used HTFA~\citep{MannEtal18} to
@@ -1319,9 +1323,9 @@ highly correlated.  We then repeated this decoding procedure, but
 using $\mathcal{G}_{\mathrm{decode}}$ as the template group and
 $\mathcal{G}_{\mathrm{template}}$ as the to-be-decoded group.  Given
 the true timepoint labels (for each group), we defined the
-\textit{decoding accuracy} as the average proportion of correctly
+decoding accuracy as the average proportion of correctly
 decoded timepoints, across both groups.  We defined the
-\textit{relative decoding accuracy} as the difference between the
+relative decoding accuracy as the difference between the
 decoding accuracy and chance accuracy (i.e., $\frac{1}{T}$).
 
 \subsubsection*{Feature weighting and testing}
@@ -1335,23 +1339,24 @@ $\mathbf{X}_1$, $\mathbf{X}_2$, $\mathbf{X}_3$, and so on.
   \centering
   \includegraphics[width=0.85\textwidth]{figs/timecorr_pipeline}
   \caption{\textbf{Decoding analysis pipeline.  a. Computing dynamic
-      correlations from timeseries data.}  Given a timeseries of
+       correlations from timeseries data.}  Given a timeseries of
     observations as a $T \times K$ matrix (or a set of $S$ such
     matrices), we use Equation~\ref{eqn:timecorr} to compute each
     participant's DISFC (relative to other participants in the
     training or test sub-group, as appropriate). We repeat this
     process twice-- once using the analysis kernel (shown here as a
     Gaussian in the upper row of the panel), and once using a $\delta$
-    function kernel (lower row of the panel).    \textbf{b. Projecting
-      dynamic correlations into a lower-dimensional space.}  We
+    function kernel (lower row of the panel).
+    \textbf{b. Projecting
+       dynamic correlations into a lower-dimensional space.}  We
     project the training and test data into $K$-dimensional spaces to
     create compact representations of dynamic correlations at the
     given order (estimated using the analysis kernel).
-    \textbf{c. Kernel trick.} We project the dynamic correlations
+   \textbf{c.  Kernel trick.}  We project the dynamic correlations
     computed using a $\delta$ function kernel into a common
     $K$-dimensional space.  These low-dimensional embeddings are fed
     back through the analysis pipeline in order to compute features at
-    the next-highest order.  \textbf{d. Decoding analysis.} We split
+    the next-highest order. \textbf{d. Decoding analysis.}  We split
     the training data into two equal groups, and optimize the feature
     weights (i.e., dynamic correlations at each order) to maximize
     decoding accuracy.  We then apply the trained classifier to the
@@ -1431,7 +1436,7 @@ can yield different decoding accuracies.  Further, the best decoding
 accuracy for a given timepoint may be reliably achieved by one set of
 parameters, whereas the best decoding accuracy for another timepoint
 might be reliably achieved by a different set of parameters, and the
-best decoding accuracy across \textit{all} timepoints might be
+best decoding accuracy across all timepoints might be
 reliably achieved by still another different set of parameters.
 Rather than attempting to maximize decoding accuracy, we sought to
 discover the trends in the data that were robust to classifier
@@ -1460,7 +1465,7 @@ analysis (first order, second order, etc.).  We selected the 10
 strongest (absolute value) correlations at each order.  Each
 correlation is between the dynamic activity patterns (or patterns of
 dynamic high-order correlations) measured at two RBF nodes (see
-\textit{Hierarchical Topographic Factor Analysis}).  Therefore, the 10
+Hierarchical Topographic Factor Analysis).  Therefore, the 10
 strongest correlations involved up to 20 RBF nodes.  Each RBF defines
 a spatial function whose activations range from 0 to 1.  We
 constructed a map of RBF components that denoted the endpoints of the
@@ -1470,6 +1475,23 @@ Neurosynth~\citep{RubiEtal17} to identify the 10 terms most commonly
 associated with the given map.  This resulted in a set of 10 terms
 associated with the average dynamic correlation patterns at each
 order.
+
+\section*{Data Availability}
+
+The authors declare that the data supporting the findings of this
+study as well as the source data for this paper are available at
+\href{https://github.com/ContextLab/timecorr-paper/releases/tag/v0.3}{github.com/ContextLab/timecorr-paper/releases/tag/v0.3}
+and has been deposited in the Zenodo database under accession code
+(link here).
+The raw fMRI data are protected and are not available due to data
+privacy laws. The processed fMRI dataset collected by
+\cite{SimoEtal16} has been made publicly available \cite{SimoEtal16b} at
+\href{http://arks.princeton.edu/ark:/88435/dsp015d86p269k}{arks.princeton.edu/ark:/88435/dsp015d86p269k}. 
+
+\section*{Code Availability}
+
+All of our analysis code may be downloaded from
+\href{https://github.com/ContextLab/timecorr-paper/releases/tag/v0.3}{github.com/ContextLab/timecorr-paper/releases/tag/v0.3}. We have also published a companion Python toolbox that may be downloaded from \href{https://timecorr.readthedocs.io}{timecorr.readthedocs.io}.
 
 
 \section*{Acknowledgements}
@@ -1487,8 +1509,725 @@ of our supporting organizations.
 Concept: J.R.M.  Implementation: T.H.C., L.L.W.O., and J.R.M.
 Analyses: L.L.W.O. and J.R.M.  Writing: L.L.W.O. and J.R.M.
 
-\bibliographystyle{apacite}
-\bibliography{CDL-bibliography/cdl}
+\section*{Competing interests}
+The authors declare no competing financial interests.
+
+\bibliographystyle{naturemag}
+%\bibliography{CDL-bibliography/cdl}
+
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\providecommand{\bibinfo}[2]{#2}
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem{HaxbEtal01}
+\bibinfo{author}{Haxby, J.~V.} \emph{et~al.}
+\newblock \bibinfo{title}{Distributed and overlapping representations of faces
+  and objects in ventral temporal cortex}.
+\newblock \emph{\bibinfo{journal}{Science}} \textbf{\bibinfo{volume}{293}},
+  \bibinfo{pages}{2425--2430} (\bibinfo{year}{2001}).
+
+\bibitem{NormEtal06b}
+\bibinfo{author}{Norman, K.~A.}, \bibinfo{author}{Polyn, S.~M.},
+  \bibinfo{author}{Detre, G.~J.} \& \bibinfo{author}{Haxby, J.~V.}
+\newblock \bibinfo{title}{Beyond mind-reading: multi-voxel pattern analysis of
+  {fMRI} data}.
+\newblock \emph{\bibinfo{journal}{Trends in Cognitive Sciences}}
+  \textbf{\bibinfo{volume}{10}}, \bibinfo{pages}{424--430}
+  (\bibinfo{year}{2006}).
+
+\bibitem{TongPrat12}
+\bibinfo{author}{Tong, F.} \& \bibinfo{author}{Pratte, M.~S.}
+\newblock \bibinfo{title}{Decoding patterns of human brain activity}.
+\newblock \emph{\bibinfo{journal}{Annual Review of Psychology}}
+  \textbf{\bibinfo{volume}{63}}, \bibinfo{pages}{483--509}
+  (\bibinfo{year}{2012}).
+
+\bibitem{MitcEtal08a}
+\bibinfo{author}{Mitchell, T.~M.} \emph{et~al.}
+\newblock \bibinfo{title}{Predicting human brain activity associated with the
+  meanings of nouns}.
+\newblock \emph{\bibinfo{journal}{Science}} \textbf{\bibinfo{volume}{320}},
+  \bibinfo{pages}{1191} (\bibinfo{year}{2008}).
+
+\bibitem{KamiTong05}
+\bibinfo{author}{Kamitani, Y.} \& \bibinfo{author}{Tong, F.}
+\newblock \bibinfo{title}{Decoding the visual and subjective contents of the
+  human brain}.
+\newblock \emph{\bibinfo{journal}{Nature Neuroscience}}
+  \textbf{\bibinfo{volume}{8}}, \bibinfo{pages}{679--685}
+  (\bibinfo{year}{2005}).
+
+\bibitem{NishEtal11}
+\bibinfo{author}{Nishimoto, S.} \emph{et~al.}
+\newblock \bibinfo{title}{Reconstructing visual experience from brain activity
+  evoked by natural movies}.
+\newblock \emph{\bibinfo{journal}{Current Biology}}
+  \textbf{\bibinfo{volume}{21}}, \bibinfo{pages}{1--6} (\bibinfo{year}{2011}).
+
+\bibitem{PereEtal18}
+\bibinfo{author}{Pereira, F.} \emph{et~al.}
+\newblock \bibinfo{title}{Toward a universal decoder of linguistic meaning from
+  brain activation}.
+\newblock \emph{\bibinfo{journal}{Nature Communications}}
+  \textbf{\bibinfo{volume}{9}}, \bibinfo{pages}{1--13} (\bibinfo{year}{2018}).
+
+\bibitem{HuthEtal12}
+\bibinfo{author}{Huth, A.~G.}, \bibinfo{author}{Nisimoto, S.},
+  \bibinfo{author}{Vu, A.~T.} \& \bibinfo{author}{Gallant, J.~L.}
+\newblock \bibinfo{title}{A continuous semantic space describes the
+  representation of thousands of object and action categories across the human
+  brain}.
+\newblock \emph{\bibinfo{journal}{Neuron}} \textbf{\bibinfo{volume}{76}},
+  \bibinfo{pages}{1210--1224} (\bibinfo{year}{2012}).
+
+\bibitem{HuthEtal16}
+\bibinfo{author}{Huth, A.~G.}, \bibinfo{author}{de~Heer, W.~A.},
+  \bibinfo{author}{Griffiths, T.~L.}, \bibinfo{author}{Theunissen, F.~E.} \&
+  \bibinfo{author}{Gallant, J.~L.}
+\newblock \bibinfo{title}{Natural speech reveals the semantic maps that tile
+  human cerebral cortex}.
+\newblock \emph{\bibinfo{journal}{Nature}} \textbf{\bibinfo{volume}{532}},
+  \bibinfo{pages}{453--458} (\bibinfo{year}{2016}).
+
+\bibitem{EtzeEtal09}
+\bibinfo{author}{Etzel, J.~A.}, \bibinfo{author}{Gazzola, V.} \&
+  \bibinfo{author}{Keysers, C.}
+\newblock \bibinfo{title}{An introduction to anatomical {ROI}-based {fMRI}
+  classification}.
+\newblock \emph{\bibinfo{journal}{Brain Research}}
+  \textbf{\bibinfo{volume}{1281}}, \bibinfo{pages}{114--125}
+  (\bibinfo{year}{2009}).
+
+\bibitem{MannEtal18}
+\bibinfo{author}{Manning, J.~R.} \emph{et~al.}
+\newblock \bibinfo{title}{A probabilistic approach to discovering dynamic
+  full-brain functional connectivity patterns}.
+\newblock \emph{\bibinfo{journal}{{NeuroImage}}}
+  \textbf{\bibinfo{volume}{180}}, \bibinfo{pages}{243--252}
+  (\bibinfo{year}{2018}).
+
+\bibitem{FongEtal19}
+\bibinfo{author}{Fong, A. H.~C.} \emph{et~al.}
+\newblock \bibinfo{title}{Dynamic functional connectivity during task
+  performance and rest predicts individual differences in attention across
+  studies}.
+\newblock \emph{\bibinfo{journal}{{NeuroImage}}}
+  \textbf{\bibinfo{volume}{188}}, \bibinfo{pages}{14--25}
+  (\bibinfo{year}{2019}).
+
+\bibitem{Gros88}
+\bibinfo{author}{Grossberg, S.}
+\newblock \bibinfo{title}{Nonlinear neural networks: principles, mechanisms,
+  and architectures}.
+\newblock \emph{\bibinfo{journal}{Neural Networks}}
+  \textbf{\bibinfo{volume}{1}}, \bibinfo{pages}{17--61} (\bibinfo{year}{1988}).
+
+\bibitem{Fris00}
+\bibinfo{author}{Friston, K.~J.}
+\newblock \bibinfo{title}{The labile brain. {I}. neuronal transients and
+  nonlinear coupling}.
+\newblock \emph{\bibinfo{journal}{Philosophical Transactions of the Royal
+  Society of London}} \textbf{\bibinfo{volume}{355B}},
+  \bibinfo{pages}{215--236} (\bibinfo{year}{2000}).
+
+\bibitem{SporHone06}
+\bibinfo{author}{Sporns, O.} \& \bibinfo{author}{Honey, C.~J.}
+\newblock \bibinfo{title}{Small worlds inside big brains}.
+\newblock \emph{\bibinfo{journal}{Proceedings of the National Academy of
+  Sciences, {USA}}} \textbf{\bibinfo{volume}{103}},
+  \bibinfo{pages}{19219--19220} (\bibinfo{year}{2006}).
+
+\bibitem{BassEtal06}
+\bibinfo{author}{Bassett, D.}, \bibinfo{author}{Meyer-Lindenberg, A.},
+  \bibinfo{author}{Achard, S.}, \bibinfo{author}{Duke, T.} \&
+  \bibinfo{author}{Bullmore, E.}
+\newblock \bibinfo{title}{Adaptive reconfiguration of fractal small-world human
+  brain functional networks}.
+\newblock \emph{\bibinfo{journal}{Proceedings of the National Academy of
+  Sciences, {USA}}} \textbf{\bibinfo{volume}{103}},
+  \bibinfo{pages}{19518--19523} (\bibinfo{year}{2006}).
+
+\bibitem{Turk13}
+\bibinfo{author}{Turk-Browne, N.~B.}
+\newblock \bibinfo{title}{Functional interactions as big data in the human
+  brain}.
+\newblock \emph{\bibinfo{journal}{Science}} \textbf{\bibinfo{volume}{342}},
+  \bibinfo{pages}{580--584} (\bibinfo{year}{2013}).
+
+\bibitem{DemeEtal19}
+\bibinfo{author}{Demertzi, A.} \emph{et~al.}
+\newblock \bibinfo{title}{Human consciousness is supported by dynamic complex
+  patterns of brain signal coordination}.
+\newblock \emph{\bibinfo{journal}{Science Advances}}
+  \textbf{\bibinfo{volume}{5}}, \bibinfo{pages}{eaat7603}
+  (\bibinfo{year}{2019}).
+
+\bibitem{SoloEtal19}
+\bibinfo{author}{Solomon, S.~H.}, \bibinfo{author}{Medaglia, J.~D.} \&
+  \bibinfo{author}{Thompson-Schill, S.~L.}
+\newblock \bibinfo{title}{Implementing a concept network model}.
+\newblock \emph{\bibinfo{journal}{Behavior Research Methods}}
+  \textbf{\bibinfo{volume}{51}}, \bibinfo{pages}{1717--1736}
+  (\bibinfo{year}{2019}).
+
+\bibitem{LuriEtal18}
+\bibinfo{author}{Lurie, D.} \emph{et~al.}
+\newblock \bibinfo{title}{On the nature of time-varying functional connectivity
+  in resting f{MRI}}.
+\newblock \emph{\bibinfo{journal}{{PsyArXiv}}}
+  \textbf{\bibinfo{volume}{doi.org/10.31234/osf.io/xtzre}}
+  (\bibinfo{year}{2018}).
+
+\bibitem{PretEtal17}
+\bibinfo{author}{Preti, M.~G.}, \bibinfo{author}{Bolton, T. A.~W.} \&
+  \bibinfo{author}{{Van De Ville}, D.}
+\newblock \bibinfo{title}{The dynamic functional connectome: state-of-the-art
+  and perspectives}.
+\newblock \emph{\bibinfo{journal}{{NeuroImage}}}
+  \textbf{\bibinfo{volume}{160}}, \bibinfo{pages}{41--54}
+  (\bibinfo{year}{2017}).
+
+\bibitem{ZouEtal19}
+\bibinfo{author}{Zou, Y.}, \bibinfo{author}{Donner, R.~V.},
+  \bibinfo{author}{Marwan, N.}, \bibinfo{author}{Donges, J.~F.} \&
+  \bibinfo{author}{Kurths, J.}
+\newblock \bibinfo{title}{Complex network approaches to nonlinear time series
+  analysis}.
+\newblock \emph{\bibinfo{journal}{Physics Reports}}
+  \textbf{\bibinfo{volume}{787}}, \bibinfo{pages}{1--97}
+  (\bibinfo{year}{2019}).
+
+\bibitem{MackEtal17}
+\bibinfo{author}{Mack, M.~L.}, \bibinfo{author}{Preston, A.~R.} \&
+  \bibinfo{author}{Love, B.~C.}
+\newblock \bibinfo{title}{Medial prefrontal cortex compresses concept
+  representations through learning}.
+\newblock \emph{\bibinfo{journal}{{bioRxiv}}}
+  \textbf{\bibinfo{volume}{doi.org/10.1101/178145}} (\bibinfo{year}{2017}).
+
+\bibitem{BresKels01}
+\bibinfo{author}{Bressler, S.~L.} \& \bibinfo{author}{Kelso, J. A.~S.}
+\newblock \bibinfo{title}{Cortical coordination dynamics and cognition}.
+\newblock \emph{\bibinfo{journal}{Trends in Cognitive Sciences}}
+  \textbf{\bibinfo{volume}{5}}, \bibinfo{pages}{26--36} (\bibinfo{year}{2001}).
+
+\bibitem{McIn00}
+\bibinfo{author}{McIntosh, A.~R.}
+\newblock \bibinfo{title}{Towards a network theory of cognition}.
+\newblock \emph{\bibinfo{journal}{Neural Networks}}
+  \textbf{\bibinfo{volume}{13}}, \bibinfo{pages}{861--870}
+  (\bibinfo{year}{2000}).
+
+\bibitem{ReimEtal17}
+\bibinfo{author}{Reimann, M.~W.} \emph{et~al.}
+\newblock \bibinfo{title}{Cliques of neurons bound into cavities provide a
+  missing link between structure and function}.
+\newblock \emph{\bibinfo{journal}{Frontiers in Computational Neuroscience}}
+  \textbf{\bibinfo{volume}{11}}, \bibinfo{pages}{1--16} (\bibinfo{year}{2017}).
+
+\bibitem{BeatEtal16}
+\bibinfo{author}{Beaty, R.~E.}, \bibinfo{author}{Benedek, M.},
+  \bibinfo{author}{Silvia, P.~J.} \& \bibinfo{author}{Schacter, D.~L.}
+\newblock \bibinfo{title}{Creative cognition and brain network dynamics}.
+\newblock \emph{\bibinfo{journal}{Trends in Cognitive Sciences}}
+  \textbf{\bibinfo{volume}{20}}, \bibinfo{pages}{87--95}
+  (\bibinfo{year}{2016}).
+
+\bibitem{BullSpor09}
+\bibinfo{author}{Bullmore, E.} \& \bibinfo{author}{Sporns, O.}
+\newblock \bibinfo{title}{Complex brain networks: graph theoretical analysis of
+  structural and functional systems}.
+\newblock \emph{\bibinfo{journal}{Nature Reviews Neuroscience}}
+  \textbf{\bibinfo{volume}{10}}, \bibinfo{pages}{186--198}
+  (\bibinfo{year}{2009}).
+
+\bibitem{Pear01}
+\bibinfo{author}{Pearson, K.}
+\newblock \bibinfo{title}{On lines and planes of closest fit to systems of
+  points in space}.
+\newblock \emph{\bibinfo{journal}{The London, Edinburgh, and Dublin
+  Philosophical Magazine and Journal of Science}} \textbf{\bibinfo{volume}{2}},
+  \bibinfo{pages}{559--572} (\bibinfo{year}{1901}).
+
+\bibitem{McInJirs19}
+\bibinfo{author}{Mc{I}ntosh, A.~R.} \& \bibinfo{author}{Jirsa, V.~K.}
+\newblock \bibinfo{title}{The hidden repertoire of brain dynamics and
+  dysfunction}.
+\newblock \emph{\bibinfo{journal}{Network Neuroscience}}
+  \textbf{\bibinfo{volume}{doi.org/10.1162/netn\_a\_00107}}
+  (\bibinfo{year}{2019}).
+
+\bibitem{TokeSomm19}
+\bibinfo{author}{Toker, D.} \& \bibinfo{author}{Sommer, F.~T.}
+\newblock \bibinfo{title}{Information integration in large brain networks}.
+\newblock \emph{\bibinfo{journal}{{PLoS} Computational Biology}}
+  \textbf{\bibinfo{volume}{15}}, \bibinfo{pages}{e1006807}
+  (\bibinfo{year}{2019}).
+
+\bibitem{GonzEtal19}
+\bibinfo{author}{Gonzalez-Castillo, J.} \emph{et~al.}
+\newblock \bibinfo{title}{Imaging the spontaneous flow of thought: distinct
+  periods of cognition contribute to dynamic functional connectivity during
+  test}.
+\newblock \emph{\bibinfo{journal}{{NeuroImage}}} \textbf{\bibinfo{volume}{202}}
+  (\bibinfo{year}{2019}).
+
+\bibitem{Land95}
+\bibinfo{author}{Landau, E.}
+\newblock \bibinfo{title}{Zur relativen {Wertbemessung} der
+  {Turnierresultate}}.
+\newblock \emph{\bibinfo{journal}{Deutsches Wochenschach}}
+  \textbf{\bibinfo{volume}{11}}, \bibinfo{pages}{366--369}
+  (\bibinfo{year}{1895}).
+
+\bibitem{BetzEtal19}
+\bibinfo{author}{Betzel, R.~F.}, \bibinfo{author}{Byrge, L.},
+  \bibinfo{author}{Esfahlani, F.~Z.} \& \bibinfo{author}{Kennedy, D.~P.}
+\newblock \bibinfo{title}{Temporal fluctuations in the brain's modular
+  architecture during movie-watching}.
+\newblock \emph{\bibinfo{journal}{{bioRxiv}}}
+  \textbf{\bibinfo{volume}{doi.org/10.1101/750919}} (\bibinfo{year}{2019}).
+
+\bibitem{SizeEtal18}
+\bibinfo{author}{Sizemore, A.~E.} \emph{et~al.}
+\newblock \bibinfo{title}{Cliques and cavities in the human connectome}.
+\newblock \emph{\bibinfo{journal}{Journal of Computational Neuroscience}}
+  \textbf{\bibinfo{volume}{44}}, \bibinfo{pages}{115--145}
+  (\bibinfo{year}{2018}).
+
+\bibitem{SimoEtal16}
+\bibinfo{author}{Simony, E.}, \bibinfo{author}{Honey, C.~J.},
+  \bibinfo{author}{Chen, J.} \& \bibinfo{author}{Hasson, U.}
+\newblock \bibinfo{title}{Dynamic reconfiguration of the default mode network
+  during narrative comprehension}.
+\newblock \emph{\bibinfo{journal}{Nature Communications}}
+  \textbf{\bibinfo{volume}{7}}, \bibinfo{pages}{1--13} (\bibinfo{year}{2016}).
+
+\bibitem{HassEtal08}
+\bibinfo{author}{Hasson, U.}, \bibinfo{author}{Yang, E.},
+  \bibinfo{author}{Vallines, I.}, \bibinfo{author}{Heeger, D.~J.} \&
+  \bibinfo{author}{Rubin, N.}
+\newblock \bibinfo{title}{A hierarchy of temporal receptive windows in human
+  cortex}.
+\newblock \emph{\bibinfo{journal}{The Journal of Neuroscience}}
+  \textbf{\bibinfo{volume}{28}}, \bibinfo{pages}{2539--2550}
+  (\bibinfo{year}{2008}).
+
+\bibitem{RubiEtal17}
+\bibinfo{author}{Rubin, T.~N.} \emph{et~al.}
+\newblock \bibinfo{title}{Decoding brain activity using a large-scale
+  probabilistic functional-anatomical atlas of human cognition}.
+\newblock \emph{\bibinfo{journal}{{PLoS} Computational Biology}}
+  \textbf{\bibinfo{volume}{13}}, \bibinfo{pages}{e1005649}
+  (\bibinfo{year}{2017}).
+
+\bibitem{ParkEtal18b}
+\bibinfo{author}{Park, H.-J.}, \bibinfo{author}{Friston, K.~J.},
+  \bibinfo{author}{Pae, C.}, \bibinfo{author}{Park, B.} \&
+  \bibinfo{author}{Razi, A.}
+\newblock \bibinfo{title}{Dynamic effective connectivity in resting state
+  {fMRI}}.
+\newblock \emph{\bibinfo{journal}{{NeuroImage}}}
+  \textbf{\bibinfo{volume}{180}}, \bibinfo{pages}{594--608}
+  (\bibinfo{year}{2018}).
+
+\bibitem{RoyEtal19}
+\bibinfo{author}{Roy, D.~S.} \emph{et~al.}
+\newblock \bibinfo{title}{Brain-wide mapping of contextual fear memory engram
+  ensembles supports the dispersed engram complex hypothesis}.
+\newblock \emph{\bibinfo{journal}{{bioRxiv}}}
+  \textbf{\bibinfo{volume}{doi.org/10.1101/668483}} (\bibinfo{year}{2019}).
+
+\bibitem{LiegEtal19}
+\bibinfo{author}{Li\'{e}geois, R.} \emph{et~al.}
+\newblock \bibinfo{title}{Resting brain dynamics at different timescales
+  capture distinct aspects of human behavior}.
+\newblock \emph{\bibinfo{journal}{Nature Communications}}
+  \textbf{\bibinfo{volume}{10}}, \bibinfo{pages}{1--9} (\bibinfo{year}{2019}).
+
+\bibitem{ChanGlov10}
+\bibinfo{author}{Chang, C.} \& \bibinfo{author}{Glover, G.~H.}
+\newblock \bibinfo{title}{Time-frequency dynamics of resting-state brain
+  connectivity measured with f{MRI}}.
+\newblock \emph{\bibinfo{journal}{{NeuroImage}}} \textbf{\bibinfo{volume}{50}},
+  \bibinfo{pages}{81--98} (\bibinfo{year}{2010}).
+
+\bibitem{ZhenEtal19}
+\bibinfo{author}{Zheng, M.}, \bibinfo{author}{Allard, A.},
+  \bibinfo{author}{Hagmann, P.} \& \bibinfo{author}{Serrano, M. . .~A.}
+\newblock \bibinfo{title}{Geometric renormalization unravels self-similarity of
+  the multiscale human connectome}.
+\newblock \emph{\bibinfo{journal}{{arXiv}}}
+  \textbf{\bibinfo{volume}{1904.11793}} (\bibinfo{year}{2019}).
+
+\bibitem{BaldEtal17}
+\bibinfo{author}{Baldassano, C.} \emph{et~al.}
+\newblock \bibinfo{title}{Discovering event structure in continuous narrative
+  perception and memory}.
+\newblock \emph{\bibinfo{journal}{Neuron}} \textbf{\bibinfo{volume}{95}},
+  \bibinfo{pages}{709--721} (\bibinfo{year}{2017}).
+
+\bibitem{HassEtal15}
+\bibinfo{author}{Hasson, U.}, \bibinfo{author}{Chen, J.} \&
+  \bibinfo{author}{Honey, C.~J.}
+\newblock \bibinfo{title}{Hierarchical process memory: memory as an integral
+  component of information processing}.
+\newblock \emph{\bibinfo{journal}{Trends in Cognitive Sciences}}
+  \textbf{\bibinfo{volume}{19}}, \bibinfo{pages}{304--315}
+  (\bibinfo{year}{2015}).
+
+\bibitem{HoneEtal12a}
+\bibinfo{author}{Honey, C.~J.} \emph{et~al.}
+\newblock \bibinfo{title}{Slow cortical dynamics and the accumulation of
+  information over long timescales}.
+\newblock \emph{\bibinfo{journal}{Neuron}} \textbf{\bibinfo{volume}{76}},
+  \bibinfo{pages}{423--434} (\bibinfo{year}{2012}).
+
+\bibitem{LernEtal11}
+\bibinfo{author}{Lerner, Y.}, \bibinfo{author}{Honey, C.~J.},
+  \bibinfo{author}{Silbert, L.~J.} \& \bibinfo{author}{Hasson, U.}
+\newblock \bibinfo{title}{Topographic mapping of a hierarchy of temporal
+  receptive windows using a narrated story}.
+\newblock \emph{\bibinfo{journal}{The Journal of Neuroscience}}
+  \textbf{\bibinfo{volume}{31}}, \bibinfo{pages}{2906--2915}
+  (\bibinfo{year}{2011}).
+
+\bibitem{LernEtal14}
+\bibinfo{author}{Lerner, Y.}, \bibinfo{author}{Honey, C.~J.},
+  \bibinfo{author}{Katkov, M.} \& \bibinfo{author}{Hasson, U.}
+\newblock \bibinfo{title}{Temporal scaling of neural responses to compressed
+  and dilated natural speech}.
+\newblock \emph{\bibinfo{journal}{Journal of Neurophysiology}}
+  \textbf{\bibinfo{volume}{111}}, \bibinfo{pages}{2433--2444}
+  (\bibinfo{year}{2014}).
+
+\bibitem{ChieHone19}
+\bibinfo{author}{Chien, H.-Y.~S.} \& \bibinfo{author}{Honey, C.~J.}
+\newblock \bibinfo{title}{Constructing and forgetting temporal context in the
+  human cerebral cortex}.
+\newblock \emph{\bibinfo{journal}{{bioRxiv}}}
+  \textbf{\bibinfo{volume}{doi.org/10.1101/761593}} (\bibinfo{year}{2019}).
+
+\bibitem{LeeEtal20}
+\bibinfo{author}{Lee, C.~S.}, \bibinfo{author}{Aly, M.} \&
+  \bibinfo{author}{Baldassano, C.}
+\newblock \bibinfo{title}{Anticipation of temporally structured events in the
+  brain}.
+\newblock \emph{\bibinfo{journal}{{bioRxiv}}}
+  \textbf{\bibinfo{volume}{10.1101/2020.10.14.338145}} (\bibinfo{year}{2020}).
+
+\bibitem{FallEtal20}
+\bibinfo{author}{Fallon, J.}, \bibinfo{author}{Ward, P. G.~D.},
+  \bibinfo{author}{Parkes, L.} \& \bibinfo{author}{Oldham, S.}
+\newblock \bibinfo{title}{Timescales of spontaneous {fMRI} fluctuations relate
+  to structural connectivity in the brain}.
+\newblock \emph{\bibinfo{journal}{Network Neuroscience}}
+  \textbf{\bibinfo{volume}{4}}, \bibinfo{pages}{788--806}
+  (\bibinfo{year}{2020}).
+
+\bibitem{ShapEtal19}
+\bibinfo{author}{Shappell, H.}, \bibinfo{author}{Caffo, B.~S.},
+  \bibinfo{author}{Pekar, J.~J.} \& \bibinfo{author}{Lindquist, M.~A.}
+\newblock \bibinfo{title}{Improved state change estimation in dynamic
+  functional connectivity using hidden semi-{M}arkov models}.
+\newblock \emph{\bibinfo{journal}{{NeuroImage}}}
+  \textbf{\bibinfo{volume}{191}}, \bibinfo{pages}{243--257}
+  (\bibinfo{year}{2019}).
+
+\bibitem{VidaEtal18}
+\bibinfo{author}{Vidaurre, D.} \emph{et~al.}
+\newblock \bibinfo{title}{Discovering dynamic brain neworks from big data in
+  rest and task}.
+\newblock \emph{\bibinfo{journal}{{NeuroImage}}}
+  \textbf{\bibinfo{volume}{180}}, \bibinfo{pages}{646--656}
+  (\bibinfo{year}{2018}).
+
+\bibitem{AlleEtal12b}
+\bibinfo{author}{Allen, E.~A.} \emph{et~al.}
+\newblock \bibinfo{title}{Tracking whole-brain connectivity dynamics in the
+  resting state}.
+\newblock \emph{\bibinfo{journal}{Cerebral Cortex}}
+  \textbf{\bibinfo{volume}{24}}, \bibinfo{pages}{663--676}
+  (\bibinfo{year}{2012}).
+
+\bibitem{SimoChan20}
+\bibinfo{author}{Simony, E.} \& \bibinfo{author}{Chang, C.}
+\newblock \bibinfo{title}{Analysis of stimulus-induced brain dynamics during
+  naturalistic paradigms}.
+\newblock \emph{\bibinfo{journal}{{NeuroImage}}}
+  \textbf{\bibinfo{volume}{216}}, \bibinfo{pages}{116461}
+  (\bibinfo{year}{2020}).
+
+\bibitem{Zar10}
+\bibinfo{author}{Zar, J.~H.}
+\newblock \emph{\bibinfo{title}{Biostatistical analysis}}
+  (\bibinfo{publisher}{Prentice-Hall}, \bibinfo{year}{2010}).
+
+\bibitem{TippBish99}
+\bibinfo{author}{Tipping, M.~E.} \& \bibinfo{author}{Bishop, C.~M.}
+\newblock \bibinfo{title}{Probabilistic principal component analysis}.
+\newblock \emph{\bibinfo{journal}{Journal of Royal Statistical Society, Series
+  {B}}} \textbf{\bibinfo{volume}{61}}, \bibinfo{pages}{611--622}
+  (\bibinfo{year}{1999}).
+
+\bibitem{Spea04}
+\bibinfo{author}{Spearman, C.}
+\newblock \bibinfo{title}{General intelligence, objectively determined and
+  measured}.
+\newblock \emph{\bibinfo{journal}{Americal Journal of Psychology}}
+  \textbf{\bibinfo{volume}{15}}, \bibinfo{pages}{201--292}
+  (\bibinfo{year}{1904}).
+
+\bibitem{JuttHera91}
+\bibinfo{author}{Jutten, C.} \& \bibinfo{author}{Herault, J.}
+\newblock \bibinfo{title}{Blind separation of sources, part {I}: an adaptive
+  algorithm based on neuromimetic architecture}.
+\newblock \emph{\bibinfo{journal}{Signal Processing}}
+  \textbf{\bibinfo{volume}{24}}, \bibinfo{pages}{1--10} (\bibinfo{year}{1991}).
+
+\bibitem{ComoEtal91}
+\bibinfo{author}{Comon, P.}, \bibinfo{author}{Jutten, C.} \&
+  \bibinfo{author}{Herault, J.}
+\newblock \bibinfo{title}{Blind separation of sources, part {II}: problems
+  statement}.
+\newblock \emph{\bibinfo{journal}{Signal Processing}}
+  \textbf{\bibinfo{volume}{24}}, \bibinfo{pages}{11--20}
+  (\bibinfo{year}{1991}).
+
+\bibitem{vandHint08}
+\bibinfo{author}{van~der Maaten, L. J.~P.} \& \bibinfo{author}{Hinton, G.~E.}
+\newblock \bibinfo{title}{Visualizing high-dimensional data using {t-SNE}}.
+\newblock \emph{\bibinfo{journal}{Journal of Machine Learning Research}}
+  \textbf{\bibinfo{volume}{9}}, \bibinfo{pages}{2579--2605}
+  (\bibinfo{year}{2008}).
+
+\bibitem{McInEtal18}
+\bibinfo{author}{McInnes, L.}, \bibinfo{author}{Healy, J.} \&
+  \bibinfo{author}{Melville, J.}
+\newblock \bibinfo{title}{{UMAP}: uniform manifold approximation and projection
+  for dimension reduction}.
+\newblock \emph{\bibinfo{journal}{{arXiv}}} \textbf{\bibinfo{volume}{1802}}
+  (\bibinfo{year}{2018}).
+
+\bibitem{LeeSeun99}
+\bibinfo{author}{Lee, D.~D.} \& \bibinfo{author}{Seung, H.~S.}
+\newblock \bibinfo{title}{Learning the parts of objects by non-negative matrix
+  factorization}.
+\newblock \emph{\bibinfo{journal}{Nature}} \textbf{\bibinfo{volume}{401}},
+  \bibinfo{pages}{788--791} (\bibinfo{year}{1999}).
+
+\bibitem{MannEtal14b}
+\bibinfo{author}{Manning, J.~R.}, \bibinfo{author}{Ranganath, R.},
+  \bibinfo{author}{Norman, K.~A.} \& \bibinfo{author}{Blei, D.~M.}
+\newblock \bibinfo{title}{Topographic factor analysis: a {B}ayesian model for
+  inferring brain networks from neural data}.
+\newblock \emph{\bibinfo{journal}{{PLoS} One}} \textbf{\bibinfo{volume}{9}},
+  \bibinfo{pages}{e94914} (\bibinfo{year}{2014}).
+
+\bibitem{GersEtal11}
+\bibinfo{author}{Gershman, S.~J.}, \bibinfo{author}{Blei, D.~M.},
+  \bibinfo{author}{Pereira, F.} \& \bibinfo{author}{Norman, K.~A.}
+\newblock \bibinfo{title}{A topographic latent source model for {fMRI} data}.
+\newblock \emph{\bibinfo{journal}{{NeuroImage}}} \textbf{\bibinfo{volume}{57}},
+  \bibinfo{pages}{89--100} (\bibinfo{year}{2011}).
+
+\bibitem{MairEtal09a}
+\bibinfo{author}{Mairal, J.~B.}, \bibinfo{author}{Bach, F.},
+  \bibinfo{author}{Ponce, J.} \& \bibinfo{author}{Sapiro, G.}
+\newblock \bibinfo{title}{Online dictionary learning for sparse coding}.
+\newblock \emph{\bibinfo{journal}{Proceedings of the International Conference
+  on Machine Learning}} \bibinfo{pages}{689--696} (\bibinfo{year}{2009}).
+
+\bibitem{MairEtal09b}
+\bibinfo{author}{Mairal, J.}, \bibinfo{author}{Ponce, J.},
+  \bibinfo{author}{Sapiro, G.}, \bibinfo{author}{Zisserman, A.} \&
+  \bibinfo{author}{Bach, F.~R.}
+\newblock \bibinfo{title}{Supervised dictionary learning}.
+\newblock \emph{\bibinfo{journal}{Advances in Neural Information Processing
+  Systems}} \bibinfo{pages}{1033--1040} (\bibinfo{year}{2009}).
+
+\bibitem{HintSala06}
+\bibinfo{author}{Hinton, G.~E.} \& \bibinfo{author}{Salakhutdinov, R.~R.}
+\newblock \bibinfo{title}{Reducing the dimensionality of data with neural
+  networks}.
+\newblock \emph{\bibinfo{journal}{Science}} \textbf{\bibinfo{volume}{313}},
+  \bibinfo{pages}{504--507} (\bibinfo{year}{2006}).
+
+\bibitem{Newm05}
+\bibinfo{author}{Newman, M. E.~J.}
+\newblock \bibinfo{title}{A measure of betweenness centrality based on random
+  walks}.
+\newblock \emph{\bibinfo{journal}{Social Networks}}
+  \textbf{\bibinfo{volume}{27}}, \bibinfo{pages}{39--54}
+  (\bibinfo{year}{2005}).
+
+\bibitem{OpsaEtal10}
+\bibinfo{author}{Opsahl, T.}, \bibinfo{author}{Agneessens, F.} \&
+  \bibinfo{author}{Skvoretz, J.}
+\newblock \bibinfo{title}{Node centrality in weighted networks: generalizing
+  degree and shortest paths}.
+\newblock \emph{\bibinfo{journal}{Social Networks}}
+  \textbf{\bibinfo{volume}{32}}, \bibinfo{pages}{245--251}
+  (\bibinfo{year}{2010}).
+
+\bibitem{Bart04}
+\bibinfo{author}{Barth\'{e}lemy, M.}
+\newblock \bibinfo{title}{Betweenness centrality in large complex networks}.
+\newblock \emph{\bibinfo{journal}{{European} Physical Journal {B}}}
+  \textbf{\bibinfo{volume}{38}}, \bibinfo{pages}{163--168}
+  (\bibinfo{year}{2004}).
+
+\bibitem{GeisEtal08}
+\bibinfo{author}{Geisberger, R.}, \bibinfo{author}{Sanders, P.} \&
+  \bibinfo{author}{Schultes, D.}
+\newblock \bibinfo{title}{Better approximation of betweenness centrality}.
+\newblock \emph{\bibinfo{journal}{Proceedings of the Meeting on Algorithm
+  Engineering and Experiments}} \bibinfo{pages}{90--100}
+  (\bibinfo{year}{2008}).
+
+\bibitem{Free77}
+\bibinfo{author}{Freeman, L.~C.}
+\newblock \bibinfo{title}{A set of measures of centrality based on
+  betweenness}.
+\newblock \emph{\bibinfo{journal}{Sociometry}} \textbf{\bibinfo{volume}{40}},
+  \bibinfo{pages}{35--41} (\bibinfo{year}{1977}).
+
+\bibitem{Rao82}
+\bibinfo{author}{Rao, C.~R.}
+\newblock \bibinfo{title}{Diversity and dissimilarity coeficients: a unified
+  approach}.
+\newblock \emph{\bibinfo{journal}{Theoretical Population Biology}}
+  \textbf{\bibinfo{volume}{21}}, \bibinfo{pages}{24--43}
+  (\bibinfo{year}{1982}).
+
+\bibitem{Lin09}
+\bibinfo{author}{Lin, J.}
+\newblock \bibinfo{title}{Divergence measures based on the {Shannon} entropy}.
+\newblock \emph{\bibinfo{journal}{{IEEE} Transactions on Information Theory}}
+  \textbf{\bibinfo{volume}{37}}, \bibinfo{pages}{145--151}
+  (\bibinfo{year}{2009}).
+
+\bibitem{RicoSzei06}
+\bibinfo{author}{Ricotta, C.} \& \bibinfo{author}{Szeidl, L.}
+\newblock \bibinfo{title}{Towards a unifying approach to diversity measures:
+  bridging the gap between the {Shannon} entropy and {Rao's} quadratic index}.
+\newblock \emph{\bibinfo{journal}{Theoretical Population Biology}}
+  \textbf{\bibinfo{volume}{70}}, \bibinfo{pages}{237--243}
+  (\bibinfo{year}{2006}).
+
+\bibitem{Newm08}
+\bibinfo{author}{Newman, M. E.~J.}
+\newblock \bibinfo{title}{The mathematics of networks}.
+\newblock \emph{\bibinfo{journal}{The New Palgrave Encyclopedia of Economics}}
+  \textbf{\bibinfo{volume}{2}}, \bibinfo{pages}{1--12} (\bibinfo{year}{2008}).
+
+\bibitem{Bona07}
+\bibinfo{author}{Bonacich, P.}
+\newblock \bibinfo{title}{Some unique properties of eigenvector centrality}.
+\newblock \emph{\bibinfo{journal}{Social Networks}}
+  \textbf{\bibinfo{volume}{29}}, \bibinfo{pages}{555--564}
+  (\bibinfo{year}{2007}).
+
+\bibitem{LohmEtal10}
+\bibinfo{author}{Lohmann, G.} \emph{et~al.}
+\newblock \bibinfo{title}{Eigenvector centrality mapping for analyzing
+  connectivity patterns in {fMRI} data of the human brain}.
+\newblock \emph{\bibinfo{journal}{{PLoS} One}} \textbf{\bibinfo{volume}{5}},
+  \bibinfo{pages}{e10232} (\bibinfo{year}{2010}).
+
+\bibitem{HaluEtal13}
+\bibinfo{author}{Halu, A.}, \bibinfo{author}{Mondrag\'{o}n, R.~J.},
+  \bibinfo{author}{Panzarasa, P.} \& \bibinfo{author}{Bianconi, G.}
+\newblock \bibinfo{title}{Multiplex {PageRank}}.
+\newblock \emph{\bibinfo{journal}{{PLoS} One}} \textbf{\bibinfo{volume}{8}},
+  \bibinfo{pages}{e78293} (\bibinfo{year}{2013}).
+
+\bibitem{HoneEtal07}
+\bibinfo{author}{Honey, C.~J.}, \bibinfo{author}{K\"{o}tter, R.},
+  \bibinfo{author}{Breakspear, M.} \& \bibinfo{author}{Sporns, O.}
+\newblock \bibinfo{title}{Network structure of cerebral cortex shapes
+  functional connectivity on multiple time scales}.
+\newblock \emph{\bibinfo{journal}{Proceedings of the National Academy of
+  Sciences, {USA}}} \textbf{\bibinfo{volume}{104}},
+  \bibinfo{pages}{10240--10245} (\bibinfo{year}{2007}).
+
+\bibitem{Schr00}
+\bibinfo{author}{Schreiber, T.}
+\newblock \bibinfo{title}{Measuring information transfer}.
+\newblock \emph{\bibinfo{journal}{Physical Review Letters}}
+  \textbf{\bibinfo{volume}{85}}, \bibinfo{pages}{461--464}
+  (\bibinfo{year}{2000}).
+
+\bibitem{AlvaEtal05}
+\bibinfo{author}{Alvarez-Hamelin, I.}, \bibinfo{author}{Dall'Asta, L.},
+  \bibinfo{author}{Barrat, A.} \& \bibinfo{author}{Vespignani, A.}
+\newblock \bibinfo{title}{$k$-corr decomposition: a tool for the visualiztion
+  of large scale networks}.
+\newblock \emph{\bibinfo{journal}{{arXiv}}} \bibinfo{pages}{cs/0504107v2}
+  (\bibinfo{year}{2005}).
+
+\bibitem{ChriFowl10}
+\bibinfo{author}{Christakis, N.~A.} \& \bibinfo{author}{Fowler, J.~H.}
+\newblock \bibinfo{title}{Social network sensors for early detection of
+  contagious outbreaks}.
+\newblock \emph{\bibinfo{journal}{{PLoS} One}} \textbf{\bibinfo{volume}{5}},
+  \bibinfo{pages}{e12948} (\bibinfo{year}{2010}).
+
+\bibitem{RubiSpor10}
+\bibinfo{author}{Rubinov, M.} \& \bibinfo{author}{Sporns, O.}
+\newblock \bibinfo{title}{Complex network measures of brain connectivity: uses
+  and interpretations}.
+\newblock \emph{\bibinfo{journal}{{NeuroImage}}} \textbf{\bibinfo{volume}{52}},
+  \bibinfo{pages}{1059--1069} (\bibinfo{year}{2010}).
+
+\bibitem{EstrRodr05}
+\bibinfo{author}{Estrada, E.} \& \bibinfo{author}{Rodr\'{i}guez-Vel\'{a}zquez,
+  J.~A.}
+\newblock \bibinfo{title}{Subraph centrality in complex networks}.
+\newblock \emph{\bibinfo{journal}{Physical Review {E}}}
+  \textbf{\bibinfo{volume}{71}}, \bibinfo{pages}{056103}
+  (\bibinfo{year}{2005}).
+
+\bibitem{ThomEtal18}
+\bibinfo{author}{Thompson, W.~H.}, \bibinfo{author}{Richter, C.~G.},
+  \bibinfo{author}{Plav\'{e}n-Sigray, P.} \& \bibinfo{author}{Fransson, P.}
+\newblock \bibinfo{title}{Simulations to benchmark time-varying connectivity
+  methods for f{MRI}}.
+\newblock \emph{\bibinfo{journal}{{PLoS} Computational Biology}}
+  \textbf{\bibinfo{volume}{14}}, \bibinfo{pages}{e1006196}
+  (\bibinfo{year}{2018}).
+
+\bibitem{CapoEtal17}
+\bibinfo{author}{Capota, M.} \emph{et~al.}
+\newblock \bibinfo{title}{Brain imaging analysis kit} (\bibinfo{year}{2017}).
+
+\bibitem{NoceWrig06}
+\bibinfo{author}{Nocedal, J.} \& \bibinfo{author}{Wright, S.~J.}
+\newblock \emph{\bibinfo{title}{Numerical optimization}}
+  (\bibinfo{publisher}{Springer}, \bibinfo{address}{New York, {NY}},
+  \bibinfo{year}{2006}).
+
+\bibitem{CombEtal19}
+\bibinfo{author}{Combrisson, E.} \emph{et~al.}
+\newblock \bibinfo{title}{Visbrain: a multi-purpose {GPU}-accelerated
+  open-source suite for multimodal brain data visualization}.
+\newblock \emph{\bibinfo{journal}{Frontiers in Neuroinformatics}}
+  \textbf{\bibinfo{volume}{13}}, \bibinfo{pages}{1--14}
+  (\bibinfo{year}{2019}).
+
+\bibitem{SimoEtal16b}
+\bibinfo{author}{Simony, E.}, \bibinfo{author}{Honey, C.~J.},
+  \bibinfo{author}{Chen, J.} \& \bibinfo{author}{Hasson, U.}
+\newblock \bibinfo{title}{Dynamic reconfiguration of the default mode network
+  during narrative comprehension}.
+\newblock \emph{\bibinfo{journal}{DataSpace}}
+  \textbf{\bibinfo{volume}{http://arks.princeton.edu/ark:/88435/dsp015d86p269k}} (\bibinfo{year}{2016}). 
+
+\end{thebibliography}
+
 
 \end{document}
 

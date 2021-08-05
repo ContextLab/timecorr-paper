@@ -1,13 +1,18 @@
-
-import supereeg as se
+import numpy as np
 import os
 from visbrain.objects import BrainObj, SceneObj, SourceObj
+import matplotlib
+matplotlib.use('Qt5Agg')
 
 cmap = 'autumn_r'
 
-neurosynth_dir ='../figs/neurosynth_data'
+replication_dir ='../figs/replication/'
+neurosynth_dir = os.path.join(replication_dir, 'neurosynth_data')
+fig_dir = replication_dir
 
-fig_dir = '../figs'
+# neurosynth_dir ='../figs/neurosynth_data'
+#
+# fig_dir = '../figs'
 
 bo_dir = os.path.join(neurosynth_dir, 'bos')
 
@@ -19,23 +24,17 @@ conditions = ['intact', 'paragraph', 'rest', 'word']
 
 for c in conditions:
 
+    data1 = np.load(os.path.join(bo_dir,f'{c}_1_data_largest_abs.npy'))
+    xyz1 = np.load(os.path.join(bo_dir, f'{c}_1_locs_largest_abs.npy'))
 
-    b1 = se.load(os.path.join(bo_dir,f'{c}_1_largest_abs.bo'))
-    b2 = se.load(os.path.join(bo_dir,f'{c}_2_largest_abs.bo'))
-    b3 = se.load(os.path.join(bo_dir,f'{c}_3_largest_abs.bo'))
-    b4 = se.load(os.path.join(bo_dir,f'{c}_4_largest_abs.bo'))
+    data2 = np.load(os.path.join(bo_dir, f'{c}_2_data_largest_abs.npy'))
+    xyz2 = np.load(os.path.join(bo_dir, f'{c}_2_locs_largest_abs.npy'))
 
-    data1 = b1.get_data().values.ravel()
-    xyz1 = b1.locs.values
+    data3= np.load(os.path.join(bo_dir, f'{c}_3_data_largest_abs.npy'))
+    xyz3 = np.load(os.path.join(bo_dir, f'{c}_3_locs_largest_abs.npy'))
 
-    data2 = b2.get_data().values.ravel()
-    xyz2 = b2.locs.values
-
-    data3 = b3.get_data().values.ravel()
-    xyz3 = b3.locs.values
-
-    data4 = b4.get_data().values.ravel()
-    xyz4 = b4.locs.values
+    data4 = np.load(os.path.join(bo_dir, f'{c}_4_data_largest_abs.npy'))
+    xyz4 = np.load(os.path.join(bo_dir, f'{c}_4_locs_largest_abs.npy'))
 
 
     template_brain = 'B3'
