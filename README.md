@@ -1,5 +1,7 @@
 # What is the neural code?
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5165254.svg)](https://doi.org/10.5281/zenodo.5165254)
+
 This repository contains data and code used to produce the paper [_High-level cognition during story listening is reflected in high-order dynamic correlations in neural activity patterns_](https://doi.org/10.1101/763821) by Lucy L.W. Owen, Thomas H. Chang, and Jeremy R. Manning.  You may also be interested in our [timecorr](https://timecorr.readthedocs.io/en/latest/) Python toolbox for calculating high-order dynamic correlations in timeseries data; the methods implemented in our timecorr toolbox feature prominently in our paper.
 
 This repository is organized as follows:
@@ -15,7 +17,7 @@ root
     └── figs : pdf copies of each figure
 ```
 
-Content of the data folder is provided [here](https://drive.google.com/file/d/1CZYe8eyAkZFuLqfwwlKoeijgkjdW6vFs/view?usp=sharing).
+Content of the data folder is provided [here](https://drive.google.com/file/d/1IOkBzy8NDxOGghIkx4UI_C43i0CfJGns/view?usp=sharing).
 We also include a Dockerfile to reproduce our computational environment. Instruction for use are below:
 
 
