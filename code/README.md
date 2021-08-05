@@ -1,6 +1,6 @@
 This folder contains notebooks to replicate analyses and figures:
 
-To replicate the figures for the analysis, download the content of the data folder provided [here](https://drive.google.com/file/d/1CZYe8eyAkZFuLqfwwlKoeijgkjdW6vFs/view?usp=sharing), put the zip file in `timecorr_paper` folder and extract it.
+To replicate the figures for the analysis, download the content of the data folder provided [here](https://drive.google.com/u/0/uc?id=1IOkBzy8NDxOGghIkx4UI_C43i0CfJGns&export=download), put the zip file in `timecorr_paper` folder and extract it.
 
 Figure 2. Run `notebooks/synthetic_data.ipynb`
 
