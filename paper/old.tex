@@ -15,11 +15,13 @@
 
 \newcommand{\kernelshape}{S1}
 \newcommand{\kernelwidth}{S2}
-\newcommand{\intact}{S3}
-\newcommand{\para}{S4}
-\newcommand{\word}{S5}
-\newcommand{\rest}{S6}
-\newcommand{\pca}{S7}
+\newcommand{\timeheatmap}{S3}
+\newcommand{\features}{S4}
+\newcommand{\intact}{S5}
+\newcommand{\para}{S6}
+\newcommand{\word}{S7}
+\newcommand{\rest}{S8}
+\newcommand{\pca}{S9}
 
 \title{High-level cognition during story listening is reflected in
   high-order dynamic correlations in neural activity patterns}
@@ -87,7 +89,7 @@ patterns~\citep[e.g.,][]{MannEtal18, FongEtal19}.  An emerging theme
 in this literature is that cognition is mediated by dynamic
 interactions between brain structures~\citep{Gros88, Fris00, SporHone06, BassEtal06,
   Turk13, DemeEtal19, SoloEtal19, LuriEtal18, PretEtal17, ZouEtal19,
-  MackEtal17}.
+  MackEtal17, BresKels01, McIn00}.
 
 
 \begin{figure}[tp]
@@ -268,8 +270,9 @@ different synthetic datasets in a kernel-dependent way.
     correlations between the vectorized upper triangles of the
     recovered correlation matrix at each timepoint and either the true
     underlying correlation at each timepoint or a reference
-    correlation matrix.  (The averages are taken across 10 different
-    randomly generated synthetic datasets of the given category.)
+    correlation matrix.  (The averages are taken across 100 different
+    randomly generated synthetic datasets of each given category, each
+    with $K = 50$ features and $T = 300$ timepoints.)
     Error ribbons denote 95\% confidence intervals (taken across
     datasets). Different colors denote different kernel shapes, and
     the shading within each color family denotes the kernel width
@@ -310,7 +313,7 @@ Eqns.~\ref{eqn:corr} and \ref{eqn:timecorr}).
 When the correlation dynamics were unstructured in time
 (Fig.~\ref{fig:synthetic}b), a Dirac $\delta$ kernel (infinitely
 narrow) performed best.  This is because, when every timepoint's
-correlations are independent of the correlations at every other
+correlations are independent from the correlations at every other
 timepoint, averaging data over time dilutes the available signal.
 Following a similar pattern, holding kernel shape fixed, narrower
 kernel parameters better recovered randomly varying correlations.
@@ -321,7 +324,7 @@ dynamic first-order correlations from synthetic data, we generated an
 analogous second set of synthetic datasets that we designed to exhibit
 known dynamic first-order \textit{and} second-order correlations (see
 \textit{Synthetic data: simulating dynamic higher-order
-  correlations}).  We generated a total of 40 datasets that varied in
+  correlations}).  We generated a total of 400 datasets that varied in
 how the first-order and second-order correlations changed over time.
 We then repeatedly applied Equation~\ref{eqn:timecorr} using the
 overall best-performing kernel from our first-order tests (a Laplace
@@ -335,12 +338,14 @@ second-order correlations from the synthetic data
 for longer intervals, or changed gradually (constant, ramping, and
 event datasets), recovery performance was relatively high, and we were
 better able to recover dynamic first-order correlations than
-second-order correlations.  We expected that this would happen, given
-that errors in our estimation procedure at lower orders necessarily
-propagate to higher orders (since lower-order correlations are used to
-estimate higher-order correlations).  Interestingly, we also found
-that when the correlations were particularly \textit{un}stable (random
-datasets), we better recovered second-order correlations.
+second-order correlations.  This is because errors in our \textit{estimation}
+procedure at lower orders necessarily propagate to higher orders
+(since lower-order correlations are used to estimate higher-order
+correlations).  Conversely, when the correlations were particularly
+\textit{un}stable (random datasets), we better recovered second-order
+correlations.  This is because noise in our \textit{data generation}
+procedure propagates from higher orders to lower orders (see
+\textit{Synthetic data: simulating dynamic high-order correlations}).
 
 \begin{figure}[tp]
   \centering
@@ -349,27 +354,55 @@ datasets), we better recovered second-order correlations.
     between the vectorized upper triangles of the recovered
     first-order and second-order correlation matrices and the true
     (simulated) first-order and second order correlation matrices at each
-    timepoint and for each synthetic dataset.  (The averages are taken across 10 different
-    randomly generated synthetic datasets of the given category.)
+    timepoint and for each synthetic dataset.  (The averages are taken across 100 different
+    randomly generated synthetic datasets of each given category, each
+    with $K = 10$ features and $T = 300$ timepoints.)
     Error ribbons denote 95\% confidence intervals (taken across
     datasets).  For a complete description of each synthetic dataset,
     see \textit{Synthetic data: simulating dynamic higher-order
       correlations}.  All estimates represented in this figure were
     computed using a Laplace kernel
-    (width~$=20$).  \textbf{a. Constant correlations.}  These datasets
+    (width~$=20$).  \textbf{Constant.}  These datasets
     have stable (unchanging) underlying second-order correlation
-    matrices.  \textbf{b. Random correlations.} These datasets are
+    matrices.  \textbf{Random.} These datasets are
     generated using a new independently drawn second-order correlation
-    matrix at each timepoint.  \textbf{c. Ramping correlations.}
+    matrix at each timepoint.  \textbf{Ramping.}
     These datasets are generated by smoothly varying the underlying
     second-order correlations between the randomly drawn correlation
-    matrices at the first and last timepoints.  \textbf{d. Event-based
-      correlations.}  These datasets are each generated using five
+    matrices at the first and last timepoints.  \textbf{Event.}  These datasets are each generated using five
     randomly drawn second-order correlation matrices that each remain
     stable for a fifth of the total timecourse.  The
-    vertical lines denote event boundaries.}
+    vertical lines denote event boundaries.  Note that the ``dips''
+    and ``ramps'' at the boundaries of sharp transitions (e.g., the
+    beginning and ends of the ``constant'' and ``ramping'' datasets,
+    and at the event boundaries of the ``event'' datasets) are
+    finite-sample effects that reflect the reduced numbers of samples
+    that may be used to accurately estimate correlations at sharp
+    boundaries.}
   \label{fig:higher_order_sims}
 \end{figure}
+
+
+We also examined the impact of the data duration (Fig.~\timeheatmap)
+and complexity (number of zero-order features; Fig.~\features) on our
+ability to accurately recover ground truth first-order and
+second-order dynamic correlations.  In general, we found that our approach
+better recovers ground truth dynamic correlations from longer duration
+timeseries data.  We also found that our approach tends to best recover data generated
+using fewer zero-order features (i.e., lower complexity), although
+this tendency was not strictly monotonic.  Further, because our data
+generation procedure requires $\mathcal{O}(K^{4})$ memory to generate
+a second-order timeseries with $K$ zero-order features, we were not
+able to fully explore how the number of zero-order features affects
+recovery accuracy as the number of features gets larger (e.g., as it
+approaches the number of features present in the fMRI data we examine
+below).  Although we were not able to formally test this to our
+satisfaction, we expect that accurately estimating dynamic high-order
+correlations would require data with many more zero-order features
+than we were able to simulate.  Our reasoning is that
+high-order correlations necessarily involve larger numbers of
+lower-order features, so achieving adequate ``resolution'' high-order
+timeseries might require many low-order features.
 
 Taken together, our explorations using synthetic data indicated that
 we are able to partially, but not perfectly, recover ground truth
@@ -432,9 +465,10 @@ activity dynamics.
     the maximum decoding accuracy within each experimental condition.
     \textbf{b.~Normalized timepoint decoding accuracy as a function of order:
       PCA.}  This panel displays the same results as Panel a, but here
-    each curve has been normalized to have a maximum value of 1 and a
-    minimum value of 0 (including the upper and lower bounds of the
-    respective 95\% confidence intervals).  Panels a and b used PCA to
+    each curve has been normalized to be bounded between 0 and 1
+    (inclusive) by subtracting the minimum accuracy
+    (across all folds and orders) and then dividing by the maximum
+    accuracy (again, across all folds and orders).  Panels a and b used PCA to
     project each high-dimensional pattern of dynamic correlations onto
     a lower-dimensional space.  \textbf{c.~Timepoint decoding accuracy as a
       function of order: eigenvector centrality.} This panel is in the
@@ -654,7 +688,7 @@ patterns of first-order network dynamics has been suggested by or
 proposed in myriad empirical studies and
 reviews~\citep[e.g.,][]{DemeEtal19, Turk13, LuriEtal18, FongEtal19,
   ParkEtal18b, PretEtal17, MannEtal18, RoyEtal19, LiegEtal19, ZouEtal19,
-  ChanGlov10, GonzEtal19}.  Our study extends this line of work by
+  ChanGlov10, GonzEtal19, McIn00, BresKels01}.  Our study extends this line of work by
 finding cognitively relevant \textit{higher-order} network dynamics
 that reflect ongoing cognition.  Our findings also complement other work
 that uses graph theory and topology to characterize how brain networks
@@ -683,6 +717,19 @@ multistability, etc. However, our decoding analyses do indicate that
 higher-order dynamics are consistent across individuals, and therefore
 unlikely to reflect non-stimulus-driven dynamics that are unlikely to
 be similar across individuals.
+
+One limitation of our approach relates to how noise propagates in our
+estimation procedure.  Specifically, our procedure for estimating
+high-order dynamic correlations depends on estimates of lower-order
+dynamic correlations.  This means that our measures of which
+higher-order patterns are reliable and stable across experimental
+conditions are partially confounded with the stability of lower-order
+patterns.  Prior work suggests that the stability of what we refer to
+here as first-order dynamics likely varies across the experimental
+conditions we examined~\citep{SimoEtal16}.  Therefore a caveat to our
+claim that richer stimuli evoke more stable higher-order dynamics is
+that our approach assumes that those high-order dynamics reflect
+relations or interactions between lower-order features.
 
 Another potential limitation of our approach relates to recent work
 suggesting that the brain undergoes rapid state changes, for example
@@ -790,12 +837,12 @@ $\mathbf{X}(\cdot, j)$ using~\citep{Pear01}:
                                                               j)
                                                               -
                                                               \bar{\mathbf{X}}(\cdot, j)\right)}{\sqrt{\sum_{t=1}^T
-                                                              \sigma^2_{\mathbf{X}(\cdot, i)} 
+                                                              \sigma^2_{\mathbf{X}(\cdot, i)}
                                                               \sigma^2_{\mathbf{X}(\cdot, j)}}},~\mathrm{where}\label{eqn:corr}\\
   \bar{\mathbf{X}}(\cdot, k) &= \frac{1}{T}\sum_{t=1}^T
                                \mathbf{X}(t, k),~\mathrm{and}\\
   \sigma^2_{\mathbf{X}(\cdot, k)} &= \frac{1}{T}\sum_{t=1}^T \left( \mathbf{X}(t, k) -
-                                    \bar{\mathbf{X}}(\cdot, k) \right)^2 
+                                    \bar{\mathbf{X}}(\cdot, k) \right)^2
 \end{align}
 We can generalize this formula to compute time-varying correlations by
 incorporating a \textit{kernel function} that takes a time $t$ as
@@ -1056,9 +1103,9 @@ information about which timepoint in a story participants were
 listening to.
 
 \subsubsection*{Synthetic data: simulating dynamic first-order correlations}
-We constructed a total of 40 different multivariate timeseries,
+We constructed a total of 400 different multivariate timeseries,
 collectively reflecting a total of 4 qualitatively different patterns
-of dynamic first-order correlations (i.e., 10 datasets reflecting each type of
+of dynamic first-order correlations (i.e., 100 datasets reflecting each type of
 dynamic pattern).  Each timeseries comprised 50 features (dimensions)
 that varied over 300 timepoints.  The observations at each timepoint
 were drawn from a zero-mean multivariate Gaussian distribution with a
@@ -1071,7 +1118,7 @@ timepoint $t$, $p(s_t) = p(s_t | s_{\backslash t})$.
 \paragraph*{Constant.}  We generated data with stable underlying
 correlations to evaluate how Equation~\ref{eqn:timecorr} characterized
 correlation ``dynamics'' when the ground truth correlations were
-static.  We constructed 10 multivariate timeseries whose observations
+static.  We constructed 100 multivariate timeseries whose observations
 were each drawn from a single (stable) Gaussian distribution.  For
 each dataset (indexed by $m$), we constructed a random covariance matrix,
 $\mathbf{\Sigma}_m$:
@@ -1083,10 +1130,10 @@ $\mathbf{\Sigma}_m$:
   $i, j \in \left[1, 2, ..., 50 \right]$.  In other words, all of the
   observations (for each of the 300 timepoints) within each dataset
   were drawn from a multivariate Gaussian distribution with the same
-  covariance matrix, and the 10 datasets each used a different
+  covariance matrix, and the 100 datasets each used a different
   covariance matrix.
-  
-  \paragraph*{Random.}  We generated a second set of 10 synthetic
+
+  \paragraph*{Random.}  We generated a second set of 100 synthetic
   datasets whose observations at each timepoint were drawn from a
   Gaussian distribution with a new randomly constructed (using
   Eqn.~\ref{eqn:randcorr}) covariance matrix.  Because each
@@ -1095,8 +1142,8 @@ $\mathbf{\Sigma}_m$:
   provided a test of reconstruction accuracy in the absence of any
   meaningful underlying temporal structure in the dynamic correlations
   underlying the data.
-  
-  \paragraph*{Ramping.}  We generated a third set of 10 synthetic
+
+  \paragraph*{Ramping.}  We generated a third set of 100 synthetic
   datasets whose underlying correlations changed gradually over time.
   For each dataset, we constructed two \textit{anchor} covariance
   matrices using Equation~\ref{eqn:randcorr},
@@ -1114,8 +1161,8 @@ to evaluate the recovery of dynamic correlations when each timepoint's
 correlation matrix is unique (as in the random datasets), but where
 the correlation dynamics are structured and exhibit first-order
 autocorrelations (as in the constant datasets).
-  
-\paragraph*{Event.} We generated a fourth set of 10 synthetic datasets
+
+\paragraph*{Event.} We generated a fourth set of 100 synthetic datasets
 whose underlying correlation matrices exhibited prolonged intervals of
 stability, interspersed with abrupt changes.  For each dataset, we
 used Equation~\ref{eqn:randcorr} to generate 5 random covariance
@@ -1139,45 +1186,66 @@ order $n$ correlations given a timeseries of order $n - 1$ correlations,
 for any $n > 1$.  Finally, given the order $n$ timeseries, we can
 reverse the preceding process to generate an order $n - 1$ timeseries, an
 order $n - 2$ order timeseries, and so on, until we obtain an order 0
-timeseries of simulated data that reflects the chosen high-order dynamics.
+timeseries of simulated data that reflects the chosen high-order
+dynamics.
 
-The central mathematical operations in our procedure are two bookkeeping
-functions, $\mathrm{vec}(\cdot)$ and $\mathrm{mat}(\cdot)$.  The
-$\mathrm{vec}(\cdot)$ function takes as input a $K \times K$ symmetric
-matrix and returns as output a
-$\left(\frac{K^2 - K}{2} + K\right)$-dimensional column vector
-containing the entries in the upper triangle and diagonal.  The
-$\mathrm{mat}(\cdot)$ function inverts $\mathrm{vec}(\cdot)$ by taking
-as input a $\left(\frac{K^2 - K}{2} + K\right)$-dimensional column
-vector and returning a $K \times K$ symmetric matrix as output.  We
-can then generate an order $n$ correlation matrix (for one timepoint, $t$) from an order
-$n - 1$ template (from the same timepoint) as follows:
-\begin{align}
-  \mathbf{\Sigma_{n}}(t) &= \mathrm{mat}(\mathrm{vec}(\mathbf{\Sigma_{n-1}}(t)) \otimes \mathrm{vec}(\mathbf{\Sigma_{n-1}}(t))^\top).\label{eqn:veccorr}
-\end{align}
+The central mathematical operation in our procedure is the Kronecker
+product ($\otimes$).  The Kronecker product of a $K \times K$ matrix,
+$m_1$, with itself (i.e., $m_1 \otimes m_1$) produces a new
+$K^2 \times K^2$ matrix, $m_2$ whose entries reflect a scaled tiling
+of the entries in $m_1$.  If these tilings (scaled copies of $m_1$) are
+indexed by row and column, then the tile in the
+$i$\textsuperscript{th} row and $j$\textsuperscript{th} column
+contains the entries of $m_1$, multiplied by $m_1(i, j)$.  Following
+this pattern, the Kronecker product $m_2 \otimes m_2$ yields the
+$K^4 \times K^4$ matrix $m_3$ whose tiles are scaled copies of $m_2$.
+In general, repeated applications of the Kronecker self-product may be
+used to generate $m_{n+1} = m_n \otimes m_n$ for $n > 1$, where
+$m_{n+1}$ is a $K^{2^n} \times K^{2^n}$ matrix.  After generating a
+first-order timeseries of dynamic correlations (see \textit{Synthetic
+  data: simulating dynamic first-order correlations}), we use this
+procedure (applied independently at each timepoint) to transform it
+into a timeseries of $n$\textsuperscript{th}-order correlations.  When
+$m_{n+1}$ is generated in this way, the temporal structure of the full
+timeseries (i.e., constant, random, ramping, event) is preserved,
+since changes in the original first-order timeseries are also
+reflected in the scaled tilings of itself that comprise the
+higher-order matrices.
 
-Given a timeseries of order $n$ correlation matrices, we can draw an
-order $n-1$ correlation matrix for each timepoint $t$ using
-\begin{align}
- \mathbf{\sigma_{n-1}}(t) &\sim \mathcal{N}\left(\mathbf{0}, \mathbf{\Sigma_n}(t)
-                   \right)\label{eqn:highorder-gen1}\\
-  \mathbf{\Sigma_{n-1}}(t) &= \mathrm{mat}(\mathbf{\sigma_{n-1}}(t)).\label{eqn:highorder-gen2}
-  \end{align}
-  We can then use repeated applications of
-  Equations~\ref{eqn:highorder-gen1} and~\ref{eqn:highorder-gen2} in
-  order to obtain a synthetic dataset.
+Given a timeseries of $n$\textsuperscript{th}-order correlations, we
+then need to work ``backwards'' in order to generate the order-zero
+timeseries.  If the $n$\textsuperscript{th}-order correlation matrix
+at a given timepoint is $m_n$, then we can generate an order $n-1$
+correlation matrix (for $n > 1$) by taking a draw from
+$\mathcal{N}\left(0, m_n\right)$ and reshaping the resulting vector to
+have square dimensions.  To force the resulting matrix to be
+symmetric, we remove its lower triangle, and replace the lower
+triangle with (a reflected version
+of) its upper triangle.  Intuitively, the resulting re-shaped matrix will look
+like a noisy (but symmetric) version of the template matrix, $m_{n-1}$.  (When
+$n = 1$, no re-shaping is needed; the resulting $K$-dimensional vector
+may be used as the observation at the given timepoint.)  After
+independently drawing each timepoint's order $n-1$ correlation matrix
+from that timepoint's order $n$ correlation matrix, this process can
+be applied repeatedly until $n = 0$.  This results in a
+$K$-dimensional timeseries of $T$ observations containing the
+specified high-order correlations at orders 1 through $n$.  Following
+our approach to generating synthetic data exhibiting known first-order
+correlations, we constructed a total of 400 additional multivariate
+timeseries, collectively reflecting a total of 4 qualitatively
+different patterns of dynamic correlations (i.e., 100 datasets
+reflecting each type of dynamic pattern: constant, random, ramping,
+and event).  Each timeseries comprised 10 zero-order features (dimensions)
+that varied over 300 timepoints.  After applying our dynamic
+correlation estimation procedure, this yielded a 100-dimensional
+timeseries of first-order
+features that could then be used to estimate dynamic second-order
+correlations.  (We chose to use $K=10$ zero-order features for our
+higher order simulations in order to put the accuracy computations
+displayed in Figs.~\ref{fig:synthetic} and~\ref{fig:higher_order_sims}
+on a roughly even footing.)
 
- When the template first-order correlations are constructed to exhibit different
- temporal profiles (e.g., using the constant, random, ramping, and
- event procedures described above), the resulting high-order
- correlations and synthetic data will exhibit the same category of
- temporal profile. Following our approach to generating synthetic data exhibiting known
- first-order correlations, we constructed a total of 40 additional multivariate timeseries,
-collectively reflecting a total of 4 qualitatively different patterns
-of dynamic correlations (i.e., 10 datasets reflecting each type of
-dynamic pattern: constant, random, ramping, and event).
 
- 
 \subsubsection*{Functional neuroimaging data collected during story
   listening}
 We examined an fMRI dataset collected by \cite{SimoEtal16} that the
@@ -1423,5 +1491,4 @@ Analyses: L.L.W.O. and J.R.M.  Writing: L.L.W.O. and J.R.M.
 \bibliography{CDL-bibliography/cdl}
 
 \end{document}
-
 
