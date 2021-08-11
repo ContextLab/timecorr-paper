@@ -1,18 +1,14 @@
 \documentclass[english]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex    Thu Aug  5 20:28:29 2021
-%DIF ADD main.tex   Tue Aug 10 20:25:03 2021
+%DIF DEL old.tex    Wed Aug 11 10:03:33 2021
+%DIF ADD main.tex   Wed Aug 11 10:21:36 2021
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage{setspace}
-%DIF 6d6
-%DIF < \usepackage{apacite}
-%DIF -------
+\usepackage{apacite}
 \usepackage{hyperref}
-%DIF 8c7-8
-%DIF < \usepackage[sort]{natbib}
-%DIF -------
+\usepackage[sort]{natbib}
 \usepackage[font=small,labelfont=bf]{caption} %DIF > 
 \usepackage[sort&compress, numbers, super]{natbib} %DIF > 
 %DIF -------
@@ -170,22 +166,42 @@ cognitive representations and (b) neural activity patterns. One means
 of testing models of the neural code is to ask how accurately that
 model is able to ``translate'' neural activity patterns into known (or
 hypothesized) mental states or cognitive
-representations~\citep[e.g.,][]{HaxbEtal01, NormEtal06b, TongPrat12,
+representations~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[e.g.,][]{HaxbEtal01, NormEtal06b, TongPrat12,
   MitcEtal08a, KamiTong05, NishEtal11, PereEtal18, HuthEtal12,
-  HuthEtal16}.  Training decoding models on different types of neural
+  HuthEtal16}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{HaxbEtal01, NormEtal06b, TongPrat12,
+  MitcEtal08a, KamiTong05, NishEtal11, PereEtal18, HuthEtal12,
+  HuthEtal16}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .  Training decoding models on different types of neural
 features (Fig.~\ref{fig:patterns}a) can also help to elucidate which
 specific aspects of neural activity patterns are informative about
 cognition and, by extension, which types of neural activity patterns
 might compose the neural code.  For example, prior work has used
 region of interest analyses to estimate the anatomical locations of
-specific neural representations~\citep[e.g.,][]{EtzeEtal09}, or to
+specific neural representations~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[e.g.,][]{EtzeEtal09}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{EtzeEtal09}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend , or to
 compare the relative contributions to the neural code of multivariate
 activity patterns versus dynamic correlations between neural activity
-patterns~\citep[e.g.,][]{MannEtal18, FongEtal19}.  An emerging theme
+patterns~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[e.g.,][]{MannEtal18, FongEtal19}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{MannEtal18, FongEtal19}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .  An emerging theme
 in this literature is that cognition is mediated by dynamic
-interactions between brain structures~\citep{Gros88, Fris00, SporHone06, BassEtal06,
+interactions between brain structures~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep{Gros88, Fris00, SporHone06, BassEtal06,
   Turk13, DemeEtal19, SoloEtal19, LuriEtal18, PretEtal17, ZouEtal19,
-  MackEtal17, BresKels01, McIn00}.
+  MackEtal17, BresKels01, McIn00}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{Gros88, Fris00, SporHone06, BassEtal06,
+  Turk13, DemeEtal19, SoloEtal19, LuriEtal18, PretEtal17, ZouEtal19,
+  MackEtal17, BresKels01, McIn00}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .
 
 
 \begin{figure}
@@ -216,14 +232,28 @@ interactions between brain structures~\citep{Gros88, Fris00, SporHone06, BassEta
 \end{figure}
 
 Studies of the neural code to date have primarily focused on
-univariate or multivariate neural patterns~\citep[for review
-see][]{NormEtal06b}, or (more recently) on patterns of dynamic
-first-order correlations~\citep[i.e., interactions between pairs of
+univariate or multivariate neural patterns~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[for review
+see][]{NormEtal06b}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{NormEtal06b}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend , or (more recently) on patterns of dynamic
+first-order correlations \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep[i.e., interactions between pairs of
 brain structures;][]{MannEtal18, FongEtal19, LuriEtal18, PretEtal17,
-  ZouEtal19, DemeEtal19}.  What might the future of this line of work
+  ZouEtal19, DemeEtal19}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{(i.e., interactions between pairs of
+brain structures~\mbox{%DIFAUXCMD
+\cite{MannEtal18, FongEtal19, LuriEtal18, PretEtal17,
+  ZouEtal19, DemeEtal19}}\hspace{0pt}%DIFAUXCMD
+)}\DIFaddend .  What might the future of this line of work
 hold?  For example, is the neural code implemented through
-higher-order interactions between brain structures~\citep[e.g.,
-see][]{ReimEtal17}?  Second-order correlations reflect
+higher-order interactions between brain structures~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[e.g.,
+see][]{ReimEtal17}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{ReimEtal17}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend ?  Second-order correlations reflect
 \DIFdelbegin \textit{\DIFdel{homologous}} %DIFAUXCMD
 \DIFdelend \DIFaddbegin \DIFadd{homologous }\DIFaddend patterns of correlation.  In other words, if the
 dynamic patterns of correlations between two regions, $A$ and $B$, are
@@ -240,7 +270,11 @@ interaction are most reflective of high-level cognitive processes?
 
 One reason one might expect to see homologous networks in a dataset is
 related to the notion that network dynamics reflect ongoing neural
-computations or cognitive processing~\citep[e.g.,][]{BeatEtal16}.  If
+computations or cognitive processing~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[e.g.,][]{BeatEtal16}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{BeatEtal16}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .  If
 the nodes in two brain networks are interacting (within each network)
 in similar ways then, according to our characterization of network
 dynamics, we refer to the similarities between those patterns of
@@ -250,11 +284,23 @@ capture and characterize those high-order dynamics.
 
 Another central question pertains to the extent to which the neural
 code is carried by activity patterns that directly reflect ongoing
-cognition~\citep[e.g., following][]{HaxbEtal01, NormEtal06b}, versus
+cognition~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[e.g., following][]{HaxbEtal01, NormEtal06b}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{HaxbEtal01, NormEtal06b}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend , versus
 the dynamic properties of the network structure itself, independent of
-specific activity patterns in any given set of regions~\citep[e.g.,
-following][]{BassEtal06}.  For example, graph measures such as
-centrality and degree~\citep{BullSpor09} may be used to estimate how a
+specific activity patterns in any given set of regions~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[e.g.,
+following][]{BassEtal06}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{BassEtal06}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .  For example, graph measures such as
+centrality and degree~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep{BullSpor09} }\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{BullSpor09} }\hspace{0pt}%DIFAUXCMD
+}\DIFaddend may be used to estimate how a
 given brain structure is ``communicating'' with other structures,
 independently of the specific neural representations carried by those
 structures.  If one considers a brain region's position in the network
@@ -279,23 +325,44 @@ timeseries data with a dimensionality reduction step
 (Fig.~\ref{fig:patterns}b) that projects the resulting dynamic
 correlations into a low-dimensional space.  We explored two
 dimensionality reduction approaches: principle components
-analysis~\citep[PCA;][]{Pear01}, which preserves an approximately
-invertible transformation back to the original data~\citep[e.g., this
+analysis~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[PCA;][]{Pear01}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{Pear01} }\hspace{0pt}%DIFAUXCMD
+(PCA)}\DIFaddend , which preserves an approximately
+invertible transformation back to the original data~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[e.g., this
 follows related approaches taken by][]{McInJirs19, TokeSomm19,
-  GonzEtal19}; and a second non-invertible algorithm for computing
-dynamic patterns in eigenvector centrality~\citep{Land95}.  This
+  GonzEtal19}}\hspace{0pt}%DIFAUXCMD
+; }\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{McInJirs19, TokeSomm19,
+  GonzEtal19}}\hspace{0pt}%DIFAUXCMD
+, }\DIFaddend and a second non-invertible algorithm for computing
+dynamic patterns in eigenvector centrality~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep{Land95}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{Land95}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .  This
 latter approach characterizes correlations between each feature
 dimension's relative \DIFdelbegin \textit{\DIFdel{position}} %DIFAUXCMD
 \DIFdelend \DIFaddbegin \DIFadd{position }\DIFaddend in the network (at each moment
 in time) in favor of the specific activity histories of different
-features~\citep[also see][]{BetzEtal19, SizeEtal18, ReimEtal17}.
+features~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[also see][]{BetzEtal19, SizeEtal18, ReimEtal17}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{BetzEtal19, SizeEtal18, ReimEtal17}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .
 
 We validated our approach using synthetic data where the underlying
 correlations were known.  We then applied our framework to a
 neuroimaging dataset collected as participants listened to either an
 audio recording of a ten-minute story, listened to a temporally
 scrambled version of the story, or underwent a resting state
-scan~\citep{SimoEtal16}.  Temporal scrambling has been used in a
+scan~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep{SimoEtal16}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{SimoEtal16}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .  Temporal scrambling has been used in a
 growing number of studies, largely by Uri Hasson's group, to identify
 brain regions that are sensitive to higher-order and longer-timescale
 information (e.g., cross-sensory integration, rich narrative meaning,
@@ -553,8 +620,12 @@ We used across-participant temporal decoders to identify cognitively
 relevant neural patterns in fMRI data (see \DIFdelbegin \textit{\DIFdel{Forward inference
   and decoding accuracy}}%DIFAUXCMD
 \DIFdelend \DIFaddbegin \DIFadd{Forward inference
-  and decoding accuracy}\DIFaddend ).  The dataset we examined~\citep[collected
-by][]{SimoEtal16} comprised four experimental conditions that exposed
+  and decoding accuracy}\DIFaddend ).  The dataset we examined~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[collected
+by][]{SimoEtal16} }\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{SimoEtal16} }\hspace{0pt}%DIFAUXCMD
+}\DIFaddend comprised four experimental conditions that exposed
 participants to stimuli that varied systematically in how cognitively
 engaging they were.  The \DIFdelbegin \textit{\DIFdel{intact}} %DIFAUXCMD
 \DIFdel{experimental condition }\DIFdelend \DIFaddbegin \DIFadd{intact experimental condition (intact) }\DIFaddend had
@@ -753,9 +824,17 @@ different brain areas occupy in their associated networks
     features of the original space. The inflated brain plots
     display the locations of the endpoints of the 10 strongest
     (absolute value) correlations at each order, thresholded at 0.999,
-    and projected onto the cortical surface~\citep{CombEtal19}.  The
+    and projected onto the cortical surface~\DIFdelbeginFL \DIFdelFL{\mbox{%DIFAUXCMD
+\citep{CombEtal19}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\mbox{%DIFAUXCMD
+\cite{CombEtal19}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddendFL .  The
     lists of terms on the right display the top five Neurosynth
-    terms~\citep{RubiEtal17} decoded from the corresponding brain maps
+    terms~\DIFdelbeginFL \DIFdelFL{\mbox{%DIFAUXCMD
+\citep{RubiEtal17} }\hspace{0pt}%DIFAUXCMD
+}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\mbox{%DIFAUXCMD
+\cite{RubiEtal17} }\hspace{0pt}%DIFAUXCMD
+}\DIFaddendFL decoded from the corresponding brain maps
     for each order.  Each row displays data from a different
     experimental condition.  Additional maps and their corresponding
     Neurosynth terms may be found in the \DIFdelbeginFL \textit{\DIFdelFL{Supplementary
@@ -777,7 +856,11 @@ kernel parameters we examined.  Using Figure~\ref{fig:decoding}c as a
 template, the best-matching kernel was a Laplace kernel with a width
 of 50 (Fig.~\ref{fig:kernels}d; also see Fig.~\pca).  We used this kernel to compute a
 single $K$ by $K$ $n^\mathrm{th}$-order DISFC matrix for each
-experimental condition.  We then used Neurosynth~\citep{RubiEtal17} to
+experimental condition.  We then used Neurosynth~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep{RubiEtal17} }\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{RubiEtal17} }\hspace{0pt}%DIFAUXCMD
+}\DIFaddend to
 compute the terms most highly associated with the most strongly
 correlated pairs of regions in each of these matrices
 (Fig.~\ref{fig:neurosynth}; see \DIFdelbegin \textit{\DIFdel{Reverse inference}}%DIFAUXCMD
@@ -824,8 +907,13 @@ of our approach.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Discussion}
 We tested the hypothesis that high-level cognition is reflected in
-high-order brain network dynamics~\citep[e.g., see][]{SoloEtal19,
-  ReimEtal17}.  We examined high-order network dynamics in functional
+high-order brain network dynamics~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[e.g., see][]{SoloEtal19,
+  ReimEtal17}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{SoloEtal19,
+  ReimEtal17}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .  We examined high-order network dynamics in functional
 neuroimaging data collected during a story listening experiment.  When
 participants listened to an auditory recording of the story,
 participants exhibited similar high-order brain network dynamics.  By
@@ -853,15 +941,26 @@ processing (Fig.~\ref{fig:discussion}).
 The notion that cognition is reflected in (and possibly mediated by)
 patterns of first-order network dynamics has been suggested by or
 proposed in myriad empirical studies and
-reviews~\citep[e.g.,][]{DemeEtal19, Turk13, LuriEtal18, FongEtal19,
+reviews~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[e.g.,][]{DemeEtal19, Turk13, LuriEtal18, FongEtal19,
   ParkEtal18b, PretEtal17, MannEtal18, RoyEtal19, LiegEtal19, ZouEtal19,
-  ChanGlov10, GonzEtal19, McIn00, BresKels01}.  Our study extends this line of work by
+  ChanGlov10, GonzEtal19, McIn00, BresKels01}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{DemeEtal19, Turk13, LuriEtal18, FongEtal19,
+  ParkEtal18b, PretEtal17, MannEtal18, RoyEtal19, LiegEtal19, ZouEtal19,
+  ChanGlov10, GonzEtal19, McIn00, BresKels01}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .  Our study extends this line of work by
 finding cognitively relevant \DIFdelbegin \textit{\DIFdel{higher-order}} %DIFAUXCMD
 \DIFdelend \DIFaddbegin \DIFadd{higher-order }\DIFaddend network dynamics
 that reflect ongoing cognition.  Our findings also complement other work
 that uses graph theory and topology to characterize how brain networks
-reconfigure during cognition~\citep[e.g.,][]{BassEtal06, ZhenEtal19,
-  McInJirs19, TokeSomm19, SizeEtal18, ReimEtal17, BetzEtal19}.
+reconfigure during cognition~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[e.g.,][]{BassEtal06, ZhenEtal19,
+  McInJirs19, TokeSomm19, SizeEtal18, ReimEtal17, BetzEtal19}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{BassEtal06, ZhenEtal19,
+  McInJirs19, TokeSomm19, SizeEtal18, ReimEtal17, BetzEtal19}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .
 
 An open question not addressed by our study pertains to how different
 structures integrate incoming information with different time
@@ -869,13 +968,27 @@ constants.  For example, one line of work suggests that the cortical
 surface comprises a structured map such that nearby brain structures
 process incoming information at similar timescales.  Low-level sensory
 areas integrate information relatively quickly, whereas higher-level
-regions integrate information relatively slowly~\citep{BaldEtal17,
+regions integrate information relatively slowly~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep{BaldEtal17,
   HassEtal08, HassEtal15, HoneEtal12a, LernEtal11, LernEtal14,
-  ChieHone19}.  A similar hierarchy appears to play a role in
-predicting future events~\citep{LeeEtal20}.  Other related work in
+  ChieHone19}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{BaldEtal17,
+  HassEtal08, HassEtal15, HoneEtal12a, LernEtal11, LernEtal14,
+  ChieHone19}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .  A similar hierarchy appears to play a role in
+predicting future events~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep{LeeEtal20}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{LeeEtal20}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .  Other related work in
 human and mouse brains indicates that the temporal response profile of
 a given brain structure may relate to how strongly connected that
-structure is with other brain areas~\citep{FallEtal20}.  Further study
+structure is with other brain areas~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep{FallEtal20}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{FallEtal20}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .  Further study
 is needed to understand the role of temporal integration at different
 scales of network interaction, and across different anatomical
 structures. Importantly, our analyses do not speak to the
@@ -894,16 +1007,28 @@ higher-order patterns are reliable and stable across experimental
 conditions are partially confounded with the stability of lower-order
 patterns.  Prior work suggests that the stability of what we refer to
 here as first-order dynamics likely varies across the experimental
-conditions we examined~\citep{SimoEtal16}.  Therefore a caveat to our
+conditions we examined~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep{SimoEtal16}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{SimoEtal16}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .  Therefore a caveat to our
 claim that richer stimuli evoke more stable higher-order dynamics is
 that our approach assumes that those high-order dynamics reflect
 relations or interactions between lower-order features.
 
 Another potential limitation of our approach relates to recent work
 suggesting that the brain undergoes rapid state changes, for example
-across event boundaries~\citep[e.g.,][]{BaldEtal17}.
+across event boundaries~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[e.g.,][]{BaldEtal17}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{BaldEtal17}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .
 \cite{ShapEtal19} used hidden semi-Markov models to estimate
-state-specific network dynamics~\citep[also see][]{VidaEtal18}.  Our
+state-specific network dynamics~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[also see][]{VidaEtal18}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{VidaEtal18}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .  Our
 general approach might be extended by considering putative state
 transitions. For example, rather than weighting all timepoints using a
 similar kernel (Eqn.~\ref{eqn:timecorr}), the kernel function could
@@ -913,9 +1038,17 @@ determined to be in the same ``state'' were given non-zero weight.
 Identifying high-order network dynamics associated with high-level
 cognition required several important methods advances.  First, we used
 kernel-based dynamic correlations to extended the notion of (static)
-inter-subject functional connectivity~\citep{SimoEtal16} to a dynamic
+inter-subject functional connectivity~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep{SimoEtal16} }\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{SimoEtal16} }\hspace{0pt}%DIFAUXCMD
+}\DIFaddend to a dynamic
 measure of inter-subject functional connectivity (DISFC) that does not
-rely on sliding windows~\citep[e.g., as in][]{MannEtal18}, and that
+rely on sliding windows~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[e.g., as in][]{MannEtal18}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{MannEtal18}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend , and that
 may be computed at individual timepoints.  This allowed us to
 precisely characterize stimulus-evoked network dynamics that were
 similar across individuals.  Second, we developed a computational
@@ -993,7 +1126,11 @@ at
 \subsection*{Kernel-based approach for computing dynamic correlations}
 Given a $T$ by $K$ matrix of observations, $\mathbf{X}$, we can compute the (static)
 Pearson's correlation between any pair of columns, $\mathbf{X}(\cdot, i)$ and
-$\mathbf{X}(\cdot, j)$ using~\citep{Pear01}:
+$\mathbf{X}(\cdot, j)$ using~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep{Pear01}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{Pear01}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend :
 \begin{align}
   \mathrm{corr}(\mathbf{X}(\cdot, i), \mathbf{X}(\cdot, j)) &=
                                                               \frac{\sum_{t=1}^T
@@ -1018,8 +1155,12 @@ incorporating a \DIFdelbegin \textit{\DIFdel{kernel function}} %DIFAUXCMD
 \DIFdelend \DIFaddbegin \DIFadd{kernel function }\DIFaddend that takes a time $t$ as
 input, and returns how much the observed data at each timepoint
 $\tau \in \left[ -\infty, \infty \right]$ contributes to the estimated instantaneous
-correlation at time $t$~\citep[Fig.~\ref{fig:kernels}; also see][for a
-similar approach]{AlleEtal12b}.
+correlation\DIFaddbegin \DIFadd{~\mbox{%DIFAUXCMD
+\cite{AlleEtal12b} }\hspace{0pt}%DIFAUXCMD
+}\DIFaddend at time $t$ \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep[Fig.~\ref{fig:kernels}; also see][for a
+similar approach]{AlleEtal12b}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{(Fig.~\ref{fig:kernels})}\DIFaddend .
 
 \begin{figure}
   \centering
@@ -1097,15 +1238,24 @@ $\mathbf{X}_n^2$, ..., $\mathbf{X}_n^P$ reflect the $T$ by $K$
 observation matrices ($n = 0$) or reduced correlation matrices
 ($n > 0$) for each of $P$ participants in an experiment.  We can use
 \DIFdelbegin \textit{\DIFdel{inter-subject functional connectivity}}%DIFAUXCMD
-\DIFdelend \DIFaddbegin \DIFadd{inter-subject functional connectivity}\DIFaddend ~\citep[ISFC;
-][]{SimoEtal16, SimoChan20} to compute the stimulus-driven correlations reflected
+\DIFdel{~\mbox{%DIFAUXCMD
+\citep[ISFC;
+][]{SimoEtal16, SimoChan20} }\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{inter-subject functional connectivity~\mbox{%DIFAUXCMD
+\cite{SimoEtal16, SimoChan20}
+}\hspace{0pt}%DIFAUXCMD
+(ISFC) }\DIFaddend to compute the stimulus-driven correlations reflected
 in the multi-participant dataset at a given timepoint $t$ using:
 \begin{align}
 \bar{\mathbf{C}}(t) = M\left(R\left(\frac{1}{2P} \sum_{p=1}^P
   Z\left(\mathbf{Y}_{n+1}^p(t)\right)^\top + Z\left(\mathbf{Y}_{n+1}^p(t)\right)\right)\right),\label{eqn:disfc}
 \end{align}
 where $M$ extracts and vectorizes the upper triangle and diagonal of a symmetric
-matrix, $Z$ is the Fisher $z$-transformation~\citep{Zar10}:
+matrix, $Z$ is the Fisher $z$-transformation~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep{Zar10}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{Zar10}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend :
 \begin{align}
 Z(r) = \frac{\log(1+r) - \log(1-r)}{2},
 \end{align}
@@ -1145,18 +1295,66 @@ correlation matrix at each timepoint.
   $\mathbf{X}_n$}
 
 The modern toolkit of dimensionality reduction algorithms include
-Principal Components Analysis~\citep[PCA;][]{Pear01}, Probabilistic
-PCA~\citep[PPCA;][]{TippBish99}, Exploratory Factor
-Analysis~\citep[EFA;][]{Spea04}, Independent Components
-Analysis~\citep[ICA;][]{JuttHera91, ComoEtal91}, $t$-Stochastic
-Neighbor Embedding~\citep[$t$-SNE;][]{vandHint08}, Uniform Manifold
-Approximation and Projection~\citep[UMAP;][]{McInEtal18}, non-negative
-matrix factorization~\citep[NMF;][]{LeeSeun99}, Topographic Factor
-Analysis~\cite[TFA;][]{MannEtal14b}, Hierarchical Topographic Factor
-analysis~\cite[HTFA;][]{MannEtal18}, Topographic Latent Source
-Analysis~\cite[TLSA;][]{GersEtal11}, dictionary
-learning~\citep{MairEtal09a, MairEtal09b}, and deep
-auto-encoders~\citep{HintSala06}, among others.  While complete
+Principal Components Analysis~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[PCA;][]{Pear01}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{Pear01} }\hspace{0pt}%DIFAUXCMD
+(PCA)}\DIFaddend , Probabilistic
+PCA~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[PPCA;][]{TippBish99}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{TippBish99} }\hspace{0pt}%DIFAUXCMD
+(PPCA)}\DIFaddend , Exploratory Factor
+Analysis~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[EFA;][]{Spea04}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{Spea04} }\hspace{0pt}%DIFAUXCMD
+(EFA)}\DIFaddend , Independent Components
+Analysis~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[ICA;][]{JuttHera91, ComoEtal91}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{JuttHera91, ComoEtal91} }\hspace{0pt}%DIFAUXCMD
+(ICA)}\DIFaddend , $t$-Stochastic
+Neighbor Embedding~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[$t$-SNE;][]{vandHint08}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{vandHint08} }\hspace{0pt}%DIFAUXCMD
+($t$-SNE)}\DIFaddend , Uniform Manifold
+Approximation and Projection~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[UMAP;][]{McInEtal18}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{McInEtal18} }\hspace{0pt}%DIFAUXCMD
+(UMAP)}\DIFaddend , non-negative
+matrix factorization~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[NMF;][]{LeeSeun99}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{LeeSeun99} }\hspace{0pt}%DIFAUXCMD
+(NMF)}\DIFaddend , Topographic Factor
+Analysis~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite[TFA;][]{MannEtal14b}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{MannEtal14b} }\hspace{0pt}%DIFAUXCMD
+(TFA)}\DIFaddend , Hierarchical Topographic Factor
+analysis~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite[HTFA;][]{MannEtal18}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{MannEtal18} }\hspace{0pt}%DIFAUXCMD
+(HTFA)}\DIFaddend , Topographic Latent Source
+Analysis~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite[TLSA;][]{GersEtal11}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{GersEtal11} }\hspace{0pt}%DIFAUXCMD
+(TLSA)}\DIFaddend , dictionary
+learning~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep{MairEtal09a, MairEtal09b}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{MairEtal09a, MairEtal09b}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend , and deep
+auto-encoders~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep{HintSala06}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{HintSala06}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend , among others.  While complete
 characterizations of each of these algorithms is beyond the scope of
 the present manuscript, the general intuition driving these approaches
 is to compute the $T$ by $K$ matrix, $\mathbf{X}$, that is closest to
@@ -1208,26 +1406,71 @@ correlation matrix or binarized correlation matrix reconstituted from
 a single timepoint's row of $\mathbf{Y}$), and return as output a set
 of $K$ measures describing how each node (feature) sits within that
 correlation matrix with respect to the rest of the population.  Widely
-used measures include betweenness centrality~\citep[the proportion of
+used measures include betweenness centrality \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep[the proportion of
 shortest paths between each pair of nodes in the population that
 involves the given node in question; e.g.,][]{Newm05, OpsaEtal10,
-  Bart04, GeisEtal08, Free77}; diversity and
-dissimilarity~\citep[characterizations of how differently connected a
+  Bart04, GeisEtal08, Free77}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{(the proportion of
+shortest paths between each pair of nodes in the population that
+involves the given node in question~\mbox{%DIFAUXCMD
+\cite{Newm05, OpsaEtal10,
+  Bart04, GeisEtal08, Free77}}\hspace{0pt}%DIFAUXCMD
+)}\DIFaddend ; diversity and
+dissimilarity \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep[characterizations of how differently connected a
 given node is from others in the population; e.g.,][]{Rao82, Lin09,
-  RicoSzei06}; eigenvector centrality and pagerank
-centrality~\citep[measures of how influential a given node is within
+  RicoSzei06}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{(characterizations of how differently connected a
+given node is from others in the population~\mbox{%DIFAUXCMD
+\cite{Rao82, Lin09,
+  RicoSzei06}}\hspace{0pt}%DIFAUXCMD
+)}\DIFaddend ; eigenvector centrality and pagerank
+centrality \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep[measures of how influential a given node is within
 the broader network; e.g.,][]{Newm08, Bona07, LohmEtal10,
-  HaluEtal13}; transfer entropy and flow coefficients~\citep[a measure
+  HaluEtal13}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{(measures of how influential a given node is within
+the broader network~\mbox{%DIFAUXCMD
+\cite{Newm08, Bona07, LohmEtal10,
+  HaluEtal13}}\hspace{0pt}%DIFAUXCMD
+)}\DIFaddend ; transfer entropy and flow coefficients \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep[a measure
 of how much information is flowing from a given node to other nodes in
-the network; e.g.,][]{HoneEtal07, Schr00}; $k$-coreness
-centrality~\citep[a measure of the connectivity of a node within its
-local subgraph; e.g.,][]{AlvaEtal05, ChriFowl10}; within-module
-degree~\citep[a measure of how many connections a node has to its
-close neighbors in the network; e.g.,][]{RubiSpor10}; participation
-coefficient~\citep[a measure of the diversity of a node's connections
-to different subgraphs in the network; e.g.,][]{RubiSpor10}; and
-subgraph centrality~\citep[a measure of a node's participation in all
-of the network's subgraphs; e.g.,][]{EstrRodr05}; among others.
+the network; e.g.,][]{HoneEtal07, Schr00}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{(a measure
+of how much information is flowing from a given node to other nodes in
+the network~\mbox{%DIFAUXCMD
+\cite{HoneEtal07, Schr00}}\hspace{0pt}%DIFAUXCMD
+)}\DIFaddend ; $k$-coreness
+centrality \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep[a measure of the connectivity of a node within its
+local subgraph; e.g.,][]{AlvaEtal05, ChriFowl10}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{(a measure of the connectivity of a node within its
+local subgraph~\mbox{%DIFAUXCMD
+\cite{AlvaEtal05, ChriFowl10}}\hspace{0pt}%DIFAUXCMD
+)}\DIFaddend ; within-module
+degree \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep[a measure of how many connections a node has to its
+close neighbors in the network; e.g.,][]{RubiSpor10}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{(a measure of how many connections a node has to its
+close neighbors in the network~\mbox{%DIFAUXCMD
+\cite{RubiSpor10}}\hspace{0pt}%DIFAUXCMD
+)}\DIFaddend ; participation
+coefficient \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep[a measure of the diversity of a node's connections
+to different subgraphs in the network; e.g.,][]{RubiSpor10}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{(a measure of the diversity of a node's connections
+to different subgraphs in the network~\mbox{%DIFAUXCMD
+\cite{RubiSpor10}}\hspace{0pt}%DIFAUXCMD
+)}\DIFaddend ; and
+subgraph centrality \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep[a measure of a node's participation in all
+of the network's subgraphs; e.g.,][]{EstrRodr05}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{(a measure of a node's participation in all
+of the network's subgraphs~\mbox{%DIFAUXCMD
+\cite{EstrRodr05}}\hspace{0pt}%DIFAUXCMD
+)}\DIFaddend ; among others.
 
 For a given graph measure,
 $\eta: \mathbb{R}^{K \times K} \rightarrow \mathbb{R}^K$, we can use
@@ -1264,8 +1507,12 @@ approach (Fig.~\ref{fig:methods}).
 \subsection*{Data}
 We examined two types of data: synthetic data and human functional
 neuroimaging data.  We constructed and leveraged the synthetic data to
-evaluate our general approach~\citep[for a related validation approach
-see][]{ThomEtal18}.  Specifically, we tested how well
+evaluate our general approach~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[for a related validation approach
+see][]{ThomEtal18}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{ThomEtal18}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .  Specifically, we tested how well
 Equation~\ref{eqn:timecorr} could be used to recover known dynamic
 correlations using different choices of kernel ($\kappa$;
 Fig.~\ref{fig:kernels}), for each of several synthetic datasets that
@@ -1440,25 +1687,42 @@ paragraphs in a randomized order and 36 in the word-scrambled
 condition listened to the words in a randomized order), or lay resting
 with their eyes open in the scanner (rest condition; 36
 participants).  Full neuroimaging details may be found in the original
-paper for which the data were collected~\citep{SimoEtal16}. \DIFaddbegin \DIFadd{Procedures
+paper for which the data were collected~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep{SimoEtal16}}\hspace{0pt}%DIFAUXCMD
+. }\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{SimoEtal16}}\hspace{0pt}%DIFAUXCMD
+. Procedures
 were approved by the Princeton University Committee on Activities
 Involving Human Subjects, and by the Western Institutional Review Board (Puyallup, WA). All subjects were native English speakers with normal hearing and provided written informed consent.
 }\DIFaddend 
 
 \paragraph{Hierarchical topographic factor analysis (HTFA).}
-Following our prior related work, we used HTFA~\citep{MannEtal18} to
+Following our prior related work, we used HTFA~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep{MannEtal18} }\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{MannEtal18} }\hspace{0pt}%DIFAUXCMD
+}\DIFaddend to
 derive a compact representation of the neuroimaging data.  In brief,
 this approach approximates the timeseries of voxel activations (44,415
 voxels) using a much smaller number of radial basis function (RBF)
-nodes~\citep[in this case, 700 nodes, as determined by an optimization
-procedure described by][]{MannEtal18}.  This provides a convenient
+nodes \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep[in this case, 700 nodes, as determined by an optimization
+procedure described by][]{MannEtal18}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{(in this case, 700 nodes, as determined by an optimization
+procedure~\mbox{%DIFAUXCMD
+\cite{MannEtal18}}\hspace{0pt}%DIFAUXCMD
+)}\DIFaddend .  This provides a convenient
 representation for examining full-brain network dynamics.  All of the
 analyses we carried out on the neuroimaging dataset were performed in
 this lower-dimensional space.  In other words, each participant's data
 matrix, $\mathbf{X}_0$, was a number-of-timepoints by 700 matrix of
 HTFA-derived factor weights (where the row and column labels were
 matched across participants).  Code for carrying out HTFA on fMRI data
-may be found as part of the BrainIAK toolbox~\citep{CapoEtal17}, which
+may be found as part of the BrainIAK toolbox~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep{CapoEtal17}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{CapoEtal17}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend , which
 may be downloaded at \href{https://brainiak.org/}{brainiak.org}.
 
 \subsection*{Temporal decoding}
@@ -1470,7 +1734,11 @@ individuals (e.g., using ISFC analyses).  In particular, neural
 patterns will be similar across individuals to the extent that the
 neural patterns under consideration are stimulus-driven, and to the
 extent that the corresponding cognitive representations are reflected
-in similar spatial patterns across people~\citep[also see][]{SimoChan20}.  Following this logic, we
+in similar spatial patterns across people~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep[also see][]{SimoChan20}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{SimoChan20}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .  Following this logic, we
 used an across-participant temporal decoding test developed by
 \cite{MannEtal18} to assess the degree to which different neural
 patterns reflected ongoing stimulus-driven cognitive processing across
@@ -1586,7 +1854,11 @@ original timeseries of neural activations, and one for each of $n$
 orders of dynamic correlations).  Our objective was to find a set of
 weights for each of these $\mathbf{\Lambda}$ matrices such that the
 weighted average of the $n+1$ matrices yielded the highest decoding
-accuracy.  We used quasi-Newton gradient ascent~\citep{NoceWrig06},
+accuracy.  We used quasi-Newton gradient ascent~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep{NoceWrig06}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{NoceWrig06}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend ,
 using decoding accuracy (for $\mathcal{G}_{\mathrm{train}_1}$ and
 $\mathcal{G}_{\mathrm{train}_2}$) as the objective function to be
 maximized, to find an optimal set of training data-derived weights,
@@ -1657,7 +1929,11 @@ a spatial function whose activations range from 0 to 1.  We
 constructed a map of RBF components that denoted the endpoints of the
 10 strongest correlations (we set each RBF to have a maximum value of
 1).  We then carried out a meta analysis using
-Neurosynth~\citep{RubiEtal17} to identify the 10 terms most commonly
+Neurosynth~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\citep{RubiEtal17} }\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{RubiEtal17} }\hspace{0pt}%DIFAUXCMD
+}\DIFaddend to identify the 10 terms most commonly
 associated with the given map.  This resulted in a set of 10 terms
 associated with the average dynamic correlation patterns at each
 order.
@@ -1666,9 +1942,9 @@ order.
 
 \DIFadd{The authors declare that the data supporting the findings of this
 study as well as the source data for this paper are available at
-}\href{https://github.com/ContextLab/timecorr-paper/releases/tag/v0.4}{\DIFadd{github.com/ContextLab/timecorr-paper/releases/tag/v0.4}}
+}\href{https://github.com/ContextLab/timecorr-paper/releases/tag/v0.4}{github.com/ContextLab/timecorr-paper/releases/tag/v0.4}
 \DIFadd{and has been deposited in the Zenodo database under accession code
-}\href{https://doi.org/10.5281/zenodo.5165253}{\DIFadd{https://doi.org/10.5281/zenodo.5165253}}\DIFadd{.
+}\href{https://doi.org/10.5281/zenodo.5165253}{https://doi.org/10.5281/zenodo.5165253}\DIFadd{.
 The source data underlying Figs. 2-6 and Supplementary Figs. S1-S9 are
 provided as a Source Data file. Source Data are provided with the
 manuscript. The raw fMRI data are protected and are not available due to data
@@ -1678,13 +1954,13 @@ privacy laws. The processed fMRI dataset collected by
 has been made publicly available \mbox{%DIFAUXCMD
 \cite{SimoEtal16b} }\hspace{0pt}%DIFAUXCMD
 at
-}\href{http://arks.princeton.edu/ark:/88435/dsp015d86p269k}{\DIFadd{arks.princeton.edu/ark:/88435/dsp015d86p269k}}\DIFadd{. 
+}\href{http://arks.princeton.edu/ark:/88435/dsp015d86p269k}{arks.princeton.edu/ark:/88435/dsp015d86p269k}\DIFadd{. 
 }
 
 \section*{\DIFadd{Code Availability}}
 
 \DIFadd{All of our analysis code may be downloaded from
-}\href{https://github.com/ContextLab/timecorr-paper/releases/tag/v0.3}{\DIFadd{github.com/ContextLab/timecorr-paper/releases/tag/v0.4}}\DIFadd{. We have also published a companion Python toolbox that may be downloaded from }\href{https://timecorr.readthedocs.io}{\DIFadd{timecorr.readthedocs.io}}\DIFadd{.
+}\href{https://github.com/ContextLab/timecorr-paper/releases/tag/v0.3}{github.com/ContextLab/timecorr-paper/releases/tag/v0.4}\DIFadd{. We have also published a companion Python toolbox that may be downloaded from }\href{https://timecorr.readthedocs.io}{timecorr.readthedocs.io}\DIFadd{.
 }
 
 
@@ -1721,798 +1997,798 @@ Analyses: L.L.W.O. and J.R.M.  Writing: L.L.W.O. and J.R.M.
 \providecommand{\eprint}[2][]{\url{#2}}
 
 \bibitem{HaxbEtal01}
-\DIFadd{\bibinfo{author}{Haxby, J.~V.} }\emph{\DIFadd{et~al.}}
-\newblock \DIFadd{\bibinfo{title}{Distributed and overlapping representations of faces
-  and objects in ventral temporal cortex}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Science}}} \textbf{\DIFadd{\bibinfo{volume}{293}}}\DIFadd{,
-  \bibinfo{pages}{2425--2430} (\bibinfo{year}{2001}).
+\bibinfo{author}{Haxby, J.~V.} \emph{\DIFadd{et~al.}}
+\newblock \bibinfo{title}{Distributed and overlapping representations of faces
+  and objects in ventral temporal cortex}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Science}} \textbf{\bibinfo{volume}{293}}\DIFadd{,
+  }\bibinfo{pages}{2425--2430} \DIFadd{(}\bibinfo{year}{2001}\DIFadd{).
 }
 
 \bibitem{NormEtal06b}
-\DIFadd{\bibinfo{author}{Norman, K.~A.}, \bibinfo{author}{Polyn, S.~M.},
-  \bibinfo{author}{Detre, G.~J.} \& \bibinfo{author}{Haxby, J.~V.}
-}\newblock \DIFadd{\bibinfo{title}{Beyond mind-reading: multi-voxel pattern analysis of
-  {fMRI} data}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Trends in Cognitive Sciences}}}
-  \textbf{\DIFadd{\bibinfo{volume}{10}}}\DIFadd{, \bibinfo{pages}{424--430}
-  (\bibinfo{year}{2006}).
+\bibinfo{author}{Norman, K.~A.}\DIFadd{, }\bibinfo{author}{Polyn, S.~M.}\DIFadd{,
+  }\bibinfo{author}{Detre, G.~J.} \DIFadd{\& }\bibinfo{author}{Haxby, J.~V.}
+\newblock \bibinfo{title}{Beyond mind-reading: multi-voxel pattern analysis of
+  {fMRI} data}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Trends in Cognitive Sciences}}
+  \textbf{\bibinfo{volume}{10}}\DIFadd{, }\bibinfo{pages}{424--430}
+  \DIFadd{(}\bibinfo{year}{2006}\DIFadd{).
 }
 
 \bibitem{TongPrat12}
-\DIFadd{\bibinfo{author}{Tong, F.} \& \bibinfo{author}{Pratte, M.~S.}
-}\newblock \DIFadd{\bibinfo{title}{Decoding patterns of human brain activity}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Annual Review of Psychology}}}
-  \textbf{\DIFadd{\bibinfo{volume}{63}}}\DIFadd{, \bibinfo{pages}{483--509}
-  (\bibinfo{year}{2012}).
+\bibinfo{author}{Tong, F.} \DIFadd{\& }\bibinfo{author}{Pratte, M.~S.}
+\newblock \bibinfo{title}{Decoding patterns of human brain activity}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Annual Review of Psychology}}
+  \textbf{\bibinfo{volume}{63}}\DIFadd{, }\bibinfo{pages}{483--509}
+  \DIFadd{(}\bibinfo{year}{2012}\DIFadd{).
 }
 
 \bibitem{MitcEtal08a}
-\DIFadd{\bibinfo{author}{Mitchell, T.~M.} }\emph{\DIFadd{et~al.}}
-\newblock \DIFadd{\bibinfo{title}{Predicting human brain activity associated with the
-  meanings of nouns}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Science}}} \textbf{\DIFadd{\bibinfo{volume}{320}}}\DIFadd{,
-  \bibinfo{pages}{1191} (\bibinfo{year}{2008}).
+\bibinfo{author}{Mitchell, T.~M.} \emph{\DIFadd{et~al.}}
+\newblock \bibinfo{title}{Predicting human brain activity associated with the
+  meanings of nouns}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Science}} \textbf{\bibinfo{volume}{320}}\DIFadd{,
+  }\bibinfo{pages}{1191} \DIFadd{(}\bibinfo{year}{2008}\DIFadd{).
 }
 
 \bibitem{KamiTong05}
-\DIFadd{\bibinfo{author}{Kamitani, Y.} \& \bibinfo{author}{Tong, F.}
-}\newblock \DIFadd{\bibinfo{title}{Decoding the visual and subjective contents of the
-  human brain}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Nature Neuroscience}}}
-  \textbf{\DIFadd{\bibinfo{volume}{8}}}\DIFadd{, \bibinfo{pages}{679--685}
-  (\bibinfo{year}{2005}).
+\bibinfo{author}{Kamitani, Y.} \DIFadd{\& }\bibinfo{author}{Tong, F.}
+\newblock \bibinfo{title}{Decoding the visual and subjective contents of the
+  human brain}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Nature Neuroscience}}
+  \textbf{\bibinfo{volume}{8}}\DIFadd{, }\bibinfo{pages}{679--685}
+  \DIFadd{(}\bibinfo{year}{2005}\DIFadd{).
 }
 
 \bibitem{NishEtal11}
-\DIFadd{\bibinfo{author}{Nishimoto, S.} }\emph{\DIFadd{et~al.}}
-\newblock \DIFadd{\bibinfo{title}{Reconstructing visual experience from brain activity
-  evoked by natural movies}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Current Biology}}}
-  \textbf{\DIFadd{\bibinfo{volume}{21}}}\DIFadd{, \bibinfo{pages}{1--6} (\bibinfo{year}{2011}).
+\bibinfo{author}{Nishimoto, S.} \emph{\DIFadd{et~al.}}
+\newblock \bibinfo{title}{Reconstructing visual experience from brain activity
+  evoked by natural movies}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Current Biology}}
+  \textbf{\bibinfo{volume}{21}}\DIFadd{, }\bibinfo{pages}{1--6} \DIFadd{(}\bibinfo{year}{2011}\DIFadd{).
 }
 
 \bibitem{PereEtal18}
-\DIFadd{\bibinfo{author}{Pereira, F.} }\emph{\DIFadd{et~al.}}
-\newblock \DIFadd{\bibinfo{title}{Toward a universal decoder of linguistic meaning from
-  brain activation}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Nature Communications}}}
-  \textbf{\DIFadd{\bibinfo{volume}{9}}}\DIFadd{, \bibinfo{pages}{1--13} (\bibinfo{year}{2018}).
+\bibinfo{author}{Pereira, F.} \emph{\DIFadd{et~al.}}
+\newblock \bibinfo{title}{Toward a universal decoder of linguistic meaning from
+  brain activation}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Nature Communications}}
+  \textbf{\bibinfo{volume}{9}}\DIFadd{, }\bibinfo{pages}{1--13} \DIFadd{(}\bibinfo{year}{2018}\DIFadd{).
 }
 
 \bibitem{HuthEtal12}
-\DIFadd{\bibinfo{author}{Huth, A.~G.}, \bibinfo{author}{Nisimoto, S.},
-  \bibinfo{author}{Vu, A.~T.} \& \bibinfo{author}{Gallant, J.~L.}
-}\newblock \DIFadd{\bibinfo{title}{A continuous semantic space describes the
+\bibinfo{author}{Huth, A.~G.}\DIFadd{, }\bibinfo{author}{Nisimoto, S.}\DIFadd{,
+  }\bibinfo{author}{Vu, A.~T.} \DIFadd{\& }\bibinfo{author}{Gallant, J.~L.}
+\newblock \bibinfo{title}{A continuous semantic space describes the
   representation of thousands of object and action categories across the human
-  brain}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Neuron}}} \textbf{\DIFadd{\bibinfo{volume}{76}}}\DIFadd{,
-  \bibinfo{pages}{1210--1224} (\bibinfo{year}{2012}).
+  brain}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Neuron}} \textbf{\bibinfo{volume}{76}}\DIFadd{,
+  }\bibinfo{pages}{1210--1224} \DIFadd{(}\bibinfo{year}{2012}\DIFadd{).
 }
 
 \bibitem{HuthEtal16}
-\DIFadd{\bibinfo{author}{Huth, A.~G.}, \bibinfo{author}{de~Heer, W.~A.},
-  \bibinfo{author}{Griffiths, T.~L.}, \bibinfo{author}{Theunissen, F.~E.} \&
-  \bibinfo{author}{Gallant, J.~L.}
-}\newblock \DIFadd{\bibinfo{title}{Natural speech reveals the semantic maps that tile
-  human cerebral cortex}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Nature}}} \textbf{\DIFadd{\bibinfo{volume}{532}}}\DIFadd{,
-  \bibinfo{pages}{453--458} (\bibinfo{year}{2016}).
+\bibinfo{author}{Huth, A.~G.}\DIFadd{, }\bibinfo{author}{de~Heer, W.~A.}\DIFadd{,
+  }\bibinfo{author}{Griffiths, T.~L.}\DIFadd{, }\bibinfo{author}{Theunissen, F.~E.} \DIFadd{\&
+  }\bibinfo{author}{Gallant, J.~L.}
+\newblock \bibinfo{title}{Natural speech reveals the semantic maps that tile
+  human cerebral cortex}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Nature}} \textbf{\bibinfo{volume}{532}}\DIFadd{,
+  }\bibinfo{pages}{453--458} \DIFadd{(}\bibinfo{year}{2016}\DIFadd{).
 }
 
 \bibitem{EtzeEtal09}
-\DIFadd{\bibinfo{author}{Etzel, J.~A.}, \bibinfo{author}{Gazzola, V.} \&
-  \bibinfo{author}{Keysers, C.}
-}\newblock \DIFadd{\bibinfo{title}{An introduction to anatomical {ROI}-based {fMRI}
-  classification}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Brain Research}}}
-  \textbf{\DIFadd{\bibinfo{volume}{1281}}}\DIFadd{, \bibinfo{pages}{114--125}
-  (\bibinfo{year}{2009}).
+\bibinfo{author}{Etzel, J.~A.}\DIFadd{, }\bibinfo{author}{Gazzola, V.} \DIFadd{\&
+  }\bibinfo{author}{Keysers, C.}
+\newblock \bibinfo{title}{An introduction to anatomical {ROI}-based {fMRI}
+  classification}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Brain Research}}
+  \textbf{\bibinfo{volume}{1281}}\DIFadd{, }\bibinfo{pages}{114--125}
+  \DIFadd{(}\bibinfo{year}{2009}\DIFadd{).
 }
 
 \bibitem{MannEtal18}
-\DIFadd{\bibinfo{author}{Manning, J.~R.} }\emph{\DIFadd{et~al.}}
-\newblock \DIFadd{\bibinfo{title}{A probabilistic approach to discovering dynamic
-  full-brain functional connectivity patterns}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{NeuroImage}}}}
-  \textbf{\DIFadd{\bibinfo{volume}{180}}}\DIFadd{, \bibinfo{pages}{243--252}
-  (\bibinfo{year}{2018}).
+\bibinfo{author}{Manning, J.~R.} \emph{\DIFadd{et~al.}}
+\newblock \bibinfo{title}{A probabilistic approach to discovering dynamic
+  full-brain functional connectivity patterns}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{NeuroImage}}}
+  \textbf{\bibinfo{volume}{180}}\DIFadd{, }\bibinfo{pages}{243--252}
+  \DIFadd{(}\bibinfo{year}{2018}\DIFadd{).
 }
 
 \bibitem{FongEtal19}
-\DIFadd{\bibinfo{author}{Fong, A. H.~C.} }\emph{\DIFadd{et~al.}}
-\newblock \DIFadd{\bibinfo{title}{Dynamic functional connectivity during task
+\bibinfo{author}{Fong, A. H.~C.} \emph{\DIFadd{et~al.}}
+\newblock \bibinfo{title}{Dynamic functional connectivity during task
   performance and rest predicts individual differences in attention across
-  studies}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{NeuroImage}}}}
-  \textbf{\DIFadd{\bibinfo{volume}{188}}}\DIFadd{, \bibinfo{pages}{14--25}
-  (\bibinfo{year}{2019}).
+  studies}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{NeuroImage}}}
+  \textbf{\bibinfo{volume}{188}}\DIFadd{, }\bibinfo{pages}{14--25}
+  \DIFadd{(}\bibinfo{year}{2019}\DIFadd{).
 }
 
 \bibitem{Gros88}
-\DIFadd{\bibinfo{author}{Grossberg, S.}
-}\newblock \DIFadd{\bibinfo{title}{Nonlinear neural networks: principles, mechanisms,
-  and architectures}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Neural Networks}}}
-  \textbf{\DIFadd{\bibinfo{volume}{1}}}\DIFadd{, \bibinfo{pages}{17--61} (\bibinfo{year}{1988}).
+\bibinfo{author}{Grossberg, S.}
+\newblock \bibinfo{title}{Nonlinear neural networks: principles, mechanisms,
+  and architectures}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Neural Networks}}
+  \textbf{\bibinfo{volume}{1}}\DIFadd{, }\bibinfo{pages}{17--61} \DIFadd{(}\bibinfo{year}{1988}\DIFadd{).
 }
 
 \bibitem{Fris00}
-\DIFadd{\bibinfo{author}{Friston, K.~J.}
-}\newblock \DIFadd{\bibinfo{title}{The labile brain. {I}. neuronal transients and
-  nonlinear coupling}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Philosophical Transactions of the Royal
-  Society of London}}} \textbf{\DIFadd{\bibinfo{volume}{355B}}}\DIFadd{,
-  \bibinfo{pages}{215--236} (\bibinfo{year}{2000}).
+\bibinfo{author}{Friston, K.~J.}
+\newblock \bibinfo{title}{The labile brain. {I}. neuronal transients and
+  nonlinear coupling}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Philosophical Transactions of the Royal
+  Society of London}} \textbf{\bibinfo{volume}{355B}}\DIFadd{,
+  }\bibinfo{pages}{215--236} \DIFadd{(}\bibinfo{year}{2000}\DIFadd{).
 }
 
 \bibitem{SporHone06}
-\DIFadd{\bibinfo{author}{Sporns, O.} \& \bibinfo{author}{Honey, C.~J.}
-}\newblock \DIFadd{\bibinfo{title}{Small worlds inside big brains}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Proceedings of the National Academy of
-  Sciences, {USA}}}} \textbf{\DIFadd{\bibinfo{volume}{103}}}\DIFadd{,
-  \bibinfo{pages}{19219--19220} (\bibinfo{year}{2006}).
+\bibinfo{author}{Sporns, O.} \DIFadd{\& }\bibinfo{author}{Honey, C.~J.}
+\newblock \bibinfo{title}{Small worlds inside big brains}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Proceedings of the National Academy of
+  Sciences, {USA}}} \textbf{\bibinfo{volume}{103}}\DIFadd{,
+  }\bibinfo{pages}{19219--19220} \DIFadd{(}\bibinfo{year}{2006}\DIFadd{).
 }
 
 \bibitem{BassEtal06}
-\DIFadd{\bibinfo{author}{Bassett, D.}, \bibinfo{author}{Meyer-Lindenberg, A.},
-  \bibinfo{author}{Achard, S.}, \bibinfo{author}{Duke, T.} \&
-  \bibinfo{author}{Bullmore, E.}
-}\newblock \DIFadd{\bibinfo{title}{Adaptive reconfiguration of fractal small-world human
-  brain functional networks}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Proceedings of the National Academy of
-  Sciences, {USA}}}} \textbf{\DIFadd{\bibinfo{volume}{103}}}\DIFadd{,
-  \bibinfo{pages}{19518--19523} (\bibinfo{year}{2006}).
+\bibinfo{author}{Bassett, D.}\DIFadd{, }\bibinfo{author}{Meyer-Lindenberg, A.}\DIFadd{,
+  }\bibinfo{author}{Achard, S.}\DIFadd{, }\bibinfo{author}{Duke, T.} \DIFadd{\&
+  }\bibinfo{author}{Bullmore, E.}
+\newblock \bibinfo{title}{Adaptive reconfiguration of fractal small-world human
+  brain functional networks}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Proceedings of the National Academy of
+  Sciences, {USA}}} \textbf{\bibinfo{volume}{103}}\DIFadd{,
+  }\bibinfo{pages}{19518--19523} \DIFadd{(}\bibinfo{year}{2006}\DIFadd{).
 }
 
 \bibitem{Turk13}
-\DIFadd{\bibinfo{author}{Turk-Browne, N.~B.}
-}\newblock \DIFadd{\bibinfo{title}{Functional interactions as big data in the human
-  brain}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Science}}} \textbf{\DIFadd{\bibinfo{volume}{342}}}\DIFadd{,
-  \bibinfo{pages}{580--584} (\bibinfo{year}{2013}).
+\bibinfo{author}{Turk-Browne, N.~B.}
+\newblock \bibinfo{title}{Functional interactions as big data in the human
+  brain}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Science}} \textbf{\bibinfo{volume}{342}}\DIFadd{,
+  }\bibinfo{pages}{580--584} \DIFadd{(}\bibinfo{year}{2013}\DIFadd{).
 }
 
 \bibitem{DemeEtal19}
-\DIFadd{\bibinfo{author}{Demertzi, A.} }\emph{\DIFadd{et~al.}}
-\newblock \DIFadd{\bibinfo{title}{Human consciousness is supported by dynamic complex
-  patterns of brain signal coordination}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Science Advances}}}
-  \textbf{\DIFadd{\bibinfo{volume}{5}}}\DIFadd{, \bibinfo{pages}{eaat7603}
-  (\bibinfo{year}{2019}).
+\bibinfo{author}{Demertzi, A.} \emph{\DIFadd{et~al.}}
+\newblock \bibinfo{title}{Human consciousness is supported by dynamic complex
+  patterns of brain signal coordination}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Science Advances}}
+  \textbf{\bibinfo{volume}{5}}\DIFadd{, }\bibinfo{pages}{eaat7603}
+  \DIFadd{(}\bibinfo{year}{2019}\DIFadd{).
 }
 
 \bibitem{SoloEtal19}
-\DIFadd{\bibinfo{author}{Solomon, S.~H.}, \bibinfo{author}{Medaglia, J.~D.} \&
-  \bibinfo{author}{Thompson-Schill, S.~L.}
-}\newblock \DIFadd{\bibinfo{title}{Implementing a concept network model}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Behavior Research Methods}}}
-  \textbf{\DIFadd{\bibinfo{volume}{51}}}\DIFadd{, \bibinfo{pages}{1717--1736}
-  (\bibinfo{year}{2019}).
+\bibinfo{author}{Solomon, S.~H.}\DIFadd{, }\bibinfo{author}{Medaglia, J.~D.} \DIFadd{\&
+  }\bibinfo{author}{Thompson-Schill, S.~L.}
+\newblock \bibinfo{title}{Implementing a concept network model}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Behavior Research Methods}}
+  \textbf{\bibinfo{volume}{51}}\DIFadd{, }\bibinfo{pages}{1717--1736}
+  \DIFadd{(}\bibinfo{year}{2019}\DIFadd{).
 }
 
 \bibitem{LuriEtal18}
-\DIFadd{\bibinfo{author}{Lurie, D.} }\emph{\DIFadd{et~al.}}
-\newblock \DIFadd{\bibinfo{title}{On the nature of time-varying functional connectivity
-  in resting f{MRI}}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{PsyArXiv}}}}
-  \textbf{\DIFadd{\bibinfo{volume}{doi.org/10.31234/osf.io/xtzre}}}
-  \DIFadd{(\bibinfo{year}{2018}).
+\bibinfo{author}{Lurie, D.} \emph{\DIFadd{et~al.}}
+\newblock \bibinfo{title}{On the nature of time-varying functional connectivity
+  in resting f{MRI}}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{PsyArXiv}}}
+  \textbf{\bibinfo{volume}{doi.org/10.31234/osf.io/xtzre}}
+  \DIFadd{(}\bibinfo{year}{2018}\DIFadd{).
 }
 
 \bibitem{PretEtal17}
-\DIFadd{\bibinfo{author}{Preti, M.~G.}, \bibinfo{author}{Bolton, T. A.~W.} \&
-  \bibinfo{author}{{Van De Ville}, D.}
-}\newblock \DIFadd{\bibinfo{title}{The dynamic functional connectome: state-of-the-art
-  and perspectives}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{NeuroImage}}}}
-  \textbf{\DIFadd{\bibinfo{volume}{160}}}\DIFadd{, \bibinfo{pages}{41--54}
-  (\bibinfo{year}{2017}).
+\bibinfo{author}{Preti, M.~G.}\DIFadd{, }\bibinfo{author}{Bolton, T. A.~W.} \DIFadd{\&
+  }\bibinfo{author}{{Van De Ville}, D.}
+\newblock \bibinfo{title}{The dynamic functional connectome: state-of-the-art
+  and perspectives}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{NeuroImage}}}
+  \textbf{\bibinfo{volume}{160}}\DIFadd{, }\bibinfo{pages}{41--54}
+  \DIFadd{(}\bibinfo{year}{2017}\DIFadd{).
 }
 
 \bibitem{ZouEtal19}
-\DIFadd{\bibinfo{author}{Zou, Y.}, \bibinfo{author}{Donner, R.~V.},
-  \bibinfo{author}{Marwan, N.}, \bibinfo{author}{Donges, J.~F.} \&
-  \bibinfo{author}{Kurths, J.}
-}\newblock \DIFadd{\bibinfo{title}{Complex network approaches to nonlinear time series
-  analysis}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Physics Reports}}}
-  \textbf{\DIFadd{\bibinfo{volume}{787}}}\DIFadd{, \bibinfo{pages}{1--97}
-  (\bibinfo{year}{2019}).
+\bibinfo{author}{Zou, Y.}\DIFadd{, }\bibinfo{author}{Donner, R.~V.}\DIFadd{,
+  }\bibinfo{author}{Marwan, N.}\DIFadd{, }\bibinfo{author}{Donges, J.~F.} \DIFadd{\&
+  }\bibinfo{author}{Kurths, J.}
+\newblock \bibinfo{title}{Complex network approaches to nonlinear time series
+  analysis}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Physics Reports}}
+  \textbf{\bibinfo{volume}{787}}\DIFadd{, }\bibinfo{pages}{1--97}
+  \DIFadd{(}\bibinfo{year}{2019}\DIFadd{).
 }
 
 \bibitem{MackEtal17}
-\DIFadd{\bibinfo{author}{Mack, M.~L.}, \bibinfo{author}{Preston, A.~R.} \&
-  \bibinfo{author}{Love, B.~C.}
-}\newblock \DIFadd{\bibinfo{title}{Medial prefrontal cortex compresses concept
-  representations through learning}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{bioRxiv}}}}
-  \textbf{\DIFadd{\bibinfo{volume}{doi.org/10.1101/178145}}} \DIFadd{(\bibinfo{year}{2017}).
+\bibinfo{author}{Mack, M.~L.}\DIFadd{, }\bibinfo{author}{Preston, A.~R.} \DIFadd{\&
+  }\bibinfo{author}{Love, B.~C.}
+\newblock \bibinfo{title}{Medial prefrontal cortex compresses concept
+  representations through learning}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{bioRxiv}}}
+  \textbf{\bibinfo{volume}{doi.org/10.1101/178145}} \DIFadd{(}\bibinfo{year}{2017}\DIFadd{).
 }
 
 \bibitem{BresKels01}
-\DIFadd{\bibinfo{author}{Bressler, S.~L.} \& \bibinfo{author}{Kelso, J. A.~S.}
-}\newblock \DIFadd{\bibinfo{title}{Cortical coordination dynamics and cognition}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Trends in Cognitive Sciences}}}
-  \textbf{\DIFadd{\bibinfo{volume}{5}}}\DIFadd{, \bibinfo{pages}{26--36} (\bibinfo{year}{2001}).
+\bibinfo{author}{Bressler, S.~L.} \DIFadd{\& }\bibinfo{author}{Kelso, J. A.~S.}
+\newblock \bibinfo{title}{Cortical coordination dynamics and cognition}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Trends in Cognitive Sciences}}
+  \textbf{\bibinfo{volume}{5}}\DIFadd{, }\bibinfo{pages}{26--36} \DIFadd{(}\bibinfo{year}{2001}\DIFadd{).
 }
 
 \bibitem{McIn00}
-\DIFadd{\bibinfo{author}{McIntosh, A.~R.}
-}\newblock \DIFadd{\bibinfo{title}{Towards a network theory of cognition}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Neural Networks}}}
-  \textbf{\DIFadd{\bibinfo{volume}{13}}}\DIFadd{, \bibinfo{pages}{861--870}
-  (\bibinfo{year}{2000}).
+\bibinfo{author}{McIntosh, A.~R.}
+\newblock \bibinfo{title}{Towards a network theory of cognition}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Neural Networks}}
+  \textbf{\bibinfo{volume}{13}}\DIFadd{, }\bibinfo{pages}{861--870}
+  \DIFadd{(}\bibinfo{year}{2000}\DIFadd{).
 }
 
 \bibitem{ReimEtal17}
-\DIFadd{\bibinfo{author}{Reimann, M.~W.} }\emph{\DIFadd{et~al.}}
-\newblock \DIFadd{\bibinfo{title}{Cliques of neurons bound into cavities provide a
-  missing link between structure and function}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Frontiers in Computational Neuroscience}}}
-  \textbf{\DIFadd{\bibinfo{volume}{11}}}\DIFadd{, \bibinfo{pages}{1--16} (\bibinfo{year}{2017}).
+\bibinfo{author}{Reimann, M.~W.} \emph{\DIFadd{et~al.}}
+\newblock \bibinfo{title}{Cliques of neurons bound into cavities provide a
+  missing link between structure and function}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Frontiers in Computational Neuroscience}}
+  \textbf{\bibinfo{volume}{11}}\DIFadd{, }\bibinfo{pages}{1--16} \DIFadd{(}\bibinfo{year}{2017}\DIFadd{).
 }
 
 \bibitem{BeatEtal16}
-\DIFadd{\bibinfo{author}{Beaty, R.~E.}, \bibinfo{author}{Benedek, M.},
-  \bibinfo{author}{Silvia, P.~J.} \& \bibinfo{author}{Schacter, D.~L.}
-}\newblock \DIFadd{\bibinfo{title}{Creative cognition and brain network dynamics}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Trends in Cognitive Sciences}}}
-  \textbf{\DIFadd{\bibinfo{volume}{20}}}\DIFadd{, \bibinfo{pages}{87--95}
-  (\bibinfo{year}{2016}).
+\bibinfo{author}{Beaty, R.~E.}\DIFadd{, }\bibinfo{author}{Benedek, M.}\DIFadd{,
+  }\bibinfo{author}{Silvia, P.~J.} \DIFadd{\& }\bibinfo{author}{Schacter, D.~L.}
+\newblock \bibinfo{title}{Creative cognition and brain network dynamics}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Trends in Cognitive Sciences}}
+  \textbf{\bibinfo{volume}{20}}\DIFadd{, }\bibinfo{pages}{87--95}
+  \DIFadd{(}\bibinfo{year}{2016}\DIFadd{).
 }
 
 \bibitem{BullSpor09}
-\DIFadd{\bibinfo{author}{Bullmore, E.} \& \bibinfo{author}{Sporns, O.}
-}\newblock \DIFadd{\bibinfo{title}{Complex brain networks: graph theoretical analysis of
-  structural and functional systems}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Nature Reviews Neuroscience}}}
-  \textbf{\DIFadd{\bibinfo{volume}{10}}}\DIFadd{, \bibinfo{pages}{186--198}
-  (\bibinfo{year}{2009}).
+\bibinfo{author}{Bullmore, E.} \DIFadd{\& }\bibinfo{author}{Sporns, O.}
+\newblock \bibinfo{title}{Complex brain networks: graph theoretical analysis of
+  structural and functional systems}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Nature Reviews Neuroscience}}
+  \textbf{\bibinfo{volume}{10}}\DIFadd{, }\bibinfo{pages}{186--198}
+  \DIFadd{(}\bibinfo{year}{2009}\DIFadd{).
 }
 
 \bibitem{Pear01}
-\DIFadd{\bibinfo{author}{Pearson, K.}
-}\newblock \DIFadd{\bibinfo{title}{On lines and planes of closest fit to systems of
-  points in space}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{The London, Edinburgh, and Dublin
-  Philosophical Magazine and Journal of Science}}} \textbf{\DIFadd{\bibinfo{volume}{2}}}\DIFadd{,
-  \bibinfo{pages}{559--572} (\bibinfo{year}{1901}).
+\bibinfo{author}{Pearson, K.}
+\newblock \bibinfo{title}{On lines and planes of closest fit to systems of
+  points in space}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{The London, Edinburgh, and Dublin
+  Philosophical Magazine and Journal of Science}} \textbf{\bibinfo{volume}{2}}\DIFadd{,
+  }\bibinfo{pages}{559--572} \DIFadd{(}\bibinfo{year}{1901}\DIFadd{).
 }
 
 \bibitem{McInJirs19}
-\DIFadd{\bibinfo{author}{Mc{I}ntosh, A.~R.} \& \bibinfo{author}{Jirsa, V.~K.}
-}\newblock \DIFadd{\bibinfo{title}{The hidden repertoire of brain dynamics and
-  dysfunction}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Network Neuroscience}}}
-  \textbf{\DIFadd{\bibinfo{volume}{doi.org/10.1162/netn\_a\_00107}}}
-  \DIFadd{(\bibinfo{year}{2019}).
+\bibinfo{author}{Mc{I}ntosh, A.~R.} \DIFadd{\& }\bibinfo{author}{Jirsa, V.~K.}
+\newblock \bibinfo{title}{The hidden repertoire of brain dynamics and
+  dysfunction}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Network Neuroscience}}
+  \textbf{\bibinfo{volume}{doi.org/10.1162/netn\_a\_00107}}
+  \DIFadd{(}\bibinfo{year}{2019}\DIFadd{).
 }
 
 \bibitem{TokeSomm19}
-\DIFadd{\bibinfo{author}{Toker, D.} \& \bibinfo{author}{Sommer, F.~T.}
-}\newblock \DIFadd{\bibinfo{title}{Information integration in large brain networks}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{PLoS} Computational Biology}}}
-  \textbf{\DIFadd{\bibinfo{volume}{15}}}\DIFadd{, \bibinfo{pages}{e1006807}
-  (\bibinfo{year}{2019}).
+\bibinfo{author}{Toker, D.} \DIFadd{\& }\bibinfo{author}{Sommer, F.~T.}
+\newblock \bibinfo{title}{Information integration in large brain networks}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{PLoS} Computational Biology}}
+  \textbf{\bibinfo{volume}{15}}\DIFadd{, }\bibinfo{pages}{e1006807}
+  \DIFadd{(}\bibinfo{year}{2019}\DIFadd{).
 }
 
 \bibitem{GonzEtal19}
-\DIFadd{\bibinfo{author}{Gonzalez-Castillo, J.} }\emph{\DIFadd{et~al.}}
-\newblock \DIFadd{\bibinfo{title}{Imaging the spontaneous flow of thought: distinct
+\bibinfo{author}{Gonzalez-Castillo, J.} \emph{\DIFadd{et~al.}}
+\newblock \bibinfo{title}{Imaging the spontaneous flow of thought: distinct
   periods of cognition contribute to dynamic functional connectivity during
-  test}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{NeuroImage}}}} \textbf{\DIFadd{\bibinfo{volume}{202}}}
-  \DIFadd{(\bibinfo{year}{2019}).
+  test}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{NeuroImage}}} \textbf{\bibinfo{volume}{202}}
+  \DIFadd{(}\bibinfo{year}{2019}\DIFadd{).
 }
 
 \bibitem{Land95}
-\DIFadd{\bibinfo{author}{Landau, E.}
-}\newblock \DIFadd{\bibinfo{title}{Zur relativen {Wertbemessung} der
-  {Turnierresultate}}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Deutsches Wochenschach}}}
-  \textbf{\DIFadd{\bibinfo{volume}{11}}}\DIFadd{, \bibinfo{pages}{366--369}
-  (\bibinfo{year}{1895}).
+\bibinfo{author}{Landau, E.}
+\newblock \bibinfo{title}{Zur relativen {Wertbemessung} der
+  {Turnierresultate}}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Deutsches Wochenschach}}
+  \textbf{\bibinfo{volume}{11}}\DIFadd{, }\bibinfo{pages}{366--369}
+  \DIFadd{(}\bibinfo{year}{1895}\DIFadd{).
 }
 
 \bibitem{BetzEtal19}
-\DIFadd{\bibinfo{author}{Betzel, R.~F.}, \bibinfo{author}{Byrge, L.},
-  \bibinfo{author}{Esfahlani, F.~Z.} \& \bibinfo{author}{Kennedy, D.~P.}
-}\newblock \DIFadd{\bibinfo{title}{Temporal fluctuations in the brain's modular
-  architecture during movie-watching}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{bioRxiv}}}}
-  \textbf{\DIFadd{\bibinfo{volume}{doi.org/10.1101/750919}}} \DIFadd{(\bibinfo{year}{2019}).
+\bibinfo{author}{Betzel, R.~F.}\DIFadd{, }\bibinfo{author}{Byrge, L.}\DIFadd{,
+  }\bibinfo{author}{Esfahlani, F.~Z.} \DIFadd{\& }\bibinfo{author}{Kennedy, D.~P.}
+\newblock \bibinfo{title}{Temporal fluctuations in the brain's modular
+  architecture during movie-watching}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{bioRxiv}}}
+  \textbf{\bibinfo{volume}{doi.org/10.1101/750919}} \DIFadd{(}\bibinfo{year}{2019}\DIFadd{).
 }
 
 \bibitem{SizeEtal18}
-\DIFadd{\bibinfo{author}{Sizemore, A.~E.} }\emph{\DIFadd{et~al.}}
-\newblock \DIFadd{\bibinfo{title}{Cliques and cavities in the human connectome}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Journal of Computational Neuroscience}}}
-  \textbf{\DIFadd{\bibinfo{volume}{44}}}\DIFadd{, \bibinfo{pages}{115--145}
-  (\bibinfo{year}{2018}).
+\bibinfo{author}{Sizemore, A.~E.} \emph{\DIFadd{et~al.}}
+\newblock \bibinfo{title}{Cliques and cavities in the human connectome}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Journal of Computational Neuroscience}}
+  \textbf{\bibinfo{volume}{44}}\DIFadd{, }\bibinfo{pages}{115--145}
+  \DIFadd{(}\bibinfo{year}{2018}\DIFadd{).
 }
 
 \bibitem{SimoEtal16}
-\DIFadd{\bibinfo{author}{Simony, E.}, \bibinfo{author}{Honey, C.~J.},
-  \bibinfo{author}{Chen, J.} \& \bibinfo{author}{Hasson, U.}
-}\newblock \DIFadd{\bibinfo{title}{Dynamic reconfiguration of the default mode network
-  during narrative comprehension}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Nature Communications}}}
-  \textbf{\DIFadd{\bibinfo{volume}{7}}}\DIFadd{, \bibinfo{pages}{1--13} (\bibinfo{year}{2016}).
+\bibinfo{author}{Simony, E.}\DIFadd{, }\bibinfo{author}{Honey, C.~J.}\DIFadd{,
+  }\bibinfo{author}{Chen, J.} \DIFadd{\& }\bibinfo{author}{Hasson, U.}
+\newblock \bibinfo{title}{Dynamic reconfiguration of the default mode network
+  during narrative comprehension}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Nature Communications}}
+  \textbf{\bibinfo{volume}{7}}\DIFadd{, }\bibinfo{pages}{1--13} \DIFadd{(}\bibinfo{year}{2016}\DIFadd{).
 }
 
 \bibitem{HassEtal08}
-\DIFadd{\bibinfo{author}{Hasson, U.}, \bibinfo{author}{Yang, E.},
-  \bibinfo{author}{Vallines, I.}, \bibinfo{author}{Heeger, D.~J.} \&
-  \bibinfo{author}{Rubin, N.}
-}\newblock \DIFadd{\bibinfo{title}{A hierarchy of temporal receptive windows in human
-  cortex}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{The Journal of Neuroscience}}}
-  \textbf{\DIFadd{\bibinfo{volume}{28}}}\DIFadd{, \bibinfo{pages}{2539--2550}
-  (\bibinfo{year}{2008}).
+\bibinfo{author}{Hasson, U.}\DIFadd{, }\bibinfo{author}{Yang, E.}\DIFadd{,
+  }\bibinfo{author}{Vallines, I.}\DIFadd{, }\bibinfo{author}{Heeger, D.~J.} \DIFadd{\&
+  }\bibinfo{author}{Rubin, N.}
+\newblock \bibinfo{title}{A hierarchy of temporal receptive windows in human
+  cortex}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{The Journal of Neuroscience}}
+  \textbf{\bibinfo{volume}{28}}\DIFadd{, }\bibinfo{pages}{2539--2550}
+  \DIFadd{(}\bibinfo{year}{2008}\DIFadd{).
 }
 
 \bibitem{RubiEtal17}
-\DIFadd{\bibinfo{author}{Rubin, T.~N.} }\emph{\DIFadd{et~al.}}
-\newblock \DIFadd{\bibinfo{title}{Decoding brain activity using a large-scale
-  probabilistic functional-anatomical atlas of human cognition}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{PLoS} Computational Biology}}}
-  \textbf{\DIFadd{\bibinfo{volume}{13}}}\DIFadd{, \bibinfo{pages}{e1005649}
-  (\bibinfo{year}{2017}).
+\bibinfo{author}{Rubin, T.~N.} \emph{\DIFadd{et~al.}}
+\newblock \bibinfo{title}{Decoding brain activity using a large-scale
+  probabilistic functional-anatomical atlas of human cognition}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{PLoS} Computational Biology}}
+  \textbf{\bibinfo{volume}{13}}\DIFadd{, }\bibinfo{pages}{e1005649}
+  \DIFadd{(}\bibinfo{year}{2017}\DIFadd{).
 }
 
 \bibitem{ParkEtal18b}
-\DIFadd{\bibinfo{author}{Park, H.-J.}, \bibinfo{author}{Friston, K.~J.},
-  \bibinfo{author}{Pae, C.}, \bibinfo{author}{Park, B.} \&
-  \bibinfo{author}{Razi, A.}
-}\newblock \DIFadd{\bibinfo{title}{Dynamic effective connectivity in resting state
-  {fMRI}}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{NeuroImage}}}}
-  \textbf{\DIFadd{\bibinfo{volume}{180}}}\DIFadd{, \bibinfo{pages}{594--608}
-  (\bibinfo{year}{2018}).
+\bibinfo{author}{Park, H.-J.}\DIFadd{, }\bibinfo{author}{Friston, K.~J.}\DIFadd{,
+  }\bibinfo{author}{Pae, C.}\DIFadd{, }\bibinfo{author}{Park, B.} \DIFadd{\&
+  }\bibinfo{author}{Razi, A.}
+\newblock \bibinfo{title}{Dynamic effective connectivity in resting state
+  {fMRI}}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{NeuroImage}}}
+  \textbf{\bibinfo{volume}{180}}\DIFadd{, }\bibinfo{pages}{594--608}
+  \DIFadd{(}\bibinfo{year}{2018}\DIFadd{).
 }
 
 \bibitem{RoyEtal19}
-\DIFadd{\bibinfo{author}{Roy, D.~S.} }\emph{\DIFadd{et~al.}}
-\newblock \DIFadd{\bibinfo{title}{Brain-wide mapping of contextual fear memory engram
-  ensembles supports the dispersed engram complex hypothesis}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{bioRxiv}}}}
-  \textbf{\DIFadd{\bibinfo{volume}{doi.org/10.1101/668483}}} \DIFadd{(\bibinfo{year}{2019}).
+\bibinfo{author}{Roy, D.~S.} \emph{\DIFadd{et~al.}}
+\newblock \bibinfo{title}{Brain-wide mapping of contextual fear memory engram
+  ensembles supports the dispersed engram complex hypothesis}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{bioRxiv}}}
+  \textbf{\bibinfo{volume}{doi.org/10.1101/668483}} \DIFadd{(}\bibinfo{year}{2019}\DIFadd{).
 }
 
 \bibitem{LiegEtal19}
-\DIFadd{\bibinfo{author}{Li\'{e}geois, R.} }\emph{\DIFadd{et~al.}}
-\newblock \DIFadd{\bibinfo{title}{Resting brain dynamics at different timescales
-  capture distinct aspects of human behavior}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Nature Communications}}}
-  \textbf{\DIFadd{\bibinfo{volume}{10}}}\DIFadd{, \bibinfo{pages}{1--9} (\bibinfo{year}{2019}).
+\bibinfo{author}{Li\'{e}geois, R.} \emph{\DIFadd{et~al.}}
+\newblock \bibinfo{title}{Resting brain dynamics at different timescales
+  capture distinct aspects of human behavior}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Nature Communications}}
+  \textbf{\bibinfo{volume}{10}}\DIFadd{, }\bibinfo{pages}{1--9} \DIFadd{(}\bibinfo{year}{2019}\DIFadd{).
 }
 
 \bibitem{ChanGlov10}
-\DIFadd{\bibinfo{author}{Chang, C.} \& \bibinfo{author}{Glover, G.~H.}
-}\newblock \DIFadd{\bibinfo{title}{Time-frequency dynamics of resting-state brain
-  connectivity measured with f{MRI}}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{NeuroImage}}}} \textbf{\DIFadd{\bibinfo{volume}{50}}}\DIFadd{,
-  \bibinfo{pages}{81--98} (\bibinfo{year}{2010}).
+\bibinfo{author}{Chang, C.} \DIFadd{\& }\bibinfo{author}{Glover, G.~H.}
+\newblock \bibinfo{title}{Time-frequency dynamics of resting-state brain
+  connectivity measured with f{MRI}}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{NeuroImage}}} \textbf{\bibinfo{volume}{50}}\DIFadd{,
+  }\bibinfo{pages}{81--98} \DIFadd{(}\bibinfo{year}{2010}\DIFadd{).
 }
 
 \bibitem{ZhenEtal19}
-\DIFadd{\bibinfo{author}{Zheng, M.}, \bibinfo{author}{Allard, A.},
-  \bibinfo{author}{Hagmann, P.} \& \bibinfo{author}{Serrano, M. . .~A.}
-}\newblock \DIFadd{\bibinfo{title}{Geometric renormalization unravels self-similarity of
-  the multiscale human connectome}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{arXiv}}}}
-  \textbf{\DIFadd{\bibinfo{volume}{1904.11793}}} \DIFadd{(\bibinfo{year}{2019}).
+\bibinfo{author}{Zheng, M.}\DIFadd{, }\bibinfo{author}{Allard, A.}\DIFadd{,
+  }\bibinfo{author}{Hagmann, P.} \DIFadd{\& }\bibinfo{author}{Serrano, M. . .~A.}
+\newblock \bibinfo{title}{Geometric renormalization unravels self-similarity of
+  the multiscale human connectome}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{arXiv}}}
+  \textbf{\bibinfo{volume}{1904.11793}} \DIFadd{(}\bibinfo{year}{2019}\DIFadd{).
 }
 
 \bibitem{BaldEtal17}
-\DIFadd{\bibinfo{author}{Baldassano, C.} }\emph{\DIFadd{et~al.}}
-\newblock \DIFadd{\bibinfo{title}{Discovering event structure in continuous narrative
-  perception and memory}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Neuron}}} \textbf{\DIFadd{\bibinfo{volume}{95}}}\DIFadd{,
-  \bibinfo{pages}{709--721} (\bibinfo{year}{2017}).
+\bibinfo{author}{Baldassano, C.} \emph{\DIFadd{et~al.}}
+\newblock \bibinfo{title}{Discovering event structure in continuous narrative
+  perception and memory}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Neuron}} \textbf{\bibinfo{volume}{95}}\DIFadd{,
+  }\bibinfo{pages}{709--721} \DIFadd{(}\bibinfo{year}{2017}\DIFadd{).
 }
 
 \bibitem{HassEtal15}
-\DIFadd{\bibinfo{author}{Hasson, U.}, \bibinfo{author}{Chen, J.} \&
-  \bibinfo{author}{Honey, C.~J.}
-}\newblock \DIFadd{\bibinfo{title}{Hierarchical process memory: memory as an integral
-  component of information processing}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Trends in Cognitive Sciences}}}
-  \textbf{\DIFadd{\bibinfo{volume}{19}}}\DIFadd{, \bibinfo{pages}{304--315}
-  (\bibinfo{year}{2015}).
+\bibinfo{author}{Hasson, U.}\DIFadd{, }\bibinfo{author}{Chen, J.} \DIFadd{\&
+  }\bibinfo{author}{Honey, C.~J.}
+\newblock \bibinfo{title}{Hierarchical process memory: memory as an integral
+  component of information processing}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Trends in Cognitive Sciences}}
+  \textbf{\bibinfo{volume}{19}}\DIFadd{, }\bibinfo{pages}{304--315}
+  \DIFadd{(}\bibinfo{year}{2015}\DIFadd{).
 }
 
 \bibitem{HoneEtal12a}
-\DIFadd{\bibinfo{author}{Honey, C.~J.} }\emph{\DIFadd{et~al.}}
-\newblock \DIFadd{\bibinfo{title}{Slow cortical dynamics and the accumulation of
-  information over long timescales}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Neuron}}} \textbf{\DIFadd{\bibinfo{volume}{76}}}\DIFadd{,
-  \bibinfo{pages}{423--434} (\bibinfo{year}{2012}).
+\bibinfo{author}{Honey, C.~J.} \emph{\DIFadd{et~al.}}
+\newblock \bibinfo{title}{Slow cortical dynamics and the accumulation of
+  information over long timescales}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Neuron}} \textbf{\bibinfo{volume}{76}}\DIFadd{,
+  }\bibinfo{pages}{423--434} \DIFadd{(}\bibinfo{year}{2012}\DIFadd{).
 }
 
 \bibitem{LernEtal11}
-\DIFadd{\bibinfo{author}{Lerner, Y.}, \bibinfo{author}{Honey, C.~J.},
-  \bibinfo{author}{Silbert, L.~J.} \& \bibinfo{author}{Hasson, U.}
-}\newblock \DIFadd{\bibinfo{title}{Topographic mapping of a hierarchy of temporal
-  receptive windows using a narrated story}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{The Journal of Neuroscience}}}
-  \textbf{\DIFadd{\bibinfo{volume}{31}}}\DIFadd{, \bibinfo{pages}{2906--2915}
-  (\bibinfo{year}{2011}).
+\bibinfo{author}{Lerner, Y.}\DIFadd{, }\bibinfo{author}{Honey, C.~J.}\DIFadd{,
+  }\bibinfo{author}{Silbert, L.~J.} \DIFadd{\& }\bibinfo{author}{Hasson, U.}
+\newblock \bibinfo{title}{Topographic mapping of a hierarchy of temporal
+  receptive windows using a narrated story}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{The Journal of Neuroscience}}
+  \textbf{\bibinfo{volume}{31}}\DIFadd{, }\bibinfo{pages}{2906--2915}
+  \DIFadd{(}\bibinfo{year}{2011}\DIFadd{).
 }
 
 \bibitem{LernEtal14}
-\DIFadd{\bibinfo{author}{Lerner, Y.}, \bibinfo{author}{Honey, C.~J.},
-  \bibinfo{author}{Katkov, M.} \& \bibinfo{author}{Hasson, U.}
-}\newblock \DIFadd{\bibinfo{title}{Temporal scaling of neural responses to compressed
-  and dilated natural speech}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Journal of Neurophysiology}}}
-  \textbf{\DIFadd{\bibinfo{volume}{111}}}\DIFadd{, \bibinfo{pages}{2433--2444}
-  (\bibinfo{year}{2014}).
+\bibinfo{author}{Lerner, Y.}\DIFadd{, }\bibinfo{author}{Honey, C.~J.}\DIFadd{,
+  }\bibinfo{author}{Katkov, M.} \DIFadd{\& }\bibinfo{author}{Hasson, U.}
+\newblock \bibinfo{title}{Temporal scaling of neural responses to compressed
+  and dilated natural speech}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Journal of Neurophysiology}}
+  \textbf{\bibinfo{volume}{111}}\DIFadd{, }\bibinfo{pages}{2433--2444}
+  \DIFadd{(}\bibinfo{year}{2014}\DIFadd{).
 }
 
 \bibitem{ChieHone19}
-\DIFadd{\bibinfo{author}{Chien, H.-Y.~S.} \& \bibinfo{author}{Honey, C.~J.}
-}\newblock \DIFadd{\bibinfo{title}{Constructing and forgetting temporal context in the
-  human cerebral cortex}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{bioRxiv}}}}
-  \textbf{\DIFadd{\bibinfo{volume}{doi.org/10.1101/761593}}} \DIFadd{(\bibinfo{year}{2019}).
+\bibinfo{author}{Chien, H.-Y.~S.} \DIFadd{\& }\bibinfo{author}{Honey, C.~J.}
+\newblock \bibinfo{title}{Constructing and forgetting temporal context in the
+  human cerebral cortex}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{bioRxiv}}}
+  \textbf{\bibinfo{volume}{doi.org/10.1101/761593}} \DIFadd{(}\bibinfo{year}{2019}\DIFadd{).
 }
 
 \bibitem{LeeEtal20}
-\DIFadd{\bibinfo{author}{Lee, C.~S.}, \bibinfo{author}{Aly, M.} \&
-  \bibinfo{author}{Baldassano, C.}
-}\newblock \DIFadd{\bibinfo{title}{Anticipation of temporally structured events in the
-  brain}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{bioRxiv}}}}
-  \textbf{\DIFadd{\bibinfo{volume}{10.1101/2020.10.14.338145}}} \DIFadd{(\bibinfo{year}{2020}).
+\bibinfo{author}{Lee, C.~S.}\DIFadd{, }\bibinfo{author}{Aly, M.} \DIFadd{\&
+  }\bibinfo{author}{Baldassano, C.}
+\newblock \bibinfo{title}{Anticipation of temporally structured events in the
+  brain}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{bioRxiv}}}
+  \textbf{\bibinfo{volume}{10.1101/2020.10.14.338145}} \DIFadd{(}\bibinfo{year}{2020}\DIFadd{).
 }
 
 \bibitem{FallEtal20}
-\DIFadd{\bibinfo{author}{Fallon, J.}, \bibinfo{author}{Ward, P. G.~D.},
-  \bibinfo{author}{Parkes, L.} \& \bibinfo{author}{Oldham, S.}
-}\newblock \DIFadd{\bibinfo{title}{Timescales of spontaneous {fMRI} fluctuations relate
-  to structural connectivity in the brain}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Network Neuroscience}}}
-  \textbf{\DIFadd{\bibinfo{volume}{4}}}\DIFadd{, \bibinfo{pages}{788--806}
-  (\bibinfo{year}{2020}).
+\bibinfo{author}{Fallon, J.}\DIFadd{, }\bibinfo{author}{Ward, P. G.~D.}\DIFadd{,
+  }\bibinfo{author}{Parkes, L.} \DIFadd{\& }\bibinfo{author}{Oldham, S.}
+\newblock \bibinfo{title}{Timescales of spontaneous {fMRI} fluctuations relate
+  to structural connectivity in the brain}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Network Neuroscience}}
+  \textbf{\bibinfo{volume}{4}}\DIFadd{, }\bibinfo{pages}{788--806}
+  \DIFadd{(}\bibinfo{year}{2020}\DIFadd{).
 }
 
 \bibitem{ShapEtal19}
-\DIFadd{\bibinfo{author}{Shappell, H.}, \bibinfo{author}{Caffo, B.~S.},
-  \bibinfo{author}{Pekar, J.~J.} \& \bibinfo{author}{Lindquist, M.~A.}
-}\newblock \DIFadd{\bibinfo{title}{Improved state change estimation in dynamic
-  functional connectivity using hidden semi-{M}arkov models}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{NeuroImage}}}}
-  \textbf{\DIFadd{\bibinfo{volume}{191}}}\DIFadd{, \bibinfo{pages}{243--257}
-  (\bibinfo{year}{2019}).
+\bibinfo{author}{Shappell, H.}\DIFadd{, }\bibinfo{author}{Caffo, B.~S.}\DIFadd{,
+  }\bibinfo{author}{Pekar, J.~J.} \DIFadd{\& }\bibinfo{author}{Lindquist, M.~A.}
+\newblock \bibinfo{title}{Improved state change estimation in dynamic
+  functional connectivity using hidden semi-{M}arkov models}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{NeuroImage}}}
+  \textbf{\bibinfo{volume}{191}}\DIFadd{, }\bibinfo{pages}{243--257}
+  \DIFadd{(}\bibinfo{year}{2019}\DIFadd{).
 }
 
 \bibitem{VidaEtal18}
-\DIFadd{\bibinfo{author}{Vidaurre, D.} }\emph{\DIFadd{et~al.}}
-\newblock \DIFadd{\bibinfo{title}{Discovering dynamic brain neworks from big data in
-  rest and task}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{NeuroImage}}}}
-  \textbf{\DIFadd{\bibinfo{volume}{180}}}\DIFadd{, \bibinfo{pages}{646--656}
-  (\bibinfo{year}{2018}).
+\bibinfo{author}{Vidaurre, D.} \emph{\DIFadd{et~al.}}
+\newblock \bibinfo{title}{Discovering dynamic brain neworks from big data in
+  rest and task}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{NeuroImage}}}
+  \textbf{\bibinfo{volume}{180}}\DIFadd{, }\bibinfo{pages}{646--656}
+  \DIFadd{(}\bibinfo{year}{2018}\DIFadd{).
 }
 
 \bibitem{AlleEtal12b}
-\DIFadd{\bibinfo{author}{Allen, E.~A.} }\emph{\DIFadd{et~al.}}
-\newblock \DIFadd{\bibinfo{title}{Tracking whole-brain connectivity dynamics in the
-  resting state}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Cerebral Cortex}}}
-  \textbf{\DIFadd{\bibinfo{volume}{24}}}\DIFadd{, \bibinfo{pages}{663--676}
-  (\bibinfo{year}{2012}).
+\bibinfo{author}{Allen, E.~A.} \emph{\DIFadd{et~al.}}
+\newblock \bibinfo{title}{Tracking whole-brain connectivity dynamics in the
+  resting state}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Cerebral Cortex}}
+  \textbf{\bibinfo{volume}{24}}\DIFadd{, }\bibinfo{pages}{663--676}
+  \DIFadd{(}\bibinfo{year}{2012}\DIFadd{).
 }
 
 \bibitem{SimoChan20}
-\DIFadd{\bibinfo{author}{Simony, E.} \& \bibinfo{author}{Chang, C.}
-}\newblock \DIFadd{\bibinfo{title}{Analysis of stimulus-induced brain dynamics during
-  naturalistic paradigms}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{NeuroImage}}}}
-  \textbf{\DIFadd{\bibinfo{volume}{216}}}\DIFadd{, \bibinfo{pages}{116461}
-  (\bibinfo{year}{2020}).
+\bibinfo{author}{Simony, E.} \DIFadd{\& }\bibinfo{author}{Chang, C.}
+\newblock \bibinfo{title}{Analysis of stimulus-induced brain dynamics during
+  naturalistic paradigms}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{NeuroImage}}}
+  \textbf{\bibinfo{volume}{216}}\DIFadd{, }\bibinfo{pages}{116461}
+  \DIFadd{(}\bibinfo{year}{2020}\DIFadd{).
 }
 
 \bibitem{Zar10}
-\DIFadd{\bibinfo{author}{Zar, J.~H.}
-}\newblock \emph{\DIFadd{\bibinfo{title}{Biostatistical analysis}}}
-  \DIFadd{(\bibinfo{publisher}{Prentice-Hall}, \bibinfo{year}{2010}).
+\bibinfo{author}{Zar, J.~H.}
+\newblock \emph{\bibinfo{title}{Biostatistical analysis}}
+  \DIFadd{(}\bibinfo{publisher}{Prentice-Hall}\DIFadd{, }\bibinfo{year}{2010}\DIFadd{).
 }
 
 \bibitem{TippBish99}
-\DIFadd{\bibinfo{author}{Tipping, M.~E.} \& \bibinfo{author}{Bishop, C.~M.}
-}\newblock \DIFadd{\bibinfo{title}{Probabilistic principal component analysis}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Journal of Royal Statistical Society, Series
-  {B}}}} \textbf{\DIFadd{\bibinfo{volume}{61}}}\DIFadd{, \bibinfo{pages}{611--622}
-  (\bibinfo{year}{1999}).
+\bibinfo{author}{Tipping, M.~E.} \DIFadd{\& }\bibinfo{author}{Bishop, C.~M.}
+\newblock \bibinfo{title}{Probabilistic principal component analysis}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Journal of Royal Statistical Society, Series
+  {B}}} \textbf{\bibinfo{volume}{61}}\DIFadd{, }\bibinfo{pages}{611--622}
+  \DIFadd{(}\bibinfo{year}{1999}\DIFadd{).
 }
 
 \bibitem{Spea04}
-\DIFadd{\bibinfo{author}{Spearman, C.}
-}\newblock \DIFadd{\bibinfo{title}{General intelligence, objectively determined and
-  measured}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Americal Journal of Psychology}}}
-  \textbf{\DIFadd{\bibinfo{volume}{15}}}\DIFadd{, \bibinfo{pages}{201--292}
-  (\bibinfo{year}{1904}).
+\bibinfo{author}{Spearman, C.}
+\newblock \bibinfo{title}{General intelligence, objectively determined and
+  measured}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Americal Journal of Psychology}}
+  \textbf{\bibinfo{volume}{15}}\DIFadd{, }\bibinfo{pages}{201--292}
+  \DIFadd{(}\bibinfo{year}{1904}\DIFadd{).
 }
 
 \bibitem{JuttHera91}
-\DIFadd{\bibinfo{author}{Jutten, C.} \& \bibinfo{author}{Herault, J.}
-}\newblock \DIFadd{\bibinfo{title}{Blind separation of sources, part {I}: an adaptive
-  algorithm based on neuromimetic architecture}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Signal Processing}}}
-  \textbf{\DIFadd{\bibinfo{volume}{24}}}\DIFadd{, \bibinfo{pages}{1--10} (\bibinfo{year}{1991}).
+\bibinfo{author}{Jutten, C.} \DIFadd{\& }\bibinfo{author}{Herault, J.}
+\newblock \bibinfo{title}{Blind separation of sources, part {I}: an adaptive
+  algorithm based on neuromimetic architecture}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Signal Processing}}
+  \textbf{\bibinfo{volume}{24}}\DIFadd{, }\bibinfo{pages}{1--10} \DIFadd{(}\bibinfo{year}{1991}\DIFadd{).
 }
 
 \bibitem{ComoEtal91}
-\DIFadd{\bibinfo{author}{Comon, P.}, \bibinfo{author}{Jutten, C.} \&
-  \bibinfo{author}{Herault, J.}
-}\newblock \DIFadd{\bibinfo{title}{Blind separation of sources, part {II}: problems
-  statement}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Signal Processing}}}
-  \textbf{\DIFadd{\bibinfo{volume}{24}}}\DIFadd{, \bibinfo{pages}{11--20}
-  (\bibinfo{year}{1991}).
+\bibinfo{author}{Comon, P.}\DIFadd{, }\bibinfo{author}{Jutten, C.} \DIFadd{\&
+  }\bibinfo{author}{Herault, J.}
+\newblock \bibinfo{title}{Blind separation of sources, part {II}: problems
+  statement}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Signal Processing}}
+  \textbf{\bibinfo{volume}{24}}\DIFadd{, }\bibinfo{pages}{11--20}
+  \DIFadd{(}\bibinfo{year}{1991}\DIFadd{).
 }
 
 \bibitem{vandHint08}
-\DIFadd{\bibinfo{author}{van~der Maaten, L. J.~P.} \& \bibinfo{author}{Hinton, G.~E.}
-}\newblock \DIFadd{\bibinfo{title}{Visualizing high-dimensional data using {t-SNE}}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Journal of Machine Learning Research}}}
-  \textbf{\DIFadd{\bibinfo{volume}{9}}}\DIFadd{, \bibinfo{pages}{2579--2605}
-  (\bibinfo{year}{2008}).
+\bibinfo{author}{van~der Maaten, L. J.~P.} \DIFadd{\& }\bibinfo{author}{Hinton, G.~E.}
+\newblock \bibinfo{title}{Visualizing high-dimensional data using {t-SNE}}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Journal of Machine Learning Research}}
+  \textbf{\bibinfo{volume}{9}}\DIFadd{, }\bibinfo{pages}{2579--2605}
+  \DIFadd{(}\bibinfo{year}{2008}\DIFadd{).
 }
 
 \bibitem{McInEtal18}
-\DIFadd{\bibinfo{author}{McInnes, L.}, \bibinfo{author}{Healy, J.} \&
-  \bibinfo{author}{Melville, J.}
-}\newblock \DIFadd{\bibinfo{title}{{UMAP}: uniform manifold approximation and projection
-  for dimension reduction}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{arXiv}}}} \textbf{\DIFadd{\bibinfo{volume}{1802}}}
-  \DIFadd{(\bibinfo{year}{2018}).
+\bibinfo{author}{McInnes, L.}\DIFadd{, }\bibinfo{author}{Healy, J.} \DIFadd{\&
+  }\bibinfo{author}{Melville, J.}
+\newblock \bibinfo{title}{{UMAP}: uniform manifold approximation and projection
+  for dimension reduction}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{arXiv}}} \textbf{\bibinfo{volume}{1802}}
+  \DIFadd{(}\bibinfo{year}{2018}\DIFadd{).
 }
 
 \bibitem{LeeSeun99}
-\DIFadd{\bibinfo{author}{Lee, D.~D.} \& \bibinfo{author}{Seung, H.~S.}
-}\newblock \DIFadd{\bibinfo{title}{Learning the parts of objects by non-negative matrix
-  factorization}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Nature}}} \textbf{\DIFadd{\bibinfo{volume}{401}}}\DIFadd{,
-  \bibinfo{pages}{788--791} (\bibinfo{year}{1999}).
+\bibinfo{author}{Lee, D.~D.} \DIFadd{\& }\bibinfo{author}{Seung, H.~S.}
+\newblock \bibinfo{title}{Learning the parts of objects by non-negative matrix
+  factorization}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Nature}} \textbf{\bibinfo{volume}{401}}\DIFadd{,
+  }\bibinfo{pages}{788--791} \DIFadd{(}\bibinfo{year}{1999}\DIFadd{).
 }
 
 \bibitem{MannEtal14b}
-\DIFadd{\bibinfo{author}{Manning, J.~R.}, \bibinfo{author}{Ranganath, R.},
-  \bibinfo{author}{Norman, K.~A.} \& \bibinfo{author}{Blei, D.~M.}
-}\newblock \DIFadd{\bibinfo{title}{Topographic factor analysis: a {B}ayesian model for
-  inferring brain networks from neural data}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{PLoS} One}}} \textbf{\DIFadd{\bibinfo{volume}{9}}}\DIFadd{,
-  \bibinfo{pages}{e94914} (\bibinfo{year}{2014}).
+\bibinfo{author}{Manning, J.~R.}\DIFadd{, }\bibinfo{author}{Ranganath, R.}\DIFadd{,
+  }\bibinfo{author}{Norman, K.~A.} \DIFadd{\& }\bibinfo{author}{Blei, D.~M.}
+\newblock \bibinfo{title}{Topographic factor analysis: a {B}ayesian model for
+  inferring brain networks from neural data}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{PLoS} One}} \textbf{\bibinfo{volume}{9}}\DIFadd{,
+  }\bibinfo{pages}{e94914} \DIFadd{(}\bibinfo{year}{2014}\DIFadd{).
 }
 
 \bibitem{GersEtal11}
-\DIFadd{\bibinfo{author}{Gershman, S.~J.}, \bibinfo{author}{Blei, D.~M.},
-  \bibinfo{author}{Pereira, F.} \& \bibinfo{author}{Norman, K.~A.}
-}\newblock \DIFadd{\bibinfo{title}{A topographic latent source model for {fMRI} data}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{NeuroImage}}}} \textbf{\DIFadd{\bibinfo{volume}{57}}}\DIFadd{,
-  \bibinfo{pages}{89--100} (\bibinfo{year}{2011}).
+\bibinfo{author}{Gershman, S.~J.}\DIFadd{, }\bibinfo{author}{Blei, D.~M.}\DIFadd{,
+  }\bibinfo{author}{Pereira, F.} \DIFadd{\& }\bibinfo{author}{Norman, K.~A.}
+\newblock \bibinfo{title}{A topographic latent source model for {fMRI} data}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{NeuroImage}}} \textbf{\bibinfo{volume}{57}}\DIFadd{,
+  }\bibinfo{pages}{89--100} \DIFadd{(}\bibinfo{year}{2011}\DIFadd{).
 }
 
 \bibitem{MairEtal09a}
-\DIFadd{\bibinfo{author}{Mairal, J.~B.}, \bibinfo{author}{Bach, F.},
-  \bibinfo{author}{Ponce, J.} \& \bibinfo{author}{Sapiro, G.}
-}\newblock \DIFadd{\bibinfo{title}{Online dictionary learning for sparse coding}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Proceedings of the International Conference
-  on Machine Learning}}} \DIFadd{\bibinfo{pages}{689--696} (\bibinfo{year}{2009}).
+\bibinfo{author}{Mairal, J.~B.}\DIFadd{, }\bibinfo{author}{Bach, F.}\DIFadd{,
+  }\bibinfo{author}{Ponce, J.} \DIFadd{\& }\bibinfo{author}{Sapiro, G.}
+\newblock \bibinfo{title}{Online dictionary learning for sparse coding}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Proceedings of the International Conference
+  on Machine Learning}} \bibinfo{pages}{689--696} \DIFadd{(}\bibinfo{year}{2009}\DIFadd{).
 }
 
 \bibitem{MairEtal09b}
-\DIFadd{\bibinfo{author}{Mairal, J.}, \bibinfo{author}{Ponce, J.},
-  \bibinfo{author}{Sapiro, G.}, \bibinfo{author}{Zisserman, A.} \&
-  \bibinfo{author}{Bach, F.~R.}
-}\newblock \DIFadd{\bibinfo{title}{Supervised dictionary learning}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Advances in Neural Information Processing
-  Systems}}} \DIFadd{\bibinfo{pages}{1033--1040} (\bibinfo{year}{2009}).
+\bibinfo{author}{Mairal, J.}\DIFadd{, }\bibinfo{author}{Ponce, J.}\DIFadd{,
+  }\bibinfo{author}{Sapiro, G.}\DIFadd{, }\bibinfo{author}{Zisserman, A.} \DIFadd{\&
+  }\bibinfo{author}{Bach, F.~R.}
+\newblock \bibinfo{title}{Supervised dictionary learning}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Advances in Neural Information Processing
+  Systems}} \bibinfo{pages}{1033--1040} \DIFadd{(}\bibinfo{year}{2009}\DIFadd{).
 }
 
 \bibitem{HintSala06}
-\DIFadd{\bibinfo{author}{Hinton, G.~E.} \& \bibinfo{author}{Salakhutdinov, R.~R.}
-}\newblock \DIFadd{\bibinfo{title}{Reducing the dimensionality of data with neural
-  networks}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Science}}} \textbf{\DIFadd{\bibinfo{volume}{313}}}\DIFadd{,
-  \bibinfo{pages}{504--507} (\bibinfo{year}{2006}).
+\bibinfo{author}{Hinton, G.~E.} \DIFadd{\& }\bibinfo{author}{Salakhutdinov, R.~R.}
+\newblock \bibinfo{title}{Reducing the dimensionality of data with neural
+  networks}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Science}} \textbf{\bibinfo{volume}{313}}\DIFadd{,
+  }\bibinfo{pages}{504--507} \DIFadd{(}\bibinfo{year}{2006}\DIFadd{).
 }
 
 \bibitem{Newm05}
-\DIFadd{\bibinfo{author}{Newman, M. E.~J.}
-}\newblock \DIFadd{\bibinfo{title}{A measure of betweenness centrality based on random
-  walks}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Social Networks}}}
-  \textbf{\DIFadd{\bibinfo{volume}{27}}}\DIFadd{, \bibinfo{pages}{39--54}
-  (\bibinfo{year}{2005}).
+\bibinfo{author}{Newman, M. E.~J.}
+\newblock \bibinfo{title}{A measure of betweenness centrality based on random
+  walks}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Social Networks}}
+  \textbf{\bibinfo{volume}{27}}\DIFadd{, }\bibinfo{pages}{39--54}
+  \DIFadd{(}\bibinfo{year}{2005}\DIFadd{).
 }
 
 \bibitem{OpsaEtal10}
-\DIFadd{\bibinfo{author}{Opsahl, T.}, \bibinfo{author}{Agneessens, F.} \&
-  \bibinfo{author}{Skvoretz, J.}
-}\newblock \DIFadd{\bibinfo{title}{Node centrality in weighted networks: generalizing
-  degree and shortest paths}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Social Networks}}}
-  \textbf{\DIFadd{\bibinfo{volume}{32}}}\DIFadd{, \bibinfo{pages}{245--251}
-  (\bibinfo{year}{2010}).
+\bibinfo{author}{Opsahl, T.}\DIFadd{, }\bibinfo{author}{Agneessens, F.} \DIFadd{\&
+  }\bibinfo{author}{Skvoretz, J.}
+\newblock \bibinfo{title}{Node centrality in weighted networks: generalizing
+  degree and shortest paths}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Social Networks}}
+  \textbf{\bibinfo{volume}{32}}\DIFadd{, }\bibinfo{pages}{245--251}
+  \DIFadd{(}\bibinfo{year}{2010}\DIFadd{).
 }
 
 \bibitem{Bart04}
-\DIFadd{\bibinfo{author}{Barth\'{e}lemy, M.}
-}\newblock \DIFadd{\bibinfo{title}{Betweenness centrality in large complex networks}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{European} Physical Journal {B}}}}
-  \textbf{\DIFadd{\bibinfo{volume}{38}}}\DIFadd{, \bibinfo{pages}{163--168}
-  (\bibinfo{year}{2004}).
+\bibinfo{author}{Barth\'{e}lemy, M.}
+\newblock \bibinfo{title}{Betweenness centrality in large complex networks}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{European} Physical Journal {B}}}
+  \textbf{\bibinfo{volume}{38}}\DIFadd{, }\bibinfo{pages}{163--168}
+  \DIFadd{(}\bibinfo{year}{2004}\DIFadd{).
 }
 
 \bibitem{GeisEtal08}
-\DIFadd{\bibinfo{author}{Geisberger, R.}, \bibinfo{author}{Sanders, P.} \&
-  \bibinfo{author}{Schultes, D.}
-}\newblock \DIFadd{\bibinfo{title}{Better approximation of betweenness centrality}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Proceedings of the Meeting on Algorithm
-  Engineering and Experiments}}} \DIFadd{\bibinfo{pages}{90--100}
-  (\bibinfo{year}{2008}).
+\bibinfo{author}{Geisberger, R.}\DIFadd{, }\bibinfo{author}{Sanders, P.} \DIFadd{\&
+  }\bibinfo{author}{Schultes, D.}
+\newblock \bibinfo{title}{Better approximation of betweenness centrality}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Proceedings of the Meeting on Algorithm
+  Engineering and Experiments}} \bibinfo{pages}{90--100}
+  \DIFadd{(}\bibinfo{year}{2008}\DIFadd{).
 }
 
 \bibitem{Free77}
-\DIFadd{\bibinfo{author}{Freeman, L.~C.}
-}\newblock \DIFadd{\bibinfo{title}{A set of measures of centrality based on
-  betweenness}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Sociometry}}} \textbf{\DIFadd{\bibinfo{volume}{40}}}\DIFadd{,
-  \bibinfo{pages}{35--41} (\bibinfo{year}{1977}).
+\bibinfo{author}{Freeman, L.~C.}
+\newblock \bibinfo{title}{A set of measures of centrality based on
+  betweenness}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Sociometry}} \textbf{\bibinfo{volume}{40}}\DIFadd{,
+  }\bibinfo{pages}{35--41} \DIFadd{(}\bibinfo{year}{1977}\DIFadd{).
 }
 
 \bibitem{Rao82}
-\DIFadd{\bibinfo{author}{Rao, C.~R.}
-}\newblock \DIFadd{\bibinfo{title}{Diversity and dissimilarity coeficients: a unified
-  approach}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Theoretical Population Biology}}}
-  \textbf{\DIFadd{\bibinfo{volume}{21}}}\DIFadd{, \bibinfo{pages}{24--43}
-  (\bibinfo{year}{1982}).
+\bibinfo{author}{Rao, C.~R.}
+\newblock \bibinfo{title}{Diversity and dissimilarity coeficients: a unified
+  approach}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Theoretical Population Biology}}
+  \textbf{\bibinfo{volume}{21}}\DIFadd{, }\bibinfo{pages}{24--43}
+  \DIFadd{(}\bibinfo{year}{1982}\DIFadd{).
 }
 
 \bibitem{Lin09}
-\DIFadd{\bibinfo{author}{Lin, J.}
-}\newblock \DIFadd{\bibinfo{title}{Divergence measures based on the {Shannon} entropy}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{IEEE} Transactions on Information Theory}}}
-  \textbf{\DIFadd{\bibinfo{volume}{37}}}\DIFadd{, \bibinfo{pages}{145--151}
-  (\bibinfo{year}{2009}).
+\bibinfo{author}{Lin, J.}
+\newblock \bibinfo{title}{Divergence measures based on the {Shannon} entropy}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{IEEE} Transactions on Information Theory}}
+  \textbf{\bibinfo{volume}{37}}\DIFadd{, }\bibinfo{pages}{145--151}
+  \DIFadd{(}\bibinfo{year}{2009}\DIFadd{).
 }
 
 \bibitem{RicoSzei06}
-\DIFadd{\bibinfo{author}{Ricotta, C.} \& \bibinfo{author}{Szeidl, L.}
-}\newblock \DIFadd{\bibinfo{title}{Towards a unifying approach to diversity measures:
-  bridging the gap between the {Shannon} entropy and {Rao's} quadratic index}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Theoretical Population Biology}}}
-  \textbf{\DIFadd{\bibinfo{volume}{70}}}\DIFadd{, \bibinfo{pages}{237--243}
-  (\bibinfo{year}{2006}).
+\bibinfo{author}{Ricotta, C.} \DIFadd{\& }\bibinfo{author}{Szeidl, L.}
+\newblock \bibinfo{title}{Towards a unifying approach to diversity measures:
+  bridging the gap between the {Shannon} entropy and {Rao's} quadratic index}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Theoretical Population Biology}}
+  \textbf{\bibinfo{volume}{70}}\DIFadd{, }\bibinfo{pages}{237--243}
+  \DIFadd{(}\bibinfo{year}{2006}\DIFadd{).
 }
 
 \bibitem{Newm08}
-\DIFadd{\bibinfo{author}{Newman, M. E.~J.}
-}\newblock \DIFadd{\bibinfo{title}{The mathematics of networks}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{The New Palgrave Encyclopedia of Economics}}}
-  \textbf{\DIFadd{\bibinfo{volume}{2}}}\DIFadd{, \bibinfo{pages}{1--12} (\bibinfo{year}{2008}).
+\bibinfo{author}{Newman, M. E.~J.}
+\newblock \bibinfo{title}{The mathematics of networks}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{The New Palgrave Encyclopedia of Economics}}
+  \textbf{\bibinfo{volume}{2}}\DIFadd{, }\bibinfo{pages}{1--12} \DIFadd{(}\bibinfo{year}{2008}\DIFadd{).
 }
 
 \bibitem{Bona07}
-\DIFadd{\bibinfo{author}{Bonacich, P.}
-}\newblock \DIFadd{\bibinfo{title}{Some unique properties of eigenvector centrality}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Social Networks}}}
-  \textbf{\DIFadd{\bibinfo{volume}{29}}}\DIFadd{, \bibinfo{pages}{555--564}
-  (\bibinfo{year}{2007}).
+\bibinfo{author}{Bonacich, P.}
+\newblock \bibinfo{title}{Some unique properties of eigenvector centrality}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Social Networks}}
+  \textbf{\bibinfo{volume}{29}}\DIFadd{, }\bibinfo{pages}{555--564}
+  \DIFadd{(}\bibinfo{year}{2007}\DIFadd{).
 }
 
 \bibitem{LohmEtal10}
-\DIFadd{\bibinfo{author}{Lohmann, G.} }\emph{\DIFadd{et~al.}}
-\newblock \DIFadd{\bibinfo{title}{Eigenvector centrality mapping for analyzing
-  connectivity patterns in {fMRI} data of the human brain}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{PLoS} One}}} \textbf{\DIFadd{\bibinfo{volume}{5}}}\DIFadd{,
-  \bibinfo{pages}{e10232} (\bibinfo{year}{2010}).
+\bibinfo{author}{Lohmann, G.} \emph{\DIFadd{et~al.}}
+\newblock \bibinfo{title}{Eigenvector centrality mapping for analyzing
+  connectivity patterns in {fMRI} data of the human brain}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{PLoS} One}} \textbf{\bibinfo{volume}{5}}\DIFadd{,
+  }\bibinfo{pages}{e10232} \DIFadd{(}\bibinfo{year}{2010}\DIFadd{).
 }
 
 \bibitem{HaluEtal13}
-\DIFadd{\bibinfo{author}{Halu, A.}, \bibinfo{author}{Mondrag\'{o}n, R.~J.},
-  \bibinfo{author}{Panzarasa, P.} \& \bibinfo{author}{Bianconi, G.}
-}\newblock \DIFadd{\bibinfo{title}{Multiplex {PageRank}}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{PLoS} One}}} \textbf{\DIFadd{\bibinfo{volume}{8}}}\DIFadd{,
-  \bibinfo{pages}{e78293} (\bibinfo{year}{2013}).
+\bibinfo{author}{Halu, A.}\DIFadd{, }\bibinfo{author}{Mondrag\'{o}n, R.~J.}\DIFadd{,
+  }\bibinfo{author}{Panzarasa, P.} \DIFadd{\& }\bibinfo{author}{Bianconi, G.}
+\newblock \bibinfo{title}{Multiplex {PageRank}}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{PLoS} One}} \textbf{\bibinfo{volume}{8}}\DIFadd{,
+  }\bibinfo{pages}{e78293} \DIFadd{(}\bibinfo{year}{2013}\DIFadd{).
 }
 
 \bibitem{HoneEtal07}
-\DIFadd{\bibinfo{author}{Honey, C.~J.}, \bibinfo{author}{K\"{o}tter, R.},
-  \bibinfo{author}{Breakspear, M.} \& \bibinfo{author}{Sporns, O.}
-}\newblock \DIFadd{\bibinfo{title}{Network structure of cerebral cortex shapes
-  functional connectivity on multiple time scales}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Proceedings of the National Academy of
-  Sciences, {USA}}}} \textbf{\DIFadd{\bibinfo{volume}{104}}}\DIFadd{,
-  \bibinfo{pages}{10240--10245} (\bibinfo{year}{2007}).
+\bibinfo{author}{Honey, C.~J.}\DIFadd{, }\bibinfo{author}{K\"{o}tter, R.}\DIFadd{,
+  }\bibinfo{author}{Breakspear, M.} \DIFadd{\& }\bibinfo{author}{Sporns, O.}
+\newblock \bibinfo{title}{Network structure of cerebral cortex shapes
+  functional connectivity on multiple time scales}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Proceedings of the National Academy of
+  Sciences, {USA}}} \textbf{\bibinfo{volume}{104}}\DIFadd{,
+  }\bibinfo{pages}{10240--10245} \DIFadd{(}\bibinfo{year}{2007}\DIFadd{).
 }
 
 \bibitem{Schr00}
-\DIFadd{\bibinfo{author}{Schreiber, T.}
-}\newblock \DIFadd{\bibinfo{title}{Measuring information transfer}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Physical Review Letters}}}
-  \textbf{\DIFadd{\bibinfo{volume}{85}}}\DIFadd{, \bibinfo{pages}{461--464}
-  (\bibinfo{year}{2000}).
+\bibinfo{author}{Schreiber, T.}
+\newblock \bibinfo{title}{Measuring information transfer}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Physical Review Letters}}
+  \textbf{\bibinfo{volume}{85}}\DIFadd{, }\bibinfo{pages}{461--464}
+  \DIFadd{(}\bibinfo{year}{2000}\DIFadd{).
 }
 
 \bibitem{AlvaEtal05}
-\DIFadd{\bibinfo{author}{Alvarez-Hamelin, I.}, \bibinfo{author}{Dall'Asta, L.},
-  \bibinfo{author}{Barrat, A.} \& \bibinfo{author}{Vespignani, A.}
-}\newblock \DIFadd{\bibinfo{title}{$k$-corr decomposition: a tool for the visualiztion
-  of large scale networks}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{arXiv}}}} \DIFadd{\bibinfo{pages}{cs/0504107v2}
-  (\bibinfo{year}{2005}).
+\bibinfo{author}{Alvarez-Hamelin, I.}\DIFadd{, }\bibinfo{author}{Dall'Asta, L.}\DIFadd{,
+  }\bibinfo{author}{Barrat, A.} \DIFadd{\& }\bibinfo{author}{Vespignani, A.}
+\newblock \bibinfo{title}{$k$-corr decomposition: a tool for the visualiztion
+  of large scale networks}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{arXiv}}} \bibinfo{pages}{cs/0504107v2}
+  \DIFadd{(}\bibinfo{year}{2005}\DIFadd{).
 }
 
 \bibitem{ChriFowl10}
-\DIFadd{\bibinfo{author}{Christakis, N.~A.} \& \bibinfo{author}{Fowler, J.~H.}
-}\newblock \DIFadd{\bibinfo{title}{Social network sensors for early detection of
-  contagious outbreaks}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{PLoS} One}}} \textbf{\DIFadd{\bibinfo{volume}{5}}}\DIFadd{,
-  \bibinfo{pages}{e12948} (\bibinfo{year}{2010}).
+\bibinfo{author}{Christakis, N.~A.} \DIFadd{\& }\bibinfo{author}{Fowler, J.~H.}
+\newblock \bibinfo{title}{Social network sensors for early detection of
+  contagious outbreaks}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{PLoS} One}} \textbf{\bibinfo{volume}{5}}\DIFadd{,
+  }\bibinfo{pages}{e12948} \DIFadd{(}\bibinfo{year}{2010}\DIFadd{).
 }
 
 \bibitem{RubiSpor10}
-\DIFadd{\bibinfo{author}{Rubinov, M.} \& \bibinfo{author}{Sporns, O.}
-}\newblock \DIFadd{\bibinfo{title}{Complex network measures of brain connectivity: uses
-  and interpretations}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{NeuroImage}}}} \textbf{\DIFadd{\bibinfo{volume}{52}}}\DIFadd{,
-  \bibinfo{pages}{1059--1069} (\bibinfo{year}{2010}).
+\bibinfo{author}{Rubinov, M.} \DIFadd{\& }\bibinfo{author}{Sporns, O.}
+\newblock \bibinfo{title}{Complex network measures of brain connectivity: uses
+  and interpretations}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{NeuroImage}}} \textbf{\bibinfo{volume}{52}}\DIFadd{,
+  }\bibinfo{pages}{1059--1069} \DIFadd{(}\bibinfo{year}{2010}\DIFadd{).
 }
 
 \bibitem{EstrRodr05}
-\DIFadd{\bibinfo{author}{Estrada, E.} \& \bibinfo{author}{Rodr\'{i}guez-Vel\'{a}zquez,
+\bibinfo{author}{Estrada, E.} \DIFadd{\& }\bibinfo{author}{Rodr\'{i}guez-Vel\'{a}zquez,
   J.~A.}
-}\newblock \DIFadd{\bibinfo{title}{Subraph centrality in complex networks}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Physical Review {E}}}}
-  \textbf{\DIFadd{\bibinfo{volume}{71}}}\DIFadd{, \bibinfo{pages}{056103}
-  (\bibinfo{year}{2005}).
+\newblock \bibinfo{title}{Subraph centrality in complex networks}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Physical Review {E}}}
+  \textbf{\bibinfo{volume}{71}}\DIFadd{, }\bibinfo{pages}{056103}
+  \DIFadd{(}\bibinfo{year}{2005}\DIFadd{).
 }
 
 \bibitem{ThomEtal18}
-\DIFadd{\bibinfo{author}{Thompson, W.~H.}, \bibinfo{author}{Richter, C.~G.},
-  \bibinfo{author}{Plav\'{e}n-Sigray, P.} \& \bibinfo{author}{Fransson, P.}
-}\newblock \DIFadd{\bibinfo{title}{Simulations to benchmark time-varying connectivity
-  methods for f{MRI}}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{{PLoS} Computational Biology}}}
-  \textbf{\DIFadd{\bibinfo{volume}{14}}}\DIFadd{, \bibinfo{pages}{e1006196}
-  (\bibinfo{year}{2018}).
+\bibinfo{author}{Thompson, W.~H.}\DIFadd{, }\bibinfo{author}{Richter, C.~G.}\DIFadd{,
+  }\bibinfo{author}{Plav\'{e}n-Sigray, P.} \DIFadd{\& }\bibinfo{author}{Fransson, P.}
+\newblock \bibinfo{title}{Simulations to benchmark time-varying connectivity
+  methods for f{MRI}}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{{PLoS} Computational Biology}}
+  \textbf{\bibinfo{volume}{14}}\DIFadd{, }\bibinfo{pages}{e1006196}
+  \DIFadd{(}\bibinfo{year}{2018}\DIFadd{).
 }
 
 \bibitem{CapoEtal17}
-\DIFadd{\bibinfo{author}{Capota, M.} }\emph{\DIFadd{et~al.}}
-\newblock \DIFadd{\bibinfo{title}{Brain imaging analysis kit} (\bibinfo{year}{2017}).
+\bibinfo{author}{Capota, M.} \emph{\DIFadd{et~al.}}
+\newblock \bibinfo{title}{Brain imaging analysis kit} \DIFadd{(}\bibinfo{year}{2017}\DIFadd{).
 }
 
 \bibitem{NoceWrig06}
-\DIFadd{\bibinfo{author}{Nocedal, J.} \& \bibinfo{author}{Wright, S.~J.}
-}\newblock \emph{\DIFadd{\bibinfo{title}{Numerical optimization}}}
-  \DIFadd{(\bibinfo{publisher}{Springer}, \bibinfo{address}{New York, {NY}},
-  \bibinfo{year}{2006}).
+\bibinfo{author}{Nocedal, J.} \DIFadd{\& }\bibinfo{author}{Wright, S.~J.}
+\newblock \emph{\bibinfo{title}{Numerical optimization}}
+  \DIFadd{(}\bibinfo{publisher}{Springer}\DIFadd{, }\bibinfo{address}{New York, {NY}}\DIFadd{,
+  }\bibinfo{year}{2006}\DIFadd{).
 }
 
 \bibitem{CombEtal19}
-\DIFadd{\bibinfo{author}{Combrisson, E.} }\emph{\DIFadd{et~al.}}
-\newblock \DIFadd{\bibinfo{title}{Visbrain: a multi-purpose {GPU}-accelerated
-  open-source suite for multimodal brain data visualization}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{Frontiers in Neuroinformatics}}}
-  \textbf{\DIFadd{\bibinfo{volume}{13}}}\DIFadd{, \bibinfo{pages}{1--14}
-  (\bibinfo{year}{2019}).
+\bibinfo{author}{Combrisson, E.} \emph{\DIFadd{et~al.}}
+\newblock \bibinfo{title}{Visbrain: a multi-purpose {GPU}-accelerated
+  open-source suite for multimodal brain data visualization}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{Frontiers in Neuroinformatics}}
+  \textbf{\bibinfo{volume}{13}}\DIFadd{, }\bibinfo{pages}{1--14}
+  \DIFadd{(}\bibinfo{year}{2019}\DIFadd{).
 }
 
 \bibitem{SimoEtal16b}
-\DIFadd{\bibinfo{author}{Simony, E.}, \bibinfo{author}{Honey, C.~J.},
-  \bibinfo{author}{Chen, J.} \& \bibinfo{author}{Hasson, U.}
-}\newblock \DIFadd{\bibinfo{title}{Dynamic reconfiguration of the default mode network
-  during narrative comprehension}.
-}\newblock \emph{\DIFadd{\bibinfo{journal}{DataSpace}}}
-  \textbf{\DIFadd{\bibinfo{volume}{http://arks.princeton.edu/ark:/88435/dsp015d86p269k}}} \DIFadd{(\bibinfo{year}{2016}). 
+\bibinfo{author}{Simony, E.}\DIFadd{, }\bibinfo{author}{Honey, C.~J.}\DIFadd{,
+  }\bibinfo{author}{Chen, J.} \DIFadd{\& }\bibinfo{author}{Hasson, U.}
+\newblock \bibinfo{title}{Dynamic reconfiguration of the default mode network
+  during narrative comprehension}\DIFadd{.
+}\newblock \emph{\bibinfo{journal}{DataSpace}}
+  \textbf{\bibinfo{volume}{http://arks.princeton.edu/ark:/88435/dsp015d86p269k}} \DIFadd{(}\bibinfo{year}{2016}\DIFadd{). 
 }
 
 \end{thebibliography}
