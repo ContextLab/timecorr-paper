@@ -1,7 +1,7 @@
 \documentclass[english]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL old.tex    Thu Aug  5 20:28:29 2021
-%DIF ADD main.tex   Thu Aug  5 19:45:31 2021
+%DIF ADD main.tex   Tue Aug 10 20:25:03 2021
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{hyperref}
@@ -642,8 +642,8 @@ test group with a stimulus timepoint.  Each classifier comprised a
 weighted blend of neural patterns that reflected up to
 $n^\mathrm{th}$-order dynamic correlations (see \DIFdelbegin \textit{\DIFdel{Feature
   weighting and testing}}%DIFAUXCMD
-\DIFdelend \DIFaddbegin \DIFadd{Feature
-  weighting and testing}\DIFaddend , Fig.~\ref{fig:pipeline}).  We repeated this process for
+\DIFdel{, Fig.~\ref{fig:pipeline}}\DIFdelend \DIFaddbegin \DIFadd{Feature
+  weighting and testing}\DIFaddend ).  We repeated this process for
 $n \in \left\{ 0, 1, 2, ..., 10 \right\}$.  Our examinations of
 synthetic data suggested that none of the kernels we examined were
 ``universal'' in the sense of optimally recovering underlying
@@ -1667,8 +1667,11 @@ order.
 \DIFadd{The authors declare that the data supporting the findings of this
 study as well as the source data for this paper are available at
 }\href{https://github.com/ContextLab/timecorr-paper/releases/tag/v0.4}{\DIFadd{github.com/ContextLab/timecorr-paper/releases/tag/v0.4}}
-\DIFadd{and has been deposited in the Zenodo database under accession code }\href{https://doi.org/10.5281/zenodo.5165253}{\DIFadd{https://doi.org/10.5281/zenodo.5165253}}\DIFadd{.
-The raw fMRI data are protected and are not available due to data
+\DIFadd{and has been deposited in the Zenodo database under accession code
+}\href{https://doi.org/10.5281/zenodo.5165253}{\DIFadd{https://doi.org/10.5281/zenodo.5165253}}\DIFadd{.
+The source data underlying Figs. 2-6 and Supplementary Figs. S1-S9 are
+provided as a Source Data file. Source Data are provided with the
+manuscript. The raw fMRI data are protected and are not available due to data
 privacy laws. The processed fMRI dataset collected by
 \mbox{%DIFAUXCMD
 \cite{SimoEtal16} }\hspace{0pt}%DIFAUXCMD
@@ -1704,7 +1707,7 @@ Analyses: L.L.W.O. and J.R.M.  Writing: L.L.W.O. and J.R.M.
 %DIFDELCMD < \bibliography{CDL-bibliography/cdl}
 %DIFDELCMD < %%%
 \DIFdelend \DIFaddbegin \section*{\DIFadd{Competing interests}}
-\DIFadd{The authors declare no competing financial interests.
+\DIFadd{The authors declare no competing interests.
 }
 
 \bibliographystyle{naturemag}
