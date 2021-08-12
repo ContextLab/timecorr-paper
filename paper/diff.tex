@@ -1,7 +1,7 @@
 \documentclass[english]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL old.tex    Wed Aug 11 10:03:33 2021
-%DIF ADD main.tex   Wed Aug 11 10:21:36 2021
+%DIF ADD main.tex   Thu Aug 12 15:01:10 2021
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{hyperref}
@@ -854,7 +854,7 @@ accuracies that were the most strongly correlated (across conditions
 and orders) with the average accuracies across all of the
 kernel parameters we examined.  Using Figure~\ref{fig:decoding}c as a
 template, the best-matching kernel was a Laplace kernel with a width
-of 50 (Fig.~\ref{fig:kernels}d; also see Fig.~\pca).  We used this kernel to compute a
+of 50 (\DIFdelbegin \DIFdel{Fig.~\ref{fig:kernels}d; also see }\DIFdelend \DIFaddbegin \DIFadd{see Kernel-based approach for computing dynamic correlations and }\DIFaddend Fig.~\pca).  We used this kernel to compute a
 single $K$ by $K$ $n^\mathrm{th}$-order DISFC matrix for each
 experimental condition.  We then used Neurosynth~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
 \citep{RubiEtal17} }\hspace{0pt}%DIFAUXCMD
@@ -1945,8 +1945,8 @@ study as well as the source data for this paper are available at
 }\href{https://github.com/ContextLab/timecorr-paper/releases/tag/v0.4}{github.com/ContextLab/timecorr-paper/releases/tag/v0.4}
 \DIFadd{and has been deposited in the Zenodo database under accession code
 }\href{https://doi.org/10.5281/zenodo.5165253}{https://doi.org/10.5281/zenodo.5165253}\DIFadd{.
-The source data underlying Figs. 2-6 and Supplementary Figs. S1-S9 are
-provided as a Source Data file. Source Data are provided with the
+The source data underlying Figures~2--6 and Supplementary Figures~S1--S9 are
+provided as Source Data files. Source Data are provided with the
 manuscript. The raw fMRI data are protected and are not available due to data
 privacy laws. The processed fMRI dataset collected by
 \mbox{%DIFAUXCMD
